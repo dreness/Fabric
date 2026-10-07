@@ -43,11 +43,20 @@ import Satin
 
     static let titleBarHeight: CGFloat = 30
 
-    /// Title-bar center in graph coordinates; node offsets locate the whole node's center.
+    /// Title-bar center in graph coordinates.
     var titleBarCenter: CGPoint
     {
-        CGPoint(x: offset.width,
-                y: offset.height - nodeSize.height / 2 + Self.titleBarHeight / 2)
+        CGPoint(x: graphRect.midX,
+                y: graphRect.minY + Self.titleBarHeight / 2)
+    }
+
+    /// The whole node's rect in graph coordinates; node offsets locate its center.
+    var graphRect: CGRect
+    {
+        CGRect(x: offset.width - nodeSize.width / 2,
+               y: offset.height - nodeSize.height / 2,
+               width: nodeSize.width,
+               height: nodeSize.height)
     }
 
     public var offset: CGSize
