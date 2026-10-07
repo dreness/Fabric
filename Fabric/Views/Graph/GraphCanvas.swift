@@ -91,8 +91,7 @@ public struct GraphCanvas : View
             DragGesture(minimumDistance: 3)
                 .onChanged { value in
                     self.calcMarqueeDragChanged(forValue: value,
-                                                currentGraph: self.editingContext.currentGraph,
-                                                canvasSize: canvasSize)
+                                                currentGraph: self.editingContext.currentGraph)
                 }
                 .onEnded { _ in
                     self.marqueeRect = .zero
@@ -106,7 +105,7 @@ public struct GraphCanvas : View
             self.editingContext.currentGraph.deselectAllNodes()
         }
         .onDrop(of: [.nodeRegistryItem, .fileURL], isTargeted: nil) { providers, location in
-            self.handleDrop(providers: providers, location: location, canvasSize: canvasSize)
+            self.handleDrop(providers: providers, location: location)
         }
         .onChange(of: editingContext.currentGraph.nodes.count) { _, _ in
             let nodeIDs = Set(editingContext.currentGraph.nodes.map(\.id))
@@ -116,7 +115,7 @@ public struct GraphCanvas : View
 
     // MARK: - Marquee Drag
 
-    private func calcMarqueeDragChanged(forValue value: DragGesture.Value, currentGraph graph: Graph, canvasSize: CGSize)
+    private func calcMarqueeDragChanged(forValue value: DragGesture.Value, currentGraph graph: Graph)
     {
         if self.marqueeRect == .zero
         {
@@ -141,20 +140,13 @@ public struct GraphCanvas : View
 
         self.marqueeRect = CGRect(origin: origin, size: size)
 
-        let marqueeInNodeSpace = CGRect(
-            x: origin.x - canvasSize.width / 2,
-            y: origin.y - canvasSize.height / 2,
-            width: size.width,
-            height: size.height
-        )
+        let marqueeInNodeSpace = CGRect(origin: self.editingContext.graphPosition(forCanvasPosition: origin),
+                                        size: size)
 
         for node in graph.nodes
         {
             let nodeViewModel = graph.viewModel(for: node)
-            let nodeOrigin = CGPoint(x: nodeViewModel.offset.width  - nodeViewModel.nodeSize.width  / 2,
-                                     y: nodeViewModel.offset.height - nodeViewModel.nodeSize.height / 2)
-            let nodeRect = CGRect(origin: nodeOrigin, size: nodeViewModel.nodeSize)
-            let inMarquee = nodeRect.intersects(marqueeInNodeSpace)
+            let inMarquee = nodeViewModel.graphRect.intersects(marqueeInNodeSpace)
             nodeViewModel.isSelected = inMarquee || preMarqueeSelection.contains(node.id)
         }
     }
@@ -162,7 +154,7 @@ public struct GraphCanvas : View
     // MARK: - Drop Helpers
 
     @MainActor
-    private func handleDrop(providers: [NSItemProvider], location: CGPoint, canvasSize: CGSize) -> Bool
+    private func handleDrop(providers: [NSItemProvider], location: CGPoint) -> Bool
     {
         let currentGraph = self.editingContext.currentGraph
         let registryProviders = providers.filter {
@@ -189,8 +181,10 @@ public struct GraphCanvas : View
                         let node = try wrapper.initializeNode(context: currentGraph.context)
                         try self.editingContext.layoutNode(node)
 
-                        node.offset.width += location.x - canvasSize.width / 2.0 - self.editingContext.currentScrollOffset.x
-                        node.offset.height += location.y - canvasSize.height / 2.0 - self.editingContext.currentScrollOffset.y - node.nodeSize.height / 4.0
+                        let dropPosition = self.editingContext.graphPosition(forCanvasPosition: location)
+                        let visibleGraphCenter = self.editingContext.visibleGraphCenter
+                        node.offset.width += dropPosition.x - visibleGraphCenter.x
+                        node.offset.height += dropPosition.y - visibleGraphCenter.y - node.nodeSize.height / 4.0
 
                         currentGraph.addNode(node)
                     }
@@ -206,12 +200,12 @@ public struct GraphCanvas : View
         let fileProviders = providers.filter {
             !$0.hasItemConformingToTypeIdentifier(UTType.nodeRegistryItem.identifier)
         }
-        let acceptedFiles = self.handleFileDrop(providers: fileProviders, location: location, canvasSize: canvasSize)
+        let acceptedFiles = self.handleFileDrop(providers: fileProviders, location: location)
         return !registryProviders.isEmpty || acceptedFiles
     }
 
     @MainActor
-    private func handleFileDrop(providers: [NSItemProvider], location: CGPoint, canvasSize: CGSize) -> Bool
+    private func handleFileDrop(providers: [NSItemProvider], location: CGPoint) -> Bool
     {
         let currentGraph = self.editingContext.currentGraph
         let fileProviders = providers.filter {
@@ -234,8 +228,9 @@ public struct GraphCanvas : View
 
                     let node = nodeClass.init(context: currentGraph.context)
                     node.setFileURL(url)
-                    node.offset = CGSize(width: location.x - canvasSize.width / 2.0 - node.nodeSize.width / 2.0,
-                                         height: location.y - canvasSize.height / 2.0 - node.nodeSize.height / 2.0)
+                    let dropPosition = self.editingContext.graphPosition(forCanvasPosition: location)
+                    node.offset = CGSize(width: dropPosition.x - node.nodeSize.width / 2.0,
+                                         height: dropPosition.y - node.nodeSize.height / 2.0)
                     currentGraph.addNode(node)
                 }
             }
