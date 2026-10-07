@@ -47,14 +47,28 @@ public class GraphCanvasContext
     
     // MARK: - Canvas Interaction State
 
-    /// Canvas scroll position; used to calculate initial offset for newly added nodes.
-    @ObservationIgnored public var currentScrollOffset: CGPoint = .zero
+    /// The canvas scroll view's latest geometry; stored so scrolling doesn't invalidate views.
+    @ObservationIgnored public var currentScrollGeometry = ScrollGeometry(contentOffset: .zero,
+                                                                          contentSize: .zero,
+                                                                          contentInsets: EdgeInsets(),
+                                                                          containerSize: .zero)
 
-    /// Raw scroll view content offset; used by editor gestures without invalidating SwiftUI views.
-    @ObservationIgnored public var currentScrollContentOffset: CGPoint = .zero
+    /// The unoccluded visible region of the canvas in scroll-content coordinates.
+    public var currentScrollViewport: CGRect
+    {
+        Self.scrollViewport(for: currentScrollGeometry)
+    }
 
-    /// Current scroll view container size; used by editor gestures without invalidating SwiftUI views.
-    @ObservationIgnored public var currentScrollContainerSize: CGSize = .zero
+    /// The canvas zoom, owned here so node placement can see what is on screen.
+    var canvasZoomTransform = GraphCanvasZoomTransform()
+
+    /// The graph position at the center of the unoccluded viewport, accounting for zoom.
+    /// Newly added nodes and notes are placed here.
+    public var visibleGraphCenter: CGPoint
+    {
+        let canvasCenter = canvasZoomTransform.canvasPosition(at: currentScrollViewport.center)
+        return graphPosition(forCanvasPosition: canvasCenter)
+    }
 
     /// Fixed graph canvas size; used to translate model-space node positions into canvas coordinates.
     @ObservationIgnored public var canvasSize: CGSize = .zero
@@ -142,10 +156,15 @@ public class GraphCanvasContext
         return self.canvasPosition(forGraphPosition: graphPosition)
     }
 
-    private func canvasPosition(forGraphPosition graphPosition: CGPoint) -> CGPoint
+    /// Graph coordinates are centered on the canvas; canvas coordinates start at its corner.
+    public func canvasPosition(forGraphPosition graphPosition: CGPoint) -> CGPoint
     {
-        return CGPoint(x: graphPosition.x + canvasSize.width / 2,
-                       y: graphPosition.y + canvasSize.height / 2)
+        graphPosition + canvasSize / 2
+    }
+
+    public func graphPosition(forCanvasPosition canvasPosition: CGPoint) -> CGPoint
+    {
+        canvasPosition - canvasSize / 2
     }
 
     public func nearestPortID(to graphPosition: CGPoint, maximumDistance: CGFloat = 25) -> UUID?
@@ -176,6 +195,71 @@ public class GraphCanvasContext
         }
 
         return closestPort?.id
+    }
+
+    // MARK: - Scroll Viewport
+
+    /// The unoccluded part of the canvas, in scroll-content coordinates.
+    ///
+    /// Sidebar and inspector overlay the scroll view. `containerSize` excludes them,
+    /// but `contentOffset` is measured from the container's physical leading edge,
+    /// behind the sidebar, so the origin is shifted by the insets. `geometry.bounds`
+    /// and `visibleRect` are both `(contentOffset, containerSize)` and miss that shift.
+    public static func scrollViewport(for geometry: ScrollGeometry) -> CGRect
+    {
+        CGRect(x: geometry.contentOffset.x + geometry.contentInsets.leading,
+               y: geometry.contentOffset.y + geometry.contentInsets.top,
+               width: geometry.containerSize.width,
+               height: geometry.containerSize.height)
+    }
+
+    /// The point to pass to `ScrollPosition.scrollTo(point:)` to move the viewport by `delta`.
+    /// `scrollTo(point:)` places the point at the inset-adjusted leading edge, not at
+    /// the raw `contentOffset`.
+    static func scrollPoint(movingViewportOf geometry: ScrollGeometry, by delta: CGSize) -> CGPoint
+    {
+        scrollViewport(for: geometry).origin + delta
+    }
+
+    // MARK: - Framing
+
+    /// Whether `graphRect(framing:)` would find anything. Reads selection and membership
+    /// only, not positions, so observers aren't invalidated by node drags.
+    func hasContent(framing scope: GraphCanvasFramingScope) -> Bool
+    {
+        let graph = currentGraph
+
+        switch scope
+        {
+        case .selection:
+            return graph.nodes.contains { graph.viewModel(for: $0).isSelected }
+
+        case .allContent:
+            return !(graph.nodes.isEmpty && graph.notes.isEmpty)
+        }
+    }
+
+    /// The rect in graph coordinates enclosing the scope's nodes and notes in the
+    /// graph being displayed, or nil when the scope is empty.
+    func graphRect(framing scope: GraphCanvasFramingScope) -> CGRect?
+    {
+        let graph = currentGraph
+
+        let enclosedRects: [CGRect]
+        switch scope
+        {
+        case .selection:
+            enclosedRects = graph.selectedNodes.map { graph.viewModel(for: $0).graphRect }
+
+        case .allContent:
+            // A note's rect is already in graph coordinates.
+            enclosedRects = graph.nodes.map { graph.viewModel(for: $0).graphRect }
+                + graph.notes.map(\.rect)
+        }
+
+        return enclosedRects.reduce(nil) { enclosingRect, rect in
+            enclosingRect?.union(rect) ?? rect
+        }
     }
 
     // MARK: - Auto-Layout Timing
@@ -221,7 +305,7 @@ public class GraphCanvasContext
     // MARK: - Interactive Node Addition
 
     /// Add a node from a registry wrapper via user interaction.
-    /// Positions the node at the current scroll center and staggers
+    /// Positions the node at the visible graph center and staggers
     /// rapid successive adds so they don't pile on top of each other.
     public func layoutNode(_ node: Node) throws
     {
@@ -230,12 +314,13 @@ public class GraphCanvasContext
     }
 
     /// Calculates the offset for a user-initiated add: centered on the
-    /// current scroll position, plus a stagger when nodes are added in
+    /// visible graph center, plus a stagger when nodes are added in
     /// quick succession.
     private func calcInteractiveOffset(for node: Node) -> CGSize
     {
-        let base = CGSize(width: currentScrollOffset.x - node.nodeSize.width / 2.0,
-                          height: currentScrollOffset.y - node.nodeSize.height / 4.0)
+        let center = visibleGraphCenter
+        let base = CGSize(width: center.x - node.nodeSize.width / 2.0,
+                          height: center.y - node.nodeSize.height / 4.0)
         return base + calcRapidAddStagger()
     }
 
