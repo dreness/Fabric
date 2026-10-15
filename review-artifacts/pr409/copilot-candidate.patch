@@ -1,0 +1,62 @@
+diff --git a/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift b/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift
+index fe59f7f8..41ae0932 100644
+--- a/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift
++++ b/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift
+@@ -179,13 +179,17 @@ open class SubgraphNode: BaseObjectNode
+     }
+ 
+     /// Whether a proxy can stand for `port`, published in a sub graph.
++    /// This is a read-only type check: constructing a proxy would mutate the
++    /// live port value and violate atomic rejected-edit semantics.
+     internal static func canProxy(_ port: Port) -> Bool
+     {
+-        self.makeProxy(for: port, id: port.id) != nil
++        self.resolveProxyFactory(for: port, id: port.id) != nil
+     }
+ 
+-    /// Type-erase proxy creation — matches the inner port's generic type.
+-    private static func makeProxy(for port: Port, id: UUID) -> Port?
++    /// Returns a pass-through wrapper for any port type supported by proxies,
++    /// using one switch as the single source of truth for both capability checks
++    /// and actual creation.
++    private static func resolveProxyFactory(for port: Port, id: UUID) -> Port?
+     {
+         switch port
+         {
+@@ -246,6 +250,12 @@ open class SubgraphNode: BaseObjectNode
+         }
+     }
+ 
++    /// Type-erase proxy creation — matches the inner port's generic type.
++    private static func makeProxy(for port: Port, id: UUID) -> Port?
++    {
++        self.resolveProxyFactory(for: port, id: id)
++    }
++
+     override open var nodeExecutionMode:ExecutionMode
+     {
+         let publishedInputPorts = self.proxyPorts.filter { $0.kind == .Inlet }
+diff --git a/Tests/GraphConnectionOwnershipTests.swift b/Tests/GraphConnectionOwnershipTests.swift
+index f3eaaa12..d0a70f45 100644
+--- a/Tests/GraphConnectionOwnershipTests.swift
++++ b/Tests/GraphConnectionOwnershipTests.swift
+@@ -528,6 +528,7 @@ struct GraphConnectionOwnershipTests
+         graph.addNode(moved)
+         let wire = try #require(graph.connect(upstream.output, to: moved.input))
+         #expect(!SubgraphNode.canProxy(moved.input))
++        #expect(moved.input.value == nil)
+         let undoManager = UndoManager()
+         undoManager.groupsByEvent = false
+         graph.undoManager = undoManager
+@@ -548,9 +549,11 @@ struct GraphConnectionOwnershipTests
+         #expect(graph.connections.map(\.id) == [wire.id])
+         #expect(!moved.input.published)
+         #expect(!undoManager.canUndo)
++        #expect(moved.input.value == nil)
+ 
+         // A supported type passes the same check.
+         let supported = NumberBinaryOperator(context: context)
++        supported.inputNumber1.value = 42
+         #expect(SubgraphNode.canProxy(supported.inputNumber1))
+     }
+ 

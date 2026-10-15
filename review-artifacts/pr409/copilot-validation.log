@@ -1,0 +1,30 @@
+Fork practice PR #5; upstream layer #409; Copilot candidate 5de1092d79873a44c50f2ef3339777ffe4b4559f
+Retain local production fix. Candidate builds but merely renames the eager proxy constructor; all 7 original failing assertions remain (live value loss and callbacks). Candidate additions do not assert supported-port value preservation after canProxy.
+Validation: real macOS/Metal; exact candidates tested first. Temporary compile repairs were diagnostic experiments only and were not adopted. No upstream comments or remote changes were made in this validation run.
+Exact candidate command: swift test --filter "Review|EditUndo|GraphAutoLayout|ProxyPortReplacement|SettingsUndo|GraphConnectionOwnership|PortHydration|GraphDuplication|StringSplitNode"
+Diagnostic repair command: swift test --filter "Copilot|Review|UndoFix" (406 omits two tests coupled to local PendingCommit APIs; 408 second run restores upstream SettingsUndoTests to use the save harness).
+Editor command: xcodebuild -project Fabric.xcodeproj -scheme "Fabric Editor" -configuration Debug -destination platform=macOS,arch=arm64 -derivedDataPath /private/tmp/fabric-prNNN-derived -clonedSourcePackagesDirPath /private/tmp/fabric-pr406-derived/SourcePackages -xcconfig /private/tmp/fabric-pr406-build.xcconfig -skipMacroValidation CODE_SIGNING_ALLOWED=NO build
+Focused excerpts below; full transient build output omitted. Existing shader diagnostics emitted by expected negative shader tests are not test failures.
+
+== copilot-tests ==
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+􀢄  Test "Embedding keeps a boundary outlet's last value" recorded an issue with 1 argument deferred → true at SubgraphReviewRegressionTests.swift:26:9: Expectation failed: source.outputNumber.value == 42
+􀢄  Test "Embedding keeps a boundary outlet's last value" recorded an issue with 1 argument deferred → true at SubgraphReviewRegressionTests.swift:28:9: Expectation failed: proxy.value == 42
+􀢄  Test "Proxy preflight leaves live values and change callbacks untouched" recorded an issue at SubgraphReviewRegressionTests.swift:74:9: Expectation failed: port.value == 42
+􀢄  Test "Proxy preflight leaves live values and change callbacks untouched" recorded an issue at SubgraphReviewRegressionTests.swift:75:9: Expectation failed: changes == 0
+􀢄  Test "Embedding keeps a boundary outlet's last value" recorded an issue with 1 argument deferred → false at SubgraphReviewRegressionTests.swift:26:9: Expectation failed: source.outputNumber.value == 42
+􀢄  Test "Embedding keeps a boundary outlet's last value" recorded an issue with 1 argument deferred → false at SubgraphReviewRegressionTests.swift:28:9: Expectation failed: proxy.value == 42
+􀢄  Test "A rejected embedding leaves supported boundary values untouched" recorded an issue at SubgraphReviewRegressionTests.swift:60:9: Expectation failed: changes == 0
+Post Shader Pipeline: program_source:871:12: error: no matching function for call to 'compositeXor'
+􀢄  Test run with 112 tests in 8 suites failed after 2.886 seconds with 7 issues.
+
+== copilot-editor ==
+** BUILD SUCCEEDED **
+
+== local-tests ==
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+Post Shader Pipeline: program_source:871:12: error: no matching function for call to 'compositeXor'
+􁁛  Test run with 288 tests in 26 suites passed after 2.641 seconds.
+
+== local-editor ==
+** BUILD SUCCEEDED **
