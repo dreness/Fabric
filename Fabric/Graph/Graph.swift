@@ -2087,25 +2087,37 @@ internal import AnyCodable
     }
 
     /// Recursively replaces UUID strings in a JSON object using a remap table.
-    /// Values under `preservingKeys` are left as they are, at any depth.
-    /// Dictionary keys are never rewritten.
-    internal static func remapUUIDs(in object: Any, remap: [String: String], preservingKeys: Set<String> = []) -> Any
+    /// Only strings that are themselves identity fields, or arrays of identity
+    /// fields, are rewritten: user text or ordinary value arrays stay as they are
+    /// even when they happen to look like a UUID. Values under `preservingKeys`
+    /// are left as they are, at any depth. Dictionary keys are never rewritten.
+    internal static func remapUUIDs(in object: Any,
+                                   remap: [String: String],
+                                   preservingKeys: Set<String> = [],
+                                   underIDKey: Bool = false) -> Any
     {
         switch object
         {
         case let string as String:
-            return remap[string] ?? string
+            return underIDKey ? (remap[string] ?? string) : string
 
         case let array as [Any]:
-            return array.map { remapUUIDs(in: $0, remap: remap, preservingKeys: preservingKeys) }
+            return array.map { remapUUIDs(in: $0, remap: remap, preservingKeys: preservingKeys, underIDKey: underIDKey) }
 
         case let dict as [String: Any]:
             var newDict = [String: Any]()
             for (key, value) in dict
             {
-                newDict[key] = preservingKeys.contains(key)
-                    ? value
-                    : remapUUIDs(in: value, remap: remap, preservingKeys: preservingKeys)
+                if preservingKeys.contains(key)
+                {
+                    newDict[key] = value
+                    continue
+                }
+                let isIdentityKey = isIDKey(key)
+                newDict[key] = remapUUIDs(in: value,
+                                          remap: remap,
+                                          preservingKeys: preservingKeys,
+                                          underIDKey: underIDKey || isIdentityKey)
             }
             return newDict
 

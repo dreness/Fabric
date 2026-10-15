@@ -60,6 +60,21 @@ public class StringSplitNode: StrategyNode
     /// parked here and seeds the inlet when Custom comes back.
     public private(set) var customSeparator: String = ", "
 
+    /// The complete settings value for this node: the parked custom separator is
+    /// part of the node's design together with its strategy, so a clone set sync
+    /// sees the settings as a cohesive whole instead of a separate live port.
+    public struct Settings: StrategySettings, Equatable
+    {
+        public var strategy: String
+        public var customSeparator: String
+
+        public init(strategy: String, customSeparator: String)
+        {
+            self.strategy = strategy
+            self.customSeparator = customSeparator
+        }
+    }
+
     private enum CodingKeys: String, CodingKey
     {
         case customSeparator
@@ -87,6 +102,30 @@ public class StringSplitNode: StrategyNode
         customSeparator = try container.decodeIfPresent(String.self, forKey: .customSeparator) ?? ", "
 
         try super.init(from: decoder)
+    }
+
+    override public var settings: (any NodeSettings)?
+    {
+        Settings(strategy: strategy, customSeparator: customSeparator)
+    }
+
+    override public func apply(_ settings: any NodeSettings)
+    {
+        guard let settings = settings as? Settings else { return }
+        let previousCustomSeparator = customSeparator
+        if let inputSeparator
+        {
+            customSeparator = inputSeparator.value ?? settings.customSeparator
+        }
+        else
+        {
+            customSeparator = settings.customSeparator
+        }
+        if previousCustomSeparator != customSeparator
+        {
+            subtitleSubject.send()
+        }
+        super.apply(settings)
     }
 
     public override func encode(to encoder: any Encoder) throws

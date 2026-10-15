@@ -58,6 +58,23 @@ struct StringSplitNodeTests
         #expect(node.inputSeparator?.value == #"\t"#)
     }
 
+    @Test("String Split settings save the parked separator with strategy")
+    func customSeparatorIsInSettings() throws
+    {
+        guard let harness = GraphExecutionTestHarness(renderWidth: 64, renderHeight: 64) else { return }
+
+        let node = StringSplitNode(context: harness.context, strategy: StringSplitMode.custom)
+        try #require(node.inputSeparator).value = #"\t"#
+        node.setStrategy(StringSplitMode.comma.rawValue)
+
+        let settings = try #require(node.settings as? StringSplitNode.Settings)
+        #expect(settings.strategy == StringSplitMode.comma.rawValue)
+        #expect(settings.customSeparator == #"\t"#)
+
+        node.commitSettings(settings)
+        #expect(node.customSeparator == #"\t"#)
+    }
+
     @Test("Escaped newline separates file contents into lines")
     func escapedNewlineSeparator()
     {

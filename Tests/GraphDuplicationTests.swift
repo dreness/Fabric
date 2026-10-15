@@ -33,4 +33,22 @@ struct GraphDuplicationTests
         #expect(copy.inputPort.id != node.inputPort.id)
         #expect(copy.inputPort.value == text)
     }
+
+    @Test("Duplicating preserves strings that match a node or port ID")
+    func duplicateKeepsNodeAndPortIDStrings() throws
+    {
+        guard let context = makeContext() else { return }
+        let graph = Graph(context: context)
+        let node = StringLengthNode(context: context)
+        graph.addNode(node)
+
+        let portIDText = node.inputPort.id.uuidString
+        let nodeIDText = node.id.uuidString
+        node.inputPort.value = portIDText
+        node.userName = nodeIDText
+
+        let copy = try #require(graph.duplicateNodes([node]).first as? StringLengthNode)
+        #expect(copy.inputPort.value == portIDText)
+        #expect(copy.userName == nodeIDText)
+    }
 }
