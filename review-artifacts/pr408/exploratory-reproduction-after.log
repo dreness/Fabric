@@ -1,0 +1,170 @@
+Building for debugging...
+[Computing dependencies]
+[Using on-disk description]
+[1 / 12] Cmlx
+[2 / 10] Fabric
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:286:28: warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+284 |     }
+285 | 
+286 |     private var oscServer: OSCServer?
+    |                            |- warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+    |                            `- note: use 'OSCUDPServer' instead
+287 |     fileprivate var isListening: Bool = false
+288 | 
+
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Fabric/Nodes/Parameters/PassThroughNode.swift:38:30: warning: 'override' is implied when overriding a required initializer
+36 |     }
+37 |     
+38 |     override public required init(from decoder: any Decoder) throws {
+   |                              `- warning: 'override' is implied when overriding a required initializer
+39 |         try super.init(from: decoder)
+40 |     }
+
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Fabric/Graph/Node/Node.swift:223:21: note: overridden required initializer is here
+221 |     }
+222 | 
+223 |     public required init(from decoder: any Decoder) throws
+    |                     `- note: overridden required initializer is here
+224 |     {
+225 |         guard let decodeContext = decoder.context else
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[3 / 11] Fabric
+[8 / 14] Fabric
+[9 / 14] Fabric
+[11 / 16] FabricTests-product
+[12 / 16] FabricTests-product
+[14 / 18] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/DocumentSaveReviewRegressionTests.swift:22:27: warning: conformance of 'FileWrapper' to 'Sendable' is unavailable in macOS; this is an error in the Swift 6 language mode
+20 |         // a background writer must wait for that snapshot before returning.
+21 |         let write = {
+22 |             try MainActor.assumeIsolated {
+   |                           `- warning: conformance of 'FileWrapper' to 'Sendable' is unavailable in macOS; this is an error in the Swift 6 language mode
+23 |                 let graph = self.editingContext.rootGraph
+24 |                 graph.takeShaderSourcesFromDisk()
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX27.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSFileWrapper.h: 0: 59 | /// - Destination node. Applicable only to symbolic-link file wrappers.
+ 60 | API_AVAILABLE(macos(10.0), ios(4.0), watchos(2.0), tvos(9.0))
+ 61 | @interface NSFileWrapper : NSObject<NSSecureCoding>
+    +---  --------------------------------------------------------------
+    |1 | @_nonSendable(_assumed)
+    |  | `- note: conformance of 'FileWrapper' to 'Sendable' has been explicitly marked unavailable here
+    +-------------------------------------------------------------------
+ 62 | 
+ 63 | #pragma mark *** Initialization ***
+
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/DocumentSaveReviewRegressionTests.swift:72:17: warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+70 |             return try document.fileWrapper(configuration: ()).regularFileContents
+71 |         }
+72 |         started.wait()
+   |                 `- warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+73 |         _ = finished.wait(timeout: .now() + .milliseconds(100))
+74 |         let data = try #require(try await task.value)
+
+Dispatch.DispatchSemaphore.wait:2:13: note: 'wait()' declared here
+1 | class DispatchSemaphore {
+2 | public func wait()}
+  |             `- note: 'wait()' declared here
+3 | 
+
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/DocumentSaveReviewRegressionTests.swift:73:22: warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+71 |         }
+72 |         started.wait()
+73 |         _ = finished.wait(timeout: .now() + .milliseconds(100))
+   |                      `- warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+74 |         let data = try #require(try await task.value)
+75 |         let decoder = JSONDecoder()
+
+Dispatch.DispatchSemaphore.wait:2:13: note: 'wait(timeout:)' declared here
+1 | class DispatchSemaphore {
+2 | public func wait(timeout: DispatchTime) -> DispatchTimeoutResult}
+  |             `- note: 'wait(timeout:)' declared here
+3 | 
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/TypingUndoTests.swift:15:27: warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 13 |     private final class WindowUndo: NSObject, NSWindowDelegate
+ 14 |     {
+ 15 |         let undoManager = UndoManager()
+    |                           `- warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 16 |         func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? { undoManager }
+ 17 |     }
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/objc/NSObject.h:66:1: note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 64 | 
+ 65 | + (void)initialize;
+ 66 | - (instancetype)init
+    | `- note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 67 | #if NS_ENFORCE_NSOBJECT_DESIGNATED_INITIALIZER
+ 68 |     NS_DESIGNATED_INITIALIZER
+
+[#ActorIsolatedCall]: <https://docs.swift.org/compiler/documentation/diagnostics/actor-isolated-call>
+[19 / 22] FabricTests-product
+[21 / 22] FabricTests-product
+[22 / 24] Fabric-product
+[23 / 24] Fabric-product
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr408/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+Build complete! (8.33 sec)
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Settings Review Regressions" started.
+􀟈  Suite "Document Save Review Regressions" started.
+􀟈  Test "Reconciliation clears a surviving inlet and leaves runtime outlets alone" started.
+􀟈  Test "Undo restores an absent inlet value, including a published inlet" started.
+􀟈  Test "A background save includes the disk shader in that same save" started.
+􀟈  Test case passing 1 argument published → false to "Undo restores an absent inlet value, including a published inlet" started.
+􀟈  Test case passing 1 argument published → true to "Undo restores an absent inlet value, including a published inlet" started.
+Init Graph
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/FC69EBEC-9C96-4DC8-8927-7EEBFD6E4C37/6E9F8EB9-8598-40AF-BB74-76BBE46C1675/Shaders.metal
+Graph: C01989F1-0DE9-4355-8474-94892395DDE2 Add Node Live Image
+􀢄  Test "Reconciliation clears a surviving inlet and leaves runtime outlets alone" recorded an issue at SettingsReviewRegressionTests.swift:25:9: Expectation failed: node.inputNumber1.value == nil
+􀄵  node.inputNumber1.value == nil → false
+􀄵    node.inputNumber1.value → 0.0
+􀄵      some → 0.0
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/FC69EBEC-9C96-4DC8-8927-7EEBFD6E4C37/6E9F8EB9-8598-40AF-BB74-76BBE46C1675/Shaders.metal
+􀢄  Test "Reconciliation clears a surviving inlet and leaves runtime outlets alone" failed after 0.165 seconds with 1 issue.
+Updating Shader: Post at: /tmp/fabric-live-shaders/C01989F1-0DE9-4355-8474-94892395DDE2/FC69EBEC-9C96-4DC8-8927-7EEBFD6E4C37/8F4A491C-71D3-4A53-B673-C9422CAF4AE2/Shaders.metal
+Graph: C01989F1-0DE9-4355-8474-94892395DDE2 Add Node Live Image
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/FC69EBEC-9C96-4DC8-8927-7EEBFD6E4C37/6E9F8EB9-8598-40AF-BB74-76BBE46C1675/Shaders.metal
+Deinit Graph: C01989F1-0DE9-4355-8474-94892395DDE2
+Deinit Graph: C01989F1-0DE9-4355-8474-94892395DDE2
+􁁛  Test "A background save includes the disk shader in that same save" passed after 0.172 seconds.
+􁁛  Suite "Document Save Review Regressions" passed after 0.172 seconds.
+Init Graph
+Graph: 822A5F09-095E-488C-B5AD-7A3A80613B18 Add Node Math Expression (x + y)
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → true at SettingsReviewRegressionTests.swift:51:13: Expectation failed: restored.value == nil
+􀄵  nil means the upstream value is absent, not the numeric default
+􀄵  restored.value == nil → false
+􀄵    restored.value → 0.0
+􀄵      some → 0.0
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → true at SettingsReviewRegressionTests.swift:56:17: Expectation failed: proxy.value == nil
+􀄵  proxy.value == nil → false
+􀄵    proxy.value → 0.0
+􀄵      some → 0.0
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → true at SettingsReviewRegressionTests.swift:51:13: Expectation failed: restored.value == nil
+􀄵  nil means the upstream value is absent, not the numeric default
+􀄵  restored.value == nil → false
+􀄵    restored.value → 0.0
+􀄵      some → 0.0
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → true at SettingsReviewRegressionTests.swift:56:17: Expectation failed: proxy.value == nil
+􀄵  proxy.value == nil → false
+􀄵    proxy.value → 0.0
+􀄵      some → 0.0
+Deinit Graph: 822A5F09-095E-488C-B5AD-7A3A80613B18
+Init Graph
+Graph: EE0542F5-DF4D-4E72-BEB2-67B3FDCB47F8 Add Node Math Expression (x + y)
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → false at SettingsReviewRegressionTests.swift:51:13: Expectation failed: restored.value == nil
+􀄵  nil means the upstream value is absent, not the numeric default
+􀄵  restored.value == nil → false
+􀄵    restored.value → 0.0
+􀄵      some → 0.0
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → false at SettingsReviewRegressionTests.swift:51:13: Expectation failed: restored.value == nil
+􀄵  nil means the upstream value is absent, not the numeric default
+􀄵  restored.value == nil → false
+􀄵    restored.value → 0.0
+􀄵      some → 0.0
+Deinit Graph: EE0542F5-DF4D-4E72-BEB2-67B3FDCB47F8
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" with 2 test cases failed after 0.174 seconds with 6 issues.
+􀢄  Suite "Settings Review Regressions" failed after 0.175 seconds with 7 issues.
+􀢄  Test run with 3 tests in 2 suites failed after 0.175 seconds with 7 issues.
+Note: Some test targets reported failures:
+  - FabricTests (Swift Testing)

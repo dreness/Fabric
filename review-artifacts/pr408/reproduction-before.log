@@ -1,0 +1,210 @@
+Building for debugging...
+[Computing dependencies]
+[Using on-disk description]
+[1 / 11] Satin
+[2 / 8] FabricTests-product
+[3 / 8] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/DocumentSaveReviewRegressionTests.swift:83:17: warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+81 |             return try document.fileWrapper(configuration: ()).regularFileContents
+82 |         }
+83 |         started.wait()
+   |                 `- warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+84 |         _ = finished.wait(timeout: .now() + .milliseconds(100))
+85 |         data = try #require(try await task.value)
+
+Dispatch.DispatchSemaphore.wait:2:13: note: 'wait()' declared here
+1 | class DispatchSemaphore {
+2 | public func wait()}
+  |             `- note: 'wait()' declared here
+3 | 
+
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/DocumentSaveReviewRegressionTests.swift:84:22: warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+82 |         }
+83 |         started.wait()
+84 |         _ = finished.wait(timeout: .now() + .milliseconds(100))
+   |                      `- warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+85 |         data = try #require(try await task.value)
+86 |         }
+
+Dispatch.DispatchSemaphore.wait:2:13: note: 'wait(timeout:)' declared here
+1 | class DispatchSemaphore {
+2 | public func wait(timeout: DispatchTime) -> DispatchTimeoutResult}
+  |             `- note: 'wait(timeout:)' declared here
+3 | 
+[5 / 10] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/TypingUndoTests.swift:15:27: warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 13 |     private final class WindowUndo: NSObject, NSWindowDelegate
+ 14 |     {
+ 15 |         let undoManager = UndoManager()
+    |                           `- warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 16 |         func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? { undoManager }
+ 17 |     }
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/objc/NSObject.h:66:1: note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 64 | 
+ 65 | + (void)initialize;
+ 66 | - (instancetype)init
+    | `- note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 67 | #if NS_ENFORCE_NSOBJECT_DESIGNATED_INITIALIZER
+ 68 |     NS_DESIGNATED_INITIALIZER
+
+[#ActorIsolatedCall]: <https://docs.swift.org/compiler/documentation/diagnostics/actor-isolated-call>
+[11 / 14] FabricTests-product
+[13 / 14] FabricTests-product
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr408/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+Build complete! (3.81 sec)
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Document Save Review Regressions" started.
+􀟈  Test "A save includes the disk shader in that same save" started.
+􀟈  Test case passing 1 argument background → false to "A save includes the disk shader in that same save" started.
+􀟈  Test case passing 1 argument background → true to "A save includes the disk shader in that same save" started.
+Init Graph
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/24BFDF6C-9668-4D2A-AA63-03A854244DF0/AC631B15-5F33-45E1-B54A-44DB35FBB3A4/Shaders.metal
+Graph: FE6073B7-8EA1-4CCD-A761-9761155BD0CA Add Node Live Image
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/24BFDF6C-9668-4D2A-AA63-03A854244DF0/AC631B15-5F33-45E1-B54A-44DB35FBB3A4/Shaders.metal
+Updating Shader: Post at: /tmp/fabric-live-shaders/FE6073B7-8EA1-4CCD-A761-9761155BD0CA/24BFDF6C-9668-4D2A-AA63-03A854244DF0/AA612E8B-FC95-4370-9D8F-259FCF061216/Shaders.metal
+Graph: FE6073B7-8EA1-4CCD-A761-9761155BD0CA Add Node Live Image
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/24BFDF6C-9668-4D2A-AA63-03A854244DF0/AC631B15-5F33-45E1-B54A-44DB35FBB3A4/Shaders.metal
+Deinit Graph: FE6073B7-8EA1-4CCD-A761-9761155BD0CA
+Deinit Graph: FE6073B7-8EA1-4CCD-A761-9761155BD0CA
+Init Graph
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/4994C2CC-40DB-4789-80B5-97F70E59D471/178F382A-724E-4E61-ABA0-AF8DEABC9CC4/Shaders.metal
+Graph: 1671F562-08B2-44D4-AE9C-506E02C300F5 Add Node Live Image
+Updating Shader: Post at: /tmp/fabric-live-shaders/1671F562-08B2-44D4-AE9C-506E02C300F5/4994C2CC-40DB-4789-80B5-97F70E59D471/56E0F439-88D4-4CA6-AED5-CB5D1AE45440/Shaders.metal
+Graph: 1671F562-08B2-44D4-AE9C-506E02C300F5 Add Node Live Image
+􀢄  Test "A save includes the disk shader in that same save" recorded an issue with 1 argument background → true at DocumentSaveReviewRegressionTests.swift:90:9: Expectation failed: (saved.node(forID: node.id) as? LiveImageNode)?.shaderSource == edited
+􀄵  (saved.node(forID: node.id) as? LiveImageNode)?.shaderSource == edited → false
+􀄵    (saved.node(forID: node.id) as? LiveImageNode)?.shaderSource → "//
+     //  LiveEffectDefaultShader.metal
+     //  Fabric
+     //
+     //  Created by Codex on 3/4/26.
+     //
+     
+     #include <metal_stdlib>
+     using namespace metal;
+     
+     typedef struct {
+         float amount; // slider, 0.0, 1.0, 1.0, Amount
+     } PostUniforms;
+     
+     fragment half4 postFragment(VertexData in [[stage_in]],
+                                 constant PostUniforms &uniforms [[buffer(FragmentBufferMaterialUniforms)]],
+                                 constant float4x4 *imageTransforms [[buffer(FragmentBufferCustom10)]],
+                                 texture2d<half, access::sample> inputTexture [[texture(FragmentTextureCustom0)]]) {
+         constexpr sampler s(address::clamp_to_edge, filter::linear);
+         float2 textureCoordinate = (imageTransforms[0] * float4(in.texcoord, 0.0, 1.0)).xy;
+         half4 color = inputTexture.sample(s, textureCoordinate);
+         return mix(half4(0.0), color, half(uniforms.amount));
+     }
+     "
+􀄵      some → "//
+       //  LiveEffectDefaultShader.metal
+       //  Fabric
+       //
+       //  Created by Codex on 3/4/26.
+       //
+       
+       #include <metal_stdlib>
+       using namespace metal;
+       
+       typedef struct {
+           float amount; // slider, 0.0, 1.0, 1.0, Amount
+       } PostUniforms;
+       
+       fragment half4 postFragment(VertexData in [[stage_in]],
+                                   constant PostUniforms &uniforms [[buffer(FragmentBufferMaterialUniforms)]],
+                                   constant float4x4 *imageTransforms [[buffer(FragmentBufferCustom10)]],
+                                   texture2d<half, access::sample> inputTexture [[texture(FragmentTextureCustom0)]]) {
+           constexpr sampler s(address::clamp_to_edge, filter::linear);
+           float2 textureCoordinate = (imageTransforms[0] * float4(in.texcoord, 0.0, 1.0)).xy;
+           half4 color = inputTexture.sample(s, textureCoordinate);
+           return mix(half4(0.0), color, half(uniforms.amount));
+       }
+       "
+􀄵    edited → "//
+     //  LiveEffectDefaultShader.metal
+     //  Fabric
+     //
+     //  Created by Codex on 3/4/26.
+     //
+     
+     #include <metal_stdlib>
+     using namespace metal;
+     
+     typedef struct {
+         float amount; // slider, 0.0, 1.0, 1.0, Amount
+     } PostUniforms;
+     
+     fragment half4 postFragment(VertexData in [[stage_in]],
+                                 constant PostUniforms &uniforms [[buffer(FragmentBufferMaterialUniforms)]],
+                                 constant float4x4 *imageTransforms [[buffer(FragmentBufferCustom10)]],
+                                 texture2d<half, access::sample> inputTexture [[texture(FragmentTextureCustom0)]]) {
+         constexpr sampler s(address::clamp_to_edge, filter::linear);
+         float2 textureCoordinate = (imageTransforms[0] * float4(in.texcoord, 0.0, 1.0)).xy;
+         half4 color = inputTexture.sample(s, textureCoordinate);
+         return mix(half4(0.0), color, half(uniforms.amount));
+     }
+     
+     // external edit before save
+     "
+􀢄  Test "A save includes the disk shader in that same save" recorded an issue with 1 argument background → true at DocumentSaveReviewRegressionTests.swift:91:9: Expectation failed: node.shaderSource == edited
+􀄵  node.shaderSource == edited → false
+􀄵    node.shaderSource → "//
+     //  LiveEffectDefaultShader.metal
+     //  Fabric
+     //
+     //  Created by Codex on 3/4/26.
+     //
+     
+     #include <metal_stdlib>
+     using namespace metal;
+     
+     typedef struct {
+         float amount; // slider, 0.0, 1.0, 1.0, Amount
+     } PostUniforms;
+     
+     fragment half4 postFragment(VertexData in [[stage_in]],
+                                 constant PostUniforms &uniforms [[buffer(FragmentBufferMaterialUniforms)]],
+                                 constant float4x4 *imageTransforms [[buffer(FragmentBufferCustom10)]],
+                                 texture2d<half, access::sample> inputTexture [[texture(FragmentTextureCustom0)]]) {
+         constexpr sampler s(address::clamp_to_edge, filter::linear);
+         float2 textureCoordinate = (imageTransforms[0] * float4(in.texcoord, 0.0, 1.0)).xy;
+         half4 color = inputTexture.sample(s, textureCoordinate);
+         return mix(half4(0.0), color, half(uniforms.amount));
+     }
+     "
+􀄵    edited → "//
+     //  LiveEffectDefaultShader.metal
+     //  Fabric
+     //
+     //  Created by Codex on 3/4/26.
+     //
+     
+     #include <metal_stdlib>
+     using namespace metal;
+     
+     typedef struct {
+         float amount; // slider, 0.0, 1.0, 1.0, Amount
+     } PostUniforms;
+     
+     fragment half4 postFragment(VertexData in [[stage_in]],
+                                 constant PostUniforms &uniforms [[buffer(FragmentBufferMaterialUniforms)]],
+                                 constant float4x4 *imageTransforms [[buffer(FragmentBufferCustom10)]],
+                                 texture2d<half, access::sample> inputTexture [[texture(FragmentTextureCustom0)]]) {
+         constexpr sampler s(address::clamp_to_edge, filter::linear);
+         float2 textureCoordinate = (imageTransforms[0] * float4(in.texcoord, 0.0, 1.0)).xy;
+         half4 color = inputTexture.sample(s, textureCoordinate);
+         return mix(half4(0.0), color, half(uniforms.amount));
+     }
+     
+     // external edit before save
+     "
+Deinit Graph: 1671F562-08B2-44D4-AE9C-506E02C300F5
+􀢄  Test "A save includes the disk shader in that same save" with 2 test cases failed after 0.074 seconds with 2 issues.
+􀢄  Suite "Document Save Review Regressions" failed after 0.074 seconds with 2 issues.
+􀢄  Test run with 1 test in 1 suite failed after 0.074 seconds with 2 issues.
+Note: Some test targets reported failures:
+  - FabricTests (Swift Testing)

@@ -1,0 +1,28 @@
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Document Save Review Regressions" started.
+􀟈  Test "A save includes the disk shader in that same save" started.
+􀟈  Test case passing 1 argument background → true to "A save includes the disk shader in that same save" started.
+􀟈  Test case passing 1 argument background → false to "A save includes the disk shader in that same save" started.
+Init Graph
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/78C7CF49-E18A-42C3-B0E4-7C9151CFE513/71365A35-E2EA-4DF8-A466-8B1C11720BD5/Shaders.metal
+Graph: F9612843-854A-4027-817B-67CBD7E8183B Add Node Live Image
+Init Graph
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/B026C3CA-D079-4BE0-958A-87E41CD5E4C0/FDF79CC0-C306-4415-865E-E4A88B51CC70/Shaders.metal
+Graph: 2205CF5A-A9EC-461B-89C0-024A71699FF1 Add Node Live Image
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/B026C3CA-D079-4BE0-958A-87E41CD5E4C0/FDF79CC0-C306-4415-865E-E4A88B51CC70/Shaders.metal
+Updating Shader: Post at: /tmp/fabric-live-shaders/2205CF5A-A9EC-461B-89C0-024A71699FF1/B026C3CA-D079-4BE0-958A-87E41CD5E4C0/600203D6-DB97-415B-96EE-46339B15D0DA/Shaders.metal
+Graph: 2205CF5A-A9EC-461B-89C0-024A71699FF1 Add Node Live Image
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/B026C3CA-D079-4BE0-958A-87E41CD5E4C0/FDF79CC0-C306-4415-865E-E4A88B51CC70/Shaders.metal
+Deinit Graph: 2205CF5A-A9EC-461B-89C0-024A71699FF1
+Deinit Graph: 2205CF5A-A9EC-461B-89C0-024A71699FF1
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/78C7CF49-E18A-42C3-B0E4-7C9151CFE513/71365A35-E2EA-4DF8-A466-8B1C11720BD5/Shaders.metal
+Updating Shader: Post at: /tmp/fabric-live-shaders/F9612843-854A-4027-817B-67CBD7E8183B/78C7CF49-E18A-42C3-B0E4-7C9151CFE513/208E69D7-16D2-4715-A704-782B505C3131/Shaders.metal
+Graph: F9612843-854A-4027-817B-67CBD7E8183B Add Node Live Image
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/78C7CF49-E18A-42C3-B0E4-7C9151CFE513/71365A35-E2EA-4DF8-A466-8B1C11720BD5/Shaders.metal
+Deinit Graph: F9612843-854A-4027-817B-67CBD7E8183B
+Deinit Graph: F9612843-854A-4027-817B-67CBD7E8183B
+􁁛  Test "A save includes the disk shader in that same save" with 2 test cases passed after 0.185 seconds.
+􁁛  Suite "Document Save Review Regressions" passed after 0.185 seconds.
+􁁛  Test run with 1 test in 1 suite passed after 0.185 seconds.

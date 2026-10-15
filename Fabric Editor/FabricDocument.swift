@@ -386,29 +386,25 @@ class FabricDocument: FileDocument
     
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper
     {
-        let graph = self.editingContext.rootGraph
+        // Disk edits and the snapshot belong to the same save. Serialize on
+        // the main thread with graph edits, including shader reconciliation;
+        // a background writer must wait for that snapshot before returning.
+        let write = {
+            try MainActor.assumeIsolated {
+                let graph = self.editingContext.rootGraph
+                graph.takeShaderSourcesFromDisk()
+                graph.rewriteFileReferences(relativeTo: graph.fileReferenceBaseURL)
 
-        // A shader edited on disk reaches the document as an edit, made on
-        // the main thread. A save off it writes what the graph holds, and the
-        // edit, which marks the document changed, is in the next save.
-        if Thread.isMainThread
-        {
-            MainActor.assumeIsolated { graph.takeShaderSourcesFromDisk() }
+                let encoder = JSONEncoder()
+                encoder.outputFormatting = [.prettyPrinted]
+                let data = try encoder.encode(graph)
+                self.lastWrittenGraph = (data, graph.fileReferenceBaseURL)
+                return FileWrapper(regularFileWithContents: data)
+            }
         }
-        else
-        {
-            DispatchQueue.main.async { graph.takeShaderSourcesFromDisk() }
-        }
 
-        graph.rewriteFileReferences(relativeTo: graph.fileReferenceBaseURL)
-
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.prettyPrinted]
-        
-        let data = try encoder.encode(self.editingContext.rootGraph)
-        self.lastWrittenGraph = (data, self.editingContext.rootGraph.fileReferenceBaseURL)
-
-        return .init(regularFileWithContents: data)
+        if Thread.isMainThread { return try write() }
+        return try DispatchQueue.main.sync(execute: write)
     }
 
     private func defaultImageExportFilename() -> String

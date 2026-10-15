@@ -1,0 +1,248 @@
+Building for debugging...
+[Computing dependencies]
+[Pre-planning 1 / 2116]
+[Planning deferred tasks]
+[Starting]
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr408/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+[12 / 180] Crypto
+[14 / 24] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/DocumentSaveReviewRegressionTests.swift:76:17: warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+74 |             return try document.fileWrapper(configuration: ()).regularFileContents
+75 |         }
+76 |         started.wait()
+   |                 `- warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+77 |         _ = finished.wait(timeout: .now() + .milliseconds(100))
+78 |         let data = try #require(try await task.value)
+
+Dispatch.DispatchSemaphore.wait:2:13: note: 'wait()' declared here
+1 | class DispatchSemaphore {
+2 | public func wait()}
+  |             `- note: 'wait()' declared here
+3 | 
+
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/DocumentSaveReviewRegressionTests.swift:77:22: warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+75 |         }
+76 |         started.wait()
+77 |         _ = finished.wait(timeout: .now() + .milliseconds(100))
+   |                      `- warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode
+78 |         let data = try #require(try await task.value)
+79 |         let decoder = JSONDecoder()
+
+Dispatch.DispatchSemaphore.wait:2:13: note: 'wait(timeout:)' declared here
+1 | class DispatchSemaphore {
+2 | public func wait(timeout: DispatchTime) -> DispatchTimeoutResult}
+  |             `- note: 'wait(timeout:)' declared here
+3 | 
+[17 / 27] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/TypingUndoTests.swift:15:27: warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 13 |     private final class WindowUndo: NSObject, NSWindowDelegate
+ 14 |     {
+ 15 |         let undoManager = UndoManager()
+    |                           `- warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 16 |         func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? { undoManager }
+ 17 |     }
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/objc/NSObject.h:66:1: note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 64 | 
+ 65 | + (void)initialize;
+ 66 | - (instancetype)init
+    | `- note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 67 | #if NS_ENFORCE_NSOBJECT_DESIGNATED_INITIALIZER
+ 68 |     NS_DESIGNATED_INITIALIZER
+
+[#ActorIsolatedCall]: <https://docs.swift.org/compiler/documentation/diagnostics/actor-isolated-call>
+[23 / 26] FabricTests-product
+[25 / 26] FabricTests-product
+Build complete! (4.42 sec)
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Document Save Review Regressions" started.
+􀟈  Suite "Settings Review Regressions" started.
+􀟈  Test "A background save includes the disk shader in that same save" started.
+􀟈  Test "Reconciliation clears a surviving inlet and leaves runtime outlets alone" started.
+􀟈  Test "Undo restores an absent inlet value, including a published inlet" started.
+􀟈  Test case passing 1 argument published → false to "Undo restores an absent inlet value, including a published inlet" started.
+􀟈  Test case passing 1 argument published → true to "Undo restores an absent inlet value, including a published inlet" started.
+Init Graph
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/5BA506EF-6D86-43D1-99A3-D5685349DFBC/6281E6A5-640A-42C2-9975-EDFEA1E80C8A/Shaders.metal
+Graph: 72315995-B244-44B3-90BF-38FE58AB80FA Add Node Live Image
+Updating Shader: Post at: /tmp/fabric-live-shaders/72315995-B244-44B3-90BF-38FE58AB80FA/5BA506EF-6D86-43D1-99A3-D5685349DFBC/ED0B8846-C3B4-4A5A-A2CB-BEAF584BAB2C/Shaders.metal
+Graph: 72315995-B244-44B3-90BF-38FE58AB80FA Add Node Live Image
+􀢄  Test "A background save includes the disk shader in that same save" recorded an issue at DocumentSaveReviewRegressionTests.swift:82:9: Expectation failed: (saved.node(forID: node.id) as? LiveImageNode)?.shaderSource == edited
+􀄵  (saved.node(forID: node.id) as? LiveImageNode)?.shaderSource == edited → false
+􀄵    (saved.node(forID: node.id) as? LiveImageNode)?.shaderSource → "//
+     //  LiveEffectDefaultShader.metal
+     //  Fabric
+     //
+     //  Created by Codex on 3/4/26.
+     //
+     
+     #include <metal_stdlib>
+     using namespace metal;
+     
+     typedef struct {
+         float amount; // slider, 0.0, 1.0, 1.0, Amount
+     } PostUniforms;
+     
+     fragment half4 postFragment(VertexData in [[stage_in]],
+                                 constant PostUniforms &uniforms [[buffer(FragmentBufferMaterialUniforms)]],
+                                 constant float4x4 *imageTransforms [[buffer(FragmentBufferCustom10)]],
+                                 texture2d<half, access::sample> inputTexture [[texture(FragmentTextureCustom0)]]) {
+         constexpr sampler s(address::clamp_to_edge, filter::linear);
+         float2 textureCoordinate = (imageTransforms[0] * float4(in.texcoord, 0.0, 1.0)).xy;
+         half4 color = inputTexture.sample(s, textureCoordinate);
+         return mix(half4(0.0), color, half(uniforms.amount));
+     }
+     "
+􀄵      some → "//
+       //  LiveEffectDefaultShader.metal
+       //  Fabric
+       //
+       //  Created by Codex on 3/4/26.
+       //
+       
+       #include <metal_stdlib>
+       using namespace metal;
+       
+       typedef struct {
+           float amount; // slider, 0.0, 1.0, 1.0, Amount
+       } PostUniforms;
+       
+       fragment half4 postFragment(VertexData in [[stage_in]],
+                                   constant PostUniforms &uniforms [[buffer(FragmentBufferMaterialUniforms)]],
+                                   constant float4x4 *imageTransforms [[buffer(FragmentBufferCustom10)]],
+                                   texture2d<half, access::sample> inputTexture [[texture(FragmentTextureCustom0)]]) {
+           constexpr sampler s(address::clamp_to_edge, filter::linear);
+           float2 textureCoordinate = (imageTransforms[0] * float4(in.texcoord, 0.0, 1.0)).xy;
+           half4 color = inputTexture.sample(s, textureCoordinate);
+           return mix(half4(0.0), color, half(uniforms.amount));
+       }
+       "
+􀄵    edited → "//
+     //  LiveEffectDefaultShader.metal
+     //  Fabric
+     //
+     //  Created by Codex on 3/4/26.
+     //
+     
+     #include <metal_stdlib>
+     using namespace metal;
+     
+     typedef struct {
+         float amount; // slider, 0.0, 1.0, 1.0, Amount
+     } PostUniforms;
+     
+     fragment half4 postFragment(VertexData in [[stage_in]],
+                                 constant PostUniforms &uniforms [[buffer(FragmentBufferMaterialUniforms)]],
+                                 constant float4x4 *imageTransforms [[buffer(FragmentBufferCustom10)]],
+                                 texture2d<half, access::sample> inputTexture [[texture(FragmentTextureCustom0)]]) {
+         constexpr sampler s(address::clamp_to_edge, filter::linear);
+         float2 textureCoordinate = (imageTransforms[0] * float4(in.texcoord, 0.0, 1.0)).xy;
+         half4 color = inputTexture.sample(s, textureCoordinate);
+         return mix(half4(0.0), color, half(uniforms.amount));
+     }
+     
+     // external edit before save
+     "
+􀢄  Test "A background save includes the disk shader in that same save" recorded an issue at DocumentSaveReviewRegressionTests.swift:83:9: Expectation failed: node.shaderSource == edited
+􀄵  node.shaderSource == edited → false
+􀄵    node.shaderSource → "//
+     //  LiveEffectDefaultShader.metal
+     //  Fabric
+     //
+     //  Created by Codex on 3/4/26.
+     //
+     
+     #include <metal_stdlib>
+     using namespace metal;
+     
+     typedef struct {
+         float amount; // slider, 0.0, 1.0, 1.0, Amount
+     } PostUniforms;
+     
+     fragment half4 postFragment(VertexData in [[stage_in]],
+                                 constant PostUniforms &uniforms [[buffer(FragmentBufferMaterialUniforms)]],
+                                 constant float4x4 *imageTransforms [[buffer(FragmentBufferCustom10)]],
+                                 texture2d<half, access::sample> inputTexture [[texture(FragmentTextureCustom0)]]) {
+         constexpr sampler s(address::clamp_to_edge, filter::linear);
+         float2 textureCoordinate = (imageTransforms[0] * float4(in.texcoord, 0.0, 1.0)).xy;
+         half4 color = inputTexture.sample(s, textureCoordinate);
+         return mix(half4(0.0), color, half(uniforms.amount));
+     }
+     "
+􀄵    edited → "//
+     //  LiveEffectDefaultShader.metal
+     //  Fabric
+     //
+     //  Created by Codex on 3/4/26.
+     //
+     
+     #include <metal_stdlib>
+     using namespace metal;
+     
+     typedef struct {
+         float amount; // slider, 0.0, 1.0, 1.0, Amount
+     } PostUniforms;
+     
+     fragment half4 postFragment(VertexData in [[stage_in]],
+                                 constant PostUniforms &uniforms [[buffer(FragmentBufferMaterialUniforms)]],
+                                 constant float4x4 *imageTransforms [[buffer(FragmentBufferCustom10)]],
+                                 texture2d<half, access::sample> inputTexture [[texture(FragmentTextureCustom0)]]) {
+         constexpr sampler s(address::clamp_to_edge, filter::linear);
+         float2 textureCoordinate = (imageTransforms[0] * float4(in.texcoord, 0.0, 1.0)).xy;
+         half4 color = inputTexture.sample(s, textureCoordinate);
+         return mix(half4(0.0), color, half(uniforms.amount));
+     }
+     
+     // external edit before save
+     "
+Deinit Graph: 72315995-B244-44B3-90BF-38FE58AB80FA
+􀢄  Test "A background save includes the disk shader in that same save" failed after 0.059 seconds with 2 issues.
+􀢄  Suite "Document Save Review Regressions" failed after 0.059 seconds with 2 issues.
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/5BA506EF-6D86-43D1-99A3-D5685349DFBC/6281E6A5-640A-42C2-9975-EDFEA1E80C8A/Shaders.metal
+Deinit Graph: 72315995-B244-44B3-90BF-38FE58AB80FA
+􀢄  Test "Reconciliation clears a surviving inlet and leaves runtime outlets alone" recorded an issue at SettingsReviewRegressionTests.swift:25:9: Expectation failed: node.inputNumber1.value == nil
+􀄵  node.inputNumber1.value == nil → false
+􀄵    node.inputNumber1.value → 0.0
+􀄵      some → 0.0
+Init Graph
+Graph: 2CF5758D-A024-46B1-91E6-AFC26BDB4CE5 Add Node Math Expression (x + y)
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → false at SettingsReviewRegressionTests.swift:51:13: Expectation failed: restored.value == nil
+􀄵  nil means the upstream value is absent, not the numeric default
+􀄵  restored.value == nil → false
+􀄵    restored.value → 0.0
+􀄵      some → 0.0
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → false at SettingsReviewRegressionTests.swift:51:13: Expectation failed: restored.value == nil
+􀄵  nil means the upstream value is absent, not the numeric default
+􀄵  restored.value == nil → false
+􀄵    restored.value → 0.0
+􀄵      some → 0.0
+Deinit Graph: 2CF5758D-A024-46B1-91E6-AFC26BDB4CE5
+Init Graph
+Graph: 7DE5D4B5-66B9-44FF-B654-3DC8D5862505 Add Node Math Expression (x + y)
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → true at SettingsReviewRegressionTests.swift:51:13: Expectation failed: restored.value == nil
+􀄵  nil means the upstream value is absent, not the numeric default
+􀄵  restored.value == nil → false
+􀄵    restored.value → 0.0
+􀄵      some → 0.0
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → true at SettingsReviewRegressionTests.swift:56:17: Expectation failed: proxy.value == nil
+􀄵  proxy.value == nil → false
+􀄵    proxy.value → 0.0
+􀄵      some → 0.0
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → true at SettingsReviewRegressionTests.swift:51:13: Expectation failed: restored.value == nil
+􀄵  nil means the upstream value is absent, not the numeric default
+􀄵  restored.value == nil → false
+􀄵    restored.value → 0.0
+􀄵      some → 0.0
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" recorded an issue with 1 argument published → true at SettingsReviewRegressionTests.swift:56:17: Expectation failed: proxy.value == nil
+􀄵  proxy.value == nil → false
+􀄵    proxy.value → 0.0
+􀄵      some → 0.0
+Deinit Graph: 7DE5D4B5-66B9-44FF-B654-3DC8D5862505
+􀢄  Test "Reconciliation clears a surviving inlet and leaves runtime outlets alone" failed after 0.164 seconds with 1 issue.
+􀢄  Test "Undo restores an absent inlet value, including a published inlet" with 2 test cases failed after 0.164 seconds with 6 issues.
+􀢄  Suite "Settings Review Regressions" failed after 0.164 seconds with 7 issues.
+􀢄  Test run with 3 tests in 2 suites failed after 0.164 seconds with 9 issues.
+Note: Some test targets reported failures:
+  - FabricTests (Swift Testing)
