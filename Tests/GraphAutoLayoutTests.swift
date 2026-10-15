@@ -81,6 +81,32 @@ struct GraphAutoLayoutTests {
         #expect(xPosition(of: node, in: layout) == 0)
     }
 
+    @Test("Auto layout skips no-op moves and keeps redo state intact")
+    func noOpAutoLayoutDoesNotAddHistory() {
+        guard let ctx = makeContext() else { return }
+        let undoManager = UndoManager()
+        undoManager.groupsByEvent = false
+        let graph = makeGraph(context: ctx)
+        graph.undoManager = undoManager
+
+        let node = makeNode(context: ctx)
+        graph.addNode(node)
+        let before = node.offset
+        graph.autoLayout()
+        #expect(node.offset == before)
+        #expect(!undoManager.canUndo)
+
+        let moved = makeNode(context: ctx)
+        graph.addNode(moved)
+        let movedOffset = CGSize(width: 999, height: 999)
+        moved.offset = movedOffset
+        graph.autoLayout()
+        #expect(undoManager.canUndo)
+        undoManager.undo()
+        #expect(moved.offset == movedOffset)
+        #expect(undoManager.canRedo)
+    }
+
     @Test("Two connected nodes: provider left of consumer")
     func twoConnected() {
         guard let ctx = makeContext() else { return }

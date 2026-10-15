@@ -22,21 +22,25 @@ extension Graph {
     /// out to the left. Wraps all moves in a single undo group.
     public func autoLayout() {
         let layout = GraphAutoLayout.compute(graph: self)
+        let moved = layout.filter { $0.0.offset != $0.1 }
+        guard !moved.isEmpty else { return }
 
-        undoManager?.beginUndoGrouping()
-
-        for (node, newOffset) in layout {
-            let oldOffset = node.offset
-            undoManager?.registerUndo(withTarget: node) { n in
-                let redoOffset = n.offset
-                self.undoManager?.registerUndo(withTarget: n) { $0.offset = redoOffset }
-                n.offset = oldOffset
+        self.performEdit(named: "Auto Layout") {
+            for (node, newOffset) in moved {
+                self.registerOffsetChange(of: node, from: node.offset)
+                node.offset = newOffset
             }
-            node.offset = newOffset
         }
+    }
 
-        undoManager?.endUndoGrouping()
-        undoManager?.setActionName("Auto Layout")
+    /// Records a move of `node`, a node in this graph, from `offset`, made
+    /// or about to be made, as an undo step that moves it back.
+    public func registerOffsetChange(of node: Node, from offset: CGSize)
+    {
+        self.registerUndo(on: node) { node in
+            node.graph?.registerOffsetChange(of: node, from: node.offset)
+            node.offset = offset
+        }
     }
 }
 
