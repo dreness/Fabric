@@ -179,9 +179,67 @@ open class SubgraphNode: BaseObjectNode
     }
 
     /// Whether a proxy can stand for `port`, published in a sub graph.
+    /// This is a read-only type check: constructing a proxy would mutate the
+    /// live port value and violate atomic rejected-edit semantics.
     internal static func canProxy(_ port: Port) -> Bool
     {
-        self.makeProxy(for: port, id: port.id) != nil
+        switch port
+        {
+        case is NodePort<Float>,
+             is NodePort<Int>,
+             is NodePort<Bool>,
+             is NodePort<String>,
+             is NodePort<simd_float2>,
+             is NodePort<simd_float3>,
+             is NodePort<simd_float4>,
+             is NodePort<FabricImage>,
+             is NodePort<Geometry>,
+             is NodePort<Material>,
+             is NodePort<PortValue>,
+             is NodePort<simd_quatf>,
+             is NodePort<simd_float4x4>,
+             is NodePort<ContiguousArray<Float>>,
+             is NodePort<ContiguousArray<Int>>,
+             is NodePort<ContiguousArray<Bool>>,
+             is NodePort<ContiguousArray<String>>,
+             is NodePort<ContiguousArray<simd_float2>>,
+             is NodePort<ContiguousArray<simd_float3>>,
+             is NodePort<ContiguousArray<simd_float4>>,
+             is NodePort<ContiguousArray<simd_float4x4>>,
+             is NodePort<ContiguousArray<simd_quatf>>,
+             is NodePort<ContiguousArray<Geometry>>,
+             is NodePort<ContiguousArray<Material>>,
+             is NodePort<ContiguousArray<FabricImage>>,
+             is NodePort<ContiguousArray<PortValue>>,
+             is NodePort<Dictionary<String, Float>>,
+             is NodePort<Dictionary<String, Int>>,
+             is NodePort<Dictionary<String, Bool>>,
+             is NodePort<Dictionary<String, String>>,
+             is NodePort<Dictionary<String, simd_float2>>,
+             is NodePort<Dictionary<String, simd_float3>>,
+             is NodePort<Dictionary<String, simd_float4>>,
+             is NodePort<Dictionary<String, simd_float4x4>>,
+             is NodePort<Dictionary<String, simd_quatf>>,
+             is NodePort<Dictionary<String, Geometry>>,
+             is NodePort<Dictionary<String, Material>>,
+             is NodePort<Dictionary<String, FabricImage>>,
+             is NodePort<Dictionary<String, ContiguousArray<Float>>>,
+             is NodePort<Dictionary<String, ContiguousArray<Int>>>,
+             is NodePort<Dictionary<String, ContiguousArray<Bool>>>,
+             is NodePort<Dictionary<String, ContiguousArray<String>>>,
+             is NodePort<Dictionary<String, ContiguousArray<simd_float2>>>,
+             is NodePort<Dictionary<String, ContiguousArray<simd_float3>>>,
+             is NodePort<Dictionary<String, ContiguousArray<simd_float4>>>,
+             is NodePort<Dictionary<String, ContiguousArray<simd_float4x4>>>,
+             is NodePort<Dictionary<String, ContiguousArray<simd_quatf>>>,
+             is NodePort<Dictionary<String, ContiguousArray<Geometry>>>,
+             is NodePort<Dictionary<String, ContiguousArray<Material>>>,
+             is NodePort<Dictionary<String, ContiguousArray<FabricImage>>>,
+             is NodePort<Dictionary<String, PortValue>>:
+            return true
+        default:
+            return false
+        }
     }
 
     /// Type-erase proxy creation — matches the inner port's generic type.

@@ -528,6 +528,7 @@ struct GraphConnectionOwnershipTests
         graph.addNode(moved)
         let wire = try #require(graph.connect(upstream.output, to: moved.input))
         #expect(!SubgraphNode.canProxy(moved.input))
+        #expect(moved.input.value == nil)
         let undoManager = UndoManager()
         undoManager.groupsByEvent = false
         graph.undoManager = undoManager
@@ -548,9 +549,11 @@ struct GraphConnectionOwnershipTests
         #expect(graph.connections.map(\.id) == [wire.id])
         #expect(!moved.input.published)
         #expect(!undoManager.canUndo)
+        #expect(moved.input.value == nil)
 
         // A supported type passes the same check.
         let supported = NumberBinaryOperator(context: context)
+        supported.inputNumber1.value = 42
         #expect(SubgraphNode.canProxy(supported.inputNumber1))
     }
 
