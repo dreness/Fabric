@@ -1,4 +1,0 @@
-2026-10-14 19:30:29.901 Fabric Editor[75067:25481221] ApplePersistenceIgnoreState: Existing state will not be touched. New state will be written to /var/folders/tj/2t0mnm3941vbns09mjwtjmvm0000gn/T/graphics.fabric.FabricEditor.savedState
-2026-10-14 19:30:50.905 Fabric Editor[75067:25481221] WARNING: Application performed a reentrant operation in its NSTableView delegate. This warning will become an assert in the future.
-2026-10-14 19:31:07.719 Fabric Editor[75067:25481221] NSQuitAlwaysKeepsWindows=NO
-2026-10-14 19:34:08.233 Fabric Editor[75067:25481221] WARNING: Application performed a reentrant operation in its NSTableView delegate. This warning will become an assert in the future.

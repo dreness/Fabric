@@ -1,4 +1,0 @@
-Patch applies to unchanged PR #406 sources in /private/tmp/fabric-pr406-patch-check-luhehr1c
-All four production files and both test files match the fixed worktree byte for byte.
-Reverse-application check also passed in the fixed worktree.
-Generated Package.resolved changes are excluded.
