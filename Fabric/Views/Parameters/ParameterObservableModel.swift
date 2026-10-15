@@ -21,11 +21,19 @@ final class ParameterObservableModel<Value: Codable & Equatable>
             guard !applyingEngine else { return }
             if getValue() != uiValue
             {
-                if editStart == nil { editStart = oldValue }
+                if editStart == nil { editStart = getValue() }
                 applyingUI = true
                 setValue(uiValue)
                 applyingUI = false
-                self.commitUnlessEditing()
+                if isEditing
+                {
+                    let commit = { [weak self] in self?.commitEdit() }
+                    pendingCommit.register(on: graph?.effectiveUndoManager, commit)
+                }
+                else
+                {
+                    self.commitUnlessEditing()
+                }
             }
         }
     }
@@ -101,7 +109,14 @@ final class ParameterObservableModel<Value: Codable & Equatable>
     func setEditing(_ editing: Bool)
     {
         isEditing = editing
-        if !editing { self.commitEdit() }
+        if editing
+        {
+            if editStart == nil { self.editStart = self.getValue() }
+        }
+        else
+        {
+            self.commitEdit()
+        }
     }
 
     private func commitUnlessEditing()

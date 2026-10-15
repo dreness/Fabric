@@ -243,6 +243,60 @@ struct EditUndoTests
         #expect(parameter.value == 5)
     }
 
+    @Test("A focused parameter edit is committed before Graph.undo() flushes it")
+    @MainActor
+    func focusedParameterEditIsVisibleToGraphUndo() throws
+    {
+        let undoManager = UndoManager()
+        undoManager.groupsByEvent = false
+        guard let context = makeContext() else { return }
+        let graph = Graph(context: context)
+        let node = NumberBinaryOperator(context: context)
+        graph.addNode(node)
+        graph.undoManager = undoManager
+        let parameter = try #require(node.inputNumber1.parameter as? FloatParameter)
+        parameter.value = 1
+        let model = ParameterObservableModel(label: parameter.label,
+                                             get: { parameter.value },
+                                             set: { parameter.value = $0 },
+                                             publisher: parameter.valuePublisher,
+                                             graph: graph,
+                                             undoParameter: parameter)
+
+        model.setEditing(true)
+        model.uiValue = 2
+        graph.undo()
+        #expect(parameter.value == 1)
+        #expect(!graph.canUndo)
+    }
+
+    @Test("An external parameter change remains the undo baseline for the active UI edit")
+    @MainActor
+    func parameterBaselineTracksLiveValue() throws
+    {
+        let undoManager = UndoManager()
+        undoManager.groupsByEvent = false
+        guard let context = makeContext() else { return }
+        let graph = Graph(context: context)
+        let node = NumberBinaryOperator(context: context)
+        graph.addNode(node)
+        graph.undoManager = undoManager
+        let parameter = try #require(node.inputNumber1.parameter as? FloatParameter)
+        parameter.value = 1
+        let model = ParameterObservableModel(label: parameter.label,
+                                             get: { parameter.value },
+                                             set: { parameter.value = $0 },
+                                             publisher: parameter.valuePublisher,
+                                             graph: graph,
+                                             undoParameter: parameter)
+
+        parameter.value = 2
+        model.uiValue = 3
+        #expect(undoManager.undoActionName == "Change Amount")
+        undoManager.undo()
+        #expect(parameter.value == 2)
+    }
+
     @Test("A momentary control's changes are not undo steps")
     @MainActor
     func untargetedParameterEditsRegisterNothing()

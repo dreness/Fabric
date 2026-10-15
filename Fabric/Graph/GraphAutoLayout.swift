@@ -22,9 +22,11 @@ extension Graph {
     /// out to the left. Wraps all moves in a single undo group.
     public func autoLayout() {
         let layout = GraphAutoLayout.compute(graph: self)
+        let moved = layout.filter { $0.0.offset != $0.1 }
+        guard !moved.isEmpty else { return }
 
         self.performEdit(named: "Auto Layout") {
-            for (node, newOffset) in layout {
+            for (node, newOffset) in moved {
                 self.registerOffsetChange(of: node, from: node.offset)
                 node.offset = newOffset
             }

@@ -19,13 +19,21 @@ final class PendingCommit
     func schedule(after delay: Duration, undoManager: UndoManager?, _ commit: @escaping () -> Void)
     {
         self.cancel()
-        self.commit = commit
+        self.register(on: undoManager, commit)
         self.timer = Task { @MainActor [weak self] in
             try? await Task.sleep(for: delay)
             guard !Task.isCancelled else { return }
             self?.flush()
         }
-        if let undoManager { Self.register(self, on: undoManager) }
+    }
+
+    /// Registers a commit with the graph's undo manager without scheduling a
+    /// timer, so Graph.undo() can flush a draft while a field remains focused.
+    func register(on undoManager: UndoManager?, _ commit: @escaping () -> Void)
+    {
+        self.commit = commit
+        guard let undoManager else { return }
+        Self.register(self, on: undoManager)
     }
 
     private func flush()
