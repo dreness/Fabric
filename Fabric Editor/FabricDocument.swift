@@ -387,28 +387,39 @@ class FabricDocument: FileDocument
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper
     {
         let graph = self.editingContext.rootGraph
+        let data: Data = try {
+            if Thread.isMainThread
+            {
+                return try self.synchronizeGraphSnapshotForSave(graph: graph)
+            }
 
-        // A shader edited on disk reaches the document as an edit, made on
-        // the main thread. A save off it writes what the graph holds, and the
-        // edit, which marks the document changed, is in the next save.
-        if Thread.isMainThread
-        {
-            MainActor.assumeIsolated { graph.takeShaderSourcesFromDisk() }
-        }
-        else
-        {
-            DispatchQueue.main.async { graph.takeShaderSourcesFromDisk() }
-        }
+            var result: Result<Data, Error>!
+            DispatchQueue.main.sync {
+                result = Result { try self.synchronizeGraphSnapshotForSave(graph: graph) }
+            }
+            return try result.get()
+        }()
 
+        return .init(regularFileWithContents: data)
+    }
+
+    @MainActor
+    private func synchronizeGraphSnapshotForSave(graph: Graph) throws -> Data
+    {
+        // A shader edited on disk reaches the document as an edit, made on the
+        // main thread. A save off it writes what the graph holds, and the edit,
+        // which marks the document changed, is in the next save. Perform the
+        // reconcile + encode as one snapshot on the main actor so background
+        // writes cannot race a queued shader update.
+        graph.takeShaderSourcesFromDisk()
         graph.rewriteFileReferences(relativeTo: graph.fileReferenceBaseURL)
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted]
-        
-        let data = try encoder.encode(self.editingContext.rootGraph)
-        self.lastWrittenGraph = (data, self.editingContext.rootGraph.fileReferenceBaseURL)
 
-        return .init(regularFileWithContents: data)
+        let data = try encoder.encode(graph)
+        self.lastWrittenGraph = (data, graph.fileReferenceBaseURL)
+        return data
     }
 
     private func defaultImageExportFilename() -> String

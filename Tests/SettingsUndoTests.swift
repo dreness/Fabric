@@ -109,6 +109,25 @@ struct SettingsUndoTests
         #expect(!fixture.undoManager.canUndo)
     }
 
+    @Test("A background save waits for shader reconciliation before encoding the graph")
+    func backgroundSaveWaitsForShaderReconciliation() throws
+    {
+        guard let context = makeContext() else { return }
+        let document = FabricDocument()
+        let graph = document.editingContext.rootGraph
+
+        let node = LiveImageNode(context: context)
+        let edited = node.shaderSource + "\n// edited on disk\n"
+        let fileURL = try #require(node.shaderFileURL)
+        try edited.write(to: fileURL, atomically: true, encoding: .utf8)
+        graph.addNode(node)
+
+        let savedData = try document.fileWrapper(configuration: .init())
+        let decoded = try JSONDecoder().decode(Graph.self, from: savedData.regularFileContents ?? Data())
+        let savedNode = try #require(decoded.nodes.compactMap { $0 as? LiveImageNode }.first)
+        #expect(savedNode.shaderSource == edited)
+    }
+
     @Test("Graph.undo while a draft waits for its pause first commits it, and undoes that")
     func undoWhileEditingCommitsTheDraftFirst()
     {
