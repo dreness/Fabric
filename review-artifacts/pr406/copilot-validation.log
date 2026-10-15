@@ -1,0 +1,29 @@
+Fork practice PR #2; upstream layer #406; Copilot candidate 793b913bf752ccfbb494354e51bbf4c1932b31d2
+Retain local production fix. Candidate fails compilation (optional-Void closure); after a closure type annotation it still fails 5 assertions: draft Undo availability, active pause timer, and engine change after focus. Two local tests of our private PendingCommit API were excluded from this candidate experiment; all behavioral tests remained. New test: CopilotUndoResponseTests.engineChangeAfterFocus.
+Validation: real macOS/Metal; exact candidates tested first. Temporary compile repairs were diagnostic experiments only and were not adopted. No upstream comments or remote changes were made in this validation run.
+Exact candidate command: swift test --filter "Review|EditUndo|GraphAutoLayout|ProxyPortReplacement|SettingsUndo|GraphConnectionOwnership|PortHydration|GraphDuplication|StringSplitNode"
+Diagnostic repair command: swift test --filter "Copilot|Review|UndoFix" (406 omits two tests coupled to local PendingCommit APIs; 408 second run restores upstream SettingsUndoTests to use the save harness).
+Editor command: xcodebuild -project Fabric.xcodeproj -scheme "Fabric Editor" -configuration Debug -destination platform=macOS,arch=arm64 -derivedDataPath /private/tmp/fabric-prNNN-derived -clonedSourcePackagesDirPath /private/tmp/fabric-pr406-derived/SourcePackages -xcconfig /private/tmp/fabric-pr406-build.xcconfig -skipMacroValidation CODE_SIGNING_ALLOWED=NO build
+Focused excerpts below; full transient build output omitted. Existing shader diagnostics emitted by expected negative shader tests are not test failures.
+
+== copilot-tests ==
+Fabric/ParameterObservableModel.swift:37:89: error: cannot convert value of type '() -> ()?' to expected argument type '() -> Void'
+
+== copilot-editor ==
+Fabric/ParameterObservableModel.swift:37:89: error: cannot convert value of type '() -> ()?' to expected argument type '() -> Void'
+** BUILD FAILED **
+
+== repaired-compile-tests ==
+􀢄  Test "A first focused draft enables Undo and can be undone and redone without losing focus" recorded an issue at UndoFixRegressionTests.swift:56:9: Expectation failed: graph.canUndo
+􀢄  Test "An unfocused paused edit still commits after its delay" recorded an issue at UndoFixRegressionTests.swift:135:9: Expectation failed: graph.canUndo
+􀢄  Test "Focus alone does not freeze the baseline before a later engine change" recorded an issue at CopilotUndoResponseTests.swift:32:9: Expectation failed: parameter.value == 2
+􀢄  Test "Returning an active edit to its starting value creates no history" recorded an issue at UndoFixRegressionTests.swift:91:9: Expectation failed: graph.canUndo
+􀢄  Test "An active field draft is not committed by the pause timer" recorded an issue at UndoFixRegressionTests.swift:114:9: Expectation failed: !undoManager.canUndo
+􀢄  Test run with 13 tests in 3 suites failed after 0.713 seconds with 5 issues.
+
+== local-tests ==
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+􁁛  Test run with 231 tests in 24 suites passed after 0.905 seconds.
+
+== local-editor ==
+** BUILD SUCCEEDED **

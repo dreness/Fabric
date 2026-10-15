@@ -1,0 +1,189 @@
+diff --git a/Fabric/Graph/GraphAutoLayout.swift b/Fabric/Graph/GraphAutoLayout.swift
+index bdf049c6..d54d8d7d 100644
+--- a/Fabric/Graph/GraphAutoLayout.swift
++++ b/Fabric/Graph/GraphAutoLayout.swift
+@@ -22,9 +22,11 @@ extension Graph {
+     /// out to the left. Wraps all moves in a single undo group.
+     public func autoLayout() {
+         let layout = GraphAutoLayout.compute(graph: self)
++        let moved = layout.filter { $0.0.offset != $0.1 }
++        guard !moved.isEmpty else { return }
+ 
+         self.performEdit(named: "Auto Layout") {
+-            for (node, newOffset) in layout {
++            for (node, newOffset) in moved {
+                 self.registerOffsetChange(of: node, from: node.offset)
+                 node.offset = newOffset
+             }
+diff --git a/Fabric/Views/Parameters/ParameterObservableModel.swift b/Fabric/Views/Parameters/ParameterObservableModel.swift
+index 14bb13b4..da270bf9 100644
+--- a/Fabric/Views/Parameters/ParameterObservableModel.swift
++++ b/Fabric/Views/Parameters/ParameterObservableModel.swift
+@@ -21,11 +21,19 @@ final class ParameterObservableModel<Value: Codable & Equatable>
+             guard !applyingEngine else { return }
+             if getValue() != uiValue
+             {
+-                if editStart == nil { editStart = oldValue }
++                if editStart == nil { editStart = getValue() }
+                 applyingUI = true
+                 setValue(uiValue)
+                 applyingUI = false
+-                self.commitUnlessEditing()
++                if isEditing
++                {
++                    let commit = { [weak self] in self?.commitEdit() }
++                    pendingCommit.register(on: graph?.effectiveUndoManager, commit)
++                }
++                else
++                {
++                    self.commitUnlessEditing()
++                }
+             }
+         }
+     }
+@@ -101,7 +109,14 @@ final class ParameterObservableModel<Value: Codable & Equatable>
+     func setEditing(_ editing: Bool)
+     {
+         isEditing = editing
+-        if !editing { self.commitEdit() }
++        if editing
++        {
++            if editStart == nil { self.editStart = self.getValue() }
++        }
++        else
++        {
++            self.commitEdit()
++        }
+     }
+ 
+     private func commitUnlessEditing()
+diff --git a/Fabric/Views/PendingCommit.swift b/Fabric/Views/PendingCommit.swift
+index b3be296b..6f8f72e7 100644
+--- a/Fabric/Views/PendingCommit.swift
++++ b/Fabric/Views/PendingCommit.swift
+@@ -19,13 +19,21 @@ final class PendingCommit
+     func schedule(after delay: Duration, undoManager: UndoManager?, _ commit: @escaping () -> Void)
+     {
+         self.cancel()
+-        self.commit = commit
++        self.register(on: undoManager, commit)
+         self.timer = Task { @MainActor [weak self] in
+             try? await Task.sleep(for: delay)
+             guard !Task.isCancelled else { return }
+             self?.flush()
+         }
+-        if let undoManager { Self.register(self, on: undoManager) }
++    }
++
++    /// Registers a commit with the graph's undo manager without scheduling a
++    /// timer, so Graph.undo() can flush a draft while a field remains focused.
++    func register(on undoManager: UndoManager?, _ commit: @escaping () -> Void)
++    {
++        self.commit = commit
++        guard let undoManager else { return }
++        Self.register(self, on: undoManager)
+     }
+ 
+     private func flush()
+diff --git a/Tests/EditUndoTests.swift b/Tests/EditUndoTests.swift
+index 0be34442..2dec8baf 100644
+--- a/Tests/EditUndoTests.swift
++++ b/Tests/EditUndoTests.swift
+@@ -243,6 +243,60 @@ struct EditUndoTests
+         #expect(parameter.value == 5)
+     }
+ 
++    @Test("A focused parameter edit is committed before Graph.undo() flushes it")
++    @MainActor
++    func focusedParameterEditIsVisibleToGraphUndo() throws
++    {
++        let undoManager = UndoManager()
++        undoManager.groupsByEvent = false
++        guard let context = makeContext() else { return }
++        let graph = Graph(context: context)
++        let node = NumberBinaryOperator(context: context)
++        graph.addNode(node)
++        graph.undoManager = undoManager
++        let parameter = try #require(node.inputNumber1.parameter as? FloatParameter)
++        parameter.value = 1
++        let model = ParameterObservableModel(label: parameter.label,
++                                             get: { parameter.value },
++                                             set: { parameter.value = $0 },
++                                             publisher: parameter.valuePublisher,
++                                             graph: graph,
++                                             undoParameter: parameter)
++
++        model.setEditing(true)
++        model.uiValue = 2
++        graph.undo()
++        #expect(parameter.value == 1)
++        #expect(!graph.canUndo)
++    }
++
++    @Test("An external parameter change remains the undo baseline for the active UI edit")
++    @MainActor
++    func parameterBaselineTracksLiveValue() throws
++    {
++        let undoManager = UndoManager()
++        undoManager.groupsByEvent = false
++        guard let context = makeContext() else { return }
++        let graph = Graph(context: context)
++        let node = NumberBinaryOperator(context: context)
++        graph.addNode(node)
++        graph.undoManager = undoManager
++        let parameter = try #require(node.inputNumber1.parameter as? FloatParameter)
++        parameter.value = 1
++        let model = ParameterObservableModel(label: parameter.label,
++                                             get: { parameter.value },
++                                             set: { parameter.value = $0 },
++                                             publisher: parameter.valuePublisher,
++                                             graph: graph,
++                                             undoParameter: parameter)
++
++        parameter.value = 2
++        model.uiValue = 3
++        #expect(undoManager.undoActionName == "Change Amount")
++        undoManager.undo()
++        #expect(parameter.value == 2)
++    }
++
+     @Test("A momentary control's changes are not undo steps")
+     @MainActor
+     func untargetedParameterEditsRegisterNothing()
+diff --git a/Tests/GraphAutoLayoutTests.swift b/Tests/GraphAutoLayoutTests.swift
+index b3ca91b8..35483b4c 100644
+--- a/Tests/GraphAutoLayoutTests.swift
++++ b/Tests/GraphAutoLayoutTests.swift
+@@ -81,6 +81,32 @@ struct GraphAutoLayoutTests {
+         #expect(xPosition(of: node, in: layout) == 0)
+     }
+ 
++    @Test("Auto layout skips no-op moves and keeps redo state intact")
++    func noOpAutoLayoutDoesNotAddHistory() {
++        guard let ctx = makeContext() else { return }
++        let undoManager = UndoManager()
++        undoManager.groupsByEvent = false
++        let graph = makeGraph(context: ctx)
++        graph.undoManager = undoManager
++
++        let node = makeNode(context: ctx)
++        graph.addNode(node)
++        let before = node.offset
++        graph.autoLayout()
++        #expect(node.offset == before)
++        #expect(!undoManager.canUndo)
++
++        let moved = makeNode(context: ctx)
++        graph.addNode(moved)
++        let movedOffset = CGSize(width: 999, height: 999)
++        moved.offset = movedOffset
++        graph.autoLayout()
++        #expect(undoManager.canUndo)
++        undoManager.undo()
++        #expect(moved.offset == movedOffset)
++        #expect(undoManager.canRedo)
++    }
++
+     @Test("Two connected nodes: provider left of consumer")
+     func twoConnected() {
+         guard let ctx = makeContext() else { return }

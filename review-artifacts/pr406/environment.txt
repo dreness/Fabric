@@ -17,3 +17,10 @@ Pinned submodules:
  f7f153de9920ff0b183ba1d38526c1a8dc0f49f8 HapInAVFoundation (1.6.9.4)
  22dfce31640b156e6d43df01257dcb72e5b20294 Satin (20.0.0-Beta-1-36-g22dfce31)
  71351d4b484cd2d1917867f7846a5cdca724552d Syphon (5-108-g71351d4)
+
+Copilot response validation (2026-10-15):
+Fork PR: https://github.com/dreness/Fabric/pull/2
+Candidate head: 793b913bf752ccfbb494354e51bbf4c1932b31d2
+Retain local production fix. Candidate fails compilation (optional-Void closure); after a closure type annotation it still fails 5 assertions: draft Undo availability, active pause timer, and engine change after focus. Two local tests of our private PendingCommit API were excluded from this candidate experiment; all behavioral tests remained. New test: CopilotUndoResponseTests.engineChangeAfterFocus.
+􁁛  Test run with 231 tests in 24 suites passed after 0.905 seconds.
+Fabric Editor Debug macOS arm64: BUILD SUCCEEDED.

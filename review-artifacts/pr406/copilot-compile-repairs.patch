@@ -1,0 +1,13 @@
+diff --git a/Fabric/Views/Parameters/ParameterObservableModel.swift b/Fabric/Views/Parameters/ParameterObservableModel.swift
+index da270bf9..ad09f1e8 100644
+--- a/Fabric/Views/Parameters/ParameterObservableModel.swift
++++ b/Fabric/Views/Parameters/ParameterObservableModel.swift
+@@ -27,7 +27,7 @@ final class ParameterObservableModel<Value: Codable & Equatable>
+                 applyingUI = false
+                 if isEditing
+                 {
+-                    let commit = { [weak self] in self?.commitEdit() }
++                    let commit: () -> Void = { [weak self] in self?.commitEdit() }
+                     pendingCommit.register(on: graph?.effectiveUndoManager, commit)
+                 }
+                 else
