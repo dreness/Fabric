@@ -1,0 +1,37 @@
+Building for debugging...
+[Computing dependencies]
+[Using on-disk description]
+[1 / 5]
+[1 / 6] MLXHuggingFaceMacros
+[1 / 5] InternalCollectionsUtilities
+[2 / 5] FabricTests-product
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr410/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+Build complete! (2.23 sec)
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Declared Ports Review" started.
+􀟈  Test "A declaration factory may ignore the supplied id without splitting parameter identity" started.
+􀟈  Test "Retyping a formatter placeholder keeps the parameter on the port's identity" started.
+􀢄  Test "A declaration factory may ignore the supplied id without splitting parameter identity" recorded an issue at DeclaredPortsReviewRegressionTests.swift:51:9: Expectation failed: replacement.parameter?.id == replacement.id
+􀄵  replacement.parameter?.id == replacement.id → false
+􀄵    replacement.parameter?.id → CEB9B771-A50A-417A-A29D-3AB1A029A1BD
+􀄵      some → CEB9B771-A50A-417A-A29D-3AB1A029A1BD
+􀄵    replacement.id → A9FC094F-1153-499C-9E43-318347F605E4
+Init Graph
+Graph: AE8D04AF-5787-4906-AE5F-62452358CC4A Add Node String Formatter ({amount:f})
+􀢄  Test "Retyping a formatter placeholder keeps the parameter on the port's identity" recorded an issue at DeclaredPortsReviewRegressionTests.swift:28:9: Expectation failed: after.parameter?.id == after.id
+􀄵  after.parameter?.id == after.id → false
+􀄵    after.parameter?.id → 67E8CA25-E4D9-4150-8EF9-A5E33AB4CF58
+􀄵      some → 67E8CA25-E4D9-4150-8EF9-A5E33AB4CF58
+􀄵    after.id → 1C9A06EE-61AA-4003-8D2F-E2C253D1FAF2
+􀢄  Test "Retyping a formatter placeholder keeps the parameter on the port's identity" recorded an issue at DeclaredPortsReviewRegressionTests.swift:37:9: Expectation failed: parameter.value == 7
+􀄵  parameter.value == 7 → false
+􀄵    parameter.value → 9
+Deinit Graph: AE8D04AF-5787-4906-AE5F-62452358CC4A
+􀢄  Test "A declaration factory may ignore the supplied id without splitting parameter identity" failed after 0.043 seconds with 1 issue.
+􀢄  Test "Retyping a formatter placeholder keeps the parameter on the port's identity" failed after 0.043 seconds with 2 issues.
+􀢄  Suite "Declared Ports Review" failed after 0.043 seconds with 3 issues.
+􀢄  Test run with 2 tests in 1 suite failed after 0.043 seconds with 3 issues.
+Note: Some test targets reported failures:
+  - FabricTests (Swift Testing)

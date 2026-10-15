@@ -167,6 +167,12 @@ public class ParameterPort<ParamValue : PortValueRepresentable & Codable & Hasha
         }
     }
 
+    override internal func adoptID(_ id: UUID)
+    {
+        super.adoptID(id)
+        self._parameter.id = id
+    }
+
     override internal func take(_ state: PortState)
     {
         super.take(state)

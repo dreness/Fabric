@@ -1,0 +1,1 @@
+Patch applies to pristine upstream head files and exactly reproduces every production/test file. git diff --cached --check passes for production and tests (raw evidence retains upstream whitespace).

@@ -1,0 +1,201 @@
+Building for debugging...
+[Computing dependencies]
+[Using on-disk description]
+[1 / 5]
+[2 / 6] Fabric
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:286:28: warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+284 |     }
+285 | 
+286 |     private var oscServer: OSCServer?
+    |                            |- warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+    |                            `- note: use 'OSCUDPServer' instead
+287 |     fileprivate var isListening: Bool = false
+288 | 
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Nodes/Parameters/PassThroughNode.swift:38:30: warning: 'override' is implied when overriding a required initializer
+36 |     }
+37 |     
+38 |     override public required init(from decoder: any Decoder) throws {
+   |                              `- warning: 'override' is implied when overriding a required initializer
+39 |         try super.init(from: decoder)
+40 |     }
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Graph/Node/Node.swift:224:21: note: overridden required initializer is here
+222 |     }
+223 | 
+224 |     public required init(from decoder: any Decoder) throws
+    |                     `- note: overridden required initializer is here
+225 |     {
+226 |         guard let decodeContext = decoder.context else
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[3 / 7] Fabric
+[9 / 11] Fabric
+[27 / 29] Fabric
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Nodes/Object/Renderables/InstancedMeshNode.swift:165:14: warning: property is accessed but result is unused [#NoUsage]
+163 |         mesh.renderOrder = self.inputRenderOrder.value ?? 0
+164 |         // TODO:
+165 |         mesh.renderLayer
+    |              `- warning: property is accessed but result is unused [#NoUsage]
+166 | 
+167 |         mesh.position = self.inputPosition.value ?? .zero
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:244:46: warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
+242 |         }
+243 | 
+244 |         let seconds = CMTimeGetSeconds(asset.duration)
+    |                                              `- warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
+245 |         self.duration = seconds.isFinite ? seconds : 0
+246 |     }
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:307:37: warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+305 |         // Falls back to 600 (a common timebase) when no video track
+306 |         // is available — e.g. asset still loading.
+307 |         let timescale = self.asset?.tracks(withMediaType: .video).first?.naturalTimeScale ?? 600
+    |                                     `- warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+308 |         let target = CMTime(seconds: clamped, preferredTimescale: timescale)
+309 |         let tol: CMTime = self.seekTolerance.isInfinite
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:307:74: warning: 'naturalTimeScale' was deprecated in macOS 13.0: Use load(.naturalTimeScale) instead [#DeprecatedDeclaration]
+305 |         // Falls back to 600 (a common timebase) when no video track
+306 |         // is available — e.g. asset still loading.
+307 |         let timescale = self.asset?.tracks(withMediaType: .video).first?.naturalTimeScale ?? 600
+    |                                                                          `- warning: 'naturalTimeScale' was deprecated in macOS 13.0: Use load(.naturalTimeScale) instead [#DeprecatedDeclaration]
+308 |         let target = CMTime(seconds: clamped, preferredTimescale: timescale)
+309 |         let tol: CMTime = self.seekTolerance.isInfinite
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:595:49: warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+593 | 
+594 |                 self.asset = AVURLAsset(url: inputURL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
+595 |                 if let videoTrack = self.asset?.tracks(withMediaType: .video).first
+    |                                                 `- warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:597:69: warning: 'preferredTransform' was deprecated in macOS 13.0: Use load(.preferredTransform) instead [#DeprecatedDeclaration]
+595 |                 if let videoTrack = self.asset?.tracks(withMediaType: .video).first
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+    |                                                                     `- warning: 'preferredTransform' was deprecated in macOS 13.0: Use load(.preferredTransform) instead [#DeprecatedDeclaration]
+598 |                     self.sourceNaturalSize = videoTrack.naturalSize
+599 |                 }
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:598:57: warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead [#DeprecatedDeclaration]
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+598 |                     self.sourceNaturalSize = videoTrack.naturalSize
+    |                                                         `- warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead [#DeprecatedDeclaration]
+599 |                 }
+600 |                 self.cacheDuration(from: self.asset)
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:783:32: warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+781 |     /// for non-Hap tracks.
+782 |     private static func hapCodecLabel(for track: AVAssetTrack) -> String? {
+783 |         guard let desc = track.formatDescriptions.first else { return nil }
+    |                                `- warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+784 |         let cmDesc = desc as! CMFormatDescription
+785 |         let sub = CMFormatDescriptionGetMediaSubType(cmDesc)
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:818:27: warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+816 |     /// the slower RGB fallback.
+817 |     private static func codecSupportsDirectDXTUpload(in track: AVAssetTrack) -> Bool {
+818 |         for desc in track.formatDescriptions {
+    |                           `- warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+819 |             let cmDesc = desc as! CMFormatDescription
+820 |             switch CMFormatDescriptionGetMediaSubType(cmDesc) {
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Graph/Graph.swift:964:50: warning: result of call to 'map' is unused [#NoUsage]
+ 962 |             let wire = Wire(connection)
+ 963 |             self.registerUndo { graph in
+ 964 |                 graph.connection(matching: wire).map { graph.disconnect($0) }
+     |                                                  `- warning: result of call to 'map' is unused [#NoUsage]
+ 965 |             }
+ 966 |             return connection
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Graph/Graph.swift:1033:46: warning: result of call to 'map' is unused [#NoUsage]
+1031 |         let wire = Wire(connection)
+1032 |         self.registerUndo { graph in
+1033 |             graph.connection(matching: wire).map { graph.setConnection($0, active: previousActive) }
+     |                                              `- warning: result of call to 'map' is unused [#NoUsage]
+1034 |         }
+1035 |         self.nameEdit(active ? "Enable Connection" : "Disable Connection",
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Fabric/Graph/Graph.swift:1100:46: warning: result of call to 'map' is unused [#NoUsage]
+1098 | 
+1099 |         self.registerUndo { graph in
+1100 |             graph.connection(matching: wire).map { graph.disconnect($0) }
+     |                                              `- warning: result of call to 'map' is unused [#NoUsage]
+1101 |         }
+1102 |         self.nameEdit("Connect Ports", inverse: "Disconnect Ports")
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+[28 / 34]
+[30 / 33] FabricTests-product
+[31 / 35] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Tests/SyphonClientReconnectionTests.swift:70:43: warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: originalServer.serverDescription,
+                                                          device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 68 |         // Keep the old endpoint valid and present: this reproduces the state
+ 69 |         // observed after a crash without relying on a process timing race.
+ 70 |         let originalClient = try #require(SyphonMetalClient(serverDescription: originalServer.serverDescription,
+    |                                           `- warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: originalServer.serverDescription,
+                                                          device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 71 |                                                           device: harness.context.device))
+ 72 |         defer { originalClient.stop() }
+[50 / 54] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Tests/SyphonServerLifecycleTests.swift:54:40: warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: firstDescription,
+                                                       device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 52 |         let firstDescription = try #require(descriptions().first)
+ 53 |         let firstIdentity = try #require(firstDescription[SyphonServerDescriptionUUIDKey] as? String)
+ 54 |         let firstClient = try #require(SyphonMetalClient(serverDescription: firstDescription,
+    |                                        `- warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: firstDescription,
+                                                       device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 55 |                                                        device: harness.context.device))
+ 56 |         defer { firstClient.stop() }
+
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Tests/SyphonServerLifecycleTests.swift:71:44: warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: restartedDescription,
+                                                           device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 69 |         let restartedDescription = try #require(descriptions().first)
+ 70 |         #expect((restartedDescription[SyphonServerDescriptionUUIDKey] as? String) != firstIdentity)
+ 71 |         let restartedClient = try #require(SyphonMetalClient(serverDescription: restartedDescription,
+    |                                            `- warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: restartedDescription,
+                                                           device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 72 |                                                            device: harness.context.device))
+ 73 |         defer { restartedClient.stop() }
+/Users/andre/.codex/worktrees/review-pr410/Fabric/Tests/TypingUndoTests.swift:15:27: warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 13 |     private final class WindowUndo: NSObject, NSWindowDelegate
+ 14 |     {
+ 15 |         let undoManager = UndoManager()
+    |                           `- warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 16 |         func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? { undoManager }
+ 17 |     }
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/objc/NSObject.h:66:1: note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 64 | 
+ 65 | + (void)initialize;
+ 66 | - (instancetype)init
+    | `- note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 67 | #if NS_ENFORCE_NSOBJECT_DESIGNATED_INITIALIZER
+ 68 |     NS_DESIGNATED_INITIALIZER
+
+[#ActorIsolatedCall]: <https://docs.swift.org/compiler/documentation/diagnostics/actor-isolated-call>
+[52 / 54] FabricTests-product
+[56 / 57] FabricTests-product
+[57 / 59] Fabric-product
+[59 / 60] Fabric-product
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr410/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+Build complete! (11.42 sec)
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Declared Ports Review" started.
+􀟈  Test "Retyping a formatter placeholder keeps the parameter on the port's identity" started.
+􀟈  Test "A declaration factory may ignore the supplied id without splitting parameter identity" started.
+Init Graph
+Graph: E27E7C65-0387-4279-B4E7-ACD8486EF6F2 Add Node String Formatter ({amount:f})
+Deinit Graph: E27E7C65-0387-4279-B4E7-ACD8486EF6F2
+􁁛  Test "Retyping a formatter placeholder keeps the parameter on the port's identity" passed after 0.029 seconds.
+􁁛  Test "A declaration factory may ignore the supplied id without splitting parameter identity" passed after 0.029 seconds.
+􁁛  Suite "Declared Ports Review" passed after 0.029 seconds.
+􁁛  Test run with 2 tests in 1 suite passed after 0.029 seconds.
