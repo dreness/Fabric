@@ -113,14 +113,7 @@ public class StringSplitNode: StrategyNode
     {
         guard let settings = settings as? Settings else { return }
         let previousCustomSeparator = customSeparator
-        if let inputSeparator
-        {
-            customSeparator = inputSeparator.value ?? settings.customSeparator
-        }
-        else
-        {
-            customSeparator = settings.customSeparator
-        }
+        customSeparator = settings.customSeparator
         if previousCustomSeparator != customSeparator
         {
             subtitleSubject.send()

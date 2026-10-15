@@ -63,16 +63,22 @@ struct StringSplitNodeTests
     {
         guard let harness = GraphExecutionTestHarness(renderWidth: 64, renderHeight: 64) else { return }
 
+        let graph = Graph(context: harness.context)
         let node = StringSplitNode(context: harness.context, strategy: StringSplitMode.custom)
+        graph.addNode(node)
         try #require(node.inputSeparator).value = #"\t"#
-        node.setStrategy(StringSplitMode.comma.rawValue)
 
-        let settings = try #require(node.settings as? StringSplitNode.Settings)
-        #expect(settings.strategy == StringSplitMode.comma.rawValue)
-        #expect(settings.customSeparator == #"\t"#)
+        let settings = StringSplitNode.Settings(strategy: StringSplitMode.comma.rawValue,
+                                                customSeparator: #"\t"#)
+        graph.setSettings(settings, on: node)
 
-        node.commitSettings(settings)
+        #expect(node.splitMode == .comma)
         #expect(node.customSeparator == #"\t"#)
+        #expect(node.inputSeparator == nil)
+
+        let saved = try #require(node.settings as? StringSplitNode.Settings)
+        #expect(saved.strategy == StringSplitMode.comma.rawValue)
+        #expect(saved.customSeparator == #"\t"#)
     }
 
     @Test("Escaped newline separates file contents into lines")

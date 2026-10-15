@@ -51,4 +51,32 @@ struct GraphDuplicationTests
         #expect(copy.inputPort.value == portIDText)
         #expect(copy.userName == nodeIDText)
     }
+
+    @Test("UUID remapping rewrites identity fields but leaves user text and ordinary value arrays alone")
+    func remapUUIDsOnlyChangesIdentityFields() throws
+    {
+        let uuid = UUID().uuidString
+        let sibling = UUID().uuidString
+        let remapped = Graph.remapUUIDs(in: [
+            "id": uuid,
+            "innerPortID": sibling,
+            "text": uuid,
+            "identityIDs": [uuid, sibling],
+            "valueArray": [uuid, "hello"],
+            "preserved": uuid,
+        ], remap: [uuid: "remapped-uuid", sibling: "remapped-sibling"], preservingKeys: ["preserved"]) as? [String: Any]
+
+        let remappedID = try #require(remapped?["id"] as? String)
+        let remappedInnerID = try #require(remapped?["innerPortID"] as? String)
+        let remappedText = try #require(remapped?["text"] as? String)
+        let remappedIDs = try #require(remapped?["identityIDs"] as? [String])
+        let valueArray = try #require(remapped?["valueArray"] as? [String])
+
+        #expect(remappedID == "remapped-uuid")
+        #expect(remappedInnerID == "remapped-sibling")
+        #expect(remappedText == uuid)
+        #expect(remappedIDs == ["remapped-uuid", "remapped-sibling"])
+        #expect(valueArray == [uuid, "hello"])
+        #expect(remapped?["preserved"] as? String == uuid)
+    }
 }
