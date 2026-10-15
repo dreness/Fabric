@@ -1,0 +1,13 @@
+Focused excerpt from the previously completed fix-tests.log run (153 tests passed).
+Only the four PublishingReviewRegressionTests and their suite events are retained; this is not a new test run.
+
+􀟈  Suite "Publishing review regressions" started.
+􀟈  Test "Replacing an inlet preserves the node's cached upstream dependency" started.
+􀟈  Test "Sample and Hold settings retain a compatible incoming wire and execution" started.
+􀟈  Test "Retyping a published inlet preserves the subgraph's upstream dependency" started.
+􀟈  Test "Replacing an outlet preserves the node's cached downstream dependency" started.
+􁁛  Test "Replacing an inlet preserves the node's cached upstream dependency" passed after 0.309 seconds.
+􁁛  Test "Retyping a published inlet preserves the subgraph's upstream dependency" passed after 0.309 seconds.
+􁁛  Test "Sample and Hold settings retain a compatible incoming wire and execution" passed after 0.309 seconds.
+􁁛  Test "Replacing an outlet preserves the node's cached downstream dependency" passed after 0.309 seconds.
+􁁛  Suite "Publishing review regressions" passed after 0.310 seconds.

@@ -1,2 +1,0 @@
-Patch applies cleanly to PR head files and reproduces all fixed source/test bytes.
-Check directory: /private/tmp/fabric-pr407-patch-7iy56o3e
