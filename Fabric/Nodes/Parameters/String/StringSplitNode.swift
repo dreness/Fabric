@@ -39,6 +39,28 @@ public enum StringSplitMode: String, NodeStrategyOption, CaseIterable
     }
 }
 
+/// The strategy and the separator retained while Custom is not selected.
+public struct StringSplitSettings: StrategySettings
+{
+    public var strategy: String
+    public var customSeparator: String
+
+    public init(strategy: String, customSeparator: String = ", ")
+    {
+        self.strategy = strategy
+        self.customSeparator = customSeparator
+    }
+
+    private enum CodingKeys: String, CodingKey { case strategy, customSeparator }
+
+    public init(from decoder: any Decoder) throws
+    {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.strategy = try container.decodeIfPresent(String.self, forKey: .strategy) ?? StringSplitMode.custom.rawValue
+        self.customSeparator = try container.decodeIfPresent(String.self, forKey: .customSeparator) ?? ", "
+    }
+}
+
 public class StringSplitNode: StrategyNode
 {
     override public class var name: String { "String Split" }
@@ -63,6 +85,17 @@ public class StringSplitNode: StrategyNode
     private enum CodingKeys: String, CodingKey
     {
         case customSeparator
+    }
+
+    override public var settings: (any NodeSettings)?
+    {
+        StringSplitSettings(strategy: strategy, customSeparator: customSeparator)
+    }
+
+    public init(context: Context, settings: StringSplitSettings)
+    {
+        self.customSeparator = settings.customSeparator
+        super.init(context: context, initialStrategy: settings.strategy)
     }
 
     public required init(context: Context)
@@ -94,8 +127,9 @@ public class StringSplitNode: StrategyNode
         try super.encode(to: encoder)
 
         var container = encoder.container(keyedBy: CodingKeys.self)
-        // The live inlet is the truth while Custom is selected.
-        try container.encode(inputSeparator?.value ?? customSeparator, forKey: .customSeparator)
+        // The live separator is encoded with its port. Keep the parked value
+        // separate so a published inlet remains each clone member's own.
+        try container.encode(customSeparator, forKey: .customSeparator)
     }
 
     // Settings pane: the strategy picker plus usage guidance for the selected mode.
@@ -134,10 +168,24 @@ public class StringSplitNode: StrategyNode
         ]
     }
 
+    override public func setStrategy(_ strategy: String)
+    {
+        guard strategy != self.strategy else { return }
+        self.commitSettings(StringSplitSettings(strategy: strategy,
+                                               customSeparator: inputSeparator?.value ?? customSeparator))
+    }
+
     /// Parks what the Separator inlet holds before a mode change takes it away.
     override public func apply(_ settings: any NodeSettings)
     {
-        if let inputSeparator { customSeparator = inputSeparator.value ?? customSeparator }
+        if let settings = settings as? StringSplitSettings
+        {
+            customSeparator = settings.customSeparator
+        }
+        else if let inputSeparator
+        {
+            customSeparator = inputSeparator.value ?? customSeparator
+        }
         super.apply(settings)
     }
 

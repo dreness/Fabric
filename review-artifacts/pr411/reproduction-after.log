@@ -1,0 +1,159 @@
+warning: 'swiftsimplify': /Users/andre/.codex/worktrees/review-pr411/Fabric/.build/checkouts/SwiftSimplify/Package.swift:10:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 8 |         .macOS(.v10_14),
+ 9 |         .iOS(.v12),
+10 |         .watchOS(.v4),
+   |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+11 |         .tvOS(.v12)
+12 |     ],
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'midikit': /Users/andre/.codex/worktrees/review-pr411/Fabric/.build/checkouts/MIDIKit/Package.swift:12:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 10 |         .iOS(.v12),
+ 11 |         .tvOS(.v12), // builds, but no MIDI features
+ 12 |         .watchOS(.v4), // builds, but no MIDI features
+    |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 13 |     ],
+ 14 |     products: [
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'swift-data-parsing': /Users/andre/.codex/worktrees/review-pr411/Fabric/.build/checkouts/swift-data-parsing/Package.swift:7:69: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 5 | let package = Package(
+ 6 |     name: "swift-data-parsing",
+ 7 |     platforms: [.macOS(.v10_13), .iOS(.v12), .tvOS(.v12), .watchOS(.v4)],
+   |                                                                     `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 8 |     products: [
+ 9 |         .library(
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'swift-timecode': /Users/andre/.codex/worktrees/review-pr411/Fabric/.build/checkouts/swift-timecode/Package.swift:13:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+11 |         .iOS(.v12),
+12 |         .tvOS(.v12),
+13 |         .watchOS(.v4),
+   |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+14 |         .visionOS(.v1)
+15 |     ],
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+Building for debugging...
+[Computing dependencies]
+[Using on-disk description]
+[1 / 5] MLXNN
+[2 / 6] Fabric
+/Users/andre/.codex/worktrees/review-pr411/Fabric/Fabric/Graph/Graph+CloneSet.swift:51:51: warning: initializer 'init(width:height:)' cannot be used in a default argument value because 'CoreGraphics' was not imported by this file; this is an error in the Swift 6 language mode
+ 49 |     @discardableResult
+ 50 |     public func duplicateAsClone(_ node: SubgraphNode,
+ 51 |                                  offset: CGSize = CGSize(width: 20, height: 20)) throws -> SubgraphNode
+    |                                                   |- warning: initializer 'init(width:height:)' cannot be used in a default argument value because 'CoreGraphics' was not imported by this file; this is an error in the Swift 6 language mode
+    |                                                   `- note: The missing import of module 'CoreGraphics' will be added implicitly
+ 52 |     {
+ 53 |         guard node.graph === self else
+
+/Users/andre/.codex/worktrees/review-pr411/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:286:28: warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+284 |     }
+285 | 
+286 |     private var oscServer: OSCServer?
+    |                            |- warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+    |                            `- note: use 'OSCUDPServer' instead
+287 |     fileprivate var isListening: Bool = false
+288 | 
+
+/Users/andre/.codex/worktrees/review-pr411/Fabric/Fabric/Nodes/Parameters/PassThroughNode.swift:38:30: warning: 'override' is implied when overriding a required initializer
+36 |     }
+37 |     
+38 |     override public required init(from decoder: any Decoder) throws {
+   |                              `- warning: 'override' is implied when overriding a required initializer
+39 |         try super.init(from: decoder)
+40 |     }
+
+/Users/andre/.codex/worktrees/review-pr411/Fabric/Fabric/Graph/Node/Node.swift:224:21: note: overridden required initializer is here
+222 |     }
+223 | 
+224 |     public required init(from decoder: any Decoder) throws
+    |                     `- note: overridden required initializer is here
+225 |     {
+226 |         guard let decodeContext = decoder.context else
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[3 / 7] Fabric
+[8 / 11] Fabric
+[9 / 12] Fabric
+[10 / 12] Fabric
+[12 / 15] FabricTests-product
+[13 / 17] FabricTests-product
+[17 / 21] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr411/Fabric/Tests/TypingUndoTests.swift:15:27: warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 13 |     private final class WindowUndo: NSObject, NSWindowDelegate
+ 14 |     {
+ 15 |         let undoManager = UndoManager()
+    |                           `- warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 16 |         func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? { undoManager }
+ 17 |     }
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/objc/NSObject.h:66:1: note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 64 | 
+ 65 | + (void)initialize;
+ 66 | - (instancetype)init
+    | `- note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 67 | #if NS_ENFORCE_NSOBJECT_DESIGNATED_INITIALIZER
+ 68 |     NS_DESIGNATED_INITIALIZER
+
+[#ActorIsolatedCall]: <https://docs.swift.org/compiler/documentation/diagnostics/actor-isolated-call>
+[23 / 26] FabricTests-product
+[25 / 26] FabricTests-product
+[26 / 28] Fabric-product
+[28 / 29] Fabric-product
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr411/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+Build complete! (8.49 sec)
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Clone Set Review" started.
+􀟈  Test "String Split gives and takes the complete settings value" started.
+􀟈  Test "Remapping ids leaves text and arrays of values intact" started.
+􀟈  Test "Duplicate preserves text even when it is an actual identity" started.
+􀟈  Test "An unrelated clone edit preserves each published separator value" started.
+􀟈  Test "A mode change carries the parked custom separator to sibling clones" started.
+􀟈  Test case passing 1 argument portID → false to "Duplicate preserves text even when it is an actual identity" started.
+􀟈  Test case passing 1 argument portID → true to "Duplicate preserves text even when it is an actual identity" started.
+􁁛  Test "String Split gives and takes the complete settings value" passed after 0.031 seconds.
+Init Graph
+Init Graph
+Graph: ECF01F92-EBC0-4ECB-B3AC-C520DAA9F497 Add Node Sub Graph
+Graph: E6229587-BA1D-42C9-8BA2-335B52FA7F23 Add Node String Split (Custom)
+Graph: 66FF46BD-7860-4C48-AD41-D69AEBB36064 Add Node String Split (Custom)
+Graph: ECF01F92-EBC0-4ECB-B3AC-C520DAA9F497 Add Node Sub Graph
+Graph: E6229587-BA1D-42C9-8BA2-335B52FA7F23 Add Node Number Binary Operator
+Graph: 66FF46BD-7860-4C48-AD41-D69AEBB36064 Add Node Number Binary Operator
+Deinit Graph: ECF01F92-EBC0-4ECB-B3AC-C520DAA9F497
+Deinit Graph: E6229587-BA1D-42C9-8BA2-335B52FA7F23
+Deinit Graph: 66FF46BD-7860-4C48-AD41-D69AEBB36064
+􁁛  Test "Remapping ids leaves text and arrays of values intact" passed after 0.068 seconds.
+􁁛  Test "An unrelated clone edit preserves each published separator value" passed after 0.071 seconds.
+Init Graph
+Init Graph
+Graph: 209BD2EB-3243-46A7-B68A-5DE07C74C90B Add Node Sub Graph
+Graph: 658FED72-1B60-4B58-AE10-A098FB480995 Add Node String Split (Custom)
+Graph: B79FCA7C-4217-43B4-8C92-E682916FFD0E Add Node String Split (Custom)
+Graph: 209BD2EB-3243-46A7-B68A-5DE07C74C90B Add Node Sub Graph
+Graph: 658FED72-1B60-4B58-AE10-A098FB480995 Add Node String Split (Comma)
+Graph: 209BD2EB-3243-46A7-B68A-5DE07C74C90B Add Node Sub Graph (Set A)
+Graph: B79FCA7C-4217-43B4-8C92-E682916FFD0E Add Node String Split (Comma)
+Graph: 209BD2EB-3243-46A7-B68A-5DE07C74C90B Add Node Sub Graph (Set A)
+Deinit Graph: 209BD2EB-3243-46A7-B68A-5DE07C74C90B
+Deinit Graph: 658FED72-1B60-4B58-AE10-A098FB480995
+Deinit Graph: B79FCA7C-4217-43B4-8C92-E682916FFD0E
+Deinit Graph: 209BD2EB-3243-46A7-B68A-5DE07C74C90B
+Deinit Graph: 658FED72-1B60-4B58-AE10-A098FB480995
+Deinit Graph: B79FCA7C-4217-43B4-8C92-E682916FFD0E
+Init Graph
+Graph: E4E15E55-86B0-44AF-B2F8-6DCB1AD3DF77 Add Node String Length
+Graph: E4E15E55-86B0-44AF-B2F8-6DCB1AD3DF77 Add Node String Length (E7039D28-A0CA-4C20-BAD7-31062F9ADE62)
+Deinit Graph: E4E15E55-86B0-44AF-B2F8-6DCB1AD3DF77
+Init Graph
+Graph: CD9E1D36-DC3A-4D43-BDB8-605563DB3463 Add Node String Length
+Graph: CD9E1D36-DC3A-4D43-BDB8-605563DB3463 Add Node String Length (38C08EFE-4DF9-431F-95CB-301AF94642AF)
+Deinit Graph: CD9E1D36-DC3A-4D43-BDB8-605563DB3463
+􁁛  Test "A mode change carries the parked custom separator to sibling clones" passed after 0.092 seconds.
+􁁛  Test "Duplicate preserves text even when it is an actual identity" with 2 test cases passed after 0.092 seconds.
+􁁛  Suite "Clone Set Review" passed after 0.092 seconds.
+􁁛  Test run with 5 tests in 1 suite passed after 0.092 seconds.

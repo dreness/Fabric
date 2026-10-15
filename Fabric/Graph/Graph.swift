@@ -2086,18 +2086,18 @@ internal import AnyCodable
         return uuids
     }
 
-    /// Recursively replaces UUID strings in a JSON object using a remap table.
+    /// Recursively replaces UUIDs under identity keys using a remap table.
     /// Values under `preservingKeys` are left as they are, at any depth.
     /// Dictionary keys are never rewritten.
-    internal static func remapUUIDs(in object: Any, remap: [String: String], preservingKeys: Set<String> = []) -> Any
+    internal static func remapUUIDs(in object: Any, remap: [String: String], preservingKeys: Set<String> = [], underIDKey: Bool = false) -> Any
     {
         switch object
         {
         case let string as String:
-            return remap[string] ?? string
+            return underIDKey ? (remap[string] ?? string) : string
 
         case let array as [Any]:
-            return array.map { remapUUIDs(in: $0, remap: remap, preservingKeys: preservingKeys) }
+            return array.map { remapUUIDs(in: $0, remap: remap, preservingKeys: preservingKeys, underIDKey: underIDKey) }
 
         case let dict as [String: Any]:
             var newDict = [String: Any]()
@@ -2105,7 +2105,7 @@ internal import AnyCodable
             {
                 newDict[key] = preservingKeys.contains(key)
                     ? value
-                    : remapUUIDs(in: value, remap: remap, preservingKeys: preservingKeys)
+                    : remapUUIDs(in: value, remap: remap, preservingKeys: preservingKeys, underIDKey: isIDKey(key))
             }
             return newDict
 

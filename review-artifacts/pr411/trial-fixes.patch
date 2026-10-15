@@ -1,0 +1,243 @@
+diff --git a/Fabric/Graph/Graph.swift b/Fabric/Graph/Graph.swift
+index d0bdba6b..58a0ea84 100644
+--- a/Fabric/Graph/Graph.swift
++++ b/Fabric/Graph/Graph.swift
+@@ -2086,18 +2086,18 @@ internal import AnyCodable
+         return uuids
+     }
+ 
+-    /// Recursively replaces UUID strings in a JSON object using a remap table.
++    /// Recursively replaces UUIDs under identity keys using a remap table.
+     /// Values under `preservingKeys` are left as they are, at any depth.
+     /// Dictionary keys are never rewritten.
+-    internal static func remapUUIDs(in object: Any, remap: [String: String], preservingKeys: Set<String> = []) -> Any
++    internal static func remapUUIDs(in object: Any, remap: [String: String], preservingKeys: Set<String> = [], underIDKey: Bool = false) -> Any
+     {
+         switch object
+         {
+         case let string as String:
+-            return remap[string] ?? string
++            return underIDKey ? (remap[string] ?? string) : string
+ 
+         case let array as [Any]:
+-            return array.map { remapUUIDs(in: $0, remap: remap, preservingKeys: preservingKeys) }
++            return array.map { remapUUIDs(in: $0, remap: remap, preservingKeys: preservingKeys, underIDKey: underIDKey) }
+ 
+         case let dict as [String: Any]:
+             var newDict = [String: Any]()
+@@ -2105,7 +2105,7 @@ internal import AnyCodable
+             {
+                 newDict[key] = preservingKeys.contains(key)
+                     ? value
+-                    : remapUUIDs(in: value, remap: remap, preservingKeys: preservingKeys)
++                    : remapUUIDs(in: value, remap: remap, preservingKeys: preservingKeys, underIDKey: isIDKey(key))
+             }
+             return newDict
+ 
+diff --git a/Fabric/Nodes/Parameters/String/StringSplitNode.swift b/Fabric/Nodes/Parameters/String/StringSplitNode.swift
+index c2f5cfc4..3ab04494 100644
+--- a/Fabric/Nodes/Parameters/String/StringSplitNode.swift
++++ b/Fabric/Nodes/Parameters/String/StringSplitNode.swift
+@@ -39,6 +39,28 @@ public enum StringSplitMode: String, NodeStrategyOption, CaseIterable
+     }
+ }
+ 
++/// The strategy and the separator retained while Custom is not selected.
++public struct StringSplitSettings: StrategySettings
++{
++    public var strategy: String
++    public var customSeparator: String
++
++    public init(strategy: String, customSeparator: String = ", ")
++    {
++        self.strategy = strategy
++        self.customSeparator = customSeparator
++    }
++
++    private enum CodingKeys: String, CodingKey { case strategy, customSeparator }
++
++    public init(from decoder: any Decoder) throws
++    {
++        let container = try decoder.container(keyedBy: CodingKeys.self)
++        self.strategy = try container.decodeIfPresent(String.self, forKey: .strategy) ?? StringSplitMode.custom.rawValue
++        self.customSeparator = try container.decodeIfPresent(String.self, forKey: .customSeparator) ?? ", "
++    }
++}
++
+ public class StringSplitNode: StrategyNode
+ {
+     override public class var name: String { "String Split" }
+@@ -65,6 +87,17 @@ public class StringSplitNode: StrategyNode
+         case customSeparator
+     }
+ 
++    override public var settings: (any NodeSettings)?
++    {
++        StringSplitSettings(strategy: strategy, customSeparator: customSeparator)
++    }
++
++    public init(context: Context, settings: StringSplitSettings)
++    {
++        self.customSeparator = settings.customSeparator
++        super.init(context: context, initialStrategy: settings.strategy)
++    }
++
+     public required init(context: Context)
+     {
+         super.init(context: context)
+@@ -94,8 +127,9 @@ public class StringSplitNode: StrategyNode
+         try super.encode(to: encoder)
+ 
+         var container = encoder.container(keyedBy: CodingKeys.self)
+-        // The live inlet is the truth while Custom is selected.
+-        try container.encode(inputSeparator?.value ?? customSeparator, forKey: .customSeparator)
++        // The live separator is encoded with its port. Keep the parked value
++        // separate so a published inlet remains each clone member's own.
++        try container.encode(customSeparator, forKey: .customSeparator)
+     }
+ 
+     // Settings pane: the strategy picker plus usage guidance for the selected mode.
+@@ -134,10 +168,24 @@ public class StringSplitNode: StrategyNode
+         ]
+     }
+ 
++    override public func setStrategy(_ strategy: String)
++    {
++        guard strategy != self.strategy else { return }
++        self.commitSettings(StringSplitSettings(strategy: strategy,
++                                               customSeparator: inputSeparator?.value ?? customSeparator))
++    }
++
+     /// Parks what the Separator inlet holds before a mode change takes it away.
+     override public func apply(_ settings: any NodeSettings)
+     {
+-        if let inputSeparator { customSeparator = inputSeparator.value ?? customSeparator }
++        if let settings = settings as? StringSplitSettings
++        {
++            customSeparator = settings.customSeparator
++        }
++        else if let inputSeparator
++        {
++            customSeparator = inputSeparator.value ?? customSeparator
++        }
+         super.apply(settings)
+     }
+ 
+diff --git a/Tests/CloneSetReviewRegressionTests.swift b/Tests/CloneSetReviewRegressionTests.swift
+new file mode 100644
+index 00000000..814e848a
+--- /dev/null
++++ b/Tests/CloneSetReviewRegressionTests.swift
+@@ -0,0 +1,112 @@
++import Foundation
++import Metal
++import Testing
++@testable import Fabric
++import Satin
++
++@Suite("Clone Set Review")
++@MainActor
++struct CloneSetReviewRegressionTests {
++    private func context() throws -> Context {
++        let device = try #require(MTLCreateSystemDefaultDevice())
++        return Context(device: device, sampleCount: 1, colorPixelFormat: .bgra8Unorm, depthPixelFormat: .depth32Float, stencilPixelFormat: .invalid)
++    }
++
++    @Test("Duplicate preserves text even when it is an actual identity", arguments: [false, true])
++    func duplicateIDText(portID: Bool) throws {
++        let graph = Graph(context: try context())
++        let node = StringLengthNode(context: graph.context)
++        graph.addNode(node)
++        let text = (portID ? node.inputPort.id : node.id).uuidString
++        node.inputPort.value = text
++        node.userName = text
++        let copy = try #require(graph.duplicateNodes([node]).first as? StringLengthNode)
++        #expect(copy.id != node.id)
++        #expect(copy.inputPort.id != node.inputPort.id)
++        #expect(copy.inputPort.value == text)
++        #expect(copy.userName == text)
++    }
++
++    @Test("Remapping ids leaves text and arrays of values intact")
++    func remappingSchema() throws {
++        let id = UUID().uuidString
++        let fresh = UUID().uuidString
++        let object: [String: Any] = ["id": id, "inletPortID": id, "nodeIDs": [id], "value": id, "text": [id]]
++        let result = try #require(Graph.remapUUIDs(in: object, remap: [id: fresh]) as? [String: Any])
++        #expect(result["id"] as? String == fresh)
++        #expect(result["inletPortID"] as? String == fresh)
++        #expect(result["nodeIDs"] as? [String] == [fresh])
++        #expect(result["value"] as? String == id)
++        #expect(result["text"] as? [String] == [id])
++    }
++
++    @Test("A mode change carries the parked custom separator to sibling clones")
++    func parkedSeparator() throws {
++        let graph = Graph(context: try context())
++        let manager = UndoManager()
++        manager.groupsByEvent = false
++        graph.undoManager = manager
++        manager.beginUndoGrouping()
++        let member = SubgraphNode(context: graph.context)
++        graph.addNode(member)
++        let split = StringSplitNode(context: graph.context)
++        member.subGraph.addNode(split)
++        let sibling = try graph.duplicateAsClone(member)
++        let other = try #require(sibling.subGraph.node(forID: split.id) as? StringSplitNode)
++        manager.endUndoGrouping()
++        manager.removeAllActions()
++        manager.beginUndoGrouping()
++        split.inputSeparator?.value = "::"
++        split.setStrategy(StringSplitMode.comma)
++        manager.endUndoGrouping()
++        #expect(split.customSeparator == "::")
++        #expect(other.customSeparator == "::")
++        #expect(sibling.isInStepWithCloneSet)
++        graph.undo()
++        #expect(other.splitMode == .custom)
++        graph.redo()
++        #expect(other.customSeparator == "::")
++        let decoder = JSONDecoder()
++        decoder.context = DecoderContext(documentContext: graph.context)
++        let reopened = try decoder.decode(Graph.self, from: JSONEncoder().encode(graph))
++        let reopenedSibling = try #require(reopened.node(forID: sibling.id) as? SubgraphNode)
++        let reopenedSplit = try #require(reopenedSibling.subGraph.node(forID: split.id) as? StringSplitNode)
++        #expect(reopenedSplit.customSeparator == "::")
++        #expect(reopenedSibling.isInStepWithCloneSet)
++        let sourceSettings = try #require(split.settings)
++        #expect(other.settings?.isEqual(to: sourceSettings) == true)
++    }
++
++    @Test("String Split gives and takes the complete settings value")
++    func splitSettingsRoundTrip() throws {
++        let node = StringSplitNode(context: try context())
++        node.inputSeparator?.value = "|"
++        node.setStrategy(StringSplitMode.comma)
++        let expected = try #require(node.settings)
++        let copy = StringSplitNode(context: node.context)
++        copy.apply(expected)
++        #expect(copy.customSeparator == "|")
++        #expect(copy.settings?.isEqual(to: expected) == true)
++        copy.setStrategy(StringSplitMode.custom)
++        #expect(copy.inputSeparator?.value == "|")
++    }
++    @Test("An unrelated clone edit preserves each published separator value")
++    func publishedSeparatorValuesStayLocal() throws {
++        let graph = Graph(context: try context())
++        let member = SubgraphNode(context: graph.context)
++        graph.addNode(member)
++        let split = StringSplitNode(context: graph.context)
++        member.subGraph.addNode(split)
++        member.subGraph.setPublished(true, on: try #require(split.inputSeparator))
++        let sibling = try graph.duplicateAsClone(member)
++        let other = try #require(sibling.subGraph.node(forID: split.id) as? StringSplitNode)
++        split.inputSeparator?.value = ":"
++        other.inputSeparator?.value = "|"
++        member.subGraph.addNode(NumberBinaryOperator(context: graph.context))
++        graph.syncCloneSets(editedIn: member.subGraph)
++        #expect(split.inputSeparator?.value == ":")
++        #expect(other.inputSeparator?.value == "|")
++        #expect(sibling.isInStepWithCloneSet)
++    }
++
++}
