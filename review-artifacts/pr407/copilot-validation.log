@@ -1,0 +1,33 @@
+Fork practice PR #3; upstream layer #407; Copilot candidate fe5988b98ed5fc3861135d506edc1c809f0c66eb
+Retain local production fix. Candidate cannot access private topology state. Temporary repair exposes a shared refresh helper and calls it from SubgraphNode; all 4 review reproductions then pass. Local fix already uses a shared helper, updates topology callbacks, and avoids extra refreshes on every add/remove/reorder.
+Validation: real macOS/Metal; exact candidates tested first. Temporary compile repairs were diagnostic experiments only and were not adopted. No upstream comments or remote changes were made in this validation run.
+Exact candidate command: swift test --filter "Review|EditUndo|GraphAutoLayout|ProxyPortReplacement|SettingsUndo|GraphConnectionOwnership|PortHydration|GraphDuplication|StringSplitNode"
+Diagnostic repair command: swift test --filter "Copilot|Review|UndoFix" (406 omits two tests coupled to local PendingCommit APIs; 408 second run restores upstream SettingsUndoTests to use the save harness).
+Editor command: xcodebuild -project Fabric.xcodeproj -scheme "Fabric Editor" -configuration Debug -destination platform=macOS,arch=arm64 -derivedDataPath /private/tmp/fabric-prNNN-derived -clonedSourcePackagesDirPath /private/tmp/fabric-pr406-derived/SourcePackages -xcconfig /private/tmp/fabric-pr406-build.xcconfig -skipMacroValidation CODE_SIGNING_ALLOWED=NO build
+Focused excerpts below; full transient build output omitted. Existing shader diagnostics emitted by expected negative shader tests are not test failures.
+
+== copilot-tests ==
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift:166:14: error: cannot assign to property: 'inputNodes' setter is inaccessible
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift:166:32: error: 'calcInputNodes' is inaccessible due to 'private' protection level
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift:167:14: error: cannot assign to property: 'outputNodes' setter is inaccessible
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift:167:33: error: 'calcOutputNodes' is inaccessible due to 'private' protection level
+
+== copilot-editor ==
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift:166:14: error: cannot assign to property: 'inputNodes' setter is inaccessible
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift:166:32: error: 'calcInputNodes' is inaccessible due to 'private' protection level
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift:167:14: error: cannot assign to property: 'outputNodes' setter is inaccessible
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift:167:33: error: 'calcOutputNodes' is inaccessible due to 'private' protection level
+** BUILD FAILED **
+
+== repaired-compile-tests ==
+􁁛  Test run with 4 tests in 1 suite passed after 0.032 seconds.
+
+== repaired-behavior-tests ==
+􁁛  Test run with 4 tests in 1 suite passed after 0.039 seconds.
+
+== local-tests ==
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+􁁛  Test run with 238 tests in 24 suites passed after 0.389 seconds.
+
+== local-editor ==
+** BUILD SUCCEEDED **

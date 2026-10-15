@@ -17,3 +17,10 @@ Pinned submodules:
  f7f153de9920ff0b183ba1d38526c1a8dc0f49f8 HapInAVFoundation (1.6.9.4)
  22dfce31640b156e6d43df01257dcb72e5b20294 Satin (20.0.0-Beta-1-36-g22dfce31)
  71351d4b484cd2d1917867f7846a5cdca724552d Syphon (5-108-g71351d4)
+
+Copilot response validation (2026-10-15):
+Fork PR: https://github.com/dreness/Fabric/pull/3
+Candidate head: fe5988b98ed5fc3861135d506edc1c809f0c66eb
+Retain local production fix. Candidate cannot access private topology state. Temporary repair exposes a shared refresh helper and calls it from SubgraphNode; all 4 review reproductions then pass. Local fix already uses a shared helper, updates topology callbacks, and avoids extra refreshes on every add/remove/reorder.
+􁁛  Test run with 238 tests in 24 suites passed after 0.389 seconds.
+Fabric Editor Debug macOS arm64: BUILD SUCCEEDED.

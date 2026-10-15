@@ -1,0 +1,105 @@
+diff --git a/Fabric/Graph/Node/Node.swift b/Fabric/Graph/Node/Node.swift
+index fd0bdb62..b8552106 100644
+--- a/Fabric/Graph/Node/Node.swift
++++ b/Fabric/Graph/Node/Node.swift
+@@ -404,6 +404,7 @@ open class Node : Codable, Equatable, Identifiable, Hashable, Copyable, CustomDe
+ 
+         self.registry.addDynamic(p, owner: self, name:name)
+         self.invalidatePortCaches()
++        self.refreshConnectionTopology()
+         if let param = p.parameter
+         {
+             self.parameterGroup.append(param)
+@@ -428,6 +429,7 @@ open class Node : Codable, Equatable, Identifiable, Hashable, Copyable, CustomDe
+ 
+         self.registry.remove(p)
+         self.invalidatePortCaches()
++        self.refreshConnectionTopology()
+         if let param = p.parameter
+         {
+             self.parameterGroup.remove(param)
+@@ -454,11 +456,13 @@ open class Node : Codable, Equatable, Identifiable, Hashable, Copyable, CustomDe
+ 
+         self.removePort(existing)
+         self.addDynamicPort(replacement, name: registryName)
++        self.refreshConnectionTopology()
+ 
+         if published
+         {
+             replacement.setPublishing(true, name: publishedName)
+             self.graph?.port(existing, wasReplacedBy: replacement)
++            self.graph?.markConnectionsChanged()
+         }
+     }
+ 
+@@ -480,6 +484,17 @@ open class Node : Codable, Equatable, Identifiable, Hashable, Copyable, CustomDe
+     {
+         self.registry.reorder(reordered)
+         self.invalidatePortCaches()
++        self.refreshConnectionTopology()
++    }
++
++    private func refreshConnectionTopology()
++    {
++        self.inputNodes = self.calcInputNodes()
++        self.outputNodes = self.calcOutputNodes()
++        if let graph = self.graph
++        {
++            graph.markNodeForLifecycleReview(self)
++        }
+     }
+ 
+     internal func inputPorts() -> [Port]
+diff --git a/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift b/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift
+index 3189cec2..ea6e5ac8 100644
+--- a/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift
++++ b/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift
+@@ -163,6 +163,9 @@ open class SubgraphNode: BaseObjectNode
+     private func proxiesDidChange()
+     {
+         self.invalidatePortCaches()
++        self.inputNodes = self.calcInputNodes()
++        self.outputNodes = self.calcOutputNodes()
++        self.graph?.markNodeForLifecycleReview(self)
+ 
+         self.parameterGroup.clear()
+         for port in self.ports
+diff --git a/Tests/ProxyPortReplacementTests.swift b/Tests/ProxyPortReplacementTests.swift
+index 8459c3c1..89f5293c 100644
+--- a/Tests/ProxyPortReplacementTests.swift
++++ b/Tests/ProxyPortReplacementTests.swift
+@@ -46,4 +46,34 @@ struct ProxyPortReplacementTests
+         #expect(graph.connections.isEmpty)
+         #expect(upstream.outputNumber.connections.isEmpty)
+     }
++
++    @Test("Replacing a typed port keeps the surviving connection and refreshes topology caches")
++    func replacementKeepsAliveConnectedProcessor() throws
++    {
++        guard let context = makeContext() else { return }
++        let graph = Graph(context: context)
++        let node = SampleAndHoldNode(context: context, portType: .Float)
++        graph.addNode(node)
++        let upstream = NumberBinaryOperator(context: context)
++        graph.addNode(upstream)
++        let input = try #require(node.findPort(named: "inputValue") as? NodePort<Float>)
++        let output = upstream.outputNumber
++
++        let connection = try #require(graph.connect(output, to: input))
++        #expect(connection.outletPortID == output.id)
++        #expect(connection.inletPortID == input.id)
++        #expect(node.inputNodes.count == 1)
++        #expect(node.executionState == .disabled)
++
++        let replacement = NodePort<Int>(name: "Value", kind: .Inlet, description: "Value to sample and hold")
++        node.replacePort(input, with: replacement)
++
++        #expect(node.inputNodes.count == 0 || node.inputNodes.contains { $0.id == upstream.id })
++        #expect(node.outputNodes.isEmpty)
++        #expect(graph.nodePort(forID: input.id) == nil)
++        let surviving = try #require(graph.nodePort(forID: replacement.id))
++        #expect(surviving.connections.count == 1)
++        #expect(surviving.connections.first?.outletPortID == output.id)
++        #expect(node.executionState == .stopped || node.executionState == .disabled)
++    }
+ }
