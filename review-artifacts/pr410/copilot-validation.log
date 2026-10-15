@@ -1,0 +1,23 @@
+Fork practice PR #6; upstream layer #410; Copilot candidate a9510afa1b946cad33e4a6deae467aa7322e0d09
+Candidate accepted as equivalent; no production changes needed. ParameterPort.adoptID matches our existing fix apart from formatting. Candidate selected tests and Fabric Editor build pass, including our formatter undo/redo and factory regressions.
+Validation: real macOS/Metal; exact candidates tested first. Temporary compile repairs were diagnostic experiments only and were not adopted. No upstream comments or remote changes were made in this validation run.
+Exact candidate command: swift test --filter "Review|EditUndo|GraphAutoLayout|ProxyPortReplacement|SettingsUndo|GraphConnectionOwnership|PortHydration|GraphDuplication|StringSplitNode"
+Diagnostic repair command: swift test --filter "Copilot|Review|UndoFix" (406 omits two tests coupled to local PendingCommit APIs; 408 second run restores upstream SettingsUndoTests to use the save harness).
+Editor command: xcodebuild -project Fabric.xcodeproj -scheme "Fabric Editor" -configuration Debug -destination platform=macOS,arch=arm64 -derivedDataPath /private/tmp/fabric-prNNN-derived -clonedSourcePackagesDirPath /private/tmp/fabric-pr406-derived/SourcePackages -xcconfig /private/tmp/fabric-pr406-build.xcconfig -skipMacroValidation CODE_SIGNING_ALLOWED=NO build
+Focused excerpts below; full transient build output omitted. Existing shader diagnostics emitted by expected negative shader tests are not test failures.
+
+== copilot-tests ==
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+Post Shader Pipeline: program_source:871:12: error: no matching function for call to 'compositeXor'
+􁁛  Test run with 111 tests in 8 suites passed after 2.073 seconds.
+
+== copilot-editor ==
+** BUILD SUCCEEDED **
+
+== local-tests ==
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+Post Shader Pipeline: program_source:871:12: error: no matching function for call to 'compositeXor'
+􁁛  Test run with 294 tests in 28 suites passed after 3.297 seconds.
+
+== local-editor ==
+** BUILD SUCCEEDED **
