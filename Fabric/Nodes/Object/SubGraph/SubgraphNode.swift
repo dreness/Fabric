@@ -163,6 +163,8 @@ open class SubgraphNode: BaseObjectNode
     private func proxiesDidChange()
     {
         self.invalidatePortCaches()
+        self.refreshConnectedNodes()
+        self.updateConnectionTopology()
 
         self.parameterGroup.clear()
         for port in self.ports

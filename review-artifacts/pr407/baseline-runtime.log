@@ -1,0 +1,906 @@
+warning: 'swiftsimplify': /Users/andre/.codex/worktrees/review-pr407/Fabric/.build/checkouts/SwiftSimplify/Package.swift:10:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 8 |         .macOS(.v10_14),
+ 9 |         .iOS(.v12),
+10 |         .watchOS(.v4),
+   |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+11 |         .tvOS(.v12)
+12 |     ],
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'midikit': /Users/andre/.codex/worktrees/review-pr407/Fabric/.build/checkouts/MIDIKit/Package.swift:12:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 10 |         .iOS(.v12),
+ 11 |         .tvOS(.v12), // builds, but no MIDI features
+ 12 |         .watchOS(.v4), // builds, but no MIDI features
+    |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 13 |     ],
+ 14 |     products: [
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'swift-timecode': /Users/andre/.codex/worktrees/review-pr407/Fabric/.build/checkouts/swift-timecode/Package.swift:13:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+11 |         .iOS(.v12),
+12 |         .tvOS(.v12),
+13 |         .watchOS(.v4),
+   |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+14 |         .visionOS(.v1)
+15 |     ],
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'swift-data-parsing': /Users/andre/.codex/worktrees/review-pr407/Fabric/.build/checkouts/swift-data-parsing/Package.swift:7:69: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 5 | let package = Package(
+ 6 |     name: "swift-data-parsing",
+ 7 |     platforms: [.macOS(.v10_13), .iOS(.v12), .tvOS(.v12), .watchOS(.v4)],
+   |                                                                     `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 8 |     products: [
+ 9 |         .library(
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Graph node lifecycle" started.
+􀟈  Suite "Proxy Port Replacement" started.
+􀟈  Suite "Undo Action Names" started.
+􀟈  Suite "Edit Undo" started.
+􀟈  Suite "Graph Connection Ownership" started.
+􀟈  Suite "Subgraph Embedding" started.
+􀟈  Test "A first connection starts both nodes, the last disconnection stops them, and reconnecting starts them again" started.
+􀟈  Suite "Undo Targets" started.
+􀟈  Suite "Port Hydration" started.
+􀟈  Test "Nodes execute only once their renderer has started them" started.
+􀟈  Suite "Publishing Events" started.
+􀟈  Test "Duplicated connected nodes start" started.
+􀟈  Test "Deleting a running node stops and disables it, and undo starts it again" started.
+􀟈  Test "A failing inner node is reported and does not keep its subgraph node or its siblings from starting" started.
+􀟈  Test "Frames without graph edits make no lifecycle calls" started.
+􀟈  Test "Nodes added while the renderer is stopped are enabled, and start when it starts" started.
+􀟈  Test "Deleting a subgraph node stops and disables the nodes inside it" started.
+􀟈  Test "An Iterator starts the nodes inside it without connections" started.
+􀟈  Test "A lifecycle failure during a frame is reported to the error delegate" started.
+􀟈  Test "An added node without connections is enabled but not started" started.
+􀟈  Test "Disabling and enabling a wire" started.
+􀟈  Test "Publishing a port starts an unconnected node and unpublishing stops it" started.
+􀟈  Test "Deleting a node whose stop throws still disables it and still deletes it" started.
+􀟈  Test "Connecting a wire" started.
+􀟈  Test "Connecting a wire that replaces another on the inlet" started.
+􀟈  Test "A parameter set through its control is one undo step per change, or per edit while one is in progress" started.
+􀟈  Test "Disconnecting a wire" started.
+􀟈  Test "Adding and deleting a node or a note keep their names through undo and redo" started.
+􀟈  Test "Disconnecting every wire on a port with two" started.
+􀟈  Test "Embedding running nodes in a subgraph, and undoing it, does not restart them" started.
+􀟈  Test "Duplicating wired nodes" started.
+􀟈  Test "Undoing a publish puts back the name the port carried unpublished, and redo publishes it under that name" started.
+􀟈  Test "Adding, editing and deleting a note are undo steps" started.
+􀟈  Test "Deleting a wired node" started.
+􀟈  Test "Undoing an unpublish brings back the proxy, its name and publish in the parent, and the parent's wire" started.
+􀟈  Test "An edit recorded for a note after its delete is not a step" started.
+􀟈  Test "Inserting a parameter node on a wired inlet" started.
+􀟈  Test "A momentary control's changes are not undo steps" started.
+􀟈  Test "Publishing and naming a published port are undo steps" started.
+􀟈  Test "A port unpublished and published again by undo has its new proxy take the parent's wire back" started.
+􀟈  Test "Creation transfers internal wires and publishes boundary proxies" started.
+􀟈  Test "A published port a node removes takes its proxy with it, and the parent's wire on the proxy" started.
+􀟈  Test "Unpublishing a port takes the parent's wires onto its proxy with it" started.
+􀟈  Test "Legacy port connection maps migrate to graph connection records" started.
+􀟈  Test "Disconnecting one outlet wire leaves sibling values intact" started.
+􀟈  Test "Embedded topology remains stable across two serialization round trips" started.
+􀟈  Test "Disconnect all and active state changes undo through Graph" started.
+􀟈  Test "Graph owns connection mutation and rejects foreign endpoints atomically" started.
+􀟈  Test "Embedding undo and redo are one stable graph edit" started.
+􀟈  Test "Embedding transfers internal wires and undo restores their identity" started.
+􀟈  Test "Node deletion restores graph-owned wires without duplicates" started.
+􀟈  Test "Parameter insertion preserves the original wire through undo and redo" started.
+􀟈  Test "Replacing an inlet is one undoable graph edit" started.
+􀟈  Test "Graph connection records are authoritative and exclusively encoded" started.
+􀟈  Test "Dynamic port replacement preserves wires through undo and redo" started.
+􀟈  Test "Embedding rebinds incoming and outgoing boundaries to proxies" started.
+􀟈  Test "Invalid subgraph selections use the shared Fabric graph error domain" started.
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Graph: 717042B8-A57A-4ED2-9863-927A7F06E1C8 Add Node Lifecycle Recording
+Graph: 539172AF-B489-43CC-981B-7FE3EC59C2FB Add Node Lifecycle Recording
+Graph: 4C8B9496-800A-49FF-B448-88B468FA486E Add Node Lifecycle Recording
+Graph: 9AB03B95-56E6-4412-B050-886015763799 Add Node Lifecycle Recording
+Graph: C04F27E6-F61B-47A9-90E2-F24035C9477C Add Node Lifecycle Recording
+Graph: 7FD5DAD0-ED48-48C8-9408-90E5E777E948 Add Node Lifecycle Recording
+Graph: 0FF41D58-8617-432E-81C8-2FF8BDC393B4 Add Node Lifecycle Recording
+Graph: BF227180-5381-4A73-8530-A3B4D2EADB1F Add Node Lifecycle Recording
+Graph: 0FF41D58-8617-432E-81C8-2FF8BDC393B4 Add Node Lifecycle Recording
+Graph: 5B80E77E-704B-4F60-8A2F-A3EC13E3F973 Add Node Number Binary Operator
+Graph: 6B45503B-D17C-4CA4-B306-E419C7BA6439 Add Node Lifecycle Recording
+Graph: 8BCC39CC-5DCF-431B-A6D0-32E4E3479B58 Add Node Sub Graph
+Graph: E600E6F7-6E0F-49BA-87B0-A64D80735BA8 Add Node Lifecycle Recording
+Graph: E600E6F7-6E0F-49BA-87B0-A64D80735BA8 Add Node Lifecycle Recording
+Graph: 3ACC9E7D-6FA8-49D0-9A99-0BC9DA56CE87 Add Node Number Binary Operator
+Graph: 480E9B03-11F8-4821-A229-90E59BB16C77 Add Node Number Binary Operator
+Deinit Graph: 6A39EEED-072C-4EBA-824E-F7B600B09BB9
+Graph: 089D1678-08B8-4542-8B1D-657816E9AEF2 Add Node Number Binary Operator
+Graph: 3ACC9E7D-6FA8-49D0-9A99-0BC9DA56CE87 Add Node Number Binary Operator
+Graph: 7FD5DAD0-ED48-48C8-9408-90E5E777E948 Add Node Lifecycle Recording
+Deinit Graph: E600E6F7-6E0F-49BA-87B0-A64D80735BA8
+Deinit Graph: 10006713-73C4-4856-9D63-9D4FF3096C25
+Deinit Graph: 7FC40AAE-FDB6-4AA3-8994-8D983D874F35
+Graph: B07CAA8D-B4F5-48B5-8400-E021917FB651 Add Node Lifecycle Recording
+Deinit Graph: C277CB45-8D0E-48A0-8CCC-4C3EFE139A3A
+Deinit Graph: 5957D4D3-3A89-41FD-8E31-AE578FF6F313
+Graph: 2DDE802B-1BA6-483A-9002-64C4A3142FC0 Add Node Number Binary Operator
+Deinit Graph: 4C8B9496-800A-49FF-B448-88B468FA486E
+Deinit Graph: 0FF41D58-8617-432E-81C8-2FF8BDC393B4
+Graph: B07CAA8D-B4F5-48B5-8400-E021917FB651 Add Node Lifecycle Recording
+Graph: 480E9B03-11F8-4821-A229-90E59BB16C77 Add Node Number Binary Operator
+Init Graph
+Deinit Graph: 19E0C21A-969D-4CF1-8BDF-8B7B5E8C26E4
+Graph: 7FD5DAD0-ED48-48C8-9408-90E5E777E948 Add Node Sub Graph
+Deinit Graph: 717042B8-A57A-4ED2-9863-927A7F06E1C8
+Graph: 12FB995B-8037-4500-A2BA-8A0820BF05AB Add Node Sub Graph
+Graph: 089D1678-08B8-4542-8B1D-657816E9AEF2 Add Node Number Binary Operator
+Deinit Graph: 539172AF-B489-43CC-981B-7FE3EC59C2FB
+Deinit Graph: 6B45503B-D17C-4CA4-B306-E419C7BA6439
+Graph: FC2113AC-FC25-43ED-9B40-93FC15683EC3 Add Node Lifecycle Recording
+Deinit Graph: C04F27E6-F61B-47A9-90E2-F24035C9477C
+Graph: C1C85EED-A795-4EF4-B0EE-B2C6E09747EC Add Node Number Binary Operator
+Graph: 5BA9C4ED-F4FB-482C-93F5-9617D7D02AB5 Add Node Lifecycle Recording
+Graph: 2DDE802B-1BA6-483A-9002-64C4A3142FC0 Add Node Number Binary Operator
+Graph: C1C85EED-A795-4EF4-B0EE-B2C6E09747EC Add Node Number Binary Operator
+Graph: EC05752F-F2BA-4F5C-B8A2-A3DE01AE9773 Add Node Lifecycle Recording
+Deinit Graph: 4D0F2637-386A-4C6B-9B7A-CE28E7B26D3A
+Deinit Graph: B3FEF765-863B-44E8-B8BE-78E5B4200FE0
+Graph: B5A04F7A-BD36-4CF0-959E-B213FCD57CE5 Add Node Iterator
+Deinit Graph: 8BCC39CC-5DCF-431B-A6D0-32E4E3479B58
+Deinit Graph: 3ACC9E7D-6FA8-49D0-9A99-0BC9DA56CE87
+Graph lifecycle: Lifecycle Recording: FabricError(severity: Fabric.FabricErrorSeverity.recoverable, kind: Fabric.FabricErrorKind.execution(Fabric.FabricErrorKind.Execution.failed), message: "Test stop failure.", underlyingError: nil)
+Deinit Graph: 1147889F-948D-4C5A-B39F-80BD1B5EEE8B
+Deinit Graph: 480E9B03-11F8-4821-A229-90E59BB16C77
+Deinit Graph: FC2113AC-FC25-43ED-9B40-93FC15683EC3
+􀟈  Test "Declared parameter metadata wins over the document's copy" started.
+Graph: 089D1678-08B8-4542-8B1D-657816E9AEF2 Add Node Number Binary Operator
+Graph lifecycle: Lifecycle Recording: FabricError(severity: Fabric.FabricErrorSeverity.recoverable, kind: Fabric.FabricErrorKind.execution(Fabric.FabricErrorKind.Execution.failed), message: "Test start failure.", underlyingError: nil)
+Deinit Graph: B5A04F7A-BD36-4CF0-959E-B213FCD57CE5
+􀟈  Test "A wire one step puts back can be taken down by the step before it" started.
+􀟈  Test "A Transform uniform saved as a plain port becomes a parameter port on its id once the shader compiles again" started.
+􀟈  Test "Suspending registration in a graph with no undo manager of its own suspends the root's it records on" started.
+Graph: 5BA9C4ED-F4FB-482C-93F5-9617D7D02AB5 Add Node Lifecycle Recording
+Deinit Graph: 2DDE802B-1BA6-483A-9002-64C4A3142FC0
+Graph lifecycle: Lifecycle Recording: FabricError(severity: Fabric.FabricErrorSeverity.recoverable, kind: Fabric.FabricErrorKind.execution(Fabric.FabricErrorKind.Execution.failed), message: "Test enable failure.", underlyingError: nil)
+Deinit Graph: EC05752F-F2BA-4F5C-B8A2-A3DE01AE9773
+􀟈  Test "JavaScript node rebuilds its script ports on decode and keeps identity" started.
+􀟈  Test "Unpublishing takes the wires at every level the port is published up to, and undo puts each level back" started.
+Graph lifecycle: Lifecycle Recording: FabricError(severity: Fabric.FabricErrorSeverity.recoverable, kind: Fabric.FabricErrorKind.execution(Fabric.FabricErrorKind.Execution.failed), message: "Test enable failure.", underlyingError: nil)
+􀟈  Test "A compute node keeps its shader binding when the bundle no longer provides the file" started.
+􀟈  Test "An editable port rebuilt on another's id keeps it, parameter included" started.
+􀟈  Test "Game controller ports persist as descriptors and rebuild on decode" started.
+Deinit Graph: D8B03BA7-F494-4775-A74D-FB134945438A
+Deinit Graph: B69A26E3-04D0-4BA0-B848-8A37DBC01334
+Deinit Graph: 12FB995B-8037-4500-A2BA-8A0820BF05AB
+􀟈  Test "Game controller reconnect record survives a save with no controller attached" started.
+Deinit Graph: BF227180-5381-4A73-8530-A3B4D2EADB1F
+Init Graph
+Deinit Graph: B07CAA8D-B4F5-48B5-8400-E021917FB651
+􀟈  Test "A step acts on the node standing under its id when it runs" started.
+Graph: 7FD5DAD0-ED48-48C8-9408-90E5E777E948 Add Node Lifecycle Recording
+􀟈  Test "Live Image node rebuilds its saved shader's uniform ports on decode" started.
+􀟈  Test "A node added with a published port gets a proxy, and undoing the add takes it" started.
+Graph: 3050829B-A001-4B74-9C6E-92255BE58C60 Add Node Number Binary Operator
+Graph: 7FD5DAD0-ED48-48C8-9408-90E5E777E948 Add Node Lifecycle Recording
+􀟈  Test "A compound edit in a graph with no undo manager of its own groups and names its steps on the document's" started.
+􀟈  Test "Unpublishing a proxy leaves the parameter it shares named as the port it stands for" started.
+􀟈  Test "A published port its node removes takes its proxy at each level up, with the wires on them, as steps of their own" started.
+Init Graph
+􀟈  Test "A published port a node removes takes the wires at every level it is published up to" started.
+􀟈  Test "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+Init Graph
+Deinit Graph: 059AF754-1145-4DBA-B5C2-44DEF83D0692
+Init Graph
+Deinit Graph: 7FD5DAD0-ED48-48C8-9408-90E5E777E948
+Init Graph
+􀟈  Test "A JavaScript node whose saved script no longer parses keeps its ports and wires" started.
+􀟈  Test "Ports added after graph decode cannot resurrect stale snapshot state" started.
+􀟈  Test "An edit in a graph the canvas has not given an undo manager records on the document's" started.
+􀟈  Test "Renaming a published port renames the parameter its proxies share, at each level it is published up to" started.
+Init Graph
+Init Graph
+􀟈  Test "Unpublishing takes the wires off the proxy at each level up, and undo and redo put them back and take them again" started.
+􀟈  Test "Duplicating a node closes its hydration window" started.
+􀟈  Test "A Live Image node whose saved shader no longer compiles keeps its ports and wires" started.
+􀟈  Test "Undoing a delete puts the node back where it stood among the graph's nodes" started.
+Deinit Graph: 5BA9C4ED-F4FB-482C-93F5-9617D7D02AB5
+􀟈  Test "Undoing Insert Parameter Node puts the port's publishing back, its proxy and the wire on it" started.
+􀟈  Test "Deleting a node takes the wires at every level its ports are published up to, and undo puts each level back" started.
+Graph: A0FCD483-57FA-46CA-BF0B-45B704BABDF2 Add Node Number Binary Operator
+Deinit Graph: 3050829B-A001-4B74-9C6E-92255BE58C60
+Init Graph
+Graph: A0FCD483-57FA-46CA-BF0B-45B704BABDF2 Add Node Number Binary Operator
+Graph: 5EABA30C-84A2-4450-BED5-53424313A6E4 Add Node Number Binary Operator
+Graph: 62034DC5-DC29-4E44-A16C-99D7A87E0BF9 Add Node Number Binary Operator
+Deinit Graph: 42E4E0A8-CBC1-4D0A-8474-81AF9D86F56D
+Init Graph
+Deinit Graph: 408763C3-0773-4E3D-8AD6-4F760C472292
+Init Graph
+􀟈  Test "Deleting a node is one undo step that puts back its wires and its proxies at each level, and redo takes them again" started.
+􀟈  Test "Retired port state is dropped and reported, not resurrected" started.
+􀟈  Test "Publishing makes a proxy over the port under its id at each level, and undo and redo take and make each" started.
+􀟈  Test "A port removed and recreated within one decode keeps its identity" started.
+Graph: 62034DC5-DC29-4E44-A16C-99D7A87E0BF9 Add Node Number Binary Operator
+Deinit Graph: 089D1678-08B8-4542-8B1D-657816E9AEF2
+Graph: 76400BC2-3526-4F8C-8F47-ECBA55EB9B81 Add Node Sub Graph
+Deinit Graph: A96053B8-325A-4C58-9787-2B243F8FAD55
+􀟈  Test "Hydration keeps the backing parameter on the port's identity" started.
+􀟈  Test case passing 1 argument kind → subgraph to "Creation transfers internal wires and publishes boundary proxies" started.
+􀟈  Test case passing 1 argument kind → subgraph to "A port unpublished and published again by undo has its new proxy take the parent's wire back" started.
+Graph: 5EABA30C-84A2-4450-BED5-53424313A6E4 Add Node Number Binary Operator
+Deinit Graph: 9AB03B95-56E6-4412-B050-886015763799
+Init Graph
+Graph: 76400BC2-3526-4F8C-8F47-ECBA55EB9B81 Add Node Number Binary Operator
+􀟈  Test case passing 1 argument kind → deferredSubgraph to "A port unpublished and published again by undo has its new proxy take the parent's wire back" started.
+􀟈  Test "Round trip preserves port identity, published state and values" started.
+Init Graph
+Init Graph
+􀟈  Test case passing 1 argument kind → deferredSubgraph to "Creation transfers internal wires and publishes boundary proxies" started.
+Graph: 39C853C0-5894-4096-933D-DC7159103205 Add Node Number Binary Operator
+􀟈  Test "A type change leaves the replacement inlet at its type's default, on the old id" started.
+Graph: B2B4ED84-542D-480E-A87C-24D6ADCF4CDE Add Node Sub Graph
+􀟈  Test case passing 1 argument kind → subgraph to "Unpublishing a port takes the parent's wires onto its proxy with it" started.
+􀟈  Test "A Transform parameter gets a parameter port; a quaternion one, which Satin cannot encode, gets none" started.
+Graph: 5EABA30C-84A2-4450-BED5-53424313A6E4 Add Node Number Binary Operator
+Graph: B2B4ED84-542D-480E-A87C-24D6ADCF4CDE Add Node Number Binary Operator
+􀟈  Test case passing 1 argument kind → deferredSubgraph to "Unpublishing a port takes the parent's wires onto its proxy with it" started.
+􀟈  Test "An inlet rests at its type's default: Transform through its parameter, Quaternion as a plain port, a collection at nothing" started.
+􀟈  Test "Compute processor node rebuilds its processor and uniform ports on decode" started.
+Graph: EE88A021-736C-4A0F-9D37-5C2358597CF2 Add Node Number Binary Operator
+Graph: B6CE277A-DDAC-4BCF-8FB2-A284BD37631A Add Node Sub Graph
+Init Graph
+Graph: D7D5F2F8-8A93-456E-A1F5-F5C3464FA850 Add Node Number Binary Operator
+Init Graph
+􀟈  Test "A saved quaternion parameter port comes back as a plain port on its id, not a crash" started.
+Graph: EE88A021-736C-4A0F-9D37-5C2358597CF2 Add Node Number Binary Operator
+Graph: B6CE277A-DDAC-4BCF-8FB2-A284BD37631A Add Node Number Binary Operator
+Init Graph
+􀟈  Test case passing 1 argument kind → subgraph to "Embedded topology remains stable across two serialization round trips" started.
+Graph: 3319397E-E347-4970-AD59-10ECCC76B814 Add Node Number Binary Operator
+Graph: EE88A021-736C-4A0F-9D37-5C2358597CF2 Add Node Float
+Init Graph
+Graph: 74819434-304B-4AC1-8578-44F04E6747E8 Add Node Number Binary Operator
+Deinit Graph: 5B80E77E-704B-4F60-8A2F-A3EC13E3F973
+Init Graph
+Graph: 6602EDA2-0BC9-4487-B7C9-ECEE7A4E8788 Add Node Number Binary Operator
+Graph: 74819434-304B-4AC1-8578-44F04E6747E8 Add Node Number Binary Operator
+Init Graph
+Init Graph
+Init Graph
+Deinit Graph: 62034DC5-DC29-4E44-A16C-99D7A87E0BF9
+Init Graph
+Graph: 499F393B-1ADD-4F1C-BFBE-F6D383576516 Add Node Number Binary Operator
+Graph: 74819434-304B-4AC1-8578-44F04E6747E8 Add Node Number Binary Operator
+􀟈  Test case passing 1 argument kind → deferredSubgraph to "Embedded topology remains stable across two serialization round trips" started.
+Graph: 6602EDA2-0BC9-4487-B7C9-ECEE7A4E8788 Add Node Number Binary Operator
+Deinit Graph: 76400BC2-3526-4F8C-8F47-ECBA55EB9B81
+Graph: 74819434-304B-4AC1-8578-44F04E6747E8 Add Node Number Binary Operator
+Graph: 499F393B-1ADD-4F1C-BFBE-F6D383576516 Add Node Number Binary Operator
+Graph: 6602EDA2-0BC9-4487-B7C9-ECEE7A4E8788 Add Node Number Binary Operator
+Graph: 499F393B-1ADD-4F1C-BFBE-F6D383576516 Add Node Number Binary Operator
+Deinit Graph: 39C853C0-5894-4096-933D-DC7159103205
+Graph: 6602EDA2-0BC9-4487-B7C9-ECEE7A4E8788 Add Node Number Binary Operator
+Graph: 499F393B-1ADD-4F1C-BFBE-F6D383576516 Add Node Number Binary Operator
+Graph: C9C688C9-7475-45F9-A372-68461D62C119 Add Node Number Binary Operator
+Graph: C9C688C9-7475-45F9-A372-68461D62C119 Add Node Number Binary Operator
+􀟈  Test "A Transform parameter port survives a save as a parameter port, value and id intact" started.
+Graph: 723A2C40-A1C2-424D-B3C9-3AE5FB10825A Add Node Number Binary Operator
+Deinit Graph: B2B4ED84-542D-480E-A87C-24D6ADCF4CDE
+Graph: 723A2C40-A1C2-424D-B3C9-3AE5FB10825A Add Node Number Binary Operator
+Deinit Graph: B6CE277A-DDAC-4BCF-8FB2-A284BD37631A
+Deinit Graph: D7D5F2F8-8A93-456E-A1F5-F5C3464FA850
+􀟈  Test "A shader's Transform uniform is a parameter port that keeps its wire and shares the material's parameter" started.
+Init Graph
+Graph: 723A2C40-A1C2-424D-B3C9-3AE5FB10825A Add Node Number Binary Operator
+Graph: C8B7AE88-57E4-497B-ACDA-A662221911B0 Add Node Number Binary Operator
+Graph: 2FB4EB90-C8BE-4C7E-91F7-B52623C8373B Add Node Number Binary Operator
+Graph: 723A2C40-A1C2-424D-B3C9-3AE5FB10825A Add Node Number Binary Operator
+Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269 Add Node Number Binary Operator
+Graph: 626FF38C-8F1F-4D94-8B15-F592A8F704CC Add Node Number Binary Operator
+Graph: C8B7AE88-57E4-497B-ACDA-A662221911B0 Add Node Number Binary Operator
+Graph: 2FB4EB90-C8BE-4C7E-91F7-B52623C8373B Add Node Number Binary Operator
+Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269 Add Node Number Binary Operator
+Graph: C8B7AE88-57E4-497B-ACDA-A662221911B0 Add Node Number Binary Operator
+Deinit Graph: 3319397E-E347-4970-AD59-10ECCC76B814
+Graph: 2FB4EB90-C8BE-4C7E-91F7-B52623C8373B Add Node Number Binary Operator
+Deinit Graph: 5EABA30C-84A2-4450-BED5-53424313A6E4
+Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269 Add Node Number Binary Operator
+Graph: C8B7AE88-57E4-497B-ACDA-A662221911B0 Add Node Number Binary Operator
+Graph: 2FB4EB90-C8BE-4C7E-91F7-B52623C8373B Add Node Number Binary Operator
+Graph: 626FF38C-8F1F-4D94-8B15-F592A8F704CC Add Node Number Binary Operator
+Init Graph
+Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269 Add Node Number Binary Operator
+Graph: 499F393B-1ADD-4F1C-BFBE-F6D383576516 Add Node Sub Graph
+Graph: 626FF38C-8F1F-4D94-8B15-F592A8F704CC Add Node Number Binary Operator
+Init Graph
+Init Graph
+􀟈  Test "State under a key the code no longer declares drops and is reported" started.
+􀟈  Test "Dynamic strategy ports rebuild from the decoded strategy and keep identity" started.
+􀟈  Test case passing 1 argument kind → subgraph to "Embedding undo and redo are one stable graph edit" started.
+Init Graph
+Graph: 46030055-7A96-470F-B4A4-5561D3676016 Add Node Number Binary Operator
+Init Graph
+Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8 Add Node Number Binary Operator
+Graph: 74819434-304B-4AC1-8578-44F04E6747E8 Add Node Sub Graph
+Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8 Add Node Number Binary Operator
+Init Graph
+Graph: 46030055-7A96-470F-B4A4-5561D3676016 Add Node Number Binary Operator
+Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8 Add Node Number Binary Operator
+􀟈  Test case passing 1 argument kind → deferredSubgraph to "Embedding undo and redo are one stable graph edit" started.
+Graph: CEAF3C02-F813-4C3B-9453-F64C14F043BE Add Node Number Binary Operator
+Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8 Add Node Number Binary Operator
+Graph: 180850F4-3A99-4A31-9E79-F6270285DE48 Add Node Number Binary Operator
+Deinit Graph: 615652FA-318C-4D7E-BB22-AA4E773F27F1
+Init Graph
+Graph: 180850F4-3A99-4A31-9E79-F6270285DE48 Add Node Number Binary Operator
+Init Graph
+Graph: CEAF3C02-F813-4C3B-9453-F64C14F043BE Add Node Number Binary Operator
+Graph: C8B7AE88-57E4-497B-ACDA-A662221911B0 Add Node Sub Graph
+Init Graph
+Init Graph
+Deinit Graph: 626FF38C-8F1F-4D94-8B15-F592A8F704CC
+Graph: 6602EDA2-0BC9-4487-B7C9-ECEE7A4E8788 Add Node Render To Image and Depth
+Graph: C95F82F6-9340-4284-98A4-49BCBEDCF854 Add Node Number Binary Operator
+Init Graph
+Graph: 2FB4EB90-C8BE-4C7E-91F7-B52623C8373B Add Node Render To Image and Depth
+Graph: C95F82F6-9340-4284-98A4-49BCBEDCF854 Add Node Number Binary Operator
+Graph: 723A2C40-A1C2-424D-B3C9-3AE5FB10825A Add Node Render To Image and Depth
+Graph: C95F82F6-9340-4284-98A4-49BCBEDCF854 Add Node Number Binary Operator
+Graph: C746BC02-2B36-4AF0-B60D-C4F311056E66 Add Node Number Binary Operator
+Deinit Graph: EE88A021-736C-4A0F-9D37-5C2358597CF2
+Graph: 2FFBC966-6E28-4908-B409-06FF47177043 Add Node Number Binary Operator
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Graph: 627D750B-7534-4502-BA82-79D2FB9849D6 Add Node Number Binary Operator
+Graph: 8D88D72A-F1FF-4AE1-87C4-AB94610BB939 Add Node Number Binary Operator
+Graph: 5AB355E3-9D39-4164-8A30-50CDC105BE44 Add Node Number Binary Operator
+Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269 Add Node Sub Graph
+Graph: C746BC02-2B36-4AF0-B60D-C4F311056E66 Add Node Number Binary Operator
+Graph: 8D88D72A-F1FF-4AE1-87C4-AB94610BB939 Add Node Number Binary Operator
+Graph: 2FFBC966-6E28-4908-B409-06FF47177043 Add Node Number Binary Operator
+Graph: 5AB355E3-9D39-4164-8A30-50CDC105BE44 Add Node Number Binary Operator
+Graph: 8D88D72A-F1FF-4AE1-87C4-AB94610BB939 Add Node Number Binary Operator
+Graph: 627D750B-7534-4502-BA82-79D2FB9849D6 Add Node Number Binary Operator
+Graph: C98DF099-6DEE-48B6-A0B4-FFB4152690DC Add Node Number Binary Operator
+Graph: 8D88D72A-F1FF-4AE1-87C4-AB94610BB939 Add Node Number Binary Operator
+Deinit Graph: 499F393B-1ADD-4F1C-BFBE-F6D383576516
+Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8 Add Node Render To Image and Depth
+Graph: 9E01063B-42DC-45C1-AEDC-1DA26CB46E9F Add Node Number Binary Operator
+Init Graph
+Deinit Graph: 46030055-7A96-470F-B4A4-5561D3676016
+Deinit Graph: C98DF099-6DEE-48B6-A0B4-FFB4152690DC
+Graph: EB5369FE-CB5B-47F3-A872-40938D5A21BA Add Node Number Binary Operator
+Graph: 9E01063B-42DC-45C1-AEDC-1DA26CB46E9F Add Node Number Binary Operator
+Graph: 3F55F108-8B67-4C29-8A3C-59EF4DDEF386 Add Node Number Binary Operator
+Graph: EB5369FE-CB5B-47F3-A872-40938D5A21BA Add Node Number Binary Operator
+Graph: B4088A93-3C48-4F55-9047-E5786A4B0667 Add Node Number Binary Operator
+Init Graph
+Graph: 3F55F108-8B67-4C29-8A3C-59EF4DDEF386 Add Node Number Binary Operator
+Deinit Graph: 74819434-304B-4AC1-8578-44F04E6747E8
+Graph: B4088A93-3C48-4F55-9047-E5786A4B0667 Add Node Number Binary Operator
+Graph: 07D36857-1C8E-4D4E-B9F8-FFCB3B418ED1 Add Node Number Binary Operator
+Deinit Graph: 180850F4-3A99-4A31-9E79-F6270285DE48
+Graph: B4088A93-3C48-4F55-9047-E5786A4B0667 Add Node Number Binary Operator
+Graph: 07D36857-1C8E-4D4E-B9F8-FFCB3B418ED1 Add Node Number Binary Operator
+Init Graph
+Init Graph
+Graph: EB5369FE-CB5B-47F3-A872-40938D5A21BA Add Node Sub Graph
+Graph: 8D88D72A-F1FF-4AE1-87C4-AB94610BB939 Add Node Sub Graph
+Graph: B4088A93-3C48-4F55-9047-E5786A4B0667 Add Node Number Binary Operator
+Deinit Graph: CEAF3C02-F813-4C3B-9453-F64C14F043BE
+Graph: F387CA58-419D-4C83-8C5E-BC2FB2025419 Add Node Number Binary Operator
+Graph: F4705FD7-9A23-44F7-9C48-91650ADFDF31 Add Node Number Binary Operator
+Graph: 5E9D7F4C-FFFA-4B91-861C-0A731D47262C Add Node Number Binary Operator
+Graph: F387CA58-419D-4C83-8C5E-BC2FB2025419 Add Node Number Binary Operator
+Graph: F4705FD7-9A23-44F7-9C48-91650ADFDF31 Add Node Number Binary Operator
+Deinit Graph: C8B7AE88-57E4-497B-ACDA-A662221911B0
+Graph: 5E9D7F4C-FFFA-4B91-861C-0A731D47262C Add Node Number Binary Operator
+Deinit Graph: 723A2C40-A1C2-424D-B3C9-3AE5FB10825A
+Deinit Graph: 2FFBC966-6E28-4908-B409-06FF47177043
+Deinit Graph: C95F82F6-9340-4284-98A4-49BCBEDCF854
+Init Graph
+Init Graph
+Deinit Graph: 5AB355E3-9D39-4164-8A30-50CDC105BE44
+Graph: 5E9D7F4C-FFFA-4B91-861C-0A731D47262C Add Node Float
+Init Graph
+Deinit Graph: 07D36857-1C8E-4D4E-B9F8-FFCB3B418ED1
+Graph: B4088A93-3C48-4F55-9047-E5786A4B0667 Add Node Render To Image and Depth
+Deinit Graph: 2FB4EB90-C8BE-4C7E-91F7-B52623C8373B
+Graph: 374473DB-F61C-486A-8998-9D99DEFC2457 Add Node Number Binary Operator
+Init Graph
+Graph: 520B388E-4E73-4350-973A-A60F71E90347 Add Node Number Binary Operator
+Graph: 374473DB-F61C-486A-8998-9D99DEFC2457 Add Node Number Binary Operator
+Graph: ECE7C16C-C50A-4119-8D97-EF1B12C9F26C Add Node Number Binary Operator
+Deinit Graph: 627D750B-7534-4502-BA82-79D2FB9849D6
+Deinit Graph: 6602EDA2-0BC9-4487-B7C9-ECEE7A4E8788
+Graph: ECE7C16C-C50A-4119-8D97-EF1B12C9F26C Add Node Number Binary Operator
+Graph: 8D88D72A-F1FF-4AE1-87C4-AB94610BB939 Add Node Number Binary Operator
+Init Graph
+Graph: 520B388E-4E73-4350-973A-A60F71E90347 Add Node Number Binary Operator
+Init Graph
+Graph: ECE7C16C-C50A-4119-8D97-EF1B12C9F26C Add Node Number Binary Operator
+Graph: 8D88D72A-F1FF-4AE1-87C4-AB94610BB939 Add Node Number Binary Operator
+Deinit Graph: C746BC02-2B36-4AF0-B60D-C4F311056E66
+􁁛  Test "Deleting a running node stops and disables it, and undo starts it again" passed after 0.032 seconds.
+􁁛  Test "Nodes execute only once their renderer has started them" passed after 0.032 seconds.
+􁁛  Test "Nodes added while the renderer is stopped are enabled, and start when it starts" passed after 0.032 seconds.
+􁁛  Test "Publishing a port starts an unconnected node and unpublishing stops it" passed after 0.032 seconds.
+􁁛  Test "Frames without graph edits make no lifecycle calls" passed after 0.032 seconds.
+Graph: 938052A6-6309-40D7-82B5-4EB4F10123BA Add Node Number Binary Operator
+􁁛  Test "A first connection starts both nodes, the last disconnection stops them, and reconnecting starts them again" passed after 0.032 seconds.
+􁁛  Test "Deleting a subgraph node stops and disables the nodes inside it" passed after 0.032 seconds.
+Graph: E23B0C00-F0F8-4773-9E89-1B80C133287A Add Node Switch
+Graph: 8D88D72A-F1FF-4AE1-87C4-AB94610BB939 Add Node Sub Graph
+Graph: 1000B341-62ED-4D17-9584-809A7519BD69 Add Node Number Binary Operator
+Graph: E23B0C00-F0F8-4773-9E89-1B80C133287A Add Node Switch
+Deinit Graph: 5E9D7F4C-FFFA-4B91-861C-0A731D47262C
+Graph: 1000B341-62ED-4D17-9584-809A7519BD69 Add Node Number Binary Operator
+Graph: E23B0C00-F0F8-4773-9E89-1B80C133287A Add Node Log
+Graph: B4088A93-3C48-4F55-9047-E5786A4B0667 Add Node Number Binary Operator
+Deinit Graph: 938052A6-6309-40D7-82B5-4EB4F10123BA
+Init Graph
+Graph: 1000B341-62ED-4D17-9584-809A7519BD69 Add Node Number Binary Operator
+Graph: F4705FD7-9A23-44F7-9C48-91650ADFDF31 Add Node Number Binary Operator
+􁁛  Test "An added node without connections is enabled but not started" passed after 0.033 seconds.
+􁁛  Test "Disconnecting a wire" passed after 0.033 seconds.
+􁁛  Test "Disabling and enabling a wire" passed after 0.033 seconds.
+􁁛  Test "Connecting a wire" passed after 0.033 seconds.
+􁁛  Test "An Iterator starts the nodes inside it without connections" passed after 0.033 seconds.
+Graph: B4088A93-3C48-4F55-9047-E5786A4B0667 Add Node Number Binary Operator
+Deinit Graph: ECE7C16C-C50A-4119-8D97-EF1B12C9F26C
+Graph: F4705FD7-9A23-44F7-9C48-91650ADFDF31 Add Node Number Binary Operator
+􁁛  Test "A lifecycle failure during a frame is reported to the error delegate" passed after 0.033 seconds.
+􁁛  Test "A failing inner node is reported and does not keep its subgraph node or its siblings from starting" passed after 0.033 seconds.
+􀟈  Test case passing 2 arguments nodeClass → SampleAndHoldNode, portName → "inputValue" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+Init Graph
+Graph: 1000B341-62ED-4D17-9584-809A7519BD69 Add Node Sub Graph
+Graph: B4088A93-3C48-4F55-9047-E5786A4B0667 Add Node Render To Image and Depth
+Graph: F9CD8A4D-E907-4C4F-A80C-7544ECDFD684 Add Node Number Binary Operator
+Graph: 520B388E-4E73-4350-973A-A60F71E90347 Add Node Number Binary Operator
+Graph: 520B388E-4E73-4350-973A-A60F71E90347 Add Node Number Binary Operator
+􁁛  Test "Embedding running nodes in a subgraph, and undoing it, does not restart them" passed after 0.033 seconds.
+Deinit Graph: 8D88D72A-F1FF-4AE1-87C4-AB94610BB939
+Init Graph
+Deinit Graph: F4705FD7-9A23-44F7-9C48-91650ADFDF31
+Graph: 1000B341-62ED-4D17-9584-809A7519BD69 Add Node Number Binary Operator
+􁁛  Test "Adding and deleting a node or a note keep their names through undo and redo" passed after 0.033 seconds.
+􀟈  Test case passing 2 arguments nodeClass → SwitchNode, portName → "input0" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+Graph: 874635D7-AE8E-4039-9C8F-AEAECF5A152C Add Node Number Binary Operator
+Init Graph
+Graph: 1000B341-62ED-4D17-9584-809A7519BD69 Add Node Sub Graph
+Init Graph
+Graph: 05F57BA6-E39F-4B39-BB78-81290BFEE6FA Add Node Sample and Hold (Float)
+Graph: D7252DE1-CB5B-451B-9D1A-7088E1C65710 Add Node Number Binary Operator
+Graph: F9CD8A4D-E907-4C4F-A80C-7544ECDFD684 Add Node Number Binary Operator
+Deinit Graph: B4088A93-3C48-4F55-9047-E5786A4B0667
+Init Graph
+Graph: 4C232E30-3705-448E-9989-CFD1D0832F05 Add Node Switch (Float)
+Deinit Graph: 520B388E-4E73-4350-973A-A60F71E90347
+Deinit Graph: 1000B341-62ED-4D17-9584-809A7519BD69
+Deinit Graph: F9CD8A4D-E907-4C4F-A80C-7544ECDFD684
+Deinit Graph: E23B0C00-F0F8-4773-9E89-1B80C133287A
+􁁛  Test "An edit recorded for a note after its delete is not a step" passed after 0.034 seconds.
+􀟈  Test case passing 2 arguments nodeClass → MatrixSwitchNode, portName → "input0" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+􁁛  Test "Adding, editing and deleting a note are undo steps" passed after 0.034 seconds.
+􁁛  Test "Deleting a node whose stop throws still disables it and still deletes it" passed after 0.034 seconds.
+􀟈  Test case passing 2 arguments nodeClass → GateNode, portName → "input" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+Init Graph
+Graph: A586A2AD-9073-492E-8406-DECE00E41115 Add Node Matrix Switch (Float)
+Init Graph
+􁁛  Test "Connecting a wire that replaces another on the inlet" passed after 0.034 seconds.
+Graph: 43B6C94B-A1CE-4300-A19A-523F519C5F88 Add Node Gate (Float)
+􀟈  Test case passing 2 arguments nodeClass → ArrayQueueNode, portName → "inputPort" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+􀟈  Test case passing 2 arguments nodeClass → ArrayReplaceValueAtIndexNode, portName → "inputValue" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+Init Graph
+Graph: 1120A2DB-E387-43B3-8393-6879CE863366 Add Node Array Queue Value (Float)
+Init Graph
+􀟈  Test case passing 2 arguments nodeClass → DictionarySetValueForKeyNode, portName → "inputValue" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+Graph: F5747725-773A-45B2-8747-F49B413D99E7 Add Node Array Replace Value at Index (Float)
+Init Graph
+Graph: E222F84E-70C5-4590-8F30-95BDE8F80338 Add Node Dictionary Set Value For Key (Float)
+􁁛  Test "Disconnecting every wire on a port with two" passed after 0.037 seconds.
+􁁛  Test "Undoing a publish puts back the name the port carried unpublished, and redo publishes it under that name" passed after 0.037 seconds.
+􁁛  Test "Undoing an unpublish brings back the proxy, its name and publish in the parent, and the parent's wire" passed after 0.037 seconds.
+􁁛  Test "Deleting a wired node" passed after 0.038 seconds.
+􁁛  Test "Publishing and naming a published port are undo steps" passed after 0.038 seconds.
+􁁛  Test "Disconnecting one outlet wire leaves sibling values intact" passed after 0.038 seconds.
+􁁛  Test "Inserting a parameter node on a wired inlet" passed after 0.038 seconds.
+􁁛  Test "Creation transfers internal wires and publishes boundary proxies" with 2 test cases passed after 0.038 seconds.
+􁁛  Test "Graph owns connection mutation and rejects foreign endpoints atomically" passed after 0.038 seconds.
+􁁛  Test "A port unpublished and published again by undo has its new proxy take the parent's wire back" with 2 test cases passed after 0.038 seconds.
+􁁛  Test "Disconnect all and active state changes undo through Graph" passed after 0.038 seconds.
+􁁛  Test "Unpublishing a port takes the parent's wires onto its proxy with it" with 2 test cases passed after 0.038 seconds.
+􁁛  Test "Node deletion restores graph-owned wires without duplicates" passed after 0.038 seconds.
+􁁛  Test "Parameter insertion preserves the original wire through undo and redo" passed after 0.038 seconds.
+􁁛  Test "An editable port rebuilt on another's id keeps it, parameter included" passed after 0.009 seconds.
+􁁛  Test "Invalid subgraph selections use the shared Fabric graph error domain" passed after 0.038 seconds.
+􁁛  Test "Replacing an inlet is one undoable graph edit" passed after 0.038 seconds.
+􁁛  Test "Embedding undo and redo are one stable graph edit" with 2 test cases passed after 0.038 seconds.
+􁁛  Test "Game controller ports persist as descriptors and rebuild on decode" passed after 0.009 seconds.
+􁁛  Test "Declared parameter metadata wins over the document's copy" passed after 0.010 seconds.
+􁁛  Test "Game controller reconnect record survives a save with no controller attached" passed after 0.009 seconds.
+􁁛  Test "A port removed and recreated within one decode keeps its identity" passed after 0.009 seconds.
+􁁛  Test "Embedding rebinds incoming and outgoing boundaries to proxies" passed after 0.038 seconds.
+􁁛  Test "Retired port state is dropped and reported, not resurrected" passed after 0.009 seconds.
+􁁛  Test "Dynamic port replacement preserves wires through undo and redo" passed after 0.038 seconds.
+􁁛  Test "Hydration keeps the backing parameter on the port's identity" passed after 0.009 seconds.
+􁁛  Test "A Transform parameter gets a parameter port; a quaternion one, which Satin cannot encode, gets none" passed after 0.009 seconds.
+􁁛  Test "Round trip preserves port identity, published state and values" passed after 0.009 seconds.
+􁁛  Test "A type change leaves the replacement inlet at its type's default, on the old id" passed after 0.009 seconds.
+􁁛  Test "An inlet rests at its type's default: Transform through its parameter, Quaternion as a plain port, a collection at nothing" passed after 0.009 seconds.
+􁁛  Test "A saved quaternion parameter port comes back as a plain port on its id, not a crash" passed after 0.009 seconds.
+􁁛  Test "Compute processor node rebuilds its processor and uniform ports on decode" passed after 0.009 seconds.
+􁁛  Test "A compute node keeps its shader binding when the bundle no longer provides the file" passed after 0.010 seconds.
+􁁛  Test "A parameter set through its control is one undo step per change, or per edit while one is in progress" passed after 0.038 seconds.
+􁁛  Test "State under a key the code no longer declares drops and is reported" passed after 0.008 seconds.
+􁁛  Test "A Transform parameter port survives a save as a parameter port, value and id intact" passed after 0.008 seconds.
+􁁛  Test "A momentary control's changes are not undo steps" passed after 0.038 seconds.
+􁁛  Suite "Edit Undo" passed after 0.039 seconds.
+􁁛  Test "Dynamic strategy ports rebuild from the decoded strategy and keep identity" passed after 0.008 seconds.
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/AC85E006-7964-4E14-8693-9D316EA6E2A2/7D2DA230-9635-419B-8DB8-C254FF06549F/Shaders.metal
+Graph: 7B001EC6-54D9-4560-9A2E-706F5725FEBB Add Node Live Image
+Graph: 7B001EC6-54D9-4560-9A2E-706F5725FEBB Add Node Transform
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/AC85E006-7964-4E14-8693-9D316EA6E2A2/7D2DA230-9635-419B-8DB8-C254FF06549F/Shaders.metal
+Graph: F5747725-773A-45B2-8747-F49B413D99E7 Add Node Array Replace Value at Index (Float)
+Graph: 43B6C94B-A1CE-4300-A19A-523F519C5F88 Add Node Gate (Float)
+Deinit Graph: F5747725-773A-45B2-8747-F49B413D99E7
+Deinit Graph: 43B6C94B-A1CE-4300-A19A-523F519C5F88
+Deinit Graph: F5747725-773A-45B2-8747-F49B413D99E7
+Deinit Graph: 43B6C94B-A1CE-4300-A19A-523F519C5F88
+Graph: 4C232E30-3705-448E-9989-CFD1D0832F05 Add Node Switch (Float)
+Deinit Graph: 4C232E30-3705-448E-9989-CFD1D0832F05
+Deinit Graph: 4C232E30-3705-448E-9989-CFD1D0832F05
+Graph: 1120A2DB-E387-43B3-8393-6879CE863366 Add Node Array Queue Value (Float)
+Graph: A586A2AD-9073-492E-8406-DECE00E41115 Add Node Matrix Switch (Float)
+Deinit Graph: 1120A2DB-E387-43B3-8393-6879CE863366
+Graph: 05F57BA6-E39F-4B39-BB78-81290BFEE6FA Add Node Sample and Hold (Float)
+Deinit Graph: A586A2AD-9073-492E-8406-DECE00E41115
+Deinit Graph: 1120A2DB-E387-43B3-8393-6879CE863366
+Deinit Graph: 05F57BA6-E39F-4B39-BB78-81290BFEE6FA
+Deinit Graph: A586A2AD-9073-492E-8406-DECE00E41115
+Deinit Graph: 05F57BA6-E39F-4B39-BB78-81290BFEE6FA
+Graph: 374473DB-F61C-486A-8998-9D99DEFC2457 Add Node Number Binary Operator
+Graph: E222F84E-70C5-4590-8F30-95BDE8F80338 Add Node Dictionary Set Value For Key (Float)
+Deinit Graph: E222F84E-70C5-4590-8F30-95BDE8F80338
+Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269 Add Node Number Binary Operator
+Deinit Graph: E222F84E-70C5-4590-8F30-95BDE8F80338
+􁁛  Test "A type-agnostic node's edited value inlet comes back with its value, on its id" with 7 test cases passed after 0.029 seconds.
+Graph: 874635D7-AE8E-4039-9C8F-AEAECF5A152C Add Node Number Binary Operator
+Graph decode: 'Number Binary Operator' dropped port state for retired keys ["retiredKey"]
+Deinit Graph: 874635D7-AE8E-4039-9C8F-AEAECF5A152C
+Deinit Graph: 874635D7-AE8E-4039-9C8F-AEAECF5A152C
+􁁛  Test "Ports added after graph decode cannot resurrect stale snapshot state" passed after 0.029 seconds.
+Updating Shader: Post at: /tmp/fabric-live-shaders/7B001EC6-54D9-4560-9A2E-706F5725FEBB/20AFA875-DAC5-46CB-812E-F154EDDE3802/DDE6C3F9-A546-467B-83E0-B41780F6BA68/Shaders.metal
+Graph: D7252DE1-CB5B-451B-9D1A-7088E1C65710 Add Node Number Binary Operator
+Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8 Add Node Number Binary Operator
+Deinit Graph: D7252DE1-CB5B-451B-9D1A-7088E1C65710
+􁁛  Test "Duplicating a node closes its hydration window" passed after 0.029 seconds.
+Graph: C9C688C9-7475-45F9-A372-68461D62C119 Add Node Number Binary Operator
+Graph: C1C85EED-A795-4EF4-B0EE-B2C6E09747EC Add Node Number Binary Operator
+Graph: C1C85EED-A795-4EF4-B0EE-B2C6E09747EC Add Node Number Binary Operator
+Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269 Add Node Number Binary Operator
+Graph: 374473DB-F61C-486A-8998-9D99DEFC2457 Add Node Number Binary Operator
+Deinit Graph: E33BD213-BE1D-4F54-A891-946E6069CE7A
+Deinit Graph: 374473DB-F61C-486A-8998-9D99DEFC2457
+Deinit Graph: C1C85EED-A795-4EF4-B0EE-B2C6E09747EC
+Deinit Graph: 374473DB-F61C-486A-8998-9D99DEFC2457
+􁁛  Test "Graph connection records are authoritative and exclusively encoded" passed after 0.060 seconds.
+􁁛  Test "Duplicated connected nodes start" passed after 0.061 seconds.
+􁁛  Suite "Graph node lifecycle" passed after 0.061 seconds.
+Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8 Add Node Number Binary Operator
+Graph: A0FCD483-57FA-46CA-BF0B-45B704BABDF2 Add Node Number Binary Operator
+Graph: A0FCD483-57FA-46CA-BF0B-45B704BABDF2 Add Node Number Binary Operator
+Graph: C9C688C9-7475-45F9-A372-68461D62C119 Add Node Number Binary Operator
+Deinit Graph: A0FCD483-57FA-46CA-BF0B-45B704BABDF2
+􁁛  Test "Duplicating wired nodes" passed after 0.061 seconds.
+􁁛  Suite "Undo Action Names" passed after 0.062 seconds.
+Graph: F387CA58-419D-4C83-8C5E-BC2FB2025419 Add Node Number Binary Operator
+Graph: C9C688C9-7475-45F9-A372-68461D62C119 Add Node Number Binary Operator
+Graph: F387CA58-419D-4C83-8C5E-BC2FB2025419 Add Node Number Binary Operator
+Graph: EB5369FE-CB5B-47F3-A872-40938D5A21BA Add Node Sub Graph
+Graph: EB5369FE-CB5B-47F3-A872-40938D5A21BA Add Node Number Binary Operator
+Graph: EB5369FE-CB5B-47F3-A872-40938D5A21BA Add Node Number Binary Operator
+Graph: C9C688C9-7475-45F9-A372-68461D62C119 Add Node Number Binary Operator
+Graph: EB5369FE-CB5B-47F3-A872-40938D5A21BA Add Node Sub Graph
+Graph: F387CA58-419D-4C83-8C5E-BC2FB2025419 Add Node Number Binary Operator
+Graph: F387CA58-419D-4C83-8C5E-BC2FB2025419 Add Node Number Binary Operator
+Deinit Graph: C9C688C9-7475-45F9-A372-68461D62C119
+Deinit Graph: EB5369FE-CB5B-47F3-A872-40938D5A21BA
+Deinit Graph: F387CA58-419D-4C83-8C5E-BC2FB2025419
+Deinit Graph: EB5369FE-CB5B-47F3-A872-40938D5A21BA
+Deinit Graph: C9C688C9-7475-45F9-A372-68461D62C119
+􁁛  Test "Embedding transfers internal wires and undo restores their identity" passed after 0.065 seconds.
+Deinit Graph: F387CA58-419D-4C83-8C5E-BC2FB2025419
+Deinit Graph: C9C688C9-7475-45F9-A372-68461D62C119
+􁁛  Test "Legacy port connection maps migrate to graph connection records" passed after 0.065 seconds.
+􁁛  Suite "Graph Connection Ownership" passed after 0.065 seconds.
+Graph: 9E01063B-42DC-45C1-AEDC-1DA26CB46E9F Add Node Number Binary Operator
+Graph: 3F55F108-8B67-4C29-8A3C-59EF4DDEF386 Add Node Number Binary Operator
+Graph: 9E01063B-42DC-45C1-AEDC-1DA26CB46E9F Add Node Number Binary Operator
+Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269 Add Node Sub Graph
+Deinit Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269
+Deinit Graph: 9E01063B-42DC-45C1-AEDC-1DA26CB46E9F
+Graph: 3F55F108-8B67-4C29-8A3C-59EF4DDEF386 Add Node Number Binary Operator
+Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8 Add Node Render To Image and Depth
+Deinit Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8
+Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269 Add Node Number Binary Operator
+Deinit Graph: 3F55F108-8B67-4C29-8A3C-59EF4DDEF386
+Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269 Add Node Number Binary Operator
+Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8 Add Node Number Binary Operator
+Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8 Add Node Number Binary Operator
+Graph: 9E01063B-42DC-45C1-AEDC-1DA26CB46E9F Add Node Number Binary Operator
+Graph: 9E01063B-42DC-45C1-AEDC-1DA26CB46E9F Add Node Number Binary Operator
+Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269 Add Node Sub Graph
+Deinit Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269
+Deinit Graph: 9E01063B-42DC-45C1-AEDC-1DA26CB46E9F
+Deinit Graph: 66D8F6F5-DCE0-407A-A78A-7B4B80AB0269
+Graph: 3F55F108-8B67-4C29-8A3C-59EF4DDEF386 Add Node Number Binary Operator
+Deinit Graph: 9E01063B-42DC-45C1-AEDC-1DA26CB46E9F
+Graph: 3F55F108-8B67-4C29-8A3C-59EF4DDEF386 Add Node Number Binary Operator
+Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8 Add Node Render To Image and Depth
+Deinit Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8
+Deinit Graph: 3F55F108-8B67-4C29-8A3C-59EF4DDEF386
+Deinit Graph: 5BFC1A3A-DFB7-4549-813F-263F5333F0C8
+Deinit Graph: 3F55F108-8B67-4C29-8A3C-59EF4DDEF386
+􁁛  Test "Embedded topology remains stable across two serialization round trips" with 2 test cases passed after 0.077 seconds.
+􁁛  Suite "Subgraph Embedding" passed after 0.077 seconds.
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+this is not a metal shader
+^
+
+Post Shader Path: /tmp/fabric-live-shaders/7B001EC6-54D9-4560-9A2E-706F5725FEBB/20AFA875-DAC5-46CB-812E-F154EDDE3802/DDE6C3F9-A546-467B-83E0-B41780F6BA68/Shaders.metal
+Graph: 7B001EC6-54D9-4560-9A2E-706F5725FEBB Add Node Live Image
+Graph: 7B001EC6-54D9-4560-9A2E-706F5725FEBB Add Node Transform
+Updating Shader: Post at: /tmp/fabric-live-shaders/7B001EC6-54D9-4560-9A2E-706F5725FEBB/20AFA875-DAC5-46CB-812E-F154EDDE3802/DDE6C3F9-A546-467B-83E0-B41780F6BA68/Shaders.metal
+Deinit Graph: 7B001EC6-54D9-4560-9A2E-706F5725FEBB
+Deinit Graph: 7B001EC6-54D9-4560-9A2E-706F5725FEBB
+􁁛  Test "A Transform uniform saved as a plain port becomes a parameter port on its id once the shader compiles again" passed after 0.102 seconds.
+􁁛  Test "JavaScript node rebuilds its script ports on decode and keeps identity" passed after 0.104 seconds.
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/3E347223-A43F-455C-ABD7-9DC4743CFC19/0CAFD558-52A9-438F-8265-9C2DD725DFBA/Shaders.metal
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/3E347223-A43F-455C-ABD7-9DC4743CFC19/0CAFD558-52A9-438F-8265-9C2DD725DFBA/Shaders.metal
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/3E347223-A43F-455C-ABD7-9DC4743CFC19/A919B1C0-4C10-4439-A52F-D4F125326A43/Shaders.metal
+􁁛  Test "Live Image node rebuilds its saved shader's uniform ports on decode" passed after 0.111 seconds.
+Init Graph
+Graph: 8E43A7A2-CE64-4542-B637-91EC357E4A31 Add Node JavaScript
+Graph: 8E43A7A2-CE64-4542-B637-91EC357E4A31 Add Node Number Binary Operator
+Graph: 8E43A7A2-CE64-4542-B637-91EC357E4A31 Add Node JavaScript
+Graph: 8E43A7A2-CE64-4542-B637-91EC357E4A31 Add Node Number Binary Operator
+Deinit Graph: 8E43A7A2-CE64-4542-B637-91EC357E4A31
+Deinit Graph: 8E43A7A2-CE64-4542-B637-91EC357E4A31
+􁁛  Test "A JavaScript node whose saved script no longer parses keeps its ports and wires" passed after 0.113 seconds.
+Init Graph
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/0E90C647-B33D-4A94-9E3F-33A73A6C8DF5/ED02506E-B890-4D1B-A205-6ADB39E73C7C/Shaders.metal
+Graph: 530B39F2-3D6D-413B-8D27-CB9D2EC41DC1 Add Node Live Image
+Graph: 530B39F2-3D6D-413B-8D27-CB9D2EC41DC1 Add Node Number Binary Operator
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/0E90C647-B33D-4A94-9E3F-33A73A6C8DF5/ED02506E-B890-4D1B-A205-6ADB39E73C7C/Shaders.metal
+Updating Shader: Post at: /tmp/fabric-live-shaders/530B39F2-3D6D-413B-8D27-CB9D2EC41DC1/A36308C5-764F-4751-AA22-38DB6AE6B39F/4036EC1D-2177-4BB6-B53D-2123649E0209/Shaders.metal
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+this is not a metal shader
+^
+
+Post Shader Path: /tmp/fabric-live-shaders/530B39F2-3D6D-413B-8D27-CB9D2EC41DC1/A36308C5-764F-4751-AA22-38DB6AE6B39F/4036EC1D-2177-4BB6-B53D-2123649E0209/Shaders.metal
+Graph: 530B39F2-3D6D-413B-8D27-CB9D2EC41DC1 Add Node Live Image
+Graph: 530B39F2-3D6D-413B-8D27-CB9D2EC41DC1 Add Node Number Binary Operator
+Deinit Graph: 530B39F2-3D6D-413B-8D27-CB9D2EC41DC1
+Deinit Graph: 530B39F2-3D6D-413B-8D27-CB9D2EC41DC1
+􁁛  Test "A Live Image node whose saved shader no longer compiles keeps its ports and wires" passed after 0.161 seconds.
+Init Graph
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/CAED60B2-5D30-4BC5-A1B3-AE1340B2C2B3/94A5B521-5901-4F1B-B740-BF499015BCFF/Shaders.metal
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/CAED60B2-5D30-4BC5-A1B3-AE1340B2C2B3/94A5B521-5901-4F1B-B740-BF499015BCFF/Shaders.metal
+Init Graph
+Graph: B9CC9CBB-883B-4442-A410-1B921C8EC585 Add Node Transform
+Graph: B9CC9CBB-883B-4442-A410-1B921C8EC585 Add Node Live Image
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/CAED60B2-5D30-4BC5-A1B3-AE1340B2C2B3/94A5B521-5901-4F1B-B740-BF499015BCFF/Shaders.metal
+Graph: B9CC9CBB-883B-4442-A410-1B921C8EC585 Add Node Transform
+Updating Shader: Post at: /tmp/fabric-live-shaders/B9CC9CBB-883B-4442-A410-1B921C8EC585/CAED60B2-5D30-4BC5-A1B3-AE1340B2C2B3/80B812C1-E638-458F-B232-1C3CDC7E929C/Shaders.metal
+Graph: B9CC9CBB-883B-4442-A410-1B921C8EC585 Add Node Live Image
+Deinit Graph: B9CC9CBB-883B-4442-A410-1B921C8EC585
+Deinit Graph: B9CC9CBB-883B-4442-A410-1B921C8EC585
+Deinit Graph: DA208B60-74AE-4FB2-87B4-9CA8C67C3461
+􁁛  Test "A shader's Transform uniform is a parameter port that keeps its wire and shares the material's parameter" passed after 0.168 seconds.
+􁁛  Suite "Port Hydration" passed after 0.198 seconds.
+Init Graph
+Init Graph
+Graph: 1C42BEBC-62A2-47F2-9030-B5A6EC2B6BBE Add Node Sub Graph
+Graph: 1687271F-D8A8-414D-8C30-781FB7B5B02A Add Node Math Expression (x)
+Graph: 1C42BEBC-62A2-47F2-9030-B5A6EC2B6BBE Add Node Number Binary Operator
+Deinit Graph: 1C42BEBC-62A2-47F2-9030-B5A6EC2B6BBE
+Deinit Graph: 1687271F-D8A8-414D-8C30-781FB7B5B02A
+Init Graph
+Init Graph
+Graph: 159BFFEC-8D88-4D29-A684-E0210E919BF3 Add Node Sub Graph
+Graph: 159BFFEC-8D88-4D29-A684-E0210E919BF3 Add Node Number Binary Operator
+Graph: 01095212-DC39-45D4-B99D-F205EAEFDF8C Add Node Number Binary Operator
+Deinit Graph: 159BFFEC-8D88-4D29-A684-E0210E919BF3
+Deinit Graph: 01095212-DC39-45D4-B99D-F205EAEFDF8C
+Init Graph
+Init Graph
+Init Graph
+Graph: EFD96095-12E1-47D7-AE0F-0F7F16586D20 Add Node Sub Graph
+Graph: EFD96095-12E1-47D7-AE0F-0F7F16586D20 Add Node Number Binary Operator
+Graph: 33E0A343-80A5-46B4-8D03-E3985A7F21AF Add Node Sub Graph
+Graph: 8A29E580-D26F-44C1-A7C0-842E04C2D84D Add Node Number Binary Operator
+Deinit Graph: EFD96095-12E1-47D7-AE0F-0F7F16586D20
+Deinit Graph: 33E0A343-80A5-46B4-8D03-E3985A7F21AF
+Deinit Graph: 8A29E580-D26F-44C1-A7C0-842E04C2D84D
+Init Graph
+Graph: A8DC6D2E-B0DF-489A-8841-C3E2B1819CB4 Add Node Number Binary Operator
+Graph: A8DC6D2E-B0DF-489A-8841-C3E2B1819CB4 Add Node Number Binary Operator
+Deinit Graph: A8DC6D2E-B0DF-489A-8841-C3E2B1819CB4
+Init Graph
+Init Graph
+Graph: 53F299F7-7D96-4515-80E0-FC6F01F6DD52 Add Node Sub Graph
+Graph: 3C9E392D-0010-43DD-8882-F723856FBE00 Add Node Number Binary Operator
+Graph: 3C9E392D-0010-43DD-8882-F723856FBE00 Add Node Number Binary Operator
+Graph: 3C9E392D-0010-43DD-8882-F723856FBE00 Add Node Number Binary Operator
+Graph: 3C9E392D-0010-43DD-8882-F723856FBE00 Add Node Float
+Deinit Graph: 53F299F7-7D96-4515-80E0-FC6F01F6DD52
+Deinit Graph: 3C9E392D-0010-43DD-8882-F723856FBE00
+Init Graph
+Init Graph
+Init Graph
+Graph: 428614E7-7007-4825-BBBE-AC11805D56E2 Add Node Sub Graph
+Graph: 428614E7-7007-4825-BBBE-AC11805D56E2 Add Node Number Binary Operator
+Graph: 68EA7B97-BEEA-4C6E-80B8-651C35BBD4B4 Add Node Sub Graph
+Graph: 4CD05A55-C5F9-4C90-99B4-8DE27A9BF20F Add Node Number Binary Operator
+Deinit Graph: 428614E7-7007-4825-BBBE-AC11805D56E2
+Deinit Graph: 68EA7B97-BEEA-4C6E-80B8-651C35BBD4B4
+Deinit Graph: 4CD05A55-C5F9-4C90-99B4-8DE27A9BF20F
+Init Graph
+Init Graph
+Graph: 7135A8B2-C5EA-4DD2-952C-5802570C7080 Add Node Sub Graph
+Graph: B7400BC4-FE84-4DA1-BD34-402CCFD2120F Add Node Number Binary Operator
+Deinit Graph: 7135A8B2-C5EA-4DD2-952C-5802570C7080
+Deinit Graph: B7400BC4-FE84-4DA1-BD34-402CCFD2120F
+Init Graph
+Init Graph
+Init Graph
+Graph: 2CCA8CC6-087B-4B59-AA8A-690E8791B6FD Add Node Sub Graph
+Graph: E7B7D8C3-43F0-4431-BFDF-32DD9FD61B8A Add Node Sub Graph
+Graph: 33D17E87-1D63-4679-9D8C-29D2D5126A34 Add Node Math Expression (x)
+Graph: 2CCA8CC6-087B-4B59-AA8A-690E8791B6FD Add Node Number Binary Operator
+Deinit Graph: 2CCA8CC6-087B-4B59-AA8A-690E8791B6FD
+Deinit Graph: E7B7D8C3-43F0-4431-BFDF-32DD9FD61B8A
+Deinit Graph: 33D17E87-1D63-4679-9D8C-29D2D5126A34
+Init Graph
+Init Graph
+Graph: CCC67D1F-21E3-4D47-88A4-2A0A18658272 Add Node Sub Graph
+Graph: 656B50C3-5885-4FCF-9797-37897C42D596 Add Node Number Binary Operator
+Graph: 656B50C3-5885-4FCF-9797-37897C42D596 Add Node Number Binary Operator
+Deinit Graph: CCC67D1F-21E3-4D47-88A4-2A0A18658272
+Deinit Graph: 656B50C3-5885-4FCF-9797-37897C42D596
+Init Graph
+Init Graph
+Init Graph
+Graph: 0659BC28-FF04-4DC3-B3B3-B89D4E868423 Add Node Sub Graph
+Graph: 0659BC28-FF04-4DC3-B3B3-B89D4E868423 Add Node Number Binary Operator
+Graph: 34EFBEB5-E01A-4B19-A5DC-07F82729073A Add Node Sub Graph
+Graph: EA0DB527-3706-49BA-B476-D8E284D4AECD Add Node Math Expression (x)
+Deinit Graph: 0659BC28-FF04-4DC3-B3B3-B89D4E868423
+Deinit Graph: 34EFBEB5-E01A-4B19-A5DC-07F82729073A
+Deinit Graph: EA0DB527-3706-49BA-B476-D8E284D4AECD
+Init Graph
+Init Graph
+Graph: 7CDA880A-CB65-45FA-8B23-30AC39A8B596 Add Node Sub Graph
+Graph: 435FC48E-74C6-44CA-9B1C-D16F55A2960C Add Node Number Binary Operator
+Deinit Graph: 7CDA880A-CB65-45FA-8B23-30AC39A8B596
+Deinit Graph: 435FC48E-74C6-44CA-9B1C-D16F55A2960C
+Init Graph
+Init Graph
+Init Graph
+Graph: 46953F8A-1362-4741-BDC1-1A62D19E893B Add Node Sub Graph
+Graph: 08D9C1A9-EF54-4EAE-89DE-B2FB3B578731 Add Node Sub Graph
+Graph: A7449414-4FDE-4213-A649-E5781F0D9D29 Add Node Number Binary Operator
+Deinit Graph: 46953F8A-1362-4741-BDC1-1A62D19E893B
+Deinit Graph: 08D9C1A9-EF54-4EAE-89DE-B2FB3B578731
+Deinit Graph: A7449414-4FDE-4213-A649-E5781F0D9D29
+Init Graph
+Init Graph
+Init Graph
+Graph: 74F13F5D-BEDB-4F2C-A85B-34AB553CFA0B Add Node Sub Graph
+Graph: 9D88B838-ED30-4766-BE1A-E984ED019462 Add Node Sub Graph
+Graph: CF69DCAB-2161-4AD0-B1C9-120A2F8FD661 Add Node Number Binary Operator
+Graph: 74F13F5D-BEDB-4F2C-A85B-34AB553CFA0B Add Node Number Binary Operator
+Deinit Graph: 74F13F5D-BEDB-4F2C-A85B-34AB553CFA0B
+Deinit Graph: 9D88B838-ED30-4766-BE1A-E984ED019462
+Deinit Graph: CF69DCAB-2161-4AD0-B1C9-120A2F8FD661
+Init Graph
+Graph: 3C1F213B-FC5B-4822-A81C-7EA4589D1244 Add Node Number Binary Operator
+Graph: 3C1F213B-FC5B-4822-A81C-7EA4589D1244 Add Node Number Binary Operator
+Graph: 3C1F213B-FC5B-4822-A81C-7EA4589D1244 Add Node Number Binary Operator
+Deinit Graph: 3C1F213B-FC5B-4822-A81C-7EA4589D1244
+Init Graph
+Init Graph
+Graph: 241051FC-8D0C-473B-80C1-F161C3ED7EA5 Add Node Sub Graph
+Graph: 241051FC-8D0C-473B-80C1-F161C3ED7EA5 Add Node Number Binary Operator
+Graph: BD6234B4-5F96-4DBE-BDC0-57F43BDF5548 Add Node Number Binary Operator
+Graph: BD6234B4-5F96-4DBE-BDC0-57F43BDF5548 Add Node Float
+Deinit Graph: 241051FC-8D0C-473B-80C1-F161C3ED7EA5
+Deinit Graph: BD6234B4-5F96-4DBE-BDC0-57F43BDF5548
+Init Graph
+Init Graph
+Init Graph
+Graph: 84269FF3-9ABE-4A29-B017-4A291B25DA65 Add Node Sub Graph
+Graph: E8CBD908-96A8-4B92-83C1-1B1EEC92849F Add Node Sub Graph
+Graph: A871DB3C-A1E4-46EB-925A-A1F2A1089B0B Add Node Number Binary Operator
+Graph: 84269FF3-9ABE-4A29-B017-4A291B25DA65 Add Node Number Binary Operator
+Graph: A871DB3C-A1E4-46EB-925A-A1F2A1089B0B Add Node Number Binary Operator
+Deinit Graph: 84269FF3-9ABE-4A29-B017-4A291B25DA65
+Deinit Graph: E8CBD908-96A8-4B92-83C1-1B1EEC92849F
+Deinit Graph: A871DB3C-A1E4-46EB-925A-A1F2A1089B0B
+Init Graph
+Init Graph
+Init Graph
+Graph: 909DC107-AD35-4EB5-874C-853CD330D491 Add Node Sub Graph
+Graph: EC57B202-EF5D-4ACA-8824-B60BAED1D2C7 Add Node Sub Graph
+Graph: 1F24EC4A-D211-4479-B600-3845B657A212 Add Node Number Binary Operator
+Deinit Graph: 909DC107-AD35-4EB5-874C-853CD330D491
+Deinit Graph: EC57B202-EF5D-4ACA-8824-B60BAED1D2C7
+Deinit Graph: 1F24EC4A-D211-4479-B600-3845B657A212
+Init Graph
+Init Graph
+Init Graph
+Graph: BF866559-37CE-4DA0-BD1A-B05D77FD1036 Add Node Sub Graph
+Graph: BF866559-37CE-4DA0-BD1A-B05D77FD1036 Add Node Number Binary Operator
+Graph: 33F15F43-495E-4E29-8969-97EDC037E60A Add Node Sub Graph
+Graph: FAB1B857-95B6-4DF0-96AA-57CE82451779 Add Node Number Binary Operator
+Deinit Graph: BF866559-37CE-4DA0-BD1A-B05D77FD1036
+Deinit Graph: 33F15F43-495E-4E29-8969-97EDC037E60A
+Deinit Graph: FAB1B857-95B6-4DF0-96AA-57CE82451779
+􁁛  Test "A published port a node removes takes its proxy with it, and the parent's wire on the proxy" passed after 0.214 seconds.
+􁁛  Test "A step acts on the node standing under its id when it runs" passed after 0.185 seconds.
+􁁛  Test "Unpublishing takes the wires at every level the port is published up to, and undo puts each level back" passed after 0.186 seconds.
+􁁛  Test "Suspending registration in a graph with no undo manager of its own suspends the root's it records on" passed after 0.186 seconds.
+􁁛  Test "A wire one step puts back can be taken down by the step before it" passed after 0.186 seconds.
+􁁛  Test "A compound edit in a graph with no undo manager of its own groups and names its steps on the document's" passed after 0.185 seconds.
+􁁛  Test "A published port its node removes takes its proxy at each level up, with the wires on them, as steps of their own" passed after 0.185 seconds.
+􁁛  Test "A published port a node removes takes the wires at every level it is published up to" passed after 0.185 seconds.
+􁁛  Test "Renaming a published port renames the parameter its proxies share, at each level it is published up to" passed after 0.185 seconds.
+􁁛  Test "Undoing Insert Parameter Node puts the port's publishing back, its proxy and the wire on it" passed after 0.185 seconds.
+􁁛  Test "A node added with a published port gets a proxy, and undoing the add takes it" passed after 0.185 seconds.
+􁁛  Test "An edit in a graph the canvas has not given an undo manager records on the document's" passed after 0.185 seconds.
+􁁛  Test "Publishing makes a proxy over the port under its id at each level, and undo and redo take and make each" passed after 0.185 seconds.
+􁁛  Test "Unpublishing a proxy leaves the parameter it shares named as the port it stands for" passed after 0.185 seconds.
+􁁛  Test "Deleting a node is one undo step that puts back its wires and its proxies at each level, and redo takes them again" passed after 0.185 seconds.
+􁁛  Test "Unpublishing takes the wires off the proxy at each level up, and undo and redo put them back and take them again" passed after 0.185 seconds.
+􁁛  Test "Undoing a delete puts the node back where it stood among the graph's nodes" passed after 0.185 seconds.
+􁁛  Test "Deleting a node takes the wires at every level its ports are published up to, and undo puts each level back" passed after 0.185 seconds.
+􁁛  Suite "Proxy Port Replacement" passed after 0.215 seconds.
+􁁛  Suite "Publishing Events" passed after 0.215 seconds.
+􁁛  Suite "Undo Targets" passed after 0.215 seconds.
+􁁛  Test run with 91 tests in 9 suites passed after 0.215 seconds.

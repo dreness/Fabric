@@ -1,0 +1,3243 @@
+Building for debugging...
+[Computing dependencies]
+[Provisioning 1 / 112]
+[Using on-disk description]
+[1 / 5]
+[2 / 6] Fabric
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:262:28: warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+260 |     }
+261 | 
+262 |     private var oscServer: OSCServer?
+    |                            |- warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+    |                            `- note: use 'OSCUDPServer' instead
+263 |     fileprivate var isListening: Bool = false
+264 | 
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Parameters/PassThroughNode.swift:38:30: warning: 'override' is implied when overriding a required initializer
+36 |     }
+37 |     
+38 |     override public required init(from decoder: any Decoder) throws {
+   |                              `- warning: 'override' is implied when overriding a required initializer
+39 |         try super.init(from: decoder)
+40 |     }
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Graph/Node/Node.swift:223:21: note: overridden required initializer is here
+221 |     }
+222 | 
+223 |     public required init(from decoder: any Decoder) throws
+    |                     `- note: overridden required initializer is here
+224 |     {
+225 |         guard let decodeContext = decoder.context else
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[3 / 7] Fabric
+[9 / 11] Fabric
+[27 / 29] Fabric
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Object/Renderables/InstancedMeshNode.swift:165:14: warning: property is accessed but result is unused [#NoUsage]
+163 |         mesh.renderOrder = self.inputRenderOrder.value ?? 0
+164 |         // TODO:
+165 |         mesh.renderLayer
+    |              `- warning: property is accessed but result is unused [#NoUsage]
+166 | 
+167 |         mesh.position = self.inputPosition.value ?? .zero
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Parameters/PassThroughNode.swift:38:30: warning: 'override' is implied when overriding a required initializer
+36 |     }
+37 |     
+38 |     override public required init(from decoder: any Decoder) throws {
+   |                              `- warning: 'override' is implied when overriding a required initializer
+39 |         try super.init(from: decoder)
+40 |     }
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Graph/Node/Node.swift:223:21: note: overridden required initializer is here
+221 |     }
+222 | 
+223 |     public required init(from decoder: any Decoder) throws
+    |                     `- note: overridden required initializer is here
+224 |     {
+225 |         guard let decodeContext = decoder.context else
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Views/Graph/GraphCanvas.swift:189:72: warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+187 |                         else { return }
+188 | 
+189 |                         let node = try wrapper.initializeNode(context: currentGraph.context)
+    |                                                                        `- warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+190 |                         try self.editingContext.layoutNode(node)
+191 | 
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Graph/Graph.swift:11:26: note: class 'Graph' does not conform to the 'Sendable' protocol
+   9 | internal import AnyCodable
+  10 | 
+  11 | @Observable public class Graph : Codable, Identifiable, Hashable, Equatable
+     |                          `- note: class 'Graph' does not conform to the 'Sendable' protocol
+  12 | {
+  13 |     public enum Version : Codable
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Views/Graph/GraphCanvas.swift:235:56: warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+233 |                     else { return }
+234 | 
+235 |                     let node = nodeClass.init(context: currentGraph.context)
+    |                                                        `- warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+236 |                     node.setFileURL(url)
+237 |                     node.offset = CGSize(width: location.x - canvasSize.width / 2.0 - node.nodeSize.width / 2.0,
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Graph/Graph.swift:11:26: note: class 'Graph' does not conform to the 'Sendable' protocol
+   9 | internal import AnyCodable
+  10 | 
+  11 | @Observable public class Graph : Codable, Identifiable, Hashable, Equatable
+     |                          `- note: class 'Graph' does not conform to the 'Sendable' protocol
+  12 | {
+  13 |     public enum Version : Codable
+
+[#SendableClosureCaptures]: <https://docs.swift.org/compiler/documentation/diagnostics/sendable-closure-captures>
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Image/Mask/ForegroundMaskNode.swift:57:19: warning: value 'decodeContext' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 55 |         let container = try decoder.container(keyedBy: CodingKeys.self)
+ 56 |         
+ 57 |         guard let decodeContext = decoder.context else
+    |                   `- warning: value 'decodeContext' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 58 |         {
+ 59 |             fatalError("Required Decode Context Not set")
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Image/Mask/PersonSegmentationMaskNode.swift:57:19: warning: value 'decodeContext' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 55 |         let container = try decoder.container(keyedBy: CodingKeys.self)
+ 56 |         
+ 57 |         guard let decodeContext = decoder.context else
+    |                   `- warning: value 'decodeContext' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 58 |         {
+ 59 |             fatalError("Required Decode Context Not set")
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:244:46: warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
+242 |         }
+243 | 
+244 |         let seconds = CMTimeGetSeconds(asset.duration)
+    |                                              `- warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
+245 |         self.duration = seconds.isFinite ? seconds : 0
+246 |     }
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:307:37: warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+305 |         // Falls back to 600 (a common timebase) when no video track
+306 |         // is available — e.g. asset still loading.
+307 |         let timescale = self.asset?.tracks(withMediaType: .video).first?.naturalTimeScale ?? 600
+    |                                     `- warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+308 |         let target = CMTime(seconds: clamped, preferredTimescale: timescale)
+309 |         let tol: CMTime = self.seekTolerance.isInfinite
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:307:74: warning: 'naturalTimeScale' was deprecated in macOS 13.0: Use load(.naturalTimeScale) instead [#DeprecatedDeclaration]
+305 |         // Falls back to 600 (a common timebase) when no video track
+306 |         // is available — e.g. asset still loading.
+307 |         let timescale = self.asset?.tracks(withMediaType: .video).first?.naturalTimeScale ?? 600
+    |                                                                          `- warning: 'naturalTimeScale' was deprecated in macOS 13.0: Use load(.naturalTimeScale) instead [#DeprecatedDeclaration]
+308 |         let target = CMTime(seconds: clamped, preferredTimescale: timescale)
+309 |         let tol: CMTime = self.seekTolerance.isInfinite
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:595:49: warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+593 | 
+594 |                 self.asset = AVURLAsset(url: inputURL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
+595 |                 if let videoTrack = self.asset?.tracks(withMediaType: .video).first
+    |                                                 `- warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:597:69: warning: 'preferredTransform' was deprecated in macOS 13.0: Use load(.preferredTransform) instead [#DeprecatedDeclaration]
+595 |                 if let videoTrack = self.asset?.tracks(withMediaType: .video).first
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+    |                                                                     `- warning: 'preferredTransform' was deprecated in macOS 13.0: Use load(.preferredTransform) instead [#DeprecatedDeclaration]
+598 |                     self.sourceNaturalSize = videoTrack.naturalSize
+599 |                 }
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:598:57: warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead [#DeprecatedDeclaration]
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+598 |                     self.sourceNaturalSize = videoTrack.naturalSize
+    |                                                         `- warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead [#DeprecatedDeclaration]
+599 |                 }
+600 |                 self.cacheDuration(from: self.asset)
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:783:32: warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+781 |     /// for non-Hap tracks.
+782 |     private static func hapCodecLabel(for track: AVAssetTrack) -> String? {
+783 |         guard let desc = track.formatDescriptions.first else { return nil }
+    |                                `- warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+784 |         let cmDesc = desc as! CMFormatDescription
+785 |         let sub = CMFormatDescriptionGetMediaSubType(cmDesc)
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:818:27: warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+816 |     /// the slower RGB fallback.
+817 |     private static func codecSupportsDirectDXTUpload(in track: AVAssetTrack) -> Bool {
+818 |         for desc in track.formatDescriptions {
+    |                           `- warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+819 |             let cmDesc = desc as! CMFormatDescription
+820 |             switch CMFormatDescriptionGetMediaSubType(cmDesc) {
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Views/NodeRegisitryView.swift:79:52: warning: 'appendInterpolation' is deprecated: Localized string interpolation produces an unlocalized, debug description for this type of value. Use a type supported by LocalizedStringKey.StringInterpolation or initialize a LocalizedStringResource instead with an interpolated value that conforms to CustomLocalizedStringResourceConvertible. [#DeprecatedDeclaration]
+ 77 |                            filteredNodesForType.isEmpty == false
+ 78 |                         {
+ 79 |                             Section(header: Text("\(nodeType)")) {
+    |                                                    `- warning: 'appendInterpolation' is deprecated: Localized string interpolation produces an unlocalized, debug description for this type of value. Use a type supported by LocalizedStringKey.StringInterpolation or initialize a LocalizedStringResource instead with an interpolated value that conforms to CustomLocalizedStringResourceConvertible. [#DeprecatedDeclaration]
+ 80 |                                 ForEach(filteredNodesForType) { node in
+ 81 |                                     VStack(alignment: .leading, spacing: 4)
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Graph/Graph.swift:966:50: warning: result of call to 'map' is unused [#NoUsage]
+ 964 |             let wire = Wire(connection)
+ 965 |             self.registerUndo { graph in
+ 966 |                 graph.connection(matching: wire).map { graph.disconnect($0) }
+     |                                                  `- warning: result of call to 'map' is unused [#NoUsage]
+ 967 |             }
+ 968 |             return connection
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Graph/Graph.swift:1032:46: warning: result of call to 'map' is unused [#NoUsage]
+1030 |         let wire = Wire(connection)
+1031 |         self.registerUndo { graph in
+1032 |             graph.connection(matching: wire).map { graph.setConnection($0, active: previousActive) }
+     |                                              `- warning: result of call to 'map' is unused [#NoUsage]
+1033 |         }
+1034 |         self.nameEdit(active ? "Enable Connection" : "Disable Connection",
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Graph/Graph.swift:1099:46: warning: result of call to 'map' is unused [#NoUsage]
+1097 | 
+1098 |         self.registerUndo { graph in
+1099 |             graph.connection(matching: wire).map { graph.disconnect($0) }
+     |                                              `- warning: result of call to 'map' is unused [#NoUsage]
+1100 |         }
+1101 |         self.nameEdit("Connect Ports", inverse: "Disconnect Ports")
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Graph/GraphCanvasContext.swift:228:13: warning: initialization of immutable value 'graph' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+226 |     public func layoutNode(_ node: Node) throws
+227 |     {
+228 |         let graph = currentGraph
+    |             `- warning: initialization of immutable value 'graph' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+229 |         node.offset = self.calcInteractiveOffset(for: node)
+230 |     }
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:262:28: warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+260 |     }
+261 | 
+262 |     private var oscServer: OSCServer?
+    |                            |- warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+    |                            `- note: use 'OSCUDPServer' instead
+263 |     fileprivate var isListening: Bool = false
+264 | 
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:392:25: warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+390 |         do
+391 |         {
+392 |             oscServer = OSCServer(port: listenPort) { [weak self] message, _ in
+    |                         |- warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+    |                         `- note: use 'OSCUDPServer' instead
+393 |                 self?.handleOSCMessage(message)
+394 |             }
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:392:25: warning: 'init(port:timeTagMode:receiveQueue:handler:)' is deprecated: Handler closure now takes 4 parameters: message, timeTag, host, port. [#DeprecatedDeclaration]
+390 |         do
+391 |         {
+392 |             oscServer = OSCServer(port: listenPort) { [weak self] message, _ in
+    |                         `- warning: 'init(port:timeTagMode:receiveQueue:handler:)' is deprecated: Handler closure now takes 4 parameters: message, timeTag, host, port. [#DeprecatedDeclaration]
+393 |                 self?.handleOSCMessage(message)
+394 |             }
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[30 / 32] Fabric
+[31 / 35] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Tests/SyphonClientReconnectionTests.swift:70:43: warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: originalServer.serverDescription,
+                                                          device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 68 |         // Keep the old endpoint valid and present: this reproduces the state
+ 69 |         // observed after a crash without relying on a process timing race.
+ 70 |         let originalClient = try #require(SyphonMetalClient(serverDescription: originalServer.serverDescription,
+    |                                           `- warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: originalServer.serverDescription,
+                                                          device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 71 |                                                           device: harness.context.device))
+ 72 |         defer { originalClient.stop() }
+[49 / 54] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Tests/SyphonServerLifecycleTests.swift:54:40: warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: firstDescription,
+                                                       device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 52 |         let firstDescription = try #require(descriptions().first)
+ 53 |         let firstIdentity = try #require(firstDescription[SyphonServerDescriptionUUIDKey] as? String)
+ 54 |         let firstClient = try #require(SyphonMetalClient(serverDescription: firstDescription,
+    |                                        `- warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: firstDescription,
+                                                       device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 55 |                                                        device: harness.context.device))
+ 56 |         defer { firstClient.stop() }
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Tests/SyphonServerLifecycleTests.swift:71:44: warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: restartedDescription,
+                                                           device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 69 |         let restartedDescription = try #require(descriptions().first)
+ 70 |         #expect((restartedDescription[SyphonServerDescriptionUUIDKey] as? String) != firstIdentity)
+ 71 |         let restartedClient = try #require(SyphonMetalClient(serverDescription: restartedDescription,
+    |                                            `- warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: restartedDescription,
+                                                           device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 72 |                                                            device: harness.context.device))
+ 73 |         defer { restartedClient.stop() }
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Tests/NodePortRoundTripContractTests.swift:113:21: warning: initialization of immutable value 'decodedNode' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+111 |                 let decodedGraph = try decoder.decode(Graph.self, from: savedData)
+112 | 
+113 |                 let decodedNode = try #require(decodedGraph.nodes.first { $0.id == node.id },
+    |                     `- warning: initialization of immutable value 'decodedNode' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+114 |                                                "\(label): node missing after decode")
+115 | 
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+[50 / 54] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Tests/DeviceOutputPortTests.swift:54:9: warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+52 | 
+53 |         let node = GameControllerNode(context: context)
+54 |         synchronize(node, to: [DeviceOutputPortDescriptor(name: "Trigger", isButton: false)])
+   |         `- warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+55 |         #expect(node.findPort(named: "Trigger") is NodePort<Float>)
+56 | 
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Tests/DeviceOutputPortTests.swift:72:9: warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+70 | 
+71 |         let node = GameControllerNode(context: context)
+72 |         synchronize(node, to: [DeviceOutputPortDescriptor(name: "A", isButton: true),
+   |         `- warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+73 |                                DeviceOutputPortDescriptor(name: "B", isButton: true)])
+74 | 
+
+/Users/andre/.codex/worktrees/review-pr407/Fabric/Tests/DeviceOutputPortTests.swift:75:9: warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+73 |                                DeviceOutputPortDescriptor(name: "B", isButton: true)])
+74 | 
+75 |         synchronize(node, to: [DeviceOutputPortDescriptor(name: "A", isButton: true)])
+   |         `- warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+76 | 
+77 |         #expect(node.ports.map(\.name) == ["A"])
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+[52 / 54] FabricTests-product
+[56 / 57] FabricTests-product
+[57 / 59] Fabric-product
+[58 / 59] Fabric-product
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr407/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+Build complete! (16.17 sec)
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Subgraph Embedding" started.
+􀟈  Suite "Graph Connection Ownership" started.
+􀟈  Suite "Syphon server lifecycle" started.
+􀟈  Suite "Undo Registration" started.
+􀟈  Suite "Undo Targets" started.
+􀟈  Suite "Node Port Round-Trip Contract" started.
+􀟈  Suite MathExpressionNodeTests started.
+􀟈  Suite "Port Hydration" started.
+􀟈  Suite "Graph Execution" started.
+􀟈  Suite "Publishing Events" started.
+􀟈  Suite "Edit Undo" started.
+􀟈  Suite "Publishing review regressions" started.
+􀟈  Suite "Undo Action Names" started.
+􀟈  Suite "Proxy Port Replacement" started.
+􀟈  Suite "JavaScript Node signature" started.
+􀟈  Suite "GraphAutoLayout" started.
+􀟈  Test "A port unpublished and published again by undo has its new proxy take the parent's wire back" started.
+􀟈  Suite "Graph node lifecycle" started.
+􀟈  Test "Embedded topology remains stable across two serialization round trips" started.
+􀟈  Test "Embedding undo and redo are one stable graph edit" started.
+􀟈  Test "Legacy port connection maps migrate to graph connection records" started.
+􀟈  Test "Creation transfers internal wires and publishes boundary proxies" started.
+􀟈  Test "Embedding transfers internal wires and undo restores their identity" started.
+􀟈  Test "Disconnect all and active state changes undo through Graph" started.
+􀟈  Test "Replacing an inlet is one undoable graph edit" started.
+􀟈  Test "Graph owns connection mutation and rejects foreign endpoints atomically" started.
+􀟈  Test "Unpublishing a port takes the parent's wires onto its proxy with it" started.
+􀟈  Test "Embedding rebinds incoming and outgoing boundaries to proxies" started.
+􀟈  Test "Deleting and undoing a server node retires and restores its advertisement" started.
+􀟈  Test "Undo steps in core code register through Graph.registerUndo" started.
+􀟈  Test "Disconnecting one outlet wire leaves sibling values intact" started.
+􀟈  Test "Every registered node flavor survives encode → decode → encode with its port set intact" started.
+􀟈  Test nestedArrayOutletIsTypedLikeItsInletAndSurvivesARecompile() started.
+􀟈  Test salientTitleTortureCases() started.
+􀟈  Test "Dynamic port replacement preserves wires through undo and redo" started.
+􀟈  Test invalidEditKeepsPortsAndReportsError() started.
+􀟈  Test comprehensionProducesTransformArrayOutput() started.
+􀟈  Test "A shader's Transform uniform is a parameter port that keeps its wire and shares the material's parameter" started.
+􀟈  Test unchangedPortsArePreservedAcrossEdits() started.
+􀟈  Test "Ports added after graph decode cannot resurrect stale snapshot state" started.
+􀟈  Test "Invalid subgraph selections use the shared Fabric graph error domain" started.
+􀟈  Test "Parameter insertion preserves the original wire through undo and redo" started.
+􀟈  Test "A wire one step puts back can be taken down by the step before it" started.
+􀟈  Test editingTheExpressionMarksItDirty() started.
+􀟈  Test "Compute processor node rebuilds its processor and uniform ports on decode" started.
+􀟈  Test "Node deletion restores graph-owned wires without duplicates" started.
+􀟈  Test "Graph connection records are authoritative and exclusively encoded" started.
+􀟈  Test "A compound edit in a graph with no undo manager of its own groups and names its steps on the document's" started.
+􀟈  Test retypeReplacesPortWithNewType() started.
+􀟈  Test inputsCarryAParameterWhereSatinHasOneForTheirType() started.
+􀟈  Test "A node added with a published port gets a proxy, and undoing the add takes it" started.
+􀟈  Test "A published port a node removes takes the wires at every level it is published up to" started.
+􀟈  Test "An editable port rebuilt on another's id keeps it, parameter included" started.
+􀟈  Test "Deleting a node takes the wires at every level its ports are published up to, and undo puts each level back" started.
+􀟈  Test "Unpublishing a proxy leaves the parameter it shares named as the port it stands for" started.
+􀟈  Test "Duplicating a node closes its hydration window" started.
+􀟈  Test "State under a key the code no longer declares drops and is reported" started.
+􀟈  Test "Suspending registration in a graph with no undo manager of its own suspends the root's it records on" started.
+􀟈  Test "Dynamic strategy ports rebuild from the decoded strategy and keep identity" started.
+􀟈  Test defaultExpressionDerivesTwoFloatInputsOneFloatOutput() started.
+􀟈  Test typedVectorInputAndOutput() started.
+􀟈  Test "Hydration keeps the backing parameter on the port's identity" started.
+􀟈  Test "Unpublishing takes the wires off the proxy at each level up, and undo and redo put them back and take them again" started.
+􀟈  Test errorWithEmptySalientTitleFallsBackToTypeName() started.
+􀟈  Test "An edit in a graph the canvas has not given an undo manager records on the document's" started.
+􀟈  Test "Undoing Insert Parameter Node puts the port's publishing back, its proxy and the wire on it" started.
+􀟈  Test "A momentary control's changes are not undo steps" started.
+􀟈  Test "A saved quaternion parameter port comes back as a plain port on its id, not a crash" started.
+􀟈  Test "Declared parameter metadata wins over the document's copy" started.
+􀟈  Test "Undoing a delete puts the node back where it stood among the graph's nodes" started.
+􀟈  Test "A parameter set through its control is one undo step per change, or per edit while one is in progress" started.
+􀟈  Test "Renaming a published port renames the parameter its proxies share, at each level it is published up to" started.
+􀟈  Test "A step acts on the node standing under its id when it runs" started.
+􀟈  Test "JavaScript node rebuilds its script ports on decode and keeps identity" started.
+􀟈  Test "Undoing a publish puts back the name the port carried unpublished, and redo publishes it under that name" started.
+􀟈  Test "Deleting a node is one undo step that puts back its wires and its proxies at each level, and redo takes them again" started.
+􀟈  Test "A JavaScript node whose saved script no longer parses keeps its ports and wires" started.
+􀟈  Test "Publishing makes a proxy over the port under its id at each level, and undo and redo take and make each" started.
+􀟈  Test "Retired port state is dropped and reported, not resurrected" started.
+􀟈  Test "Adding, editing and deleting a note are undo steps" started.
+􀟈  Test "Unpublishing takes the wires at every level the port is published up to, and undo puts each level back" started.
+􀟈  Test "Game controller ports persist as descriptors and rebuild on decode" started.
+􀟈  Test case passing 1 argument kind → subgraph to "Embedding undo and redo are one stable graph edit" started.
+􀟈  Test "An edit recorded for a note after its delete is not a step" started.
+􀟈  Test case passing 1 argument kind → subgraph to "A port unpublished and published again by undo has its new proxy take the parent's wire back" started.
+􀟈  Test "Replacing an inlet preserves the node's cached upstream dependency" started.
+􀟈  Test case passing 1 argument kind → deferredSubgraph to "A port unpublished and published again by undo has its new proxy take the parent's wire back" started.
+􀟈  Test "Disabling and enabling a wire" started.
+􀟈  Test "A Transform parameter port survives a save as a parameter port, value and id intact" started.
+􀟈  Test case passing 1 argument kind → deferredSubgraph to "Embedding undo and redo are one stable graph edit" started.
+􀟈  Test "A Transform uniform saved as a plain port becomes a parameter port on its id once the shader compiles again" started.
+􀟈  Test "Undoing an unpublish brings back the proxy, its name and publish in the parent, and the parent's wire" started.
+􀟈  Test "Adding and deleting a node or a note keep their names through undo and redo" started.
+􀟈  Test "Subgraph proxy inlet and outlet forward values across graphs" started.
+􀟈  Test "Game controller reconnect record survives a save with no controller attached" started.
+􀟈  Test "A port removed and recreated within one decode keeps its identity" started.
+􀟈  Test "Sample and Hold settings retain a compatible incoming wire and execution" started.
+􀟈  Test "A published port its node removes takes its proxy at each level up, with the wires on them, as steps of their own" started.
+􀟈  Test "A published port a node removes takes its proxy with it, and the parent's wire on the proxy" started.
+􀟈  Test "Connecting a wire" started.
+􀟈  Test "Round trip preserves port identity, published state and values" started.
+􀟈  Test "Publishing and naming a published port are undo steps" started.
+􀟈  Test case passing 1 argument kind → subgraph to "Creation transfers internal wires and publishes boundary proxies" started.
+􀟈  Test case passing 1 argument kind → subgraph to "Embedded topology remains stable across two serialization round trips" started.
+􀟈  Test case passing 1 argument kind → deferredSubgraph to "Creation transfers internal wires and publishes boundary proxies" started.
+􀟈  Test "A type change leaves the replacement inlet at its type's default, on the old id" started.
+􀟈  Test "Retyping a published inlet preserves the subgraph's upstream dependency" started.
+􀟈  Test "Connecting a wire that replaces another on the inlet" started.
+􀟈  Test "An inlet rests at its type's default: Transform through its parameter, Quaternion as a plain port, a collection at nothing" started.
+􀟈  Test "Disconnecting a wire" started.
+􀟈  Test "Live Image node rebuilds its saved shader's uniform ports on decode" started.
+􀟈  Test case passing 1 argument kind → deferredSubgraph to "Embedded topology remains stable across two serialization round trips" started.
+􀟈  Test "A Transform parameter gets a parameter port; a quaternion one, which Satin cannot encode, gets none" started.
+􀟈  Test "Deleting a wired node" started.
+􀟈  Test "A Live Image node whose saved shader no longer compiles keeps its ports and wires" started.
+􀟈  Test "Replacing an outlet preserves the node's cached downstream dependency" started.
+􀟈  Test case passing 1 argument kind → subgraph to "Unpublishing a port takes the parent's wires onto its proxy with it" started.
+􀟈  Test "Inserting a parameter node on a wired inlet" started.
+􀟈  Test "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+􀟈  Test "Disconnecting every wire on a port with two" started.
+􀟈  Test "A compute node keeps its shader binding when the bundle no longer provides the file" started.
+􀟈  Test case passing 1 argument kind → deferredSubgraph to "Unpublishing a port takes the parent's wires onto its proxy with it" started.
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Graph: BF45F632-D687-4AC2-AA97-6A363D2D05AB Add Node Number Binary Operator
+Graph: F456F0DE-02A5-473E-B782-A40ABBDB28A4 Add Node Number Binary Operator
+Graph: 0C54AC07-3FF7-4802-A4F9-27F1217BAC4C Add Node Number Binary Operator
+Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118 Add Node Number Binary Operator
+Graph: C46C4215-26F7-4E70-B1CD-5A4754E47AF3 Add Node Number Binary Operator
+Graph: 65F1FDEB-2591-4288-B10A-C7C159AC772A Add Node Number Binary Operator
+Graph: 86B0542A-7080-4B78-A63A-19B42F5C5B02 Add Node Number Binary Operator
+Graph: FD5ECEAC-3654-4853-88CA-E8B462E34A1C Add Node Number Binary Operator
+Graph: 066DC173-8154-4B05-8B27-7781CCDA9958 Add Node Number Binary Operator
+Graph: A5C66369-760F-495B-ADD2-D82D13D6465B Add Node Number Binary Operator
+Graph: E6CB497D-FB3C-44D0-8558-06074342CEDB Add Node Number Binary Operator
+Graph: A6EB7343-7F48-433E-8692-A3FF6585EE0C Add Node Number Binary Operator
+Graph: 941510FE-380A-4672-A8B7-C707ED0052D0 Add Node Number Binary Operator
+Graph: 8FE81BBB-B006-4BF8-A128-F1183FBF1107 Add Node Number Binary Operator
+Graph: 6AAA4D02-89AE-402C-9DF1-0EDF2FE1988D Add Node Syphon Server
+Graph: B199B3B4-FBE4-40A9-B96A-7073C6858BDC Add Node Number Binary Operator
+Graph: 90A229BA-2DEF-4A1C-91B2-4D9A377232D5 Add Node Number Binary Operator
+Graph: 3A67445D-7ACF-4C42-821C-1A90A5DC3F50 Add Node Number Binary Operator
+Graph: 86B0542A-7080-4B78-A63A-19B42F5C5B02 Add Node Number Binary Operator
+Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118 Add Node Number Binary Operator
+Graph: B199B3B4-FBE4-40A9-B96A-7073C6858BDC Add Node Number Binary Operator
+Graph: F456F0DE-02A5-473E-B782-A40ABBDB28A4 Add Node Number Binary Operator
+Graph: E6CB497D-FB3C-44D0-8558-06074342CEDB Add Node Number Binary Operator
+Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118 Add Node Number Binary Operator
+Graph: 3A67445D-7ACF-4C42-821C-1A90A5DC3F50 Add Node Number Binary Operator
+Graph: F456F0DE-02A5-473E-B782-A40ABBDB28A4 Add Node Number Binary Operator
+Graph: B199B3B4-FBE4-40A9-B96A-7073C6858BDC Add Node Number Binary Operator
+Graph: 8FE81BBB-B006-4BF8-A128-F1183FBF1107 Add Node Number Binary Operator
+Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118 Add Node Number Binary Operator
+Graph: 90A229BA-2DEF-4A1C-91B2-4D9A377232D5 Add Node Number Binary Operator
+Graph: FD5ECEAC-3654-4853-88CA-E8B462E34A1C Add Node Number Binary Operator
+Graph: 0C54AC07-3FF7-4802-A4F9-27F1217BAC4C Add Node Number Binary Operator
+Graph: A5C66369-760F-495B-ADD2-D82D13D6465B Add Node Number Binary Operator
+Graph: 0C54AC07-3FF7-4802-A4F9-27F1217BAC4C Add Node Number Binary Operator
+Graph: 941510FE-380A-4672-A8B7-C707ED0052D0 Add Node Number Binary Operator
+Graph: 0C54AC07-3FF7-4802-A4F9-27F1217BAC4C Add Node Number Binary Operator
+Graph: 86B0542A-7080-4B78-A63A-19B42F5C5B02 Add Node Number Binary Operator
+Graph: 90A229BA-2DEF-4A1C-91B2-4D9A377232D5 Add Node Number Binary Operator
+Graph: 066DC173-8154-4B05-8B27-7781CCDA9958 Add Node Number Binary Operator
+Graph: 941510FE-380A-4672-A8B7-C707ED0052D0 Add Node Number Binary Operator
+Graph: 86B0542A-7080-4B78-A63A-19B42F5C5B02 Add Node Number Binary Operator
+Graph: 3A67445D-7ACF-4C42-821C-1A90A5DC3F50 Add Node Number Binary Operator
+Graph: C46C4215-26F7-4E70-B1CD-5A4754E47AF3 Add Node Number Binary Operator
+Graph: 8FE81BBB-B006-4BF8-A128-F1183FBF1107 Add Node Number Binary Operator
+Graph: FD5ECEAC-3654-4853-88CA-E8B462E34A1C Add Node Number Binary Operator
+Graph: 3A67445D-7ACF-4C42-821C-1A90A5DC3F50 Add Node Number Binary Operator
+Graph: A6EB7343-7F48-433E-8692-A3FF6585EE0C Add Node Number Binary Operator
+Graph: 90A229BA-2DEF-4A1C-91B2-4D9A377232D5 Add Node Number Binary Operator
+Graph: FD5ECEAC-3654-4853-88CA-E8B462E34A1C Add Node Number Binary Operator
+Graph: 65F1FDEB-2591-4288-B10A-C7C159AC772A Add Node Number Binary Operator
+Graph: 066DC173-8154-4B05-8B27-7781CCDA9958 Add Node Number Binary Operator
+Graph: BF45F632-D687-4AC2-AA97-6A363D2D05AB Add Node Number Binary Operator
+Graph: 65F1FDEB-2591-4288-B10A-C7C159AC772A Add Node Number Binary Operator
+Graph: 066DC173-8154-4B05-8B27-7781CCDA9958 Add Node Number Binary Operator
+Graph: C46C4215-26F7-4E70-B1CD-5A4754E47AF3 Add Node Number Binary Operator
+Graph: 65F1FDEB-2591-4288-B10A-C7C159AC772A Add Node Number Binary Operator
+Graph: C46C4215-26F7-4E70-B1CD-5A4754E47AF3 Add Node Number Binary Operator
+Graph: B199B3B4-FBE4-40A9-B96A-7073C6858BDC Add Node Number Binary Operator
+Graph: BF45F632-D687-4AC2-AA97-6A363D2D05AB Add Node Number Binary Operator
+Init Graph
+Init Graph
+Init Graph
+Graph: A6EB7343-7F48-433E-8692-A3FF6585EE0C Add Node Sub Graph
+Graph: 8FE81BBB-B006-4BF8-A128-F1183FBF1107 Add Node Sub Graph
+Init Graph
+Init Graph
+Deinit Graph: 941510FE-380A-4672-A8B7-C707ED0052D0
+Graph: F39DF102-8879-46F7-9487-A7C8BA4E1F9B Add Node Number Binary Operator
+Init Graph
+Init Graph
+Init Graph
+Graph: 066DC173-8154-4B05-8B27-7781CCDA9958 Add Node Sub Graph
+Graph: C46C4215-26F7-4E70-B1CD-5A4754E47AF3 Add Node Sub Graph
+Graph: 65F1FDEB-2591-4288-B10A-C7C159AC772A Add Node Sub Graph
+Init Graph
+Init Graph
+Deinit Graph: F39DF102-8879-46F7-9487-A7C8BA4E1F9B
+Init Graph
+Deinit Graph: A5C66369-760F-495B-ADD2-D82D13D6465B
+Graph: 0C54AC07-3FF7-4802-A4F9-27F1217BAC4C Add Node Sub Graph
+Graph: 6EBB7D33-FB20-4429-A7A9-990EFD7E8316 Add Node Number Binary Operator
+Init Graph
+􀟈  Test "Parameters are inputs and the return type is outputs" started.
+Graph: 86B0542A-7080-4B78-A63A-19B42F5C5B02 Add Node Render To Image and Depth
+Graph: 09F844B1-95F4-4C38-B650-80BF7BEFF6BF Add Node Number Binary Operator
+Graph: CE196DFC-5902-4AB4-83F2-D91C950E1CE2 Add Node Number Binary Operator
+Graph: FD5ECEAC-3654-4853-88CA-E8B462E34A1C Add Node Render To Image and Depth
+Graph: 90A229BA-2DEF-4A1C-91B2-4D9A377232D5 Add Node Render To Image and Depth
+Graph: 09F844B1-95F4-4C38-B650-80BF7BEFF6BF Add Node Number Binary Operator
+Graph: 6EBB7D33-FB20-4429-A7A9-990EFD7E8316 Add Node Number Binary Operator
+Init Graph
+Graph: 3A67445D-7ACF-4C42-821C-1A90A5DC3F50 Add Node Render To Image and Depth
+Graph: CE196DFC-5902-4AB4-83F2-D91C950E1CE2 Add Node Number Binary Operator
+Graph: 69D5A0E5-A146-4BB1-BC08-2EDBFF69BC04 Add Node Number Binary Operator
+Graph: D2CCE067-C34A-4DA6-A4C6-A568A2A7F199 Add Node Number Binary Operator
+Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118 Add Node Render To Image and Depth
+Graph: B199B3B4-FBE4-40A9-B96A-7073C6858BDC Add Node Sub Graph
+Graph: 3126DA03-6B6C-4692-A5D8-C9AB4D74BBB9 Add Node Number Binary Operator
+Graph: 940D843D-1434-47A9-9D08-1EB00680A616 Add Node Number Binary Operator
+Graph: D2CCE067-C34A-4DA6-A4C6-A568A2A7F199 Add Node Number Binary Operator
+Graph: 6FC7B5A3-8CDD-490B-B1E3-EB20BF42F553 Add Node Number Binary Operator
+Graph: 3126DA03-6B6C-4692-A5D8-C9AB4D74BBB9 Add Node Number Binary Operator
+Graph: 7EBF286C-A1C3-49B9-9FDC-8D7A218DB368 Add Node Number Binary Operator
+Deinit Graph: F456F0DE-02A5-473E-B782-A40ABBDB28A4
+Graph: 6FC7B5A3-8CDD-490B-B1E3-EB20BF42F553 Add Node Number Binary Operator
+Graph: 7EBF286C-A1C3-49B9-9FDC-8D7A218DB368 Add Node Number Binary Operator
+Deinit Graph: BF45F632-D687-4AC2-AA97-6A363D2D05AB
+Graph: B47273D6-82E0-4003-94A4-7C2D5327E2D8 Add Node Number Binary Operator
+Graph: B4CE9091-3125-42CA-B291-B04AFCF444F0 Add Node Number Binary Operator
+Graph: F7E66883-83C4-4646-8241-D820D4F17939 Add Node Number Binary Operator
+Graph: 940D843D-1434-47A9-9D08-1EB00680A616 Add Node Number Binary Operator
+Graph: B47273D6-82E0-4003-94A4-7C2D5327E2D8 Add Node Number Binary Operator
+Graph: B4CE9091-3125-42CA-B291-B04AFCF444F0 Add Node Number Binary Operator
+Graph: F7E66883-83C4-4646-8241-D820D4F17939 Add Node Number Binary Operator
+Deinit Graph: C46C4215-26F7-4E70-B1CD-5A4754E47AF3
+Deinit Graph: 09F844B1-95F4-4C38-B650-80BF7BEFF6BF
+Graph: B199B3B4-FBE4-40A9-B96A-7073C6858BDC Add Node Number Binary Operator
+Graph: 8FE81BBB-B006-4BF8-A128-F1183FBF1107 Add Node Number Binary Operator
+Graph: B199B3B4-FBE4-40A9-B96A-7073C6858BDC Add Node Number Binary Operator
+Graph: 8FE81BBB-B006-4BF8-A128-F1183FBF1107 Add Node Sub Graph
+Deinit Graph: 90A229BA-2DEF-4A1C-91B2-4D9A377232D5
+Deinit Graph: 65F1FDEB-2591-4288-B10A-C7C159AC772A
+Graph: 69D5A0E5-A146-4BB1-BC08-2EDBFF69BC04 Add Node Number Binary Operator
+Graph: B199B3B4-FBE4-40A9-B96A-7073C6858BDC Add Node Sub Graph
+Deinit Graph: CE196DFC-5902-4AB4-83F2-D91C950E1CE2
+Deinit Graph: 3126DA03-6B6C-4692-A5D8-C9AB4D74BBB9
+Deinit Graph: 3A67445D-7ACF-4C42-821C-1A90A5DC3F50
+Deinit Graph: 0C54AC07-3FF7-4802-A4F9-27F1217BAC4C
+Graph: 7EBF286C-A1C3-49B9-9FDC-8D7A218DB368 Add Node Number Binary Operator
+Deinit Graph: 940D843D-1434-47A9-9D08-1EB00680A616
+Deinit Graph: B4CE9091-3125-42CA-B291-B04AFCF444F0
+Graph: 7EBF286C-A1C3-49B9-9FDC-8D7A218DB368 Add Node Number Binary Operator
+Graph: FD5ECEAC-3654-4853-88CA-E8B462E34A1C Add Node Number Binary Operator
+Graph: FD5ECEAC-3654-4853-88CA-E8B462E34A1C Add Node Number Binary Operator
+􀟈  Test "Transpiling a signature leaves every line below it where it was" started.
+Deinit Graph: 8FE81BBB-B006-4BF8-A128-F1183FBF1107
+􀟈  Test "Duplicating wired nodes" started.
+􀟈  Test "A script with nothing to return declares no outputs" started.
+Deinit Graph: 86B0542A-7080-4B78-A63A-19B42F5C5B02
+􀟈  Test "An input whose declared type changes keeps its port's id and published state" started.
+􀟈  Test "The rewrite leaves every line below the signature where it was" started.
+Graph: FD5ECEAC-3654-4853-88CA-E8B462E34A1C Add Node Render To Image and Depth
+Deinit Graph: 69D5A0E5-A146-4BB1-BC08-2EDBFF69BC04
+Deinit Graph: B199B3B4-FBE4-40A9-B96A-7073C6858BDC
+Deinit Graph: B47273D6-82E0-4003-94A4-7C2D5327E2D8
+Init Graph
+Graph: F7E66883-83C4-4646-8241-D820D4F17939 Add Node Number Binary Operator
+Init Graph
+Init Graph
+Init Graph
+Deinit Graph: 7EBF286C-A1C3-49B9-9FDC-8D7A218DB368
+􀟈  Test "A signature inside a string is not the signature" started.
+Graph: F7E66883-83C4-4646-8241-D820D4F17939 Add Node Number Binary Operator
+Graph: 14DC78FC-AC37-4A5B-8568-70A66C2B5304 Add Node Number Binary Operator
+Graph: 19A91A72-8129-4FA6-BA28-CD9765FB3BE7 Add Node Number Binary Operator
+Graph: 56AD4E67-BA93-4012-85EC-8E5E93440BC2 Add Node Number Binary Operator
+Graph: 56AD4E67-BA93-4012-85EC-8E5E93440BC2 Add Node Number Binary Operator
+􀟈  Test "A script takes a dictionary of anything" started.
+􀟈  Test "A require inside a string is refused with the rest" started.
+Graph: 0DDEB615-5629-4AC3-917D-7C63EE3B60B8 Add Node Switch
+Init Graph
+Graph: 56AD4E67-BA93-4012-85EC-8E5E93440BC2 Add Node Float
+Graph: 0DDEB615-5629-4AC3-917D-7C63EE3B60B8 Add Node Switch
+Deinit Graph: FD5ECEAC-3654-4853-88CA-E8B462E34A1C
+Deinit Graph: 19A91A72-8129-4FA6-BA28-CD9765FB3BE7
+Graph: CA8913E9-BC4F-4BC4-9B81-7B59C60D4BE3 Add Node Number Binary Operator
+Graph: 0DDEB615-5629-4AC3-917D-7C63EE3B60B8 Add Node Log
+Graph: CA8913E9-BC4F-4BC4-9B81-7B59C60D4BE3 Add Node Number Binary Operator
+Deinit Graph: F7E66883-83C4-4646-8241-D820D4F17939
+􀟈  Test "Fan-in: two providers at same column, left of consumer" started.
+􀟈  Test "Three-node chain: columns increase leftward" started.
+􀟈  Test "A type Fabric has no port for is named in the error" started.
+􀟈  Test "Nodes top-align with their downstream target, not just stacked" started.
+􀟈  Test "A require the script actually makes is still refused" started.
+􀟈  Test "Two connected nodes: provider left of consumer" started.
+Init Graph
+􀟈  Test "A signature inside a template literal is not the signature" started.
+􀟈  Test "Single node is placed at column 0" started.
+􀟈  Test "The refusal says which type it is refusing" started.
+Deinit Graph: 56AD4E67-BA93-4012-85EC-8E5E93440BC2
+Graph: 366C41EF-A1B9-4EFC-89C5-A9131B54E225 Add Node Number Binary Operator
+Graph: 366C41EF-A1B9-4EFC-89C5-A9131B54E225 Add Node Number Binary Operator
+Deinit Graph: CA8913E9-BC4F-4BC4-9B81-7B59C60D4BE3
+Init Graph
+􀟈  Test "Column anchors to topmost downstream node, not first sorted node" started.
+Graph: 332D739E-7DE3-4EDB-8D70-2437369CB6F8 Add Node Number Binary Operator
+􀟈  Test "Collections are written as TypeScript writes them" started.
+􀟈  Test "Disconnected nodes all placed at column 0" started.
+􀟈  Test "An unclosed signature in prose does not consume the real one" started.
+􀟈  Test "A signature inside a block comment is not the signature" started.
+􀟈  Test "Offstage Left Box: secs*speed top-aligns with Orientation From Euler" started.
+􀟈  Test "A body may call the globals the types are named after" started.
+􀟈  Test "A node given the annotated form keeps the TypeScript" started.
+􀟈  Test "Nodes execute only once their renderer has started them" started.
+􀟈  Test "A node whose script carries a commented signature compiles" started.
+􀟈  Test "Publishing a port starts an unconnected node and unpublishing stops it" started.
+􀟈  Test "A script that is entirely commented out declares nothing" started.
+􀟈  Test "Deleting a node whose stop throws still disables it and still deletes it" started.
+􀟈  Test "The annotated form cannot return a dictionary of anything either" started.
+􀟈  Test "Column spacing matches constant" started.
+􀟈  Test "A signature commented out above the real one is not the signature" started.
+􀟈  Test "Reading the annotated form writes it back as TypeScript" started.
+􀟈  Test "A failing inner node is reported and does not keep its subgraph node or its siblings from starting" started.
+􀟈  Test "Empty graph produces no layout" started.
+􀟈  Test "A commented-out require is not a require" started.
+Init Graph
+Init Graph
+􀟈  Test "Nodes added while the renderer is stopped are enabled, and start when it starts" started.
+􀟈  Test "Offstage Left Box: column ordering and top-alignment" started.
+Deinit Graph: 0DDEB615-5629-4AC3-917D-7C63EE3B60B8
+􀟈  Test "An Iterator starts the nodes inside it without connections" started.
+􀟈  Test "Fan-out source top-aligns with topmost downstream, not first-connected" started.
+􀟈  Test "Column sorted by downstream node row, not just port index" started.
+􀟈  Test "Nodes skip gap to align with downstream target" started.
+􀟈  Test "Deleting a subgraph node stops and disables the nodes inside it" started.
+􀟈  Test "A new node's template parses to the ports it declares" started.
+Graph: E1867380-04B8-41AD-AD2A-4D9DA80ACC9D Add Node Sub Graph
+􀟈  Test "A script cannot return a Value, however it is wrapped" started.
+􀟈  Test "The rewrite parses as itself, to the same ports" started.
+Graph: E1867380-04B8-41AD-AD2A-4D9DA80ACC9D Add Node Number Binary Operator
+􀟈  Test "A script in the annotated form still declares its ports" started.
+Graph: 0386B57C-6600-434D-B798-20F90358BCC4 Add Node Number Binary Operator
+􀟈  Test "What JavaScriptCore runs carries no types" started.
+􀟈  Test "A quote inside a regular expression does not hide the signature" started.
+Init Graph
+􀟈  Test "Duplicated connected nodes start" started.
+Init Graph
+􀟈  Test "Deleting a running node stops and disables it, and undo starts it again" started.
+Init Graph
+Deinit Graph: 155E4469-1925-4B3A-BD94-6549823B6B30
+Deinit Graph: 574AFC72-A09D-4D30-B63F-B1C9B43E8196
+􀟈  Test "A lifecycle failure during a frame is reported to the error delegate" started.
+􀟈  Test "A first connection starts both nodes, the last disconnection stops them, and reconnecting starts them again" started.
+Graph: 08FF2769-E171-459F-A957-02A4A28B2B9B Add Node Number Binary Operator
+Graph: 08FF2769-E171-459F-A957-02A4A28B2B9B Add Node Number Binary Operator
+Init Graph
+􀟈  Test "Frames without graph edits make no lifecycle calls" started.
+Init Graph
+Init Graph
+Graph: 013C5504-5B30-4623-A40E-09E64C0B8254 Add Node Number Binary Operator
+Deinit Graph: 08FF2769-E171-459F-A957-02A4A28B2B9B
+Init Graph
+Init Graph
+Init Graph
+Graph: 7AC61E25-7385-4D34-88B5-148C5A0A16EF Add Node Sub Graph
+Graph: 7AC61E25-7385-4D34-88B5-148C5A0A16EF Add Node Number Binary Operator
+Graph: 3B0ED86F-AC33-4314-8D3F-12D258D993DF Add Node Float
+Graph: FEDDDCC5-C4E0-497A-90BC-12C098B3C2E7 Add Node Number Binary Operator
+Deinit Graph: 013C5504-5B30-4623-A40E-09E64C0B8254
+Graph: 3B0ED86F-AC33-4314-8D3F-12D258D993DF Add Node Sub Graph
+Graph: B32917E3-79BF-4654-8D41-A972A0BD2794 Add Node Number Binary Operator
+􀟈  Test "An added node without connections is enabled but not started" started.
+􀟈  Test "Embedding running nodes in a subgraph, and undoing it, does not restart them" started.
+Init Graph
+Graph: F1B54A4B-00E1-41CC-AB70-E34016E29DB0 Add Node Number Binary Operator
+Graph: F1B54A4B-00E1-41CC-AB70-E34016E29DB0 Add Node Number Binary Operator
+Deinit Graph: 7AC61E25-7385-4D34-88B5-148C5A0A16EF
+Deinit Graph: F1B54A4B-00E1-41CC-AB70-E34016E29DB0
+Deinit Graph: FEDDDCC5-C4E0-497A-90BC-12C098B3C2E7
+Deinit Graph: E1867380-04B8-41AD-AD2A-4D9DA80ACC9D
+Deinit Graph: 0386B57C-6600-434D-B798-20F90358BCC4
+􀟈  Test case passing 2 arguments nodeClass → SampleAndHoldNode, portName → "inputValue" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+Init Graph
+Init Graph
+Graph: 64C3A46E-059D-4BA7-8935-55B6AD53933D Add Node Sub Graph
+Init Graph
+Graph: 64C3A46E-059D-4BA7-8935-55B6AD53933D Add Node Number Binary Operator
+Graph: 0E5349EA-ADAA-4BC6-854C-107AF570DACA Add Node Number Binary Operator
+Init Graph
+Init Graph
+Init Graph
+Graph: 8E5D5B18-2173-4805-BCE2-05B93FF0C1C7 Add Node Number Binary Operator
+Graph: 8E5D5B18-2173-4805-BCE2-05B93FF0C1C7 Add Node Number Binary Operator
+Graph: 7ABE17AE-D8E2-4F23-BD48-1DA47E2EA93D Add Node Number Binary Operator
+Graph: DD2EDFBD-6911-4C0A-A3E6-DE707299EE25 Add Node Number Binary Operator
+Graph: 7ABE17AE-D8E2-4F23-BD48-1DA47E2EA93D Add Node Number Binary Operator
+Init Graph
+Graph: 1C6CABD7-034C-4FB4-9EC3-F1BB8C5F2FC9 Add Node Sample and Hold (Float)
+Graph: B6372D7F-57C5-4BD0-84FB-390833129132 Add Node Number Binary Operator
+Graph: DD2EDFBD-6911-4C0A-A3E6-DE707299EE25 Add Node Number Binary Operator
+Deinit Graph: 8E5D5B18-2173-4805-BCE2-05B93FF0C1C7
+Graph: 7ABE17AE-D8E2-4F23-BD48-1DA47E2EA93D Add Node Number Binary Operator
+Deinit Graph: 64C3A46E-059D-4BA7-8935-55B6AD53933D
+Graph: B6372D7F-57C5-4BD0-84FB-390833129132 Add Node Number Binary Operator
+􀟈  Test case passing 2 arguments nodeClass → SwitchNode, portName → "input0" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+Deinit Graph: 0E5349EA-ADAA-4BC6-854C-107AF570DACA
+Graph: DD2EDFBD-6911-4C0A-A3E6-DE707299EE25 Add Node Number Binary Operator
+Graph: B6372D7F-57C5-4BD0-84FB-390833129132 Add Node Float
+􀟈  Test case passing 2 arguments nodeClass → MatrixSwitchNode, portName → "input0" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+􀟈  Test case passing 2 arguments nodeClass → GateNode, portName → "input" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+􀟈  Test case passing 2 arguments nodeClass → ArrayQueueNode, portName → "inputPort" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+Init Graph
+Graph: 24A2FCF5-42B8-4E64-B9D0-C00EB742DA63 Add Node Switch (Float)
+Deinit Graph: 7ABE17AE-D8E2-4F23-BD48-1DA47E2EA93D
+Init Graph
+􀟈  Test case passing 2 arguments nodeClass → ArrayReplaceValueAtIndexNode, portName → "inputValue" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+Graph: 33018587-200B-411B-B72A-F76BBDF4F319 Add Node Array Queue Value (Float)
+Init Graph
+Graph: 80DFB455-E56D-4DE7-8D6B-A092ACEC449E Add Node Gate (Float)
+Deinit Graph: DD2EDFBD-6911-4C0A-A3E6-DE707299EE25
+Init Graph
+Graph: 32797B4A-6D2F-44DC-AC5D-69150AD2C2D7 Add Node Matrix Switch (Float)
+􀟈  Test case passing 2 arguments nodeClass → DictionarySetValueForKeyNode, portName → "inputValue" to "A type-agnostic node's edited value inlet comes back with its value, on its id" started.
+Init Graph
+Graph: EEEC6501-AFC9-4179-B835-E8AFAD44898C Add Node Array Replace Value at Index (Float)
+Deinit Graph: B6372D7F-57C5-4BD0-84FB-390833129132
+Init Graph
+Init Graph
+Graph: 6DD8059C-045D-4C19-9403-850BC707A7FE Add Node Dictionary Set Value For Key (Float)
+Init Graph
+Graph: 56B3A17A-5F84-4C6A-B00E-B88BA6017611 Add Node Number Binary Operator
+Graph: 56B3A17A-5F84-4C6A-B00E-B88BA6017611 Add Node Number Binary Operator
+Deinit Graph: 56B3A17A-5F84-4C6A-B00E-B88BA6017611
+Deinit Graph: 858CA2F6-0278-426D-AD27-2532D6FFC62F
+Deinit Graph: 3B0ED86F-AC33-4314-8D3F-12D258D993DF
+Deinit Graph: B32917E3-79BF-4654-8D41-A972A0BD2794
+􁁛  Test "Disconnecting one outlet wire leaves sibling values intact" passed after 0.060 seconds.
+􁁛  Test "Graph owns connection mutation and rejects foreign endpoints atomically" passed after 0.060 seconds.
+􁁛  Test "Disconnect all and active state changes undo through Graph" passed after 0.060 seconds.
+􁁛  Test "Replacing an inlet is one undoable graph edit" passed after 0.060 seconds.
+􁁛  Test "Creation transfers internal wires and publishes boundary proxies" with 2 test cases passed after 0.060 seconds.
+􁁛  Test salientTitleTortureCases() passed after 0.060 seconds.
+􁁛  Test "A port unpublished and published again by undo has its new proxy take the parent's wire back" with 2 test cases passed after 0.060 seconds.
+􁁛  Test "Unpublishing a port takes the parent's wires onto its proxy with it" with 2 test cases passed after 0.060 seconds.
+􁁛  Test "Embedding rebinds incoming and outgoing boundaries to proxies" passed after 0.060 seconds.
+􁁛  Test "Embedding undo and redo are one stable graph edit" with 2 test cases passed after 0.060 seconds.
+Init Graph
+􁁛  Test "Invalid subgraph selections use the shared Fabric graph error domain" passed after 0.060 seconds.
+Graph: 2BCDD2B2-FA4E-4987-A541-B0C5E575F56A Add Node Number Binary Operator
+Graph: 2BCDD2B2-FA4E-4987-A541-B0C5E575F56A Add Node Number Binary Operator
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/E77EF4F5-DDD0-4BBC-983A-2AC9F0796274/B8C75075-372B-4488-AC54-C75416D84CAC/Shaders.metal
+Init Graph
+Graph: 0E88CA79-A00E-4316-A8DF-27EAB28B4DA4 Add Node Number Binary Operator
+Graph: 0E88CA79-A00E-4316-A8DF-27EAB28B4DA4 Add Node Number Binary Operator
+Graph: 0E88CA79-A00E-4316-A8DF-27EAB28B4DA4 Add Node Number Binary Operator
+Deinit Graph: 0E88CA79-A00E-4316-A8DF-27EAB28B4DA4
+􁁛  Test unchangedPortsArePreservedAcrossEdits() passed after 0.061 seconds.
+Init Graph
+Graph: 52F5DBB5-EBCF-40F9-B77D-CDFCF9B7787E Add Node Number Binary Operator
+Graph: 52F5DBB5-EBCF-40F9-B77D-CDFCF9B7787E Add Node Number Binary Operator
+Graph: 52F5DBB5-EBCF-40F9-B77D-CDFCF9B7787E Add Node Number Binary Operator
+Deinit Graph: 52F5DBB5-EBCF-40F9-B77D-CDFCF9B7787E
+􁁛  Test editingTheExpressionMarksItDirty() passed after 0.062 seconds.
+􁁛  Test invalidEditKeepsPortsAndReportsError() passed after 0.062 seconds.
+􁁛  Test comprehensionProducesTransformArrayOutput() passed after 0.062 seconds.
+Init Graph
+Graph: E34B5F31-4F1A-48F8-9DBA-730B5E1D6B4A Add Node Number Binary Operator
+Graph: E34B5F31-4F1A-48F8-9DBA-730B5E1D6B4A Add Node Number Binary Operator
+Graph: E34B5F31-4F1A-48F8-9DBA-730B5E1D6B4A Add Node Number Binary Operator
+Graph: E34B5F31-4F1A-48F8-9DBA-730B5E1D6B4A Add Node Number Binary Operator
+Graph: E34B5F31-4F1A-48F8-9DBA-730B5E1D6B4A Add Node Number Binary Operator
+Deinit Graph: E34B5F31-4F1A-48F8-9DBA-730B5E1D6B4A
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/E77EF4F5-DDD0-4BBC-983A-2AC9F0796274/B8C75075-372B-4488-AC54-C75416D84CAC/Shaders.metal
+Init Graph
+Graph: E4966148-F53A-4623-AB6B-8B838275BCBF Add Node Transform
+Graph: E4966148-F53A-4623-AB6B-8B838275BCBF Add Node Live Image
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/E77EF4F5-DDD0-4BBC-983A-2AC9F0796274/B8C75075-372B-4488-AC54-C75416D84CAC/Shaders.metal
+Init Graph
+Graph: DF84F79F-E556-42ED-A17F-60FB9A7E38F4 Add Node Number Binary Operator
+Graph: DF84F79F-E556-42ED-A17F-60FB9A7E38F4 Add Node Number Binary Operator
+Deinit Graph: DF84F79F-E556-42ED-A17F-60FB9A7E38F4
+􁁛  Test nestedArrayOutletIsTypedLikeItsInletAndSurvivesARecompile() passed after 0.067 seconds.
+􁁛  Test retypeReplacesPortWithNewType() passed after 0.067 seconds.
+Init Graph
+Graph: 02551FC4-0500-4710-9BF9-3D233CFD36B2 Add Node Number Binary Operator
+Deinit Graph: 02551FC4-0500-4710-9BF9-3D233CFD36B2
+􁁛  Test "Parameter insertion preserves the original wire through undo and redo" passed after 0.067 seconds.
+􁁛  Test "Node deletion restores graph-owned wires without duplicates" passed after 0.067 seconds.
+Init Graph
+Graph: 727E8836-2A55-4E1A-AE3D-F37494738DAA Add Node Number Binary Operator
+Graph: 727E8836-2A55-4E1A-AE3D-F37494738DAA Add Node Number Binary Operator
+Graph: 727E8836-2A55-4E1A-AE3D-F37494738DAA Add Node Number Binary Operator
+Graph: 727E8836-2A55-4E1A-AE3D-F37494738DAA Add Node Number Binary Operator
+Graph: 727E8836-2A55-4E1A-AE3D-F37494738DAA Add Node Number Binary Operator
+Graph: 727E8836-2A55-4E1A-AE3D-F37494738DAA Add Node Number Binary Operator
+Deinit Graph: 727E8836-2A55-4E1A-AE3D-F37494738DAA
+􁁛  Test "An editable port rebuilt on another's id keeps it, parameter included" passed after 0.068 seconds.
+Init Graph
+Graph: BB62ABB2-54E1-4A14-957B-AE0EBFB5F602 Add Node Number Binary Operator
+Graph: BB62ABB2-54E1-4A14-957B-AE0EBFB5F602 Add Node Number Binary Operator
+Graph: BB62ABB2-54E1-4A14-957B-AE0EBFB5F602 Add Node Number Binary Operator
+Deinit Graph: BB62ABB2-54E1-4A14-957B-AE0EBFB5F602
+Init Graph
+Graph: DE6E17AB-8A61-456F-BEF0-086BF4C58D4E Add Node Number Binary Operator
+Graph: DE6E17AB-8A61-456F-BEF0-086BF4C58D4E Add Node Number Binary Operator
+Graph: DE6E17AB-8A61-456F-BEF0-086BF4C58D4E Add Node Number Binary Operator
+Graph: DE6E17AB-8A61-456F-BEF0-086BF4C58D4E Add Node Number Binary Operator
+Graph: DE6E17AB-8A61-456F-BEF0-086BF4C58D4E Add Node Number Binary Operator
+Graph: DE6E17AB-8A61-456F-BEF0-086BF4C58D4E Add Node Number Binary Operator
+Graph: DE6E17AB-8A61-456F-BEF0-086BF4C58D4E Add Node Number Binary Operator
+Deinit Graph: DE6E17AB-8A61-456F-BEF0-086BF4C58D4E
+􁁛  Test defaultExpressionDerivesTwoFloatInputsOneFloatOutput() passed after 0.069 seconds.
+􁁛  Test typedVectorInputAndOutput() passed after 0.069 seconds.
+Init Graph
+Init Graph
+Graph: B97AEB8F-3ED7-48B3-9DA7-0294807BEB24 Add Node Lifecycle Recording
+Init Graph
+Graph: 2F483A28-5FB5-4223-B302-D10935D8F3CA Add Node Perspective Camera
+Deinit Graph: A2C32D1F-1366-4535-9EA9-12E50456CA9E
+Deinit Graph: B97AEB8F-3ED7-48B3-9DA7-0294807BEB24
+Graph: E4966148-F53A-4623-AB6B-8B838275BCBF Add Node Transform
+Init Graph
+Init Graph
+Graph: 437E2DF5-7936-4F38-AB76-EF2B06B2EA26 Add Node Lifecycle Recording
+Deinit Graph: 97A8D896-1DE2-439B-8AB5-01EF3203CB5F
+Deinit Graph: 437E2DF5-7936-4F38-AB76-EF2B06B2EA26
+Graph: 80DFB455-E56D-4DE7-8D6B-A092ACEC449E Add Node Gate (Float)
+Graph: EEEC6501-AFC9-4179-B835-E8AFAD44898C Add Node Array Replace Value at Index (Float)
+Graph: 24A2FCF5-42B8-4E64-B9D0-C00EB742DA63 Add Node Switch (Float)
+Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118 Add Node Number Binary Operator
+Deinit Graph: 80DFB455-E56D-4DE7-8D6B-A092ACEC449E
+Graph: 33018587-200B-411B-B72A-F76BBDF4F319 Add Node Array Queue Value (Float)
+Graph: 6DD8059C-045D-4C19-9403-850BC707A7FE Add Node Dictionary Set Value For Key (Float)
+􁁛  Test errorWithEmptySalientTitleFallsBackToTypeName() passed after 0.076 seconds.
+Deinit Graph: 24A2FCF5-42B8-4E64-B9D0-C00EB742DA63
+Deinit Graph: EEEC6501-AFC9-4179-B835-E8AFAD44898C
+Deinit Graph: 80DFB455-E56D-4DE7-8D6B-A092ACEC449E
+Graph: 1C6CABD7-034C-4FB4-9EC3-F1BB8C5F2FC9 Add Node Sample and Hold (Float)
+Deinit Graph: 6DD8059C-045D-4C19-9403-850BC707A7FE
+Deinit Graph: EEEC6501-AFC9-4179-B835-E8AFAD44898C
+Deinit Graph: 24A2FCF5-42B8-4E64-B9D0-C00EB742DA63
+Deinit Graph: 33018587-200B-411B-B72A-F76BBDF4F319
+Deinit Graph: 6DD8059C-045D-4C19-9403-850BC707A7FE
+Deinit Graph: 1C6CABD7-034C-4FB4-9EC3-F1BB8C5F2FC9
+Deinit Graph: 33018587-200B-411B-B72A-F76BBDF4F319
+Deinit Graph: 1C6CABD7-034C-4FB4-9EC3-F1BB8C5F2FC9
+Graph: 32797B4A-6D2F-44DC-AC5D-69150AD2C2D7 Add Node Matrix Switch (Float)
+Deinit Graph: 32797B4A-6D2F-44DC-AC5D-69150AD2C2D7
+Deinit Graph: 32797B4A-6D2F-44DC-AC5D-69150AD2C2D7
+Init Graph
+Init Graph
+Graph: 90B3A322-8D81-42E0-84B4-E7FDABD79290 Add Node Lifecycle Recording
+Graph: 366C41EF-A1B9-4EFC-89C5-A9131B54E225 Add Node Number Binary Operator
+􁁛  Test "State under a key the code no longer declares drops and is reported" passed after 0.077 seconds.
+􁁛  Test inputsCarryAParameterWhereSatinHasOneForTheirType() passed after 0.077 seconds.
+Init Graph
+Init Graph
+Init Graph
+Graph: 77B8ED34-C330-42D6-8990-8F838FA06E23 Add Node Number Binary Operator
+Init Graph
+Init Graph
+Deinit Graph: 4D371D90-8531-4AC9-BE66-996725FC7444
+Init Graph
+Graph: 77B8ED34-C330-42D6-8990-8F838FA06E23 Add Node Number Binary Operator
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Graph: E6CB497D-FB3C-44D0-8558-06074342CEDB Add Node Number Binary Operator
+Graph: EEF0E98B-55A8-429E-82E7-9649AFDFA190 Add Node Lifecycle Recording
+Graph: 066DC173-8154-4B05-8B27-7781CCDA9958 Add Node Number Binary Operator
+Graph: 3CE0F6A5-2A6F-4A34-AFF2-99061DC67890 Add Node Lifecycle Recording
+Graph: AE0B0643-8AFC-40BE-9750-6B7342D2C54D Add Node Lifecycle Recording
+Graph: 3CE0F6A5-2A6F-4A34-AFF2-99061DC67890 Add Node Lifecycle Recording
+Graph: EEF0E98B-55A8-429E-82E7-9649AFDFA190 Add Node Lifecycle Recording
+Graph: 14092D82-0E06-4948-A5C3-7A1686A87B40 Add Node Sub Graph
+Deinit Graph: 77B8ED34-C330-42D6-8990-8F838FA06E23
+Graph: CEFD0BEA-A559-4D18-B960-E2C39CF94422 Add Node Iterator
+Deinit Graph: DCA3C379-6054-4C40-9B7C-1F91B6858C08
+Deinit Graph: EEF0E98B-55A8-429E-82E7-9649AFDFA190
+Init Graph
+Graph: 21BCB671-D255-4FDA-9059-FF6CF58A90DA Add Node Number Binary Operator
+Deinit Graph: E4368161-2F76-44BB-8CA2-653733939543
+Graph: 21BCB671-D255-4FDA-9059-FF6CF58A90DA Add Node Number Binary Operator
+Graph lifecycle: Lifecycle Recording: FabricError(severity: Fabric.FabricErrorSeverity.recoverable, kind: Fabric.FabricErrorKind.execution(Fabric.FabricErrorKind.Execution.failed), message: "Test enable failure.", underlyingError: nil)
+Graph: 21BCB671-D255-4FDA-9059-FF6CF58A90DA Add Node Number Binary Operator
+Deinit Graph: CEFD0BEA-A559-4D18-B960-E2C39CF94422
+Graph lifecycle: Lifecycle Recording: FabricError(severity: Fabric.FabricErrorSeverity.recoverable, kind: Fabric.FabricErrorKind.execution(Fabric.FabricErrorKind.Execution.failed), message: "Test enable failure.", underlyingError: nil)
+Graph: 21BCB671-D255-4FDA-9059-FF6CF58A90DA Add Node Number Binary Operator
+Init Graph
+Graph: 63F2000F-5F55-4038-9B0D-8CF905C062E8 Add Node Number Binary Operator
+Graph: 21BCB671-D255-4FDA-9059-FF6CF58A90DA Add Node Number Binary Operator
+Deinit Graph: AE0B0643-8AFC-40BE-9750-6B7342D2C54D
+Graph lifecycle: Lifecycle Recording: FabricError(severity: Fabric.FabricErrorSeverity.recoverable, kind: Fabric.FabricErrorKind.execution(Fabric.FabricErrorKind.Execution.failed), message: "Test stop failure.", underlyingError: nil)
+Graph: 63F2000F-5F55-4038-9B0D-8CF905C062E8 Add Node Number Binary Operator
+Deinit Graph: 80C9C851-B5D4-4633-B169-C0F050FBFA98
+Graph: 63F2000F-5F55-4038-9B0D-8CF905C062E8 Add Node Number Binary Operator
+Graph: 332D739E-7DE3-4EDB-8D70-2437369CB6F8 Add Node Number Binary Operator
+Graph: 63F2000F-5F55-4038-9B0D-8CF905C062E8 Add Node Number Binary Operator
+Graph: 63F2000F-5F55-4038-9B0D-8CF905C062E8 Add Node Number Binary Operator
+Init Graph
+Deinit Graph: 14092D82-0E06-4948-A5C3-7A1686A87B40
+Graph: 13CA7345-2682-435B-A658-70F83A3352CD Add Node Number Binary Operator
+Deinit Graph: 3CE0F6A5-2A6F-4A34-AFF2-99061DC67890
+Graph: 13CA7345-2682-435B-A658-70F83A3352CD Add Node Number Binary Operator
+􁁛  Test "A saved quaternion parameter port comes back as a plain port on its id, not a crash" passed after 0.078 seconds.
+􁁛  Test "Dynamic port replacement preserves wires through undo and redo" passed after 0.078 seconds.
+Deinit Graph: 332D739E-7DE3-4EDB-8D70-2437369CB6F8
+Graph: 13CA7345-2682-435B-A658-70F83A3352CD Add Node Number Binary Operator
+Graph: 13CA7345-2682-435B-A658-70F83A3352CD Add Node Number Binary Operator
+Init Graph
+Graph: 14DC78FC-AC37-4A5B-8568-70A66C2B5304 Add Node Number Binary Operator
+Graph: 13CA7345-2682-435B-A658-70F83A3352CD Add Node Number Binary Operator
+Init Graph
+Graph: 13CA7345-2682-435B-A658-70F83A3352CD Add Node Number Binary Operator
+Graph: 13CA7345-2682-435B-A658-70F83A3352CD Add Node Number Binary Operator
+Graph decode: 'Number Binary Operator' dropped port state for retired keys ["retiredKey"]
+Init Graph
+Graph: 166B4602-C8CD-48E0-B109-594CB1A98D59 Add Node Lifecycle Recording
+􁁛  Test "Dynamic strategy ports rebuild from the decoded strategy and keep identity" passed after 0.078 seconds.
+􁁛  Test "Hydration keeps the backing parameter on the port's identity" passed after 0.078 seconds.
+􁁛  Test "Declared parameter metadata wins over the document's copy" passed after 0.078 seconds.
+Graph: 13BC56DB-0875-4E64-9778-8F37EC0A512A Add Node Sub Graph
+Graph: 13CA7345-2682-435B-A658-70F83A3352CD Add Node Number Binary Operator
+Graph: 13CA7345-2682-435B-A658-70F83A3352CD Add Node Number Binary Operator
+Init Graph
+Graph: 7FF95A20-0BE3-494D-8704-A9BBEB458038 Add Node Number Binary Operator
+Deinit Graph: 14DC78FC-AC37-4A5B-8568-70A66C2B5304
+Graph: 13CA7345-2682-435B-A658-70F83A3352CD Add Node Number Binary Operator
+Graph: 7FF95A20-0BE3-494D-8704-A9BBEB458038 Add Node Number Binary Operator
+Graph: 13CA7345-2682-435B-A658-70F83A3352CD Add Node Number Binary Operator
+Graph: 7FF95A20-0BE3-494D-8704-A9BBEB458038 Add Node Number Binary Operator
+Deinit Graph: 166B4602-C8CD-48E0-B109-594CB1A98D59
+Graph: 7FF95A20-0BE3-494D-8704-A9BBEB458038 Add Node Number Binary Operator
+Deinit Graph: 14DC78FC-AC37-4A5B-8568-70A66C2B5304
+Graph: 7FF95A20-0BE3-494D-8704-A9BBEB458038 Add Node Number Binary Operator
+Deinit Graph: 21BCB671-D255-4FDA-9059-FF6CF58A90DA
+Init Graph
+Deinit Graph: 83F8C26E-8BFB-4BC8-99BC-3BE4F50B6A69
+Graph: 7FF95A20-0BE3-494D-8704-A9BBEB458038 Add Node Number Binary Operator
+Deinit Graph: 63F2000F-5F55-4038-9B0D-8CF905C062E8
+Deinit Graph: 13BC56DB-0875-4E64-9778-8F37EC0A512A
+Init Graph
+Init Graph
+Deinit Graph: 604F5865-C38D-4C0A-9B33-EA58509C8F20
+Init Graph
+Deinit Graph: 90B3A322-8D81-42E0-84B4-E7FDABD79290
+Init Graph
+Graph: BE8E1568-E48F-4D3B-B5CE-BC6FEA43CDCC Add Node Lifecycle Recording
+Init Graph
+􁁛  Test "Adding, editing and deleting a note are undo steps" passed after 0.078 seconds.
+Graph: 32EADC0D-FCEE-4785-8B2C-01BA606E3EC8 Add Node Lifecycle Recording
+Graph: 40613B31-0AA2-45C6-8319-4C34C8E6ACC2 Add Node Number Binary Operator
+􁁛  Test "An edit recorded for a note after its delete is not a step" passed after 0.078 seconds.
+􁁛  Test "Disabling and enabling a wire" passed after 0.078 seconds.
+Graph lifecycle: Lifecycle Recording: FabricError(severity: Fabric.FabricErrorSeverity.recoverable, kind: Fabric.FabricErrorKind.execution(Fabric.FabricErrorKind.Execution.failed), message: "Test start failure.", underlyingError: nil)
+Graph: 40613B31-0AA2-45C6-8319-4C34C8E6ACC2 Add Node Number Binary Operator
+􁁛  Test "Game controller ports persist as descriptors and rebuild on decode" passed after 0.078 seconds.
+􁁛  Test "Adding and deleting a node or a note keep their names through undo and redo" passed after 0.078 seconds.
+Graph: 2F483A28-5FB5-4223-B302-D10935D8F3CA Add Node Perspective Camera
+Deinit Graph: 022B903C-FD5F-44C2-A87E-A9380E071B64
+􁁛  Test "Retired port state is dropped and reported, not resurrected" passed after 0.078 seconds.
+Deinit Graph: 32EADC0D-FCEE-4785-8B2C-01BA606E3EC8
+Deinit Graph: EFABE179-2BAA-4160-AB4C-5CF57E958352
+Init Graph
+􁁛  Test "Game controller reconnect record survives a save with no controller attached" passed after 0.078 seconds.
+Deinit Graph: BE8E1568-E48F-4D3B-B5CE-BC6FEA43CDCC
+Init Graph
+􁁛  Test "A port removed and recreated within one decode keeps its identity" passed after 0.078 seconds.
+􁁛  Test "A Transform parameter port survives a save as a parameter port, value and id intact" passed after 0.079 seconds.
+Graph: F1F004A7-760C-445D-91DD-1E024C41F35B Add Node Lifecycle Recording
+􁁛  Test "Round trip preserves port identity, published state and values" passed after 0.079 seconds.
+Graph: F1F004A7-760C-445D-91DD-1E024C41F35B Add Node Lifecycle Recording
+Deinit Graph: 7FF95A20-0BE3-494D-8704-A9BBEB458038
+􁁛  Test "Connecting a wire" passed after 0.078 seconds.
+􁁛  Test "Undoing an unpublish brings back the proxy, its name and publish in the parent, and the parent's wire" passed after 0.078 seconds.
+􁁛  Test "A Transform parameter gets a parameter port; a quaternion one, which Satin cannot encode, gets none" passed after 0.078 seconds.
+􁁛  Test "Undoing a publish puts back the name the port carried unpublished, and redo publishes it under that name" passed after 0.079 seconds.
+􁁛  Test "An inlet rests at its type's default: Transform through its parameter, Quaternion as a plain port, a collection at nothing" passed after 0.078 seconds.
+􁁛  Test "A type change leaves the replacement inlet at its type's default, on the old id" passed after 0.078 seconds.
+􁁛  Test "Disconnecting a wire" passed after 0.078 seconds.
+􁁛  Test "Publishing and naming a published port are undo steps" passed after 0.078 seconds.
+􁁛  Test "Deleting a wired node" passed after 0.078 seconds.
+􁁛  Test "Connecting a wire that replaces another on the inlet" passed after 0.078 seconds.
+Deinit Graph: E0E6B4ED-0A03-4F08-B329-2952336AD8CB
+􁁛  Test "Inserting a parameter node on a wired inlet" passed after 0.078 seconds.
+Deinit Graph: F1F004A7-760C-445D-91DD-1E024C41F35B
+􁁛  Test "Disconnecting every wire on a port with two" passed after 0.078 seconds.
+􁁛  Test "Compute processor node rebuilds its processor and uniform ports on decode" passed after 0.079 seconds.
+􁁛  Test "Subgraph proxy inlet and outlet forward values across graphs" passed after 0.079 seconds.
+􁁛  Test "A compute node keeps its shader binding when the bundle no longer provides the file" passed after 0.078 seconds.
+􁁛  Test "Fan-in: two providers at same column, left of consumer" passed after 0.036 seconds.
+􁁛  Test "Three-node chain: columns increase leftward" passed after 0.036 seconds.
+􁁛  Test "Nodes top-align with their downstream target, not just stacked" passed after 0.036 seconds.
+􁁛  Test "Two connected nodes: provider left of consumer" passed after 0.036 seconds.
+􁁛  Test "Single node is placed at column 0" passed after 0.036 seconds.
+􁁛  Test "Column anchors to topmost downstream node, not first sorted node" passed after 0.036 seconds.
+􁁛  Test "Offstage Left Box: secs*speed top-aligns with Orientation From Euler" passed after 0.035 seconds.
+Deinit Graph: 2F483A28-5FB5-4223-B302-D10935D8F3CA
+􁁛  Test "Disconnected nodes all placed at column 0" passed after 0.035 seconds.
+Deinit Graph: 2F483A28-5FB5-4223-B302-D10935D8F3CA
+􁁛  Test "Publishing a port starts an unconnected node and unpublishing stops it" passed after 0.035 seconds.
+􁁛  Test "Nodes execute only once their renderer has started them" passed after 0.035 seconds.
+􁁛  Test "Empty graph produces no layout" passed after 0.035 seconds.
+􁁛  Test "A type-agnostic node's edited value inlet comes back with its value, on its id" with 7 test cases passed after 0.078 seconds.
+􁁛  Test "Column spacing matches constant" passed after 0.035 seconds.
+􁁛  Test "Nodes added while the renderer is stopped are enabled, and start when it starts" passed after 0.035 seconds.
+􁁛  Test "An Iterator starts the nodes inside it without connections" passed after 0.035 seconds.
+􁁛  Test "A failing inner node is reported and does not keep its subgraph node or its siblings from starting" passed after 0.035 seconds.
+􁁛  Test "Duplicating a node closes its hydration window" passed after 0.079 seconds.
+􁁛  Test "Deleting a subgraph node stops and disables the nodes inside it" passed after 0.035 seconds.
+􁁛  Test "Ports added after graph decode cannot resurrect stale snapshot state" passed after 0.079 seconds.
+􁁛  Test "Deleting a node whose stop throws still disables it and still deletes it" passed after 0.035 seconds.
+􁁛  Test "Fan-out source top-aligns with topmost downstream, not first-connected" passed after 0.035 seconds.
+􁁛  Test "Deleting a running node stops and disables it, and undo starts it again" passed after 0.034 seconds.
+􁁛  Test "A lifecycle failure during a frame is reported to the error delegate" passed after 0.034 seconds.
+􁁛  Test "Column sorted by downstream node row, not just port index" passed after 0.035 seconds.
+Deinit Graph: 13CA7345-2682-435B-A658-70F83A3352CD
+Init Graph
+􁁛  Suite MathExpressionNodeTests passed after 0.080 seconds.
+􁁛  Test "Nodes skip gap to align with downstream target" passed after 0.035 seconds.
+􁁛  Test "A first connection starts both nodes, the last disconnection stops them, and reconnecting starts them again" passed after 0.034 seconds.
+􁁛  Suite "Graph Execution" passed after 0.080 seconds.
+Graph: 990D5BE0-DB06-440D-8593-F7DAAB1C8B0E Add Node Orthographic Camera
+􁁛  Test "Offstage Left Box: column ordering and top-alignment" passed after 0.035 seconds.
+􁁛  Suite "GraphAutoLayout" passed after 0.080 seconds.
+Graph: 2BCDD2B2-FA4E-4987-A541-B0C5E575F56A Add Node Number Binary Operator
+Graph: 2BCDD2B2-FA4E-4987-A541-B0C5E575F56A Add Node Number Binary Operator
+Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118 Add Node Number Binary Operator
+Graph: E6CB497D-FB3C-44D0-8558-06074342CEDB Add Node Number Binary Operator
+Graph: 366C41EF-A1B9-4EFC-89C5-A9131B54E225 Add Node Number Binary Operator
+Deinit Graph: 366C41EF-A1B9-4EFC-89C5-A9131B54E225
+Deinit Graph: 2BCDD2B2-FA4E-4987-A541-B0C5E575F56A
+Deinit Graph: 366C41EF-A1B9-4EFC-89C5-A9131B54E225
+􁁛  Test "Duplicating wired nodes" passed after 0.040 seconds.
+􁁛  Suite "Undo Action Names" passed after 0.082 seconds.
+􁁛  Test "Graph connection records are authoritative and exclusively encoded" passed after 0.082 seconds.
+Graph: 066DC173-8154-4B05-8B27-7781CCDA9958 Add Node Number Binary Operator
+Updating Shader: Post at: /tmp/fabric-live-shaders/E4966148-F53A-4623-AB6B-8B838275BCBF/E77EF4F5-DDD0-4BBC-983A-2AC9F0796274/9918E88F-0BB9-49FA-BBC8-2BE2783CBA2A/Shaders.metal
+Init Graph
+Init Graph
+Graph: 34B9F893-BB6C-4C75-8E6C-6567B5B141F5 Add Node Lifecycle Recording
+Init Graph
+Init Graph
+Init Graph
+Init Graph
+Graph: 49E96DF4-9823-469B-A0DA-1DB5C2EED3C2 Add Node Lifecycle Recording
+Graph: 095E1FFC-D1C2-41FF-8CDB-4D6F943832E4 Add Node Lifecycle Recording
+Graph: 095E1FFC-D1C2-41FF-8CDB-4D6F943832E4 Add Node Lifecycle Recording
+Deinit Graph: A3D44623-ADEE-46ED-AE7E-850AF84B160A
+Deinit Graph: 49E96DF4-9823-469B-A0DA-1DB5C2EED3C2
+Init Graph
+Graph: 095E1FFC-D1C2-41FF-8CDB-4D6F943832E4 Add Node Sub Graph
+Graph: 3376F9B3-822D-46BF-A1BE-3300F1C3E269 Add Node Lifecycle Recording
+􁁛  Test "An added node without connections is enabled but not started" passed after 0.038 seconds.
+Graph: 3376F9B3-822D-46BF-A1BE-3300F1C3E269 Add Node Lifecycle Recording
+Deinit Graph: 6434CA8D-1602-496B-B8F8-ADB6A0212F63
+Deinit Graph: 34B9F893-BB6C-4C75-8E6C-6567B5B141F5
+Graph: 095E1FFC-D1C2-41FF-8CDB-4D6F943832E4 Add Node Lifecycle Recording
+Graph: 095E1FFC-D1C2-41FF-8CDB-4D6F943832E4 Add Node Lifecycle Recording
+􁁛  Test "Frames without graph edits make no lifecycle calls" passed after 0.038 seconds.
+Deinit Graph: 29B8669A-BAB0-4346-81F9-1B901082DC5A
+Deinit Graph: 095E1FFC-D1C2-41FF-8CDB-4D6F943832E4
+Deinit Graph: 3376F9B3-822D-46BF-A1BE-3300F1C3E269
+􁁛  Test "Embedding running nodes in a subgraph, and undoing it, does not restart them" passed after 0.038 seconds.
+Graph: E4966148-F53A-4623-AB6B-8B838275BCBF Add Node Live Image
+Deinit Graph: E4966148-F53A-4623-AB6B-8B838275BCBF
+Graph: 990D5BE0-DB06-440D-8593-F7DAAB1C8B0E Add Node Orthographic Camera
+Deinit Graph: E4966148-F53A-4623-AB6B-8B838275BCBF
+Graph: E6CB497D-FB3C-44D0-8558-06074342CEDB Add Node Number Binary Operator
+Graph: 6EBB7D33-FB20-4429-A7A9-990EFD7E8316 Add Node Number Binary Operator
+Deinit Graph: 3BDA5F0C-7531-4E92-BD29-DB989329A719
+􁁛  Test "A shader's Transform uniform is a parameter port that keeps its wire and shares the material's parameter" passed after 0.084 seconds.
+Deinit Graph: 990D5BE0-DB06-440D-8593-F7DAAB1C8B0E
+Deinit Graph: 990D5BE0-DB06-440D-8593-F7DAAB1C8B0E
+Graph: 40613B31-0AA2-45C6-8319-4C34C8E6ACC2 Add Node Number Binary Operator
+Graph: 40613B31-0AA2-45C6-8319-4C34C8E6ACC2 Add Node Number Binary Operator
+Deinit Graph: 96ECE3AE-1699-4515-9E1C-EF121C869091
+Deinit Graph: 40613B31-0AA2-45C6-8319-4C34C8E6ACC2
+Init Graph
+Graph: D26354B2-3DC3-4CED-9C44-1E90BCAAB961 Add Node Directional Light
+Init Graph
+􁁛  Test "Duplicated connected nodes start" passed after 0.040 seconds.
+􁁛  Suite "Graph node lifecycle" passed after 0.085 seconds.
+Deinit Graph: 61CA43F2-FC64-4B55-A63F-C914BBAC8F65
+􁁛  Test "A momentary control's changes are not undo steps" passed after 0.085 seconds.
+Init Graph
+Graph: F188B61C-CDEC-41D0-8E6E-97DEB3843F7C Add Node Number Binary Operator
+Deinit Graph: F188B61C-CDEC-41D0-8E6E-97DEB3843F7C
+Graph: E6CB497D-FB3C-44D0-8558-06074342CEDB Add Node Number Binary Operator
+Deinit Graph: E6CB497D-FB3C-44D0-8558-06074342CEDB
+􁁛  Test "A parameter set through its control is one undo step per change, or per edit while one is in progress" passed after 0.086 seconds.
+􁁛  Suite "Edit Undo" passed after 0.087 seconds.
+Deinit Graph: E6CB497D-FB3C-44D0-8558-06074342CEDB
+Graph: 6EBB7D33-FB20-4429-A7A9-990EFD7E8316 Add Node Number Binary Operator
+Deinit Graph: E6CB497D-FB3C-44D0-8558-06074342CEDB
+Graph: A6EB7343-7F48-433E-8692-A3FF6585EE0C Add Node Sub Graph
+􁁛  Test "Legacy port connection maps migrate to graph connection records" passed after 0.087 seconds.
+Graph: A6EB7343-7F48-433E-8692-A3FF6585EE0C Add Node Number Binary Operator
+Graph: A6EB7343-7F48-433E-8692-A3FF6585EE0C Add Node Number Binary Operator
+Graph: A6EB7343-7F48-433E-8692-A3FF6585EE0C Add Node Sub Graph
+Graph: 6EBB7D33-FB20-4429-A7A9-990EFD7E8316 Add Node Number Binary Operator
+Graph: 6EBB7D33-FB20-4429-A7A9-990EFD7E8316 Add Node Number Binary Operator
+Deinit Graph: A6EB7343-7F48-433E-8692-A3FF6585EE0C
+Deinit Graph: 6EBB7D33-FB20-4429-A7A9-990EFD7E8316
+Deinit Graph: A6EB7343-7F48-433E-8692-A3FF6585EE0C
+Deinit Graph: 6EBB7D33-FB20-4429-A7A9-990EFD7E8316
+􁁛  Test "Embedding transfers internal wires and undo restores their identity" passed after 0.087 seconds.
+􁁛  Suite "Graph Connection Ownership" passed after 0.088 seconds.
+Graph: D2CCE067-C34A-4DA6-A4C6-A568A2A7F199 Add Node Number Binary Operator
+􁁛  Test "JavaScript node rebuilds its script ports on decode and keeps identity" passed after 0.090 seconds.
+Graph: 6FC7B5A3-8CDD-490B-B1E3-EB20BF42F553 Add Node Number Binary Operator
+Graph: D26354B2-3DC3-4CED-9C44-1E90BCAAB961 Add Node Directional Light
+Deinit Graph: D26354B2-3DC3-4CED-9C44-1E90BCAAB961
+Deinit Graph: D26354B2-3DC3-4CED-9C44-1E90BCAAB961
+Init Graph
+Graph: 88E5C42A-F36B-4A1B-833C-86F1160B10E3 Add Node Point Light
+Graph: 6FC7B5A3-8CDD-490B-B1E3-EB20BF42F553 Add Node Number Binary Operator
+Graph: D2CCE067-C34A-4DA6-A4C6-A568A2A7F199 Add Node Number Binary Operator
+Graph: 066DC173-8154-4B05-8B27-7781CCDA9958 Add Node Sub Graph
+Init Graph
+Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118 Add Node Render To Image and Depth
+Deinit Graph: 066DC173-8154-4B05-8B27-7781CCDA9958
+Deinit Graph: D2CCE067-C34A-4DA6-A4C6-A568A2A7F199
+Graph: C7D0A25B-D2BF-468E-8188-CF2FB5B9AFA5 Add Node JavaScript
+Deinit Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118
+Graph: C7D0A25B-D2BF-468E-8188-CF2FB5B9AFA5 Add Node Number Binary Operator
+Deinit Graph: 6FC7B5A3-8CDD-490B-B1E3-EB20BF42F553
+Graph: 066DC173-8154-4B05-8B27-7781CCDA9958 Add Node Number Binary Operator
+Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118 Add Node Number Binary Operator
+Graph: C7D0A25B-D2BF-468E-8188-CF2FB5B9AFA5 Add Node JavaScript
+Graph: 066DC173-8154-4B05-8B27-7781CCDA9958 Add Node Number Binary Operator
+Graph: C7D0A25B-D2BF-468E-8188-CF2FB5B9AFA5 Add Node Number Binary Operator
+Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118 Add Node Number Binary Operator
+Deinit Graph: C7D0A25B-D2BF-468E-8188-CF2FB5B9AFA5
+Deinit Graph: C7D0A25B-D2BF-468E-8188-CF2FB5B9AFA5
+􁁛  Test "A JavaScript node whose saved script no longer parses keeps its ports and wires" passed after 0.097 seconds.
+Graph: 88E5C42A-F36B-4A1B-833C-86F1160B10E3 Add Node Point Light
+Deinit Graph: 88E5C42A-F36B-4A1B-833C-86F1160B10E3
+Deinit Graph: 88E5C42A-F36B-4A1B-833C-86F1160B10E3
+Init Graph
+Graph: 322DB721-79CB-47B2-8025-3B7713094899 Add Node Spot Light
+Init Graph
+Graph: D2CCE067-C34A-4DA6-A4C6-A568A2A7F199 Add Node Number Binary Operator
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/F6FAE0F0-03B0-4DE1-A2C1-5CFAD44A6D3F/3B7BCB93-196D-4F6C-9C81-F647394C7A86/Shaders.metal
+Graph: EF44D7CC-93DC-4BC2-A463-1BDFC4809B29 Add Node Live Image
+Graph: EF44D7CC-93DC-4BC2-A463-1BDFC4809B29 Add Node Transform
+Graph: 6FC7B5A3-8CDD-490B-B1E3-EB20BF42F553 Add Node Number Binary Operator
+Graph: D2CCE067-C34A-4DA6-A4C6-A568A2A7F199 Add Node Number Binary Operator
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/F6FAE0F0-03B0-4DE1-A2C1-5CFAD44A6D3F/3B7BCB93-196D-4F6C-9C81-F647394C7A86/Shaders.metal
+Graph: 066DC173-8154-4B05-8B27-7781CCDA9958 Add Node Sub Graph
+Deinit Graph: 066DC173-8154-4B05-8B27-7781CCDA9958
+Deinit Graph: D2CCE067-C34A-4DA6-A4C6-A568A2A7F199
+Deinit Graph: 066DC173-8154-4B05-8B27-7781CCDA9958
+Deinit Graph: D2CCE067-C34A-4DA6-A4C6-A568A2A7F199
+Graph: 6FC7B5A3-8CDD-490B-B1E3-EB20BF42F553 Add Node Number Binary Operator
+Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118 Add Node Render To Image and Depth
+Deinit Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118
+Graph: 322DB721-79CB-47B2-8025-3B7713094899 Add Node Spot Light
+Deinit Graph: 6FC7B5A3-8CDD-490B-B1E3-EB20BF42F553
+Deinit Graph: E7D0621F-FF1A-443B-A922-7CBAD386F118
+Deinit Graph: 6FC7B5A3-8CDD-490B-B1E3-EB20BF42F553
+􁁛  Test "Embedded topology remains stable across two serialization round trips" with 2 test cases passed after 0.107 seconds.
+􁁛  Suite "Subgraph Embedding" passed after 0.107 seconds.
+Deinit Graph: 322DB721-79CB-47B2-8025-3B7713094899
+Deinit Graph: 322DB721-79CB-47B2-8025-3B7713094899
+Init Graph
+Graph: 7C3044CB-8B62-4465-B291-932CD8D01F0D Add Node Mesh
+Updating Shader: Post at: /tmp/fabric-live-shaders/EF44D7CC-93DC-4BC2-A463-1BDFC4809B29/69B158B2-5B66-4EA8-A987-D7D2A0B31C47/940DFEA5-EB53-432B-B81E-EB7FFFEE39BC/Shaders.metal
+Graph: 7C3044CB-8B62-4465-B291-932CD8D01F0D Add Node Mesh
+Deinit Graph: 7C3044CB-8B62-4465-B291-932CD8D01F0D
+Deinit Graph: 7C3044CB-8B62-4465-B291-932CD8D01F0D
+Init Graph
+Graph: A8B4F45F-9191-4A7E-85F0-EE6E8E2E266C Add Node Model Mesh
+Graph: A8B4F45F-9191-4A7E-85F0-EE6E8E2E266C Add Node Model Mesh
+Deinit Graph: A8B4F45F-9191-4A7E-85F0-EE6E8E2E266C
+Deinit Graph: A8B4F45F-9191-4A7E-85F0-EE6E8E2E266C
+Init Graph
+Graph: 877D88A5-773D-4979-AAE3-114D719CBAC1 Add Node Instanced Mesh
+Graph: 877D88A5-773D-4979-AAE3-114D719CBAC1 Add Node Instanced Mesh
+Deinit Graph: 877D88A5-773D-4979-AAE3-114D719CBAC1
+Deinit Graph: 877D88A5-773D-4979-AAE3-114D719CBAC1
+Init Graph
+Graph: 7778891C-2E66-4926-9520-583FB6657E08 Add Node Instanced Model Mesh
+Graph: 7778891C-2E66-4926-9520-583FB6657E08 Add Node Instanced Model Mesh
+Deinit Graph: 7778891C-2E66-4926-9520-583FB6657E08
+Deinit Graph: 7778891C-2E66-4926-9520-583FB6657E08
+Init Graph
+Graph: 2A9D8352-07A5-4EB9-BC15-D578BE91B701 Add Node Skybox
+Graph: 2A9D8352-07A5-4EB9-BC15-D578BE91B701 Add Node Skybox
+Deinit Graph: 2A9D8352-07A5-4EB9-BC15-D578BE91B701
+Deinit Graph: 2A9D8352-07A5-4EB9-BC15-D578BE91B701
+Init Graph
+Graph: AC9C6773-F072-4AC3-8056-A793ECEFC678 Add Node Image Mesh
+Graph: AC9C6773-F072-4AC3-8056-A793ECEFC678 Add Node Image Mesh
+Deinit Graph: AC9C6773-F072-4AC3-8056-A793ECEFC678
+Deinit Graph: AC9C6773-F072-4AC3-8056-A793ECEFC678
+Init Graph
+Graph: DD006F3A-A3A1-4256-92A1-7C5D9936EC59 Add Node Geometry
+Graph: DD006F3A-A3A1-4256-92A1-7C5D9936EC59 Add Node Geometry
+Deinit Graph: DD006F3A-A3A1-4256-92A1-7C5D9936EC59
+Deinit Graph: DD006F3A-A3A1-4256-92A1-7C5D9936EC59
+Init Graph
+Graph: 6D967336-1BF4-4FEF-B79F-FE9EFC686586 Add Node Plane Geometry
+Graph: 6D967336-1BF4-4FEF-B79F-FE9EFC686586 Add Node Plane Geometry
+Deinit Graph: 6D967336-1BF4-4FEF-B79F-FE9EFC686586
+Deinit Graph: 6D967336-1BF4-4FEF-B79F-FE9EFC686586
+Init Graph
+Graph: CCB05C74-DDEC-4534-94EE-56E4A93CAC3F Add Node Perspective Quad Geometry
+Graph: CCB05C74-DDEC-4534-94EE-56E4A93CAC3F Add Node Perspective Quad Geometry
+Deinit Graph: CCB05C74-DDEC-4534-94EE-56E4A93CAC3F
+Deinit Graph: CCB05C74-DDEC-4534-94EE-56E4A93CAC3F
+Init Graph
+Graph: B745EC8A-AED8-444A-BAF7-05B1DD2B9E81 Add Node Round Rect Geometry
+Graph: B745EC8A-AED8-444A-BAF7-05B1DD2B9E81 Add Node Round Rect Geometry
+Deinit Graph: B745EC8A-AED8-444A-BAF7-05B1DD2B9E81
+Deinit Graph: B745EC8A-AED8-444A-BAF7-05B1DD2B9E81
+Init Graph
+Graph: DC2EAC8A-7AE4-4A14-BA59-EB0EC6EBA983 Add Node Triangle Geometry
+Graph: DC2EAC8A-7AE4-4A14-BA59-EB0EC6EBA983 Add Node Triangle Geometry
+Deinit Graph: DC2EAC8A-7AE4-4A14-BA59-EB0EC6EBA983
+Deinit Graph: DC2EAC8A-7AE4-4A14-BA59-EB0EC6EBA983
+Init Graph
+Graph: 501D8A0C-6A97-420F-A5D8-CDF7601C8AE0 Add Node Circle Geometry
+Graph: 501D8A0C-6A97-420F-A5D8-CDF7601C8AE0 Add Node Circle Geometry
+Deinit Graph: 501D8A0C-6A97-420F-A5D8-CDF7601C8AE0
+Deinit Graph: 501D8A0C-6A97-420F-A5D8-CDF7601C8AE0
+Init Graph
+Graph: 8F79DA0B-5AE9-4EEC-88BF-CF790788382D Add Node Arc Geometry
+Graph: 8F79DA0B-5AE9-4EEC-88BF-CF790788382D Add Node Arc Geometry
+Deinit Graph: 8F79DA0B-5AE9-4EEC-88BF-CF790788382D
+Deinit Graph: 8F79DA0B-5AE9-4EEC-88BF-CF790788382D
+Init Graph
+Graph: 38AE852E-E0DF-4CA5-91B6-62CD46D25049 Add Node Cone Geometry
+Graph: 38AE852E-E0DF-4CA5-91B6-62CD46D25049 Add Node Cone Geometry
+Deinit Graph: 38AE852E-E0DF-4CA5-91B6-62CD46D25049
+Deinit Graph: 38AE852E-E0DF-4CA5-91B6-62CD46D25049
+Init Graph
+Graph: 2CB99ED4-181C-463D-8ED5-F6F5E94CB046 Add Node Box Geometry
+Graph: 2CB99ED4-181C-463D-8ED5-F6F5E94CB046 Add Node Box Geometry
+Deinit Graph: 2CB99ED4-181C-463D-8ED5-F6F5E94CB046
+Deinit Graph: 2CB99ED4-181C-463D-8ED5-F6F5E94CB046
+Init Graph
+Graph: 9EDCBC2B-6FD2-49B8-A8DB-30C9EFE6A60D Add Node Round Box Geometry
+Graph: 9EDCBC2B-6FD2-49B8-A8DB-30C9EFE6A60D Add Node Round Box Geometry
+Deinit Graph: 9EDCBC2B-6FD2-49B8-A8DB-30C9EFE6A60D
+Deinit Graph: 9EDCBC2B-6FD2-49B8-A8DB-30C9EFE6A60D
+Init Graph
+Graph: 815A047B-0847-429C-9FD1-F3E7DD991901 Add Node Sphere Geometry
+Graph: 815A047B-0847-429C-9FD1-F3E7DD991901 Add Node Sphere Geometry
+Deinit Graph: 815A047B-0847-429C-9FD1-F3E7DD991901
+Deinit Graph: 815A047B-0847-429C-9FD1-F3E7DD991901
+Init Graph
+Graph: AFCC6C0D-FDFA-4E90-B8DE-158A20D7D592 Add Node IcoSphere Geometry
+Graph: AFCC6C0D-FDFA-4E90-B8DE-158A20D7D592 Add Node IcoSphere Geometry
+Deinit Graph: AFCC6C0D-FDFA-4E90-B8DE-158A20D7D592
+Deinit Graph: AFCC6C0D-FDFA-4E90-B8DE-158A20D7D592
+Init Graph
+Graph: 9B16AE95-C05D-42DD-AAE2-1C43C05E9628 Add Node Capsule Geometry
+Graph: 9B16AE95-C05D-42DD-AAE2-1C43C05E9628 Add Node Capsule Geometry
+Deinit Graph: 9B16AE95-C05D-42DD-AAE2-1C43C05E9628
+Deinit Graph: 9B16AE95-C05D-42DD-AAE2-1C43C05E9628
+Init Graph
+Graph: EEDEDCDB-851F-463C-ACF8-7637B1BF21EE Add Node Tube Geometry
+Graph: EEDEDCDB-851F-463C-ACF8-7637B1BF21EE Add Node Tube Geometry
+Deinit Graph: EEDEDCDB-851F-463C-ACF8-7637B1BF21EE
+Deinit Graph: EEDEDCDB-851F-463C-ACF8-7637B1BF21EE
+Init Graph
+Graph: 4BC44576-F4DB-4DB3-9DB7-8E7A3C51B709 Add Node Torus Geometry
+Graph: 4BC44576-F4DB-4DB3-9DB7-8E7A3C51B709 Add Node Torus Geometry
+Deinit Graph: 4BC44576-F4DB-4DB3-9DB7-8E7A3C51B709
+Deinit Graph: 4BC44576-F4DB-4DB3-9DB7-8E7A3C51B709
+Init Graph
+Graph: 67DC62BA-A81F-4924-B383-F7EBA9A0056E Add Node Cyclorama Geometry
+􁁛  Test "Undo steps in core code register through Graph.registerUndo" passed after 0.177 seconds.
+􁁛  Suite "Undo Registration" passed after 0.177 seconds.
+Graph: 67DC62BA-A81F-4924-B383-F7EBA9A0056E Add Node Cyclorama Geometry
+Deinit Graph: 67DC62BA-A81F-4924-B383-F7EBA9A0056E
+Deinit Graph: 67DC62BA-A81F-4924-B383-F7EBA9A0056E
+Init Graph
+Graph: 4984807B-8D21-4D09-AEA0-59047C9BA59C Add Node 2D Text Geometry
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+this is not a metal shader
+^
+
+Post Shader Path: /tmp/fabric-live-shaders/EF44D7CC-93DC-4BC2-A463-1BDFC4809B29/69B158B2-5B66-4EA8-A987-D7D2A0B31C47/940DFEA5-EB53-432B-B81E-EB7FFFEE39BC/Shaders.metal
+Graph: EF44D7CC-93DC-4BC2-A463-1BDFC4809B29 Add Node Live Image
+Graph: EF44D7CC-93DC-4BC2-A463-1BDFC4809B29 Add Node Transform
+Updating Shader: Post at: /tmp/fabric-live-shaders/EF44D7CC-93DC-4BC2-A463-1BDFC4809B29/69B158B2-5B66-4EA8-A987-D7D2A0B31C47/940DFEA5-EB53-432B-B81E-EB7FFFEE39BC/Shaders.metal
+Deinit Graph: EF44D7CC-93DC-4BC2-A463-1BDFC4809B29
+Deinit Graph: EF44D7CC-93DC-4BC2-A463-1BDFC4809B29
+􁁛  Test "A Transform uniform saved as a plain port becomes a parameter port on its id once the shader compiles again" passed after 0.198 seconds.
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/8EC56B1C-B3C6-4970-AE76-6579127BD09E/53A28CBC-22D9-4645-9C88-973AB4B7D2EA/Shaders.metal
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/8EC56B1C-B3C6-4970-AE76-6579127BD09E/53A28CBC-22D9-4645-9C88-973AB4B7D2EA/Shaders.metal
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/8EC56B1C-B3C6-4970-AE76-6579127BD09E/E8A46A86-995B-41CE-A6B0-D37F5914257F/Shaders.metal
+Graph: 4984807B-8D21-4D09-AEA0-59047C9BA59C Add Node 2D Text Geometry
+Deinit Graph: 4984807B-8D21-4D09-AEA0-59047C9BA59C
+Deinit Graph: 4984807B-8D21-4D09-AEA0-59047C9BA59C
+􁁛  Test "Live Image node rebuilds its saved shader's uniform ports on decode" passed after 0.205 seconds.
+Init Graph
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/49D2699C-1A00-4282-8205-77D2584A6987/4CBCE8BD-8432-4869-85F5-B369B84AA525/Shaders.metal
+Graph: 2A6A7B8E-228C-41F7-90CF-2F594678B503 Add Node Live Image
+Graph: 2A6A7B8E-228C-41F7-90CF-2F594678B503 Add Node Number Binary Operator
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/49D2699C-1A00-4282-8205-77D2584A6987/4CBCE8BD-8432-4869-85F5-B369B84AA525/Shaders.metal
+Updating Shader: Post at: /tmp/fabric-live-shaders/2A6A7B8E-228C-41F7-90CF-2F594678B503/C42BCB5E-B161-4A9F-97B8-0DDEE8A3769F/8501C502-ED74-4807-B2DC-DCAA0138670E/Shaders.metal
+Init Graph
+Graph: C6951FE0-EA3F-40DF-B332-C33821D50907 Add Node 3D Text Geometry
+Graph: C6951FE0-EA3F-40DF-B332-C33821D50907 Add Node 3D Text Geometry
+Deinit Graph: C6951FE0-EA3F-40DF-B332-C33821D50907
+Deinit Graph: C6951FE0-EA3F-40DF-B332-C33821D50907
+Init Graph
+Graph: 2F1CCADE-B148-4528-B1CB-6B76898270EC Add Node Geometry Compose
+Graph: 2F1CCADE-B148-4528-B1CB-6B76898270EC Add Node Geometry Compose
+Deinit Graph: 2F1CCADE-B148-4528-B1CB-6B76898270EC
+Deinit Graph: 2F1CCADE-B148-4528-B1CB-6B76898270EC
+Init Graph
+Graph: 56475CA6-1564-42D7-83D5-9749D5BEDCF2 Add Node Super Shape Geometry
+Graph: 56475CA6-1564-42D7-83D5-9749D5BEDCF2 Add Node Super Shape Geometry
+Deinit Graph: 56475CA6-1564-42D7-83D5-9749D5BEDCF2
+Deinit Graph: 56475CA6-1564-42D7-83D5-9749D5BEDCF2
+Init Graph
+Graph: 12CFB0FE-DC89-4305-A310-B8A4C1B30954 Add Node Mobius Strip Geometry
+Graph: 12CFB0FE-DC89-4305-A310-B8A4C1B30954 Add Node Mobius Strip Geometry
+Deinit Graph: 12CFB0FE-DC89-4305-A310-B8A4C1B30954
+Deinit Graph: 12CFB0FE-DC89-4305-A310-B8A4C1B30954
+Init Graph
+Graph: FCCADCD4-D135-4FE0-991B-DAD531925D1F Add Node Helicoid Geometry
+Graph: FCCADCD4-D135-4FE0-991B-DAD531925D1F Add Node Helicoid Geometry
+Deinit Graph: FCCADCD4-D135-4FE0-991B-DAD531925D1F
+Deinit Graph: FCCADCD4-D135-4FE0-991B-DAD531925D1F
+Init Graph
+Graph: 6D437947-AF0A-42E4-9AD7-F3C417A9B42F Add Node Superellipsoid Geometry
+Graph: 6D437947-AF0A-42E4-9AD7-F3C417A9B42F Add Node Superellipsoid Geometry
+Deinit Graph: 6D437947-AF0A-42E4-9AD7-F3C417A9B42F
+Deinit Graph: 6D437947-AF0A-42E4-9AD7-F3C417A9B42F
+Init Graph
+Graph: CDA70FC8-2911-4653-ADDC-1E54E4E66B04 Add Node Klein Bottle Geometry
+Graph: CDA70FC8-2911-4653-ADDC-1E54E4E66B04 Add Node Klein Bottle Geometry
+Deinit Graph: CDA70FC8-2911-4653-ADDC-1E54E4E66B04
+Deinit Graph: CDA70FC8-2911-4653-ADDC-1E54E4E66B04
+Init Graph
+Graph: C1EA7363-37C3-4E10-90DB-4DCC3D66AC77 Add Node Catenoid Geometry
+Graph: C1EA7363-37C3-4E10-90DB-4DCC3D66AC77 Add Node Catenoid Geometry
+Deinit Graph: C1EA7363-37C3-4E10-90DB-4DCC3D66AC77
+Deinit Graph: C1EA7363-37C3-4E10-90DB-4DCC3D66AC77
+Init Graph
+Graph: D127E2A7-064A-4B92-BD84-CDCBEAD41C55 Add Node Paraboloid Geometry
+Graph: D127E2A7-064A-4B92-BD84-CDCBEAD41C55 Add Node Paraboloid Geometry
+Deinit Graph: D127E2A7-064A-4B92-BD84-CDCBEAD41C55
+Deinit Graph: D127E2A7-064A-4B92-BD84-CDCBEAD41C55
+Init Graph
+Graph: 92F50DF2-0FC3-4084-9569-258E3192210D Add Node Enneper Surface Geometry
+Graph: 92F50DF2-0FC3-4084-9569-258E3192210D Add Node Enneper Surface Geometry
+Deinit Graph: 92F50DF2-0FC3-4084-9569-258E3192210D
+Deinit Graph: 92F50DF2-0FC3-4084-9569-258E3192210D
+Init Graph
+Graph: 7A807A23-16DB-4E96-9AB9-08BA11BD3A6D Add Node Pseudosphere Geometry
+Graph: 7A807A23-16DB-4E96-9AB9-08BA11BD3A6D Add Node Pseudosphere Geometry
+Deinit Graph: 7A807A23-16DB-4E96-9AB9-08BA11BD3A6D
+Deinit Graph: 7A807A23-16DB-4E96-9AB9-08BA11BD3A6D
+Init Graph
+Graph: E3B71AF3-2A16-4A43-93B2-051060131727 Add Node Dupin Cyclide Geometry
+Graph: E3B71AF3-2A16-4A43-93B2-051060131727 Add Node Dupin Cyclide Geometry
+Deinit Graph: E3B71AF3-2A16-4A43-93B2-051060131727
+Deinit Graph: E3B71AF3-2A16-4A43-93B2-051060131727
+Init Graph
+Graph: 43C66321-63A6-4CEF-80A9-6B3FC60B1655 Add Node Roman Surface Geometry
+Graph: 43C66321-63A6-4CEF-80A9-6B3FC60B1655 Add Node Roman Surface Geometry
+Deinit Graph: 43C66321-63A6-4CEF-80A9-6B3FC60B1655
+Deinit Graph: 43C66321-63A6-4CEF-80A9-6B3FC60B1655
+Init Graph
+Graph: 1A94CD80-49A1-41BD-92BD-2E608B504FBD Add Node Cross Cap Geometry
+Graph: 1A94CD80-49A1-41BD-92BD-2E608B504FBD Add Node Cross Cap Geometry
+Deinit Graph: 1A94CD80-49A1-41BD-92BD-2E608B504FBD
+Deinit Graph: 1A94CD80-49A1-41BD-92BD-2E608B504FBD
+Init Graph
+Graph: E1C3A212-6670-4436-A120-D97E1B40FFD8 Add Node Bour Surface Geometry
+Graph: E1C3A212-6670-4436-A120-D97E1B40FFD8 Add Node Bour Surface Geometry
+Deinit Graph: E1C3A212-6670-4436-A120-D97E1B40FFD8
+Deinit Graph: E1C3A212-6670-4436-A120-D97E1B40FFD8
+Init Graph
+Graph: 6B6BA55C-D4D3-4DE8-85CD-75E2ADDAEE03 Add Node Breather Surface Geometry
+Graph: 6B6BA55C-D4D3-4DE8-85CD-75E2ADDAEE03 Add Node Breather Surface Geometry
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+this is not a metal shader
+^
+
+Post Shader Path: /tmp/fabric-live-shaders/2A6A7B8E-228C-41F7-90CF-2F594678B503/C42BCB5E-B161-4A9F-97B8-0DDEE8A3769F/8501C502-ED74-4807-B2DC-DCAA0138670E/Shaders.metal
+Graph: 2A6A7B8E-228C-41F7-90CF-2F594678B503 Add Node Live Image
+Deinit Graph: 6B6BA55C-D4D3-4DE8-85CD-75E2ADDAEE03
+Deinit Graph: 6B6BA55C-D4D3-4DE8-85CD-75E2ADDAEE03
+Init Graph
+Graph: 6E6327CF-78C1-43BA-974C-935800ADCE4F Add Node Dini Surface Geometry
+Graph: 2A6A7B8E-228C-41F7-90CF-2F594678B503 Add Node Number Binary Operator
+Deinit Graph: 2A6A7B8E-228C-41F7-90CF-2F594678B503
+Deinit Graph: 2A6A7B8E-228C-41F7-90CF-2F594678B503
+􁁛  Test "A Live Image node whose saved shader no longer compiles keeps its ports and wires" passed after 0.263 seconds.
+􁁛  Suite "Port Hydration" passed after 0.264 seconds.
+Graph: 6E6327CF-78C1-43BA-974C-935800ADCE4F Add Node Dini Surface Geometry
+Deinit Graph: 6E6327CF-78C1-43BA-974C-935800ADCE4F
+Deinit Graph: 6E6327CF-78C1-43BA-974C-935800ADCE4F
+Init Graph
+Graph: 59872B11-44FA-4D35-850A-C845C12A0FA2 Add Node Parametric Expression Geometry (cos(u) * sin(v), sin(u) * sin(v), cos(v))
+Init Graph
+Init Graph
+Graph: BD4A4BFB-B956-4D6C-80A3-2CF0A955E5F3 Add Node Sub Graph
+Graph: BD4A4BFB-B956-4D6C-80A3-2CF0A955E5F3 Add Node Number Binary Operator
+Graph: 6D7E206D-722B-452F-B230-513AA78D4A67 Add Node Number Binary Operator
+Graph: 59872B11-44FA-4D35-850A-C845C12A0FA2 Add Node Parametric Expression Geometry (cos(u) * sin(v), sin(u) * sin(v), cos(v))
+Deinit Graph: BD4A4BFB-B956-4D6C-80A3-2CF0A955E5F3
+Deinit Graph: 6D7E206D-722B-452F-B230-513AA78D4A67
+Deinit Graph: 59872B11-44FA-4D35-850A-C845C12A0FA2
+Deinit Graph: 59872B11-44FA-4D35-850A-C845C12A0FA2
+Init Graph
+Graph: 36CDD3B0-0806-4C5F-B475-AE0053DF4624 Add Node Material
+Init Graph
+Init Graph
+Graph: 6625AFB1-2F8A-479C-99C2-35EF5057FA74 Add Node Sub Graph
+Graph: 677E26D0-0813-42B5-9721-F36784A33491 Add Node Number Binary Operator
+Graph: 677E26D0-0813-42B5-9721-F36784A33491 Add Node Number Binary Operator
+Graph: 677E26D0-0813-42B5-9721-F36784A33491 Add Node Number Binary Operator
+Graph: 677E26D0-0813-42B5-9721-F36784A33491 Add Node Float
+Graph: 36CDD3B0-0806-4C5F-B475-AE0053DF4624 Add Node Material
+Deinit Graph: 36CDD3B0-0806-4C5F-B475-AE0053DF4624
+Deinit Graph: 36CDD3B0-0806-4C5F-B475-AE0053DF4624
+Init Graph
+Graph: 5E156344-EA65-4105-A00C-A8A13762FBD2 Add Node Color Material
+Deinit Graph: 6625AFB1-2F8A-479C-99C2-35EF5057FA74
+Deinit Graph: 677E26D0-0813-42B5-9721-F36784A33491
+Init Graph
+Init Graph
+Init Graph
+Graph: D16F644A-682C-4B69-83B5-CBC6CDE1BD9D Add Node Sub Graph
+Graph: D16F644A-682C-4B69-83B5-CBC6CDE1BD9D Add Node Number Binary Operator
+Graph: FBCB0449-CA93-4AE1-8093-9B426FE2BC20 Add Node Sub Graph
+Graph: 61828DCF-6BF0-49DC-A467-022871DCDA7E Add Node Number Binary Operator
+Deinit Graph: D16F644A-682C-4B69-83B5-CBC6CDE1BD9D
+Deinit Graph: FBCB0449-CA93-4AE1-8093-9B426FE2BC20
+Deinit Graph: 61828DCF-6BF0-49DC-A467-022871DCDA7E
+Init Graph
+Init Graph
+Init Graph
+Graph: B733BDC2-B894-4FAA-8848-10979E81D2F4 Add Node Sub Graph
+Graph: B733BDC2-B894-4FAA-8848-10979E81D2F4 Add Node Number Binary Operator
+Graph: 5B080C12-B75B-456E-9D6C-41458C2E2452 Add Node Sub Graph
+Graph: B304414D-5A07-42EA-9606-D6B8A8302D6E Add Node Math Expression (x)
+Graph: 5E156344-EA65-4105-A00C-A8A13762FBD2 Add Node Color Material
+Deinit Graph: B733BDC2-B894-4FAA-8848-10979E81D2F4
+Deinit Graph: 5B080C12-B75B-456E-9D6C-41458C2E2452
+Deinit Graph: B304414D-5A07-42EA-9606-D6B8A8302D6E
+Deinit Graph: 5E156344-EA65-4105-A00C-A8A13762FBD2
+Deinit Graph: 5E156344-EA65-4105-A00C-A8A13762FBD2
+Init Graph
+Graph: 838D1E86-999F-447A-8DDB-AF5E0AC2877D Add Node UV Material
+Graph: 838D1E86-999F-447A-8DDB-AF5E0AC2877D Add Node UV Material
+Deinit Graph: 838D1E86-999F-447A-8DDB-AF5E0AC2877D
+Deinit Graph: 838D1E86-999F-447A-8DDB-AF5E0AC2877D
+Init Graph
+Graph: F121B773-7E4F-49DF-AE1C-D34821D3045C Add Node Image Material
+Graph: F121B773-7E4F-49DF-AE1C-D34821D3045C Add Node Image Material
+Init Graph
+Init Graph
+Deinit Graph: F121B773-7E4F-49DF-AE1C-D34821D3045C
+Graph: D02F340D-B89E-42F8-A151-D0AFB8C92930 Add Node Sub Graph
+Deinit Graph: F121B773-7E4F-49DF-AE1C-D34821D3045C
+Graph: 00DD665A-A101-42DE-81E3-617A17B6EB63 Add Node Number Binary Operator
+Init Graph
+Graph: 936FD822-CEAB-488E-A4A2-9198431C7E2D Add Node Diffuse Material
+Graph: 00DD665A-A101-42DE-81E3-617A17B6EB63 Add Node Number Binary Operator
+Deinit Graph: D02F340D-B89E-42F8-A151-D0AFB8C92930
+Deinit Graph: 00DD665A-A101-42DE-81E3-617A17B6EB63
+Init Graph
+Init Graph
+Init Graph
+Graph: BBEE748B-B481-4962-9675-CCBBA11DA9F5 Add Node Sub Graph
+Graph: BBEE748B-B481-4962-9675-CCBBA11DA9F5 Add Node Number Binary Operator
+Graph: 7FDDD700-EBE1-46A5-B761-AFF8F3C90E00 Add Node Sub Graph
+Graph: AA2DA96C-1177-4F16-B2D6-AC201B60843F Add Node Number Binary Operator
+Graph: 936FD822-CEAB-488E-A4A2-9198431C7E2D Add Node Diffuse Material
+Deinit Graph: BBEE748B-B481-4962-9675-CCBBA11DA9F5
+Deinit Graph: 7FDDD700-EBE1-46A5-B761-AFF8F3C90E00
+Deinit Graph: AA2DA96C-1177-4F16-B2D6-AC201B60843F
+Deinit Graph: 936FD822-CEAB-488E-A4A2-9198431C7E2D
+Deinit Graph: 936FD822-CEAB-488E-A4A2-9198431C7E2D
+Init Graph
+Graph: 58455B65-AC52-4C43-A51F-3002D98311CA Add Node Depth Material
+Init Graph
+Init Graph
+Graph: 8ACDEE08-96ED-44BE-B6B4-F89C2530D049 Add Node Sub Graph
+Graph: 8B819E14-CD98-43A3-A637-474357CAD016 Add Node Number Binary Operator
+Deinit Graph: 8ACDEE08-96ED-44BE-B6B4-F89C2530D049
+Deinit Graph: 8B819E14-CD98-43A3-A637-474357CAD016
+Init Graph
+Init Graph
+Init Graph
+Graph: 5B8B3141-FF08-4A33-A1FD-FCDD4DB00FCD Add Node Sub Graph
+Graph: 6745EEA1-182C-465C-B2F6-524FBE5FE72A Add Node Sub Graph
+Graph: D84E1526-222D-48D2-A043-FF670EAB5F20 Add Node Number Binary Operator
+Graph: 5B8B3141-FF08-4A33-A1FD-FCDD4DB00FCD Add Node Number Binary Operator
+Deinit Graph: 5B8B3141-FF08-4A33-A1FD-FCDD4DB00FCD
+Deinit Graph: 6745EEA1-182C-465C-B2F6-524FBE5FE72A
+Deinit Graph: D84E1526-222D-48D2-A043-FF670EAB5F20
+Init Graph
+Init Graph
+Graph: B99C1909-D669-4A81-9099-4531668D6A2D Add Node Sub Graph
+Graph: 18A35DD9-8648-46EF-A7D5-00C3A6F9F3ED Add Node Number Binary Operator
+Deinit Graph: B99C1909-D669-4A81-9099-4531668D6A2D
+Deinit Graph: 18A35DD9-8648-46EF-A7D5-00C3A6F9F3ED
+Graph: 58455B65-AC52-4C43-A51F-3002D98311CA Add Node Depth Material
+Deinit Graph: 58455B65-AC52-4C43-A51F-3002D98311CA
+Deinit Graph: 58455B65-AC52-4C43-A51F-3002D98311CA
+Init Graph
+Graph: 07F75ACC-CAAE-48C3-B4D9-57C25719A9E7 Add Node Physical Material
+Init Graph
+Init Graph
+Graph: 55598713-532E-4B92-95D6-1F59C9CDB3BF Add Node Sub Graph
+Graph: 55598713-532E-4B92-95D6-1F59C9CDB3BF Add Node Number Binary Operator
+Graph: 9742E63E-C460-4B58-8A88-7CFAE8232EF9 Add Node Number Binary Operator
+Graph: 9742E63E-C460-4B58-8A88-7CFAE8232EF9 Add Node Float
+Deinit Graph: 55598713-532E-4B92-95D6-1F59C9CDB3BF
+Deinit Graph: 9742E63E-C460-4B58-8A88-7CFAE8232EF9
+Init Graph
+Graph: D0B5E368-EB62-4457-82EA-199287117BAF Add Node Number Binary Operator
+Graph: D0B5E368-EB62-4457-82EA-199287117BAF Add Node Number Binary Operator
+Graph: D0B5E368-EB62-4457-82EA-199287117BAF Add Node Number Binary Operator
+Deinit Graph: D0B5E368-EB62-4457-82EA-199287117BAF
+Init Graph
+Graph: 07F75ACC-CAAE-48C3-B4D9-57C25719A9E7 Add Node Physical Material
+Graph: 109DE8B8-CF72-4899-ACA6-A5F509DE698F Add Node Number Binary Operator
+Graph: 109DE8B8-CF72-4899-ACA6-A5F509DE698F Add Node Number Binary Operator
+Deinit Graph: 109DE8B8-CF72-4899-ACA6-A5F509DE698F
+Deinit Graph: 07F75ACC-CAAE-48C3-B4D9-57C25719A9E7
+Init Graph
+Init Graph
+Init Graph
+Graph: 8E92C7BB-77AE-4C90-A80C-39C806FA5353 Add Node Sub Graph
+Deinit Graph: 07F75ACC-CAAE-48C3-B4D9-57C25719A9E7
+Graph: 91D49518-40AF-4C95-9F0A-AFB4A4570E1F Add Node Sub Graph
+Graph: E67B4081-1A8D-4F0D-8953-0C554D843C06 Add Node Number Binary Operator
+Deinit Graph: 8E92C7BB-77AE-4C90-A80C-39C806FA5353
+Init Graph
+Graph: 2EDF7E6F-FD2F-4EFD-BCC9-71E39C94343B Add Node Advanced Physical Material
+Deinit Graph: 91D49518-40AF-4C95-9F0A-AFB4A4570E1F
+Deinit Graph: E67B4081-1A8D-4F0D-8953-0C554D843C06
+Init Graph
+Init Graph
+Init Graph
+Graph: 16BE0E1C-9BCD-4D0E-93C3-2CC2AEB7EC63 Add Node Sub Graph
+Graph: 9E69591F-4D78-491E-8666-974E3B163138 Add Node Sub Graph
+Graph: B85795FF-963B-41E2-ABD9-D0616370D91B Add Node Number Binary Operator
+Graph: 16BE0E1C-9BCD-4D0E-93C3-2CC2AEB7EC63 Add Node Number Binary Operator
+Graph: B85795FF-963B-41E2-ABD9-D0616370D91B Add Node Number Binary Operator
+Deinit Graph: 16BE0E1C-9BCD-4D0E-93C3-2CC2AEB7EC63
+Deinit Graph: 9E69591F-4D78-491E-8666-974E3B163138
+Deinit Graph: B85795FF-963B-41E2-ABD9-D0616370D91B
+Init Graph
+Init Graph
+Init Graph
+Graph: 7F958FB9-9AA5-4BC9-BE72-46283590A5CD Add Node Sub Graph
+Graph: 5776C41C-460F-41B5-9BAA-A2E0F0379288 Add Node Sub Graph
+Graph: 532219DE-6168-4D07-A553-083B622452E2 Add Node Number Binary Operator
+Deinit Graph: 7F958FB9-9AA5-4BC9-BE72-46283590A5CD
+Deinit Graph: 5776C41C-460F-41B5-9BAA-A2E0F0379288
+Deinit Graph: 532219DE-6168-4D07-A553-083B622452E2
+Init Graph
+Init Graph
+Init Graph
+Graph: 7D9FFBFE-265B-438A-9B84-91511271E687 Add Node Sub Graph
+Graph: 7D9FFBFE-265B-438A-9B84-91511271E687 Add Node Number Binary Operator
+Graph: A9E47D9A-DA0B-454F-9672-2B5A4FD7B192 Add Node Sub Graph
+Graph: 72DEFF3D-EA6B-4000-80AD-90A529AC1528 Add Node Number Binary Operator
+Deinit Graph: 7D9FFBFE-265B-438A-9B84-91511271E687
+Deinit Graph: A9E47D9A-DA0B-454F-9672-2B5A4FD7B192
+Deinit Graph: 72DEFF3D-EA6B-4000-80AD-90A529AC1528
+Init Graph
+Init Graph
+Graph: D603730B-8755-4B94-9659-03D13FE70A6E Add Node Number Binary Operator
+Graph: D603730B-8755-4B94-9659-03D13FE70A6E Add Node Number Binary Operator
+Deinit Graph: FED33D71-4472-4A35-8041-014C66E24CD7
+Deinit Graph: D603730B-8755-4B94-9659-03D13FE70A6E
+Init Graph
+Init Graph
+Graph: 27580154-E7C7-4929-8AC1-199407F2B7A6 Add Node Number Binary Operator
+Graph: 27580154-E7C7-4929-8AC1-199407F2B7A6 Add Node Sample and Hold (Float)
+Graph: 2EDF7E6F-FD2F-4EFD-BCC9-71E39C94343B Add Node Advanced Physical Material
+Deinit Graph: 6D15BF96-C7D8-4007-90E1-15FC494EADD3
+Deinit Graph: 27580154-E7C7-4929-8AC1-199407F2B7A6
+Init Graph
+Init Graph
+Init Graph
+Graph: AAC07DA5-C460-40B4-AE33-09BFAC44B06D Add Node Sub Graph
+Graph: 7F6C8FFA-1117-4975-8B2C-A09E966AF55A Add Node Sub Graph
+Graph: 24917BB7-09F8-4470-AB0C-DB33AEA17284 Add Node Math Expression (x)
+Graph: AAC07DA5-C460-40B4-AE33-09BFAC44B06D Add Node Number Binary Operator
+Deinit Graph: AAC07DA5-C460-40B4-AE33-09BFAC44B06D
+Deinit Graph: 7F6C8FFA-1117-4975-8B2C-A09E966AF55A
+Deinit Graph: 24917BB7-09F8-4470-AB0C-DB33AEA17284
+Deinit Graph: 2EDF7E6F-FD2F-4EFD-BCC9-71E39C94343B
+Init Graph
+Init Graph
+Graph: 2EECA622-2828-4A84-8879-00871EB991A0 Add Node Sub Graph
+Deinit Graph: 2EDF7E6F-FD2F-4EFD-BCC9-71E39C94343B
+Graph: 21A64588-F126-4A5F-AC8D-96DBB4C7D988 Add Node Math Expression (x)
+Graph: 2EECA622-2828-4A84-8879-00871EB991A0 Add Node Number Binary Operator
+Deinit Graph: 2EECA622-2828-4A84-8879-00871EB991A0
+Deinit Graph: 21A64588-F126-4A5F-AC8D-96DBB4C7D988
+Init Graph
+Init Graph
+Graph: A4694941-1F0D-4F24-A42E-C65B5036809D Add Node Number Binary Operator
+Graph: A4694941-1F0D-4F24-A42E-C65B5036809D Add Node Sub Graph
+Graph: 1B19444F-F6D0-4239-AEDB-126EE71927E0 Add Node Number Binary Operator
+Deinit Graph: A4694941-1F0D-4F24-A42E-C65B5036809D
+Deinit Graph: 1B19444F-F6D0-4239-AEDB-126EE71927E0
+Init Graph
+Graph: 28546E33-CC72-4651-8409-5F04329D2CAA Add Node Number Binary Operator
+Graph: 28546E33-CC72-4651-8409-5F04329D2CAA Add Node Number Binary Operator
+Deinit Graph: 28546E33-CC72-4651-8409-5F04329D2CAA
+Init Graph
+Graph: 9BFD21E2-C397-4B1A-B623-E7251BEA9711 Add Node Displacement Material
+Graph: 9BFD21E2-C397-4B1A-B623-E7251BEA9711 Add Node Displacement Material
+Deinit Graph: 9BFD21E2-C397-4B1A-B623-E7251BEA9711
+Deinit Graph: 9BFD21E2-C397-4B1A-B623-E7251BEA9711
+Init Graph
+Graph: D6A21BE7-3E01-4B8C-82E1-9197831473DB Add Node Image
+Graph: D6A21BE7-3E01-4B8C-82E1-9197831473DB Add Node Image
+Deinit Graph: D6A21BE7-3E01-4B8C-82E1-9197831473DB
+Deinit Graph: D6A21BE7-3E01-4B8C-82E1-9197831473DB
+􁁛  Test "A wire one step puts back can be taken down by the step before it" passed after 0.309 seconds.
+􁁛  Test "A compound edit in a graph with no undo manager of its own groups and names its steps on the document's" passed after 0.309 seconds.
+􁁛  Test "A published port a node removes takes the wires at every level it is published up to" passed after 0.309 seconds.
+􁁛  Test "Deleting a node takes the wires at every level its ports are published up to, and undo puts each level back" passed after 0.309 seconds.
+􁁛  Test "A node added with a published port gets a proxy, and undoing the add takes it" passed after 0.309 seconds.
+􁁛  Test "Unpublishing takes the wires off the proxy at each level up, and undo and redo put them back and take them again" passed after 0.309 seconds.
+􁁛  Test "Undoing Insert Parameter Node puts the port's publishing back, its proxy and the wire on it" passed after 0.309 seconds.
+􁁛  Test "Undoing a delete puts the node back where it stood among the graph's nodes" passed after 0.309 seconds.
+􁁛  Test "An edit in a graph the canvas has not given an undo manager records on the document's" passed after 0.309 seconds.
+􁁛  Test "Unpublishing a proxy leaves the parameter it shares named as the port it stands for" passed after 0.309 seconds.
+􁁛  Test "A step acts on the node standing under its id when it runs" passed after 0.309 seconds.
+􁁛  Test "Suspending registration in a graph with no undo manager of its own suspends the root's it records on" passed after 0.309 seconds.
+􁁛  Test "Deleting a node is one undo step that puts back its wires and its proxies at each level, and redo takes them again" passed after 0.309 seconds.
+􁁛  Test "Renaming a published port renames the parameter its proxies share, at each level it is published up to" passed after 0.309 seconds.
+􁁛  Test "Unpublishing takes the wires at every level the port is published up to, and undo puts each level back" passed after 0.309 seconds.
+􁁛  Test "Publishing makes a proxy over the port under its id at each level, and undo and redo take and make each" passed after 0.309 seconds.
+􁁛  Test "Replacing an inlet preserves the node's cached upstream dependency" passed after 0.309 seconds.
+􁁛  Test "A published port its node removes takes its proxy at each level up, with the wires on them, as steps of their own" passed after 0.309 seconds.
+􁁛  Test "A published port a node removes takes its proxy with it, and the parent's wire on the proxy" passed after 0.309 seconds.
+􁁛  Test "Transpiling a signature leaves every line below it where it was" passed after 0.268 seconds.
+􁁛  Test "Retyping a published inlet preserves the subgraph's upstream dependency" passed after 0.309 seconds.
+􁁛  Test "Sample and Hold settings retain a compatible incoming wire and execution" passed after 0.309 seconds.
+􁁛  Test "Replacing an outlet preserves the node's cached downstream dependency" passed after 0.309 seconds.
+􁁛  Test "A type Fabric has no port for is named in the error" passed after 0.267 seconds.
+􁁛  Test "A require inside a string is refused with the rest" passed after 0.268 seconds.
+􁁛  Test "A body may call the globals the types are named after" passed after 0.266 seconds.
+􁁛  Test "An input whose declared type changes keeps its port's id and published state" passed after 0.268 seconds.
+􁁛  Test "An unclosed signature in prose does not consume the real one" passed after 0.266 seconds.
+􁁛  Test "A signature inside a template literal is not the signature" passed after 0.267 seconds.
+􁁛  Test "A script with nothing to return declares no outputs" passed after 0.268 seconds.
+􁁛  Test "The rewrite leaves every line below the signature where it was" passed after 0.268 seconds.
+􁁛  Test "The refusal says which type it is refusing" passed after 0.267 seconds.
+􁁛  Test "A signature commented out above the real one is not the signature" passed after 0.266 seconds.
+􁁛  Test "A require the script actually makes is still refused" passed after 0.267 seconds.
+􁁛  Test "A new node's template parses to the ports it declares" passed after 0.265 seconds.
+􁁛  Test "Collections are written as TypeScript writes them" passed after 0.266 seconds.
+􁁛  Test "The rewrite parses as itself, to the same ports" passed after 0.265 seconds.
+􁁛  Test "A script in the annotated form still declares its ports" passed after 0.265 seconds.
+􁁛  Test "Reading the annotated form writes it back as TypeScript" passed after 0.266 seconds.
+􁁛  Suite "Publishing Events" passed after 0.310 seconds.
+􁁛  Test "A script takes a dictionary of anything" passed after 0.268 seconds.
+􁁛  Test "A script cannot return a Value, however it is wrapped" passed after 0.265 seconds.
+􁁛  Test "A node given the annotated form keeps the TypeScript" passed after 0.266 seconds.
+􁁛  Test "Parameters are inputs and the return type is outputs" passed after 0.270 seconds.
+􁁛  Test "A signature inside a string is not the signature" passed after 0.268 seconds.
+􁁛  Test "A commented-out require is not a require" passed after 0.265 seconds.
+􁁛  Test "The annotated form cannot return a dictionary of anything either" passed after 0.266 seconds.
+􁁛  Suite "Publishing review regressions" passed after 0.310 seconds.
+􁁛  Suite "Proxy Port Replacement" passed after 0.310 seconds.
+􁁛  Test "A quote inside a regular expression does not hide the signature" passed after 0.265 seconds.
+􁁛  Test "What JavaScriptCore runs carries no types" passed after 0.265 seconds.
+􁁛  Test "A signature inside a block comment is not the signature" passed after 0.266 seconds.
+􁁛  Test "A node whose script carries a commented signature compiles" passed after 0.266 seconds.
+􁁛  Suite "Undo Targets" passed after 0.310 seconds.
+􁁛  Test "A script that is entirely commented out declares nothing" passed after 0.266 seconds.
+􁁛  Suite "JavaScript Node signature" passed after 0.310 seconds.
+Deinit Graph: 14A4E95A-32A5-457C-913D-BBD87F695CD0
+Deinit Graph: 6AAA4D02-89AE-402C-9DF1-0EDF2FE1988D
+􁁛  Test "Deleting and undoing a server node retires and restores its advertisement" passed after 0.359 seconds.
+􁁛  Suite "Syphon server lifecycle" passed after 0.359 seconds.
+Init Graph
+Graph: 80EA5964-70DB-43C2-B4CD-BCF1E243DDDC Add Node Movie Provider
+Graph: 80EA5964-70DB-43C2-B4CD-BCF1E243DDDC Add Node Movie Provider
+Deinit Graph: 80EA5964-70DB-43C2-B4CD-BCF1E243DDDC
+Deinit Graph: 80EA5964-70DB-43C2-B4CD-BCF1E243DDDC
+One Time Global setup for CameraProviderNode
+Init Graph
+Graph: B73617EF-A5ED-43D2-A430-07380AE6BF22 Add Node Camera Provider
+Graph: B73617EF-A5ED-43D2-A430-07380AE6BF22 Add Node Camera Provider
+Deinit Graph: B73617EF-A5ED-43D2-A430-07380AE6BF22
+Deinit Graph: B73617EF-A5ED-43D2-A430-07380AE6BF22
+Init Graph
+Graph: 345A0E7C-BA31-427F-80B1-C175FE104B9A Add Node Image Provider
+Graph: 345A0E7C-BA31-427F-80B1-C175FE104B9A Add Node Image Provider
+Deinit Graph: 345A0E7C-BA31-427F-80B1-C175FE104B9A
+Deinit Graph: 345A0E7C-BA31-427F-80B1-C175FE104B9A
+Init Graph
+Graph: D42D3D10-FA11-46BA-8830-2A63294323A3 Add Node Test Card
+Graph: D42D3D10-FA11-46BA-8830-2A63294323A3 Add Node Test Card
+Deinit Graph: D42D3D10-FA11-46BA-8830-2A63294323A3
+Deinit Graph: D42D3D10-FA11-46BA-8830-2A63294323A3
+Init Graph
+Graph: D113E3B9-9B85-4E2E-A6ED-7D234D86AD7B Add Node Screen Capture Provider
+Graph: D113E3B9-9B85-4E2E-A6ED-7D234D86AD7B Add Node Screen Capture Provider
+Deinit Graph: D113E3B9-9B85-4E2E-A6ED-7D234D86AD7B
+Deinit Graph: D113E3B9-9B85-4E2E-A6ED-7D234D86AD7B
+Init Graph
+Graph: 2B3C001D-C1A8-49F8-A0ED-4F717988A1B0 Add Node Syphon Client
+Graph: 2B3C001D-C1A8-49F8-A0ED-4F717988A1B0 Add Node Syphon Client
+Deinit Graph: 2B3C001D-C1A8-49F8-A0ED-4F717988A1B0
+Deinit Graph: 2B3C001D-C1A8-49F8-A0ED-4F717988A1B0
+Init Graph
+Graph: 4616A706-8F99-4A56-8638-CF39EE500D90 Add Node Syphon Server
+Graph: 4616A706-8F99-4A56-8638-CF39EE500D90 Add Node Syphon Server
+Deinit Graph: 4616A706-8F99-4A56-8638-CF39EE500D90
+Deinit Graph: 4616A706-8F99-4A56-8638-CF39EE500D90
+Updating Shader: Post at: /tmp/fabric-live-shaders/unsaved-document/7E4F4C46-BB30-4B75-AC2F-A22523318B6B/5BD7378C-B6EF-4A3A-B96A-BA1BC88684DC/Shaders.metal
+Init Graph
+Graph: C9421245-7D64-4158-A04E-2F236E2AA978 Add Node Live Image
+Updating Shader: Post at: /tmp/fabric-live-shaders/C9421245-7D64-4158-A04E-2F236E2AA978/7E4F4C46-BB30-4B75-AC2F-A22523318B6B/4705FF30-A09E-41F6-82FA-6C45BE36E955/Shaders.metal
+Graph: C9421245-7D64-4158-A04E-2F236E2AA978 Add Node Live Image
+Deinit Graph: C9421245-7D64-4158-A04E-2F236E2AA978
+Deinit Graph: C9421245-7D64-4158-A04E-2F236E2AA978
+Init Graph
+Graph: 73880767-5E60-4CA7-AF8C-C8D446B253F3 Add Node Depth Of Field
+Graph: 73880767-5E60-4CA7-AF8C-C8D446B253F3 Add Node Depth Of Field
+Deinit Graph: 73880767-5E60-4CA7-AF8C-C8D446B253F3
+Deinit Graph: 73880767-5E60-4CA7-AF8C-C8D446B253F3
+Init Graph
+Graph: 23A6E9DC-31AB-4EEB-8659-CD72EAA13867 Add Node Gaussian Blur
+Graph: 23A6E9DC-31AB-4EEB-8659-CD72EAA13867 Add Node Gaussian Blur
+Deinit Graph: 23A6E9DC-31AB-4EEB-8659-CD72EAA13867
+Deinit Graph: 23A6E9DC-31AB-4EEB-8659-CD72EAA13867
+Init Graph
+Graph: A6F06864-35EE-44FA-908A-A2186FC97723 Add Node Gaussian Blur Channels
+Graph: A6F06864-35EE-44FA-908A-A2186FC97723 Add Node Gaussian Blur Channels
+Deinit Graph: A6F06864-35EE-44FA-908A-A2186FC97723
+Deinit Graph: A6F06864-35EE-44FA-908A-A2186FC97723
+Init Graph
+Graph: 6AAD3E9B-6B9B-4601-883D-3A06980AFDCD Add Node Motion Blur
+Graph: 6AAD3E9B-6B9B-4601-883D-3A06980AFDCD Add Node Motion Blur
+Deinit Graph: 6AAD3E9B-6B9B-4601-883D-3A06980AFDCD
+Deinit Graph: 6AAD3E9B-6B9B-4601-883D-3A06980AFDCD
+Init Graph
+Graph: CEF39E33-805C-4AA4-BDFF-C0FE90C1FD0C Add Node Post Process Motion Blur
+Graph: CEF39E33-805C-4AA4-BDFF-C0FE90C1FD0C Add Node Post Process Motion Blur
+Deinit Graph: CEF39E33-805C-4AA4-BDFF-C0FE90C1FD0C
+Deinit Graph: CEF39E33-805C-4AA4-BDFF-C0FE90C1FD0C
+Init Graph
+Graph: AF06C0F0-9545-4C64-9C9F-9E753A4F6C0B Add Node Zoom Blur
+Graph: AF06C0F0-9545-4C64-9C9F-9E753A4F6C0B Add Node Zoom Blur
+Deinit Graph: AF06C0F0-9545-4C64-9C9F-9E753A4F6C0B
+Deinit Graph: AF06C0F0-9545-4C64-9C9F-9E753A4F6C0B
+Init Graph
+Graph: E9F9976A-8ED2-4277-B2E8-57E16B9332BC Add Node Foreground Mask
+Graph: E9F9976A-8ED2-4277-B2E8-57E16B9332BC Add Node Foreground Mask
+Deinit Graph: E9F9976A-8ED2-4277-B2E8-57E16B9332BC
+Deinit Graph: E9F9976A-8ED2-4277-B2E8-57E16B9332BC
+Init Graph
+Graph: 0BC12CEE-8AD4-46E8-BCF7-34459FE1E597 Add Node Person Segmentation Mask
+Graph: 0BC12CEE-8AD4-46E8-BCF7-34459FE1E597 Add Node Person Segmentation Mask
+Deinit Graph: 0BC12CEE-8AD4-46E8-BCF7-34459FE1E597
+Deinit Graph: 0BC12CEE-8AD4-46E8-BCF7-34459FE1E597
+Init Graph
+Graph: FA7941C7-465C-47D2-9BF3-EEA4A746E92B Add Node Face Pose Analysis
+Graph: FA7941C7-465C-47D2-9BF3-EEA4A746E92B Add Node Face Pose Analysis
+Deinit Graph: FA7941C7-465C-47D2-9BF3-EEA4A746E92B
+Deinit Graph: FA7941C7-465C-47D2-9BF3-EEA4A746E92B
+Init Graph
+Graph: AC0BA511-232C-4C4B-9F2A-3E6D01C65603 Add Node Hand Pose Analysis
+Graph: AC0BA511-232C-4C4B-9F2A-3E6D01C65603 Add Node Hand Pose Analysis
+Deinit Graph: AC0BA511-232C-4C4B-9F2A-3E6D01C65603
+Deinit Graph: AC0BA511-232C-4C4B-9F2A-3E6D01C65603
+Init Graph
+Graph: 10E4D4F7-3B20-44E7-9FA4-5D94EC71FF80 Add Node Lucas-Kanade Optical Flow
+Graph: 10E4D4F7-3B20-44E7-9FA4-5D94EC71FF80 Add Node Lucas-Kanade Optical Flow
+Deinit Graph: 10E4D4F7-3B20-44E7-9FA4-5D94EC71FF80
+Deinit Graph: 10E4D4F7-3B20-44E7-9FA4-5D94EC71FF80
+Init Graph
+Graph: 966F3B51-4C8D-4591-BA81-5F3AE7C236DD Add Node Local VLM Node
+Graph: 966F3B51-4C8D-4591-BA81-5F3AE7C236DD Add Node Local VLM Node
+Deinit Graph: 966F3B51-4C8D-4591-BA81-5F3AE7C236DD
+Deinit Graph: 966F3B51-4C8D-4591-BA81-5F3AE7C236DD
+Init Graph
+Graph: 0254EBA8-60B4-4A1B-92BF-71BED7051086 Add Node Contour Path
+Graph: 0254EBA8-60B4-4A1B-92BF-71BED7051086 Add Node Contour Path
+Deinit Graph: 0254EBA8-60B4-4A1B-92BF-71BED7051086
+Deinit Graph: 0254EBA8-60B4-4A1B-92BF-71BED7051086
+Init Graph
+Graph: AF2A1E8F-6DAE-4E74-A43D-C18F233A83A6 Add Node Upsample
+Graph: AF2A1E8F-6DAE-4E74-A43D-C18F233A83A6 Add Node Upsample
+Deinit Graph: AF2A1E8F-6DAE-4E74-A43D-C18F233A83A6
+Deinit Graph: AF2A1E8F-6DAE-4E74-A43D-C18F233A83A6
+Init Graph
+Graph: D90182FD-DCA3-4CDE-B9B6-7F6818E84F39 Add Node Key Point Displacement
+Graph: D90182FD-DCA3-4CDE-B9B6-7F6818E84F39 Add Node Key Point Displacement
+Deinit Graph: D90182FD-DCA3-4CDE-B9B6-7F6818E84F39
+Deinit Graph: D90182FD-DCA3-4CDE-B9B6-7F6818E84F39
+Init Graph
+Graph: 286FE32A-E073-4436-AB30-7EA884BEF9F6 Add Node Color LUT Correction
+Graph: 286FE32A-E073-4436-AB30-7EA884BEF9F6 Add Node Color LUT Correction
+Deinit Graph: 286FE32A-E073-4436-AB30-7EA884BEF9F6
+Deinit Graph: 286FE32A-E073-4436-AB30-7EA884BEF9F6
+Init Graph
+Graph: 98AA3E3B-131D-4D3C-909F-8FECA54F14F0 Add Node Additive
+Graph: 98AA3E3B-131D-4D3C-909F-8FECA54F14F0 Add Node Additive
+Deinit Graph: 98AA3E3B-131D-4D3C-909F-8FECA54F14F0
+Deinit Graph: 98AA3E3B-131D-4D3C-909F-8FECA54F14F0
+Init Graph
+Graph: DE1B723B-CC07-481D-95F3-420EA853FFD2 Add Node Texture Crop
+Graph: DE1B723B-CC07-481D-95F3-420EA853FFD2 Add Node Texture Crop
+Deinit Graph: DE1B723B-CC07-481D-95F3-420EA853FFD2
+Deinit Graph: DE1B723B-CC07-481D-95F3-420EA853FFD2
+Init Graph
+Graph: 05D12761-3EB6-4D50-9FEA-8A37AE6C3771 Add Node Image Resample
+Graph: 05D12761-3EB6-4D50-9FEA-8A37AE6C3771 Add Node Image Resample
+Deinit Graph: 05D12761-3EB6-4D50-9FEA-8A37AE6C3771
+Deinit Graph: 05D12761-3EB6-4D50-9FEA-8A37AE6C3771
+Init Graph
+Graph: C68C5ED2-7102-4131-8978-235D912E6EE0 Add Node Distance
+Graph: C68C5ED2-7102-4131-8978-235D912E6EE0 Add Node Distance
+Deinit Graph: C68C5ED2-7102-4131-8978-235D912E6EE0
+Deinit Graph: C68C5ED2-7102-4131-8978-235D912E6EE0
+Init Graph
+Graph: 11D1D1E5-B7CE-4FF0-A1B8-B67D4DAA45AC Add Node Easing
+Graph: 11D1D1E5-B7CE-4FF0-A1B8-B67D4DAA45AC Add Node Easing
+Deinit Graph: 11D1D1E5-B7CE-4FF0-A1B8-B67D4DAA45AC
+Deinit Graph: 11D1D1E5-B7CE-4FF0-A1B8-B67D4DAA45AC
+Init Graph
+Graph: 99B56F87-ED35-4BBB-A962-4F275EB7EFFA Add Node Tween
+Graph: 99B56F87-ED35-4BBB-A962-4F275EB7EFFA Add Node Tween
+Deinit Graph: 99B56F87-ED35-4BBB-A962-4F275EB7EFFA
+Deinit Graph: 99B56F87-ED35-4BBB-A962-4F275EB7EFFA
+Init Graph
+Graph: 223670C3-0CF4-42BF-9AD1-5C7A77D5E272 Add Node Repeat
+Graph: 223670C3-0CF4-42BF-9AD1-5C7A77D5E272 Add Node Repeat
+Deinit Graph: 223670C3-0CF4-42BF-9AD1-5C7A77D5E272
+Deinit Graph: 223670C3-0CF4-42BF-9AD1-5C7A77D5E272
+Init Graph
+Graph: 601B3448-043E-4E55-BA47-B34E1D215226 Add Node Ripple Repeat
+Graph: 601B3448-043E-4E55-BA47-B34E1D215226 Add Node Ripple Repeat
+Deinit Graph: 601B3448-043E-4E55-BA47-B34E1D215226
+Deinit Graph: 601B3448-043E-4E55-BA47-B34E1D215226
+Init Graph
+Graph: 7030F447-3FA6-4984-8E27-077AE0FBA371 Add Node Pairwise Distance Array
+Graph: 7030F447-3FA6-4984-8E27-077AE0FBA371 Add Node Pairwise Distance Array
+Deinit Graph: 7030F447-3FA6-4984-8E27-077AE0FBA371
+Deinit Graph: 7030F447-3FA6-4984-8E27-077AE0FBA371
+Init Graph
+Graph: 9934508A-B49E-4751-B77B-F04146310011 Add Node Array Range Interpolate
+Graph: 9934508A-B49E-4751-B77B-F04146310011 Add Node Array Range Interpolate
+Deinit Graph: 9934508A-B49E-4751-B77B-F04146310011
+Deinit Graph: 9934508A-B49E-4751-B77B-F04146310011
+Init Graph
+Graph: EFB0466B-D1E9-4710-AFA7-9C81AEFCD3C2 Add Node Array Resample
+Graph: EFB0466B-D1E9-4710-AFA7-9C81AEFCD3C2 Add Node Array Resample
+Deinit Graph: EFB0466B-D1E9-4710-AFA7-9C81AEFCD3C2
+Deinit Graph: EFB0466B-D1E9-4710-AFA7-9C81AEFCD3C2
+Init Graph
+Graph: C20B8CFC-1C2F-4918-85DF-7502BF0CC472 Add Node Bool
+Graph: C20B8CFC-1C2F-4918-85DF-7502BF0CC472 Add Node Bool
+Deinit Graph: C20B8CFC-1C2F-4918-85DF-7502BF0CC472
+Deinit Graph: C20B8CFC-1C2F-4918-85DF-7502BF0CC472
+Init Graph
+Graph: 01FE0447-CB63-4DE8-B884-AD180743E6E5 Add Node Boolean Logic Comparisons
+Graph: 01FE0447-CB63-4DE8-B884-AD180743E6E5 Add Node Boolean Logic Comparisons
+Deinit Graph: 01FE0447-CB63-4DE8-B884-AD180743E6E5
+Deinit Graph: 01FE0447-CB63-4DE8-B884-AD180743E6E5
+Init Graph
+Graph: C9128979-75D2-4F83-BB58-9C1181498CFD Add Node Float
+Graph: C9128979-75D2-4F83-BB58-9C1181498CFD Add Node Float
+Deinit Graph: C9128979-75D2-4F83-BB58-9C1181498CFD
+Deinit Graph: C9128979-75D2-4F83-BB58-9C1181498CFD
+Init Graph
+Graph: 2B4E4526-E664-4626-A4A4-772C8B9CCEA2 Add Node Int
+Graph: 2B4E4526-E664-4626-A4A4-772C8B9CCEA2 Add Node Int
+Deinit Graph: 2B4E4526-E664-4626-A4A4-772C8B9CCEA2
+Deinit Graph: 2B4E4526-E664-4626-A4A4-772C8B9CCEA2
+Init Graph
+Graph: EA286B31-B35E-4191-BCB8-3040B9738408 Add Node Graph Time
+Graph: EA286B31-B35E-4191-BCB8-3040B9738408 Add Node Graph Time
+Deinit Graph: EA286B31-B35E-4191-BCB8-3040B9738408
+Deinit Graph: EA286B31-B35E-4191-BCB8-3040B9738408
+Init Graph
+Graph: 0A5AD9AD-EB7D-4A86-9CDB-15C62C199A76 Add Node System Time
+Graph: 0A5AD9AD-EB7D-4A86-9CDB-15C62C199A76 Add Node System Time
+Deinit Graph: 0A5AD9AD-EB7D-4A86-9CDB-15C62C199A76
+Deinit Graph: 0A5AD9AD-EB7D-4A86-9CDB-15C62C199A76
+Init Graph
+Graph: A2703483-CE37-4377-980E-3914004226A5 Add Node Timestamp
+Graph: A2703483-CE37-4377-980E-3914004226A5 Add Node Timestamp
+Deinit Graph: A2703483-CE37-4377-980E-3914004226A5
+Deinit Graph: A2703483-CE37-4377-980E-3914004226A5
+Init Graph
+Graph: FDAC0E1D-A965-4D63-B97F-92B177756B45 Add Node Timeline
+Graph: FDAC0E1D-A965-4D63-B97F-92B177756B45 Add Node Timeline
+Deinit Graph: FDAC0E1D-A965-4D63-B97F-92B177756B45
+Deinit Graph: FDAC0E1D-A965-4D63-B97F-92B177756B45
+Init Graph
+Graph: C93D1C63-33AA-4F13-8B22-255F4BC39AA7 Add Node Number Unary Operator
+Graph: C93D1C63-33AA-4F13-8B22-255F4BC39AA7 Add Node Number Unary Operator
+Deinit Graph: C93D1C63-33AA-4F13-8B22-255F4BC39AA7
+Deinit Graph: C93D1C63-33AA-4F13-8B22-255F4BC39AA7
+Init Graph
+Graph: B037681A-2A4A-4988-8EFC-22FE4416A1F1 Add Node Number Binary Operator
+Graph: B037681A-2A4A-4988-8EFC-22FE4416A1F1 Add Node Number Binary Operator
+Deinit Graph: B037681A-2A4A-4988-8EFC-22FE4416A1F1
+Deinit Graph: B037681A-2A4A-4988-8EFC-22FE4416A1F1
+Init Graph
+Graph: 52ACB3E3-3641-4726-BEAA-6CD0A95658B3 Add Node Number Comparison
+Graph: 52ACB3E3-3641-4726-BEAA-6CD0A95658B3 Add Node Number Comparison
+Deinit Graph: 52ACB3E3-3641-4726-BEAA-6CD0A95658B3
+Deinit Graph: 52ACB3E3-3641-4726-BEAA-6CD0A95658B3
+Init Graph
+Graph: 1CCF2673-936D-4508-853F-4B7AF215E28C Add Node Round Number
+Graph: 1CCF2673-936D-4508-853F-4B7AF215E28C Add Node Round Number
+Deinit Graph: 1CCF2673-936D-4508-853F-4B7AF215E28C
+Deinit Graph: 1CCF2673-936D-4508-853F-4B7AF215E28C
+Init Graph
+Graph: 2339BDF0-73D5-442C-9752-EC417C851266 Add Node Clamp Number
+Graph: 2339BDF0-73D5-442C-9752-EC417C851266 Add Node Clamp Number
+Deinit Graph: 2339BDF0-73D5-442C-9752-EC417C851266
+Deinit Graph: 2339BDF0-73D5-442C-9752-EC417C851266
+Init Graph
+Graph: CA6A5888-0412-4AEF-A551-4CF93662E3C3 Add Node Number Remap
+Graph: CA6A5888-0412-4AEF-A551-4CF93662E3C3 Add Node Number Remap
+Deinit Graph: CA6A5888-0412-4AEF-A551-4CF93662E3C3
+Deinit Graph: CA6A5888-0412-4AEF-A551-4CF93662E3C3
+Init Graph
+Graph: A26EF35C-2403-4B2D-B1D7-A8D31966E2F3 Add Node Number Integral
+Graph: A26EF35C-2403-4B2D-B1D7-A8D31966E2F3 Add Node Number Integral
+Deinit Graph: A26EF35C-2403-4B2D-B1D7-A8D31966E2F3
+Deinit Graph: A26EF35C-2403-4B2D-B1D7-A8D31966E2F3
+Init Graph
+Graph: 9F516F1A-B50D-4481-8501-E31E79F1CCAB Add Node Smooth (One Euro)
+Graph: 9F516F1A-B50D-4481-8501-E31E79F1CCAB Add Node Smooth (One Euro)
+Deinit Graph: 9F516F1A-B50D-4481-8501-E31E79F1CCAB
+Deinit Graph: 9F516F1A-B50D-4481-8501-E31E79F1CCAB
+Init Graph
+Graph: 4199E171-35F4-4CF4-9FC2-122AA2BD70C7 Add Node LFO
+Graph: 4199E171-35F4-4CF4-9FC2-122AA2BD70C7 Add Node LFO
+Deinit Graph: 4199E171-35F4-4CF4-9FC2-122AA2BD70C7
+Deinit Graph: 4199E171-35F4-4CF4-9FC2-122AA2BD70C7
+Init Graph
+Graph: 40137178-82AB-4D78-8610-91BD8FE7FED7 Add Node Pulse
+Graph: 40137178-82AB-4D78-8610-91BD8FE7FED7 Add Node Pulse
+Deinit Graph: 40137178-82AB-4D78-8610-91BD8FE7FED7
+Deinit Graph: 40137178-82AB-4D78-8610-91BD8FE7FED7
+Init Graph
+Graph: E8F33C04-94D1-4710-A2CE-AC23355CF165 Add Node Number Generator (Random)
+Graph: E8F33C04-94D1-4710-A2CE-AC23355CF165 Add Node Number Generator (Random)
+Deinit Graph: E8F33C04-94D1-4710-A2CE-AC23355CF165
+Deinit Graph: E8F33C04-94D1-4710-A2CE-AC23355CF165
+Init Graph
+Graph: B396B165-78C9-4C36-9433-AFFAE1567C6B Add Node Index Generator (Shuffle)
+Graph: B396B165-78C9-4C36-9433-AFFAE1567C6B Add Node Index Generator (Shuffle)
+Deinit Graph: B396B165-78C9-4C36-9433-AFFAE1567C6B
+Deinit Graph: B396B165-78C9-4C36-9433-AFFAE1567C6B
+Init Graph
+Graph: 9CDBCDB2-D6EE-48A4-AD7F-94B956020CCB Add Node Trigger
+Graph: 9CDBCDB2-D6EE-48A4-AD7F-94B956020CCB Add Node Trigger
+Deinit Graph: 9CDBCDB2-D6EE-48A4-AD7F-94B956020CCB
+Deinit Graph: 9CDBCDB2-D6EE-48A4-AD7F-94B956020CCB
+Init Graph
+Graph: B3A30790-87DF-4FD9-864F-616242AE5EA7 Add Node Math Expression (sin(x) + y^2)
+Graph: B3A30790-87DF-4FD9-864F-616242AE5EA7 Add Node Math Expression (sin(x) + y^2)
+Deinit Graph: B3A30790-87DF-4FD9-864F-616242AE5EA7
+Deinit Graph: B3A30790-87DF-4FD9-864F-616242AE5EA7
+Init Graph
+Graph: 9F8E6878-3C45-463E-9279-275C4A0A6CB5 Add Node Gradient Noise
+Graph: 9F8E6878-3C45-463E-9279-275C4A0A6CB5 Add Node Gradient Noise
+Deinit Graph: 9F8E6878-3C45-463E-9279-275C4A0A6CB5
+Deinit Graph: 9F8E6878-3C45-463E-9279-275C4A0A6CB5
+Init Graph
+Graph: 92C60383-7C85-498F-B6E6-3733AB37A176 Add Node Audio Spectrum
+Graph: 92C60383-7C85-498F-B6E6-3733AB37A176 Add Node Audio Spectrum
+Deinit Graph: 92C60383-7C85-498F-B6E6-3733AB37A176
+Deinit Graph: 92C60383-7C85-498F-B6E6-3733AB37A176
+Init Graph
+Graph: C873E5EF-B6BD-4CC8-AB99-08C26437CC78 Add Node Vector 2
+Graph: C873E5EF-B6BD-4CC8-AB99-08C26437CC78 Add Node Vector 2
+Deinit Graph: C873E5EF-B6BD-4CC8-AB99-08C26437CC78
+Deinit Graph: C873E5EF-B6BD-4CC8-AB99-08C26437CC78
+Init Graph
+Graph: 1DFA60C2-C2D3-4FB6-BA9E-D5FE145ACD02 Add Node Vector 3
+Graph: 1DFA60C2-C2D3-4FB6-BA9E-D5FE145ACD02 Add Node Vector 3
+Deinit Graph: 1DFA60C2-C2D3-4FB6-BA9E-D5FE145ACD02
+Deinit Graph: 1DFA60C2-C2D3-4FB6-BA9E-D5FE145ACD02
+Init Graph
+Graph: 02061AC9-253F-4457-85E5-823798DB9A53 Add Node Vector 4
+Graph: 02061AC9-253F-4457-85E5-823798DB9A53 Add Node Vector 4
+Deinit Graph: 02061AC9-253F-4457-85E5-823798DB9A53
+Deinit Graph: 02061AC9-253F-4457-85E5-823798DB9A53
+Init Graph
+Graph: 028D8616-6B97-4ACE-9441-359F40B0A4AE Add Node Vector Compose
+Graph: 028D8616-6B97-4ACE-9441-359F40B0A4AE Add Node Vector Compose
+Deinit Graph: 028D8616-6B97-4ACE-9441-359F40B0A4AE
+Deinit Graph: 028D8616-6B97-4ACE-9441-359F40B0A4AE
+Init Graph
+Graph: EDB5E4B3-BB92-4E8D-AF8E-C3353670C5BF Add Node Vector Decompose
+Graph: EDB5E4B3-BB92-4E8D-AF8E-C3353670C5BF Add Node Vector Decompose
+Deinit Graph: EDB5E4B3-BB92-4E8D-AF8E-C3353670C5BF
+Deinit Graph: EDB5E4B3-BB92-4E8D-AF8E-C3353670C5BF
+Init Graph
+Graph: 1836DB4D-DD2D-4F5A-84CF-A38E93D554B9 Add Node Vector Array Compose
+Graph: 1836DB4D-DD2D-4F5A-84CF-A38E93D554B9 Add Node Vector Array Compose
+Deinit Graph: 1836DB4D-DD2D-4F5A-84CF-A38E93D554B9
+Deinit Graph: 1836DB4D-DD2D-4F5A-84CF-A38E93D554B9
+Init Graph
+Graph: 22DD4839-D276-4F43-824E-E59858365A6D Add Node Vector Array Decompose
+Graph: 22DD4839-D276-4F43-824E-E59858365A6D Add Node Vector Array Decompose
+Deinit Graph: 22DD4839-D276-4F43-824E-E59858365A6D
+Deinit Graph: 22DD4839-D276-4F43-824E-E59858365A6D
+Init Graph
+Graph: 2BE7EE09-2504-4D32-9863-77CAB1CC5F35 Add Node Quaternion
+Graph: 2BE7EE09-2504-4D32-9863-77CAB1CC5F35 Add Node Quaternion
+Deinit Graph: 2BE7EE09-2504-4D32-9863-77CAB1CC5F35
+Deinit Graph: 2BE7EE09-2504-4D32-9863-77CAB1CC5F35
+Init Graph
+Graph: A8DF3003-D0E9-48D0-A343-083399971F42 Add Node Orientation Compose (Euler)
+Graph: A8DF3003-D0E9-48D0-A343-083399971F42 Add Node Orientation Compose (Euler)
+Deinit Graph: A8DF3003-D0E9-48D0-A343-083399971F42
+Deinit Graph: A8DF3003-D0E9-48D0-A343-083399971F42
+Init Graph
+Graph: 6A06E0B9-DEE0-4CA0-BDBC-BC9823DDB3A5 Add Node Orientation Decompose (To Euler)
+Graph: 6A06E0B9-DEE0-4CA0-BDBC-BC9823DDB3A5 Add Node Orientation Decompose (To Euler)
+Deinit Graph: 6A06E0B9-DEE0-4CA0-BDBC-BC9823DDB3A5
+Deinit Graph: 6A06E0B9-DEE0-4CA0-BDBC-BC9823DDB3A5
+Init Graph
+Graph: 86757AFD-8106-4ECD-8EB4-48FB94CC8931 Add Node Orientation Array Compose (Euler)
+Graph: 86757AFD-8106-4ECD-8EB4-48FB94CC8931 Add Node Orientation Array Compose (Euler)
+Deinit Graph: 86757AFD-8106-4ECD-8EB4-48FB94CC8931
+Deinit Graph: 86757AFD-8106-4ECD-8EB4-48FB94CC8931
+Init Graph
+Graph: 2D5BFA0D-1D38-43DF-A32D-BEFF20F268BD Add Node Orientation Array Decompose (To Euler)
+Graph: 2D5BFA0D-1D38-43DF-A32D-BEFF20F268BD Add Node Orientation Array Decompose (To Euler)
+Deinit Graph: 2D5BFA0D-1D38-43DF-A32D-BEFF20F268BD
+Deinit Graph: 2D5BFA0D-1D38-43DF-A32D-BEFF20F268BD
+Init Graph
+Graph: 691F94ED-BD13-477C-BCAF-2559E7E3B811 Add Node Transform
+Graph: 691F94ED-BD13-477C-BCAF-2559E7E3B811 Add Node Transform
+Deinit Graph: 691F94ED-BD13-477C-BCAF-2559E7E3B811
+Deinit Graph: 691F94ED-BD13-477C-BCAF-2559E7E3B811
+Init Graph
+Graph: 439797EE-ED34-4B8F-813D-817B4DAF7EAD Add Node Transform Compose (TRS)
+Graph: 439797EE-ED34-4B8F-813D-817B4DAF7EAD Add Node Transform Compose (TRS)
+Deinit Graph: 439797EE-ED34-4B8F-813D-817B4DAF7EAD
+Deinit Graph: 439797EE-ED34-4B8F-813D-817B4DAF7EAD
+Init Graph
+Graph: C4CA2470-AAAF-42B8-A673-69B8D8DE8D25 Add Node Transform Decompose (TRS)
+Graph: C4CA2470-AAAF-42B8-A673-69B8D8DE8D25 Add Node Transform Decompose (TRS)
+Deinit Graph: C4CA2470-AAAF-42B8-A673-69B8D8DE8D25
+Deinit Graph: C4CA2470-AAAF-42B8-A673-69B8D8DE8D25
+Init Graph
+Graph: F69E43EB-73A9-400E-BEBF-EFC97BF0D713 Add Node Transform Translate
+Graph: F69E43EB-73A9-400E-BEBF-EFC97BF0D713 Add Node Transform Translate
+Deinit Graph: F69E43EB-73A9-400E-BEBF-EFC97BF0D713
+Deinit Graph: F69E43EB-73A9-400E-BEBF-EFC97BF0D713
+Init Graph
+Graph: E7A7B812-19B2-4F99-99D5-AC98500ECD79 Add Node Transform Rotate
+Graph: E7A7B812-19B2-4F99-99D5-AC98500ECD79 Add Node Transform Rotate
+Deinit Graph: E7A7B812-19B2-4F99-99D5-AC98500ECD79
+Deinit Graph: E7A7B812-19B2-4F99-99D5-AC98500ECD79
+Init Graph
+Graph: 91D11503-FDD4-4EC3-BD90-E5A0CCA4BCFC Add Node Transform Scale
+Graph: 91D11503-FDD4-4EC3-BD90-E5A0CCA4BCFC Add Node Transform Scale
+Deinit Graph: 91D11503-FDD4-4EC3-BD90-E5A0CCA4BCFC
+Deinit Graph: 91D11503-FDD4-4EC3-BD90-E5A0CCA4BCFC
+Init Graph
+Graph: 2CDB5315-38DB-435C-B0DE-05BB091D64C6 Add Node Transform Transpose
+Graph: 2CDB5315-38DB-435C-B0DE-05BB091D64C6 Add Node Transform Transpose
+Deinit Graph: 2CDB5315-38DB-435C-B0DE-05BB091D64C6
+Deinit Graph: 2CDB5315-38DB-435C-B0DE-05BB091D64C6
+Init Graph
+Graph: 986F8FC7-BCF8-466B-88BD-3E5BADE010EE Add Node Transform Invert
+Graph: 986F8FC7-BCF8-466B-88BD-3E5BADE010EE Add Node Transform Invert
+Deinit Graph: 986F8FC7-BCF8-466B-88BD-3E5BADE010EE
+Deinit Graph: 986F8FC7-BCF8-466B-88BD-3E5BADE010EE
+Init Graph
+Graph: 401D34EE-3AA9-458B-870D-67C692A67941 Add Node Transform Array Compose (TRS)
+Graph: 401D34EE-3AA9-458B-870D-67C692A67941 Add Node Transform Array Compose (TRS)
+Deinit Graph: 401D34EE-3AA9-458B-870D-67C692A67941
+Deinit Graph: 401D34EE-3AA9-458B-870D-67C692A67941
+Init Graph
+Graph: D7A44507-5FBF-480C-870C-43AD5E681D79 Add Node Transform Array Decompose (TRS)
+Graph: D7A44507-5FBF-480C-870C-43AD5E681D79 Add Node Transform Array Decompose (TRS)
+Deinit Graph: D7A44507-5FBF-480C-870C-43AD5E681D79
+Deinit Graph: D7A44507-5FBF-480C-870C-43AD5E681D79
+Init Graph
+Graph: 14456370-4321-4CC2-8908-AD56477B8B9B Add Node Geometry Decompose (Transform)
+Graph: 14456370-4321-4CC2-8908-AD56477B8B9B Add Node Geometry Decompose (Transform)
+Deinit Graph: 14456370-4321-4CC2-8908-AD56477B8B9B
+Deinit Graph: 14456370-4321-4CC2-8908-AD56477B8B9B
+Init Graph
+Graph: B1F74A8C-3B02-4C69-A658-1B0890379777 Add Node Color
+Graph: B1F74A8C-3B02-4C69-A658-1B0890379777 Add Node Color
+Deinit Graph: B1F74A8C-3B02-4C69-A658-1B0890379777
+Deinit Graph: B1F74A8C-3B02-4C69-A658-1B0890379777
+Init Graph
+Graph: 717966C9-6B1D-4685-999A-910D213661B8 Add Node Color From RGBA
+Graph: 717966C9-6B1D-4685-999A-910D213661B8 Add Node Color From RGBA
+Deinit Graph: 717966C9-6B1D-4685-999A-910D213661B8
+Deinit Graph: 717966C9-6B1D-4685-999A-910D213661B8
+Init Graph
+Graph: FEC8B6E0-79BC-4C66-978C-ACDD7FF61509 Add Node String
+Graph: FEC8B6E0-79BC-4C66-978C-ACDD7FF61509 Add Node String
+Deinit Graph: FEC8B6E0-79BC-4C66-978C-ACDD7FF61509
+Deinit Graph: FEC8B6E0-79BC-4C66-978C-ACDD7FF61509
+Init Graph
+Graph: 09E4169B-4218-4C74-9163-509487F6B714 Add Node String Trim
+Graph: 09E4169B-4218-4C74-9163-509487F6B714 Add Node String Trim
+Deinit Graph: 09E4169B-4218-4C74-9163-509487F6B714
+Deinit Graph: 09E4169B-4218-4C74-9163-509487F6B714
+Init Graph
+Graph: 009B09F8-FFF1-45C6-A11D-3E272EB5EEEE Add Node String Length
+Graph: 009B09F8-FFF1-45C6-A11D-3E272EB5EEEE Add Node String Length
+Deinit Graph: 009B09F8-FFF1-45C6-A11D-3E272EB5EEEE
+Deinit Graph: 009B09F8-FFF1-45C6-A11D-3E272EB5EEEE
+Init Graph
+Graph: 214E7966-9FD0-4533-A3BB-DBA804687CB3 Add Node String Range
+Graph: 214E7966-9FD0-4533-A3BB-DBA804687CB3 Add Node String Range
+Deinit Graph: 214E7966-9FD0-4533-A3BB-DBA804687CB3
+Deinit Graph: 214E7966-9FD0-4533-A3BB-DBA804687CB3
+Init Graph
+Graph: BAC5B86E-5024-4592-AB7C-F8CE217E0D4C Add Node String Wrap
+Graph: BAC5B86E-5024-4592-AB7C-F8CE217E0D4C Add Node String Wrap
+Deinit Graph: BAC5B86E-5024-4592-AB7C-F8CE217E0D4C
+Deinit Graph: BAC5B86E-5024-4592-AB7C-F8CE217E0D4C
+Init Graph
+Graph: AD9E0F63-03F1-40E0-BB16-A99485A8E21D Add Node String Case
+Graph: AD9E0F63-03F1-40E0-BB16-A99485A8E21D Add Node String Case
+Deinit Graph: AD9E0F63-03F1-40E0-BB16-A99485A8E21D
+Deinit Graph: AD9E0F63-03F1-40E0-BB16-A99485A8E21D
+Init Graph
+Graph: A662D366-1AD3-4572-9051-39B2D00D27DC Add Node String Comparison
+Graph: A662D366-1AD3-4572-9051-39B2D00D27DC Add Node String Comparison
+Deinit Graph: A662D366-1AD3-4572-9051-39B2D00D27DC
+Deinit Graph: A662D366-1AD3-4572-9051-39B2D00D27DC
+Init Graph
+Graph: 8C6AF9CB-7B86-4DF4-9490-B6F7497E8B33 Add Node String Formatter (Hello {name})
+Graph: 8C6AF9CB-7B86-4DF4-9490-B6F7497E8B33 Add Node String Formatter (Hello {name})
+Deinit Graph: 8C6AF9CB-7B86-4DF4-9490-B6F7497E8B33
+Deinit Graph: 8C6AF9CB-7B86-4DF4-9490-B6F7497E8B33
+Init Graph
+Graph: EDBD5D4A-38B1-4773-A4B7-238D27823CC4 Add Node String Scanner (Frame {n:d} at {t:f}s)
+Graph: EDBD5D4A-38B1-4773-A4B7-238D27823CC4 Add Node String Scanner (Frame {n:d} at {t:f}s)
+Deinit Graph: EDBD5D4A-38B1-4773-A4B7-238D27823CC4
+Deinit Graph: EDBD5D4A-38B1-4773-A4B7-238D27823CC4
+Init Graph
+Graph: 723903D9-3404-48B3-8591-D508E0CB4989 Add Node String Join
+Graph: 723903D9-3404-48B3-8591-D508E0CB4989 Add Node String Join
+Deinit Graph: 723903D9-3404-48B3-8591-D508E0CB4989
+Deinit Graph: 723903D9-3404-48B3-8591-D508E0CB4989
+Init Graph
+Graph: 3181EE7C-1B97-4FEE-B007-FEA7FDB968E1 Add Node String Split (Custom)
+Graph: 3181EE7C-1B97-4FEE-B007-FEA7FDB968E1 Add Node String Split (Custom)
+Deinit Graph: 3181EE7C-1B97-4FEE-B007-FEA7FDB968E1
+Deinit Graph: 3181EE7C-1B97-4FEE-B007-FEA7FDB968E1
+Init Graph
+Graph: 39B78481-1C87-4FF2-B993-FE004A570C55 Add Node String Difference
+Graph: 39B78481-1C87-4FF2-B993-FE004A570C55 Add Node String Difference
+Deinit Graph: 39B78481-1C87-4FF2-B993-FE004A570C55
+Deinit Graph: 39B78481-1C87-4FF2-B993-FE004A570C55
+Init Graph
+Graph: 59253000-AD80-4369-AF0A-8EADCDF0346D Add Node Timestamp Formatter
+Graph: 59253000-AD80-4369-AF0A-8EADCDF0346D Add Node Timestamp Formatter
+Deinit Graph: 59253000-AD80-4369-AF0A-8EADCDF0346D
+Deinit Graph: 59253000-AD80-4369-AF0A-8EADCDF0346D
+Init Graph
+Graph: 6458BFEA-AB8E-4E53-AB3C-9DC870F24C36 Add Node Timecode Formatter
+Graph: 6458BFEA-AB8E-4E53-AB3C-9DC870F24C36 Add Node Timecode Formatter
+Deinit Graph: 6458BFEA-AB8E-4E53-AB3C-9DC870F24C36
+Deinit Graph: 6458BFEA-AB8E-4E53-AB3C-9DC870F24C36
+Init Graph
+Graph: 323B5517-5264-4B9E-A78F-917D40470DE9 Add Node Local LLM Node
+Graph: 323B5517-5264-4B9E-A78F-917D40470DE9 Add Node Local LLM Node
+Deinit Graph: 323B5517-5264-4B9E-A78F-917D40470DE9
+Deinit Graph: 323B5517-5264-4B9E-A78F-917D40470DE9
+Init Graph
+Graph: 7ED61E86-CD92-4F8F-8607-E73D6B1B58A2 Add Node Directory Scanner
+Graph: 7ED61E86-CD92-4F8F-8607-E73D6B1B58A2 Add Node Directory Scanner
+Deinit Graph: 7ED61E86-CD92-4F8F-8607-E73D6B1B58A2
+Deinit Graph: 7ED61E86-CD92-4F8F-8607-E73D6B1B58A2
+Init Graph
+Graph: C83A1526-101F-452D-A073-435FC4BE1AF3 Add Node Text File Loader
+Graph: C83A1526-101F-452D-A073-435FC4BE1AF3 Add Node Text File Loader
+Deinit Graph: C83A1526-101F-452D-A073-435FC4BE1AF3
+Deinit Graph: C83A1526-101F-452D-A073-435FC4BE1AF3
+Init Graph
+Graph: BAF3E24C-3BDB-4B6C-8630-CEEE45B53479 Add Node Dictionary of Virtual
+Graph: BAF3E24C-3BDB-4B6C-8630-CEEE45B53479 Add Node Dictionary of Virtual
+Deinit Graph: BAF3E24C-3BDB-4B6C-8630-CEEE45B53479
+Deinit Graph: BAF3E24C-3BDB-4B6C-8630-CEEE45B53479
+Init Graph
+Graph: AC7CDD5C-A38B-4BA7-894D-62E6F5BE2D31 Add Node Dictionary of Bool
+Graph: AC7CDD5C-A38B-4BA7-894D-62E6F5BE2D31 Add Node Dictionary of Bool
+Deinit Graph: AC7CDD5C-A38B-4BA7-894D-62E6F5BE2D31
+Deinit Graph: AC7CDD5C-A38B-4BA7-894D-62E6F5BE2D31
+Init Graph
+Graph: A48DA65F-85A5-4BC8-8C12-FD9724C8A6C1 Add Node Dictionary of Int
+Graph: A48DA65F-85A5-4BC8-8C12-FD9724C8A6C1 Add Node Dictionary of Int
+Deinit Graph: A48DA65F-85A5-4BC8-8C12-FD9724C8A6C1
+Deinit Graph: A48DA65F-85A5-4BC8-8C12-FD9724C8A6C1
+Init Graph
+Graph: 0EEC79DF-ECEE-40D1-B171-1BB6A5875E09 Add Node Dictionary of Float
+Graph: 0EEC79DF-ECEE-40D1-B171-1BB6A5875E09 Add Node Dictionary of Float
+Deinit Graph: 0EEC79DF-ECEE-40D1-B171-1BB6A5875E09
+Deinit Graph: 0EEC79DF-ECEE-40D1-B171-1BB6A5875E09
+Init Graph
+Graph: 9AD00A1E-B649-4256-846B-34182678BF49 Add Node Dictionary of String
+Graph: 9AD00A1E-B649-4256-846B-34182678BF49 Add Node Dictionary of String
+Deinit Graph: 9AD00A1E-B649-4256-846B-34182678BF49
+Deinit Graph: 9AD00A1E-B649-4256-846B-34182678BF49
+Init Graph
+Graph: E4B8C784-CB22-480C-9197-C3B312EED07A Add Node Dictionary of Vector 2
+Graph: E4B8C784-CB22-480C-9197-C3B312EED07A Add Node Dictionary of Vector 2
+Deinit Graph: E4B8C784-CB22-480C-9197-C3B312EED07A
+Deinit Graph: E4B8C784-CB22-480C-9197-C3B312EED07A
+Init Graph
+Graph: 24956742-DB4C-4F5E-80A0-E16886C3B19B Add Node Dictionary of Vector 3
+Graph: 24956742-DB4C-4F5E-80A0-E16886C3B19B Add Node Dictionary of Vector 3
+Deinit Graph: 24956742-DB4C-4F5E-80A0-E16886C3B19B
+Deinit Graph: 24956742-DB4C-4F5E-80A0-E16886C3B19B
+Init Graph
+Graph: 2938F7D0-5E4C-489B-B319-1D2485C50F9D Add Node Dictionary of Vector 4
+Graph: 2938F7D0-5E4C-489B-B319-1D2485C50F9D Add Node Dictionary of Vector 4
+Deinit Graph: 2938F7D0-5E4C-489B-B319-1D2485C50F9D
+Deinit Graph: 2938F7D0-5E4C-489B-B319-1D2485C50F9D
+Init Graph
+Graph: C869B215-803D-453A-AB91-94B71E469F3A Add Node Dictionary of Quaternion
+Graph: C869B215-803D-453A-AB91-94B71E469F3A Add Node Dictionary of Quaternion
+Deinit Graph: C869B215-803D-453A-AB91-94B71E469F3A
+Deinit Graph: C869B215-803D-453A-AB91-94B71E469F3A
+Init Graph
+Graph: AD5F6B2C-B9A9-4C21-9DC2-73F91C6E1AD2 Add Node Dictionary of Transform
+Graph: AD5F6B2C-B9A9-4C21-9DC2-73F91C6E1AD2 Add Node Dictionary of Transform
+Deinit Graph: AD5F6B2C-B9A9-4C21-9DC2-73F91C6E1AD2
+Deinit Graph: AD5F6B2C-B9A9-4C21-9DC2-73F91C6E1AD2
+Init Graph
+Graph: AE551188-4AEC-4A81-BDFB-4B43FFE4A9A4 Add Node Dictionary of Geometry
+Graph: AE551188-4AEC-4A81-BDFB-4B43FFE4A9A4 Add Node Dictionary of Geometry
+Deinit Graph: AE551188-4AEC-4A81-BDFB-4B43FFE4A9A4
+Deinit Graph: AE551188-4AEC-4A81-BDFB-4B43FFE4A9A4
+Init Graph
+Graph: BC376A2E-AAA3-4D38-931B-805EC6FCEF80 Add Node Dictionary of Material
+Graph: BC376A2E-AAA3-4D38-931B-805EC6FCEF80 Add Node Dictionary of Material
+Deinit Graph: BC376A2E-AAA3-4D38-931B-805EC6FCEF80
+Deinit Graph: BC376A2E-AAA3-4D38-931B-805EC6FCEF80
+Init Graph
+Graph: 165C4DE3-DF5B-4E44-ADA6-7DD95D93E6B0 Add Node Dictionary of Image
+Graph: 165C4DE3-DF5B-4E44-ADA6-7DD95D93E6B0 Add Node Dictionary of Image
+Deinit Graph: 165C4DE3-DF5B-4E44-ADA6-7DD95D93E6B0
+Deinit Graph: 165C4DE3-DF5B-4E44-ADA6-7DD95D93E6B0
+Init Graph
+Graph: F1CE8C34-12A4-4040-BDA6-A74477C256F3 Add Node Compose Dictionary
+Graph: F1CE8C34-12A4-4040-BDA6-A74477C256F3 Add Node Compose Dictionary
+Deinit Graph: F1CE8C34-12A4-4040-BDA6-A74477C256F3
+Deinit Graph: F1CE8C34-12A4-4040-BDA6-A74477C256F3
+Init Graph
+Graph: E9E6E8F8-E786-45CF-B5E6-6589EA063E3A Add Node Decompose Dictionary
+Graph: E9E6E8F8-E786-45CF-B5E6-6589EA063E3A Add Node Decompose Dictionary
+Deinit Graph: E9E6E8F8-E786-45CF-B5E6-6589EA063E3A
+Deinit Graph: E9E6E8F8-E786-45CF-B5E6-6589EA063E3A
+Init Graph
+Graph: 6CE0171B-06B9-443C-B974-C9E2832C38F5 Add Node Dictionary Set Value For Key
+Graph: 6CE0171B-06B9-443C-B974-C9E2832C38F5 Add Node Dictionary Set Value For Key
+Deinit Graph: 6CE0171B-06B9-443C-B974-C9E2832C38F5
+Deinit Graph: 6CE0171B-06B9-443C-B974-C9E2832C38F5
+Init Graph
+Graph: AA2880E0-0C06-4243-9216-43219FC00936 Add Node Dictionary Value For Key
+Graph: AA2880E0-0C06-4243-9216-43219FC00936 Add Node Dictionary Value For Key
+Deinit Graph: AA2880E0-0C06-4243-9216-43219FC00936
+Deinit Graph: AA2880E0-0C06-4243-9216-43219FC00936
+Init Graph
+Graph: 278F3E60-7369-4399-9F0D-6F45E8B0B4C4 Add Node Dictionary Count
+Graph: 278F3E60-7369-4399-9F0D-6F45E8B0B4C4 Add Node Dictionary Count
+Deinit Graph: 278F3E60-7369-4399-9F0D-6F45E8B0B4C4
+Deinit Graph: 278F3E60-7369-4399-9F0D-6F45E8B0B4C4
+Init Graph
+Graph: DA411F1A-F133-484C-ABF6-3D2FED911C1E Add Node Dictionary Has Key
+Graph: DA411F1A-F133-484C-ABF6-3D2FED911C1E Add Node Dictionary Has Key
+Deinit Graph: DA411F1A-F133-484C-ABF6-3D2FED911C1E
+Deinit Graph: DA411F1A-F133-484C-ABF6-3D2FED911C1E
+Init Graph
+Graph: 8DC8F5CF-2503-45A9-87D2-C637621D2C37 Add Node Dictionary Remove Key
+Graph: 8DC8F5CF-2503-45A9-87D2-C637621D2C37 Add Node Dictionary Remove Key
+Deinit Graph: 8DC8F5CF-2503-45A9-87D2-C637621D2C37
+Deinit Graph: 8DC8F5CF-2503-45A9-87D2-C637621D2C37
+Init Graph
+Graph: B32B1534-94CB-425A-A556-5A5CF69EF9B5 Add Node Dictionary Merge
+Graph: B32B1534-94CB-425A-A556-5A5CF69EF9B5 Add Node Dictionary Merge
+Deinit Graph: B32B1534-94CB-425A-A556-5A5CF69EF9B5
+Deinit Graph: B32B1534-94CB-425A-A556-5A5CF69EF9B5
+Init Graph
+Graph: 97E6D2FE-5A57-4335-B9F8-B2F76FC11353 Add Node Dictionary From JSON String
+Graph: 97E6D2FE-5A57-4335-B9F8-B2F76FC11353 Add Node Dictionary From JSON String
+Deinit Graph: 97E6D2FE-5A57-4335-B9F8-B2F76FC11353
+Deinit Graph: 97E6D2FE-5A57-4335-B9F8-B2F76FC11353
+Init Graph
+Graph: 5C7BFC4E-D926-47BA-8AC1-553A1E7F7830 Add Node Array Count
+Graph: 5C7BFC4E-D926-47BA-8AC1-553A1E7F7830 Add Node Array Count
+Deinit Graph: 5C7BFC4E-D926-47BA-8AC1-553A1E7F7830
+Deinit Graph: 5C7BFC4E-D926-47BA-8AC1-553A1E7F7830
+Init Graph
+Graph: E5F7C291-2CF3-4D00-B36E-884C6C966E87 Add Node Array First Value
+Graph: E5F7C291-2CF3-4D00-B36E-884C6C966E87 Add Node Array First Value
+Deinit Graph: E5F7C291-2CF3-4D00-B36E-884C6C966E87
+Deinit Graph: E5F7C291-2CF3-4D00-B36E-884C6C966E87
+Init Graph
+Graph: 410644EC-490D-4CC4-8B11-93A11061768C Add Node Array Last Value
+Graph: 410644EC-490D-4CC4-8B11-93A11061768C Add Node Array Last Value
+Deinit Graph: 410644EC-490D-4CC4-8B11-93A11061768C
+Deinit Graph: 410644EC-490D-4CC4-8B11-93A11061768C
+Init Graph
+Graph: 2DB4B86D-252B-466C-BA4A-8E0D4F7CF55A Add Node Array Value at Index
+Graph: 2DB4B86D-252B-466C-BA4A-8E0D4F7CF55A Add Node Array Value at Index
+Deinit Graph: 2DB4B86D-252B-466C-BA4A-8E0D4F7CF55A
+Deinit Graph: 2DB4B86D-252B-466C-BA4A-8E0D4F7CF55A
+Init Graph
+Graph: 0060E05C-4940-4CFF-B9B0-0529F0AA02F4 Add Node Array Append
+Graph: 0060E05C-4940-4CFF-B9B0-0529F0AA02F4 Add Node Array Append
+Deinit Graph: 0060E05C-4940-4CFF-B9B0-0529F0AA02F4
+Deinit Graph: 0060E05C-4940-4CFF-B9B0-0529F0AA02F4
+Init Graph
+Graph: 6CC6173C-7094-4BE8-A0CA-BD9382D7D63F Add Node Array Replace Value at Index
+Graph: 6CC6173C-7094-4BE8-A0CA-BD9382D7D63F Add Node Array Replace Value at Index
+Deinit Graph: 6CC6173C-7094-4BE8-A0CA-BD9382D7D63F
+Deinit Graph: 6CC6173C-7094-4BE8-A0CA-BD9382D7D63F
+Init Graph
+Graph: E448AF3A-F7DD-4671-8E1F-8DA0229DE0AC Add Node Array Split at Index
+Graph: E448AF3A-F7DD-4671-8E1F-8DA0229DE0AC Add Node Array Split at Index
+Deinit Graph: E448AF3A-F7DD-4671-8E1F-8DA0229DE0AC
+Deinit Graph: E448AF3A-F7DD-4671-8E1F-8DA0229DE0AC
+Init Graph
+Graph: CFC6B432-5A22-4B5D-BAC0-6A49D8E2B60D Add Node Array Subarray
+Graph: CFC6B432-5A22-4B5D-BAC0-6A49D8E2B60D Add Node Array Subarray
+Deinit Graph: CFC6B432-5A22-4B5D-BAC0-6A49D8E2B60D
+Deinit Graph: CFC6B432-5A22-4B5D-BAC0-6A49D8E2B60D
+Init Graph
+Graph: C7F73323-54AE-4D06-BBB8-0AA9A5CFC247 Add Node Array Queue Value
+Graph: C7F73323-54AE-4D06-BBB8-0AA9A5CFC247 Add Node Array Queue Value
+Deinit Graph: C7F73323-54AE-4D06-BBB8-0AA9A5CFC247
+Deinit Graph: C7F73323-54AE-4D06-BBB8-0AA9A5CFC247
+Init Graph
+Graph: F03DBD00-87AD-416E-A507-89C67084C1E8 Add Node Array Reverse
+Graph: F03DBD00-87AD-416E-A507-89C67084C1E8 Add Node Array Reverse
+Deinit Graph: F03DBD00-87AD-416E-A507-89C67084C1E8
+Deinit Graph: F03DBD00-87AD-416E-A507-89C67084C1E8
+Init Graph
+Graph: FBDADFDB-C11B-4814-92DC-9C3E2AB90DC4 Add Node Array Shuffle
+Graph: FBDADFDB-C11B-4814-92DC-9C3E2AB90DC4 Add Node Array Shuffle
+Deinit Graph: FBDADFDB-C11B-4814-92DC-9C3E2AB90DC4
+Deinit Graph: FBDADFDB-C11B-4814-92DC-9C3E2AB90DC4
+Init Graph
+Graph: 3952F943-EC00-4465-B1C7-2CF8D8ECA101 Add Node Line Points
+Graph: 3952F943-EC00-4465-B1C7-2CF8D8ECA101 Add Node Line Points
+Deinit Graph: 3952F943-EC00-4465-B1C7-2CF8D8ECA101
+Deinit Graph: 3952F943-EC00-4465-B1C7-2CF8D8ECA101
+Init Graph
+Graph: B3E36C2F-92A4-406B-8B31-8DEFAD282CF0 Add Node Ring Points
+Graph: B3E36C2F-92A4-406B-8B31-8DEFAD282CF0 Add Node Ring Points
+Deinit Graph: B3E36C2F-92A4-406B-8B31-8DEFAD282CF0
+Deinit Graph: B3E36C2F-92A4-406B-8B31-8DEFAD282CF0
+Init Graph
+Graph: 31D5495E-5962-4C6A-BDD1-D8021C4D765E Add Node Grid Points
+Graph: 31D5495E-5962-4C6A-BDD1-D8021C4D765E Add Node Grid Points
+Deinit Graph: 31D5495E-5962-4C6A-BDD1-D8021C4D765E
+Deinit Graph: 31D5495E-5962-4C6A-BDD1-D8021C4D765E
+Init Graph
+Graph: 133B03F5-F658-425A-B8FD-C191F03DEE1C Add Node Simplify Polyline
+Graph: 133B03F5-F658-425A-B8FD-C191F03DEE1C Add Node Simplify Polyline
+Deinit Graph: 133B03F5-F658-425A-B8FD-C191F03DEE1C
+Deinit Graph: 133B03F5-F658-425A-B8FD-C191F03DEE1C
+Init Graph
+Graph: 212A8BF0-8A81-4D56-9B95-1106809B85DA Add Node OSC Receive
+Graph: 212A8BF0-8A81-4D56-9B95-1106809B85DA Add Node OSC Receive
+Deinit Graph: 212A8BF0-8A81-4D56-9B95-1106809B85DA
+Deinit Graph: 212A8BF0-8A81-4D56-9B95-1106809B85DA
+Init Graph
+Graph: E91EEE8B-4E2B-4795-A895-DBC695D274E8 Add Node HID Device
+Graph: E91EEE8B-4E2B-4795-A895-DBC695D274E8 Add Node HID Device
+Deinit Graph: E91EEE8B-4E2B-4795-A895-DBC695D274E8
+Deinit Graph: E91EEE8B-4E2B-4795-A895-DBC695D274E8
+Init Graph
+Graph: 7CF85DE9-E202-4B57-94AD-55902AE17FF4 Add Node Game Controller
+Graph: 7CF85DE9-E202-4B57-94AD-55902AE17FF4 Add Node Game Controller
+Deinit Graph: 7CF85DE9-E202-4B57-94AD-55902AE17FF4
+Deinit Graph: 7CF85DE9-E202-4B57-94AD-55902AE17FF4
+Init Graph
+Graph: 7E77FC5B-EB4F-4ED4-9209-2B0737D8B25C Add Node MIDI Input
+Graph: 7E77FC5B-EB4F-4ED4-9209-2B0737D8B25C Add Node MIDI Input
+Deinit Graph: 7E77FC5B-EB4F-4ED4-9209-2B0737D8B25C
+Deinit Graph: 7E77FC5B-EB4F-4ED4-9209-2B0737D8B25C
+Init Graph
+Init Graph
+Graph: B3B749E2-F7C2-444C-AAB8-AFD7845FD369 Add Node Sub Graph
+Graph: B3B749E2-F7C2-444C-AAB8-AFD7845FD369 Add Node Sub Graph
+Deinit Graph: B3B749E2-F7C2-444C-AAB8-AFD7845FD369
+Deinit Graph: 487BB746-1F69-4502-842F-0FCC89342359
+Deinit Graph: B3B749E2-F7C2-444C-AAB8-AFD7845FD369
+Deinit Graph: 487BB746-1F69-4502-842F-0FCC89342359
+Init Graph
+Init Graph
+Graph: 2E28AEC3-14DB-40A2-A258-65C40E4D8DD3 Add Node Render To Image and Depth
+Graph: 2E28AEC3-14DB-40A2-A258-65C40E4D8DD3 Add Node Render To Image and Depth
+Deinit Graph: 2E28AEC3-14DB-40A2-A258-65C40E4D8DD3
+Deinit Graph: 876799D2-84EF-4EF5-A3B0-5B1336813746
+Deinit Graph: 2E28AEC3-14DB-40A2-A258-65C40E4D8DD3
+Deinit Graph: 876799D2-84EF-4EF5-A3B0-5B1336813746
+Init Graph
+Init Graph
+Graph: 3D4790E7-8CDA-4BA5-92E5-68E7A344EA10 Add Node Iterator
+Graph: 3D4790E7-8CDA-4BA5-92E5-68E7A344EA10 Add Node Iterator
+Deinit Graph: 3D4790E7-8CDA-4BA5-92E5-68E7A344EA10
+Deinit Graph: 3FC20422-77CA-416D-BB1F-1A715D1AD553
+Deinit Graph: 3D4790E7-8CDA-4BA5-92E5-68E7A344EA10
+Deinit Graph: 3FC20422-77CA-416D-BB1F-1A715D1AD553
+Init Graph
+Graph: 6C798E32-67B3-4BAA-841C-885DE90FA9E6 Add Node Iterator Info
+Graph: 6C798E32-67B3-4BAA-841C-885DE90FA9E6 Add Node Iterator Info
+Deinit Graph: 6C798E32-67B3-4BAA-841C-885DE90FA9E6
+Deinit Graph: 6C798E32-67B3-4BAA-841C-885DE90FA9E6
+Init Graph
+Init Graph
+Graph: 3133CE3C-6DC2-4BC9-A688-9C97AA685877 Add Node Environment Node
+Graph: 3133CE3C-6DC2-4BC9-A688-9C97AA685877 Add Node Environment Node
+Deinit Graph: 3133CE3C-6DC2-4BC9-A688-9C97AA685877
+Deinit Graph: F4F415F5-ED31-4DC5-9B90-F274F8DB4B95
+Deinit Graph: 3133CE3C-6DC2-4BC9-A688-9C97AA685877
+Deinit Graph: F4F415F5-ED31-4DC5-9B90-F274F8DB4B95
+Init Graph
+Graph: 525C0D29-8A38-42BA-BE10-779B345D07D8 Add Node Background Color
+Graph: 525C0D29-8A38-42BA-BE10-779B345D07D8 Add Node Background Color
+Deinit Graph: 525C0D29-8A38-42BA-BE10-779B345D07D8
+Deinit Graph: 525C0D29-8A38-42BA-BE10-779B345D07D8
+Init Graph
+Graph: E67BCD8D-D4F8-4641-AF28-B676854B7A95 Add Node Log
+Graph: E67BCD8D-D4F8-4641-AF28-B676854B7A95 Add Node Log
+Deinit Graph: E67BCD8D-D4F8-4641-AF28-B676854B7A95
+Deinit Graph: E67BCD8D-D4F8-4641-AF28-B676854B7A95
+Init Graph
+Graph: FA2C879C-295E-4F4D-938C-74076BF52E8B Add Node Visualize
+Graph: FA2C879C-295E-4F4D-938C-74076BF52E8B Add Node Visualize
+Deinit Graph: FA2C879C-295E-4F4D-938C-74076BF52E8B
+Deinit Graph: FA2C879C-295E-4F4D-938C-74076BF52E8B
+Init Graph
+Graph: 8BC7ACB2-9C22-48EA-8D95-4A84E405BD75 Add Node JavaScript
+Graph: 8BC7ACB2-9C22-48EA-8D95-4A84E405BD75 Add Node JavaScript
+Deinit Graph: 8BC7ACB2-9C22-48EA-8D95-4A84E405BD75
+Deinit Graph: 8BC7ACB2-9C22-48EA-8D95-4A84E405BD75
+Init Graph
+Graph: 3573643B-55B6-44BB-BDCE-FF89E1AD2CD9 Add Node Cursor
+Graph: 3573643B-55B6-44BB-BDCE-FF89E1AD2CD9 Add Node Cursor
+Deinit Graph: 3573643B-55B6-44BB-BDCE-FF89E1AD2CD9
+Deinit Graph: 3573643B-55B6-44BB-BDCE-FF89E1AD2CD9
+Init Graph
+Graph: 414584B7-1434-4889-9866-DCE1F33B139F Add Node Keyboard
+Graph: 414584B7-1434-4889-9866-DCE1F33B139F Add Node Keyboard
+Deinit Graph: 414584B7-1434-4889-9866-DCE1F33B139F
+Deinit Graph: 414584B7-1434-4889-9866-DCE1F33B139F
+Init Graph
+Graph: B3EF2584-EC26-4498-8100-FF7CE2CDBAC7 Add Node Rendering Info
+Graph: B3EF2584-EC26-4498-8100-FF7CE2CDBAC7 Add Node Rendering Info
+Deinit Graph: B3EF2584-EC26-4498-8100-FF7CE2CDBAC7
+Deinit Graph: B3EF2584-EC26-4498-8100-FF7CE2CDBAC7
+Init Graph
+Graph: A4BB827B-AE24-48D1-961F-429CBD6C2A29 Add Node Image Dimensions
+Graph: A4BB827B-AE24-48D1-961F-429CBD6C2A29 Add Node Image Dimensions
+Deinit Graph: A4BB827B-AE24-48D1-961F-429CBD6C2A29
+Deinit Graph: A4BB827B-AE24-48D1-961F-429CBD6C2A29
+Init Graph
+Graph: C644A30F-876D-4217-91E0-C21FD02C7E10 Add Node Pixels to Units
+Graph: C644A30F-876D-4217-91E0-C21FD02C7E10 Add Node Pixels to Units
+Deinit Graph: C644A30F-876D-4217-91E0-C21FD02C7E10
+Deinit Graph: C644A30F-876D-4217-91E0-C21FD02C7E10
+Init Graph
+Graph: CAB14853-083A-4D35-947A-71679711DA06 Add Node Units to Pixels
+Graph: CAB14853-083A-4D35-947A-71679711DA06 Add Node Units to Pixels
+Deinit Graph: CAB14853-083A-4D35-947A-71679711DA06
+Deinit Graph: CAB14853-083A-4D35-947A-71679711DA06
+Init Graph
+Graph: A62E9B8D-0DE8-4E6C-9B5D-0C2541D2409D Add Node Signal
+Graph: A62E9B8D-0DE8-4E6C-9B5D-0C2541D2409D Add Node Signal
+Deinit Graph: A62E9B8D-0DE8-4E6C-9B5D-0C2541D2409D
+Deinit Graph: A62E9B8D-0DE8-4E6C-9B5D-0C2541D2409D
+Init Graph
+Graph: A4B1EBA9-32E9-47D8-9926-4D16539150B6 Add Node Switch
+Graph: A4B1EBA9-32E9-47D8-9926-4D16539150B6 Add Node Switch
+Deinit Graph: A4B1EBA9-32E9-47D8-9926-4D16539150B6
+Deinit Graph: A4B1EBA9-32E9-47D8-9926-4D16539150B6
+Init Graph
+Graph: 00A38CD2-54BA-49E1-B78F-815917F6DCFE Add Node Gate
+Graph: 00A38CD2-54BA-49E1-B78F-815917F6DCFE Add Node Gate
+Deinit Graph: 00A38CD2-54BA-49E1-B78F-815917F6DCFE
+Deinit Graph: 00A38CD2-54BA-49E1-B78F-815917F6DCFE
+Init Graph
+Graph: 6E4288DF-D818-4A8C-97E5-34619F96B40E Add Node Matrix Switch
+Graph: 6E4288DF-D818-4A8C-97E5-34619F96B40E Add Node Matrix Switch
+Deinit Graph: 6E4288DF-D818-4A8C-97E5-34619F96B40E
+Deinit Graph: 6E4288DF-D818-4A8C-97E5-34619F96B40E
+Init Graph
+Graph: B0B53AE2-36AC-487E-9D27-E1304D5C190E Add Node Sample and Hold
+Graph: B0B53AE2-36AC-487E-9D27-E1304D5C190E Add Node Sample and Hold
+Deinit Graph: B0B53AE2-36AC-487E-9D27-E1304D5C190E
+Deinit Graph: B0B53AE2-36AC-487E-9D27-E1304D5C190E
+Init Graph
+Graph: 4EE409E8-132C-4319-90EA-E5CA76B7A90F Add Node Aces
+Graph: 4EE409E8-132C-4319-90EA-E5CA76B7A90F Add Node Aces
+Deinit Graph: 4EE409E8-132C-4319-90EA-E5CA76B7A90F
+Deinit Graph: 4EE409E8-132C-4319-90EA-E5CA76B7A90F
+Init Graph
+Graph: 86F98C1D-9550-4FBE-A00C-EA5B98929557 Add Node Additive
+Graph: 86F98C1D-9550-4FBE-A00C-EA5B98929557 Add Node Additive
+Deinit Graph: 86F98C1D-9550-4FBE-A00C-EA5B98929557
+Deinit Graph: 86F98C1D-9550-4FBE-A00C-EA5B98929557
+Init Graph
+Graph: 178EB8D4-534A-4E48-AE25-49D49645A730 Add Node Apply Mask
+Graph: 178EB8D4-534A-4E48-AE25-49D49645A730 Add Node Apply Mask
+Deinit Graph: 178EB8D4-534A-4E48-AE25-49D49645A730
+Deinit Graph: 178EB8D4-534A-4E48-AE25-49D49645A730
+Init Graph
+Graph: 40CB13C6-809E-4E53-9B0D-E53EAA3CEF0B Add Node Average
+Graph: 40CB13C6-809E-4E53-9B0D-E53EAA3CEF0B Add Node Average
+Deinit Graph: 40CB13C6-809E-4E53-9B0D-E53EAA3CEF0B
+Deinit Graph: 40CB13C6-809E-4E53-9B0D-E53EAA3CEF0B
+Init Graph
+Graph: 0466A60F-3C7E-4AE6-966C-E8AA3329179A Add Node Barrel
+Graph: 0466A60F-3C7E-4AE6-966C-E8AA3329179A Add Node Barrel
+Deinit Graph: 0466A60F-3C7E-4AE6-966C-E8AA3329179A
+Deinit Graph: 0466A60F-3C7E-4AE6-966C-E8AA3329179A
+Init Graph
+Graph: 5AD35410-E6E4-4136-B376-C8121A20B486 Add Node Brightness Contrast Saturation
+Graph: 5AD35410-E6E4-4136-B376-C8121A20B486 Add Node Brightness Contrast Saturation
+Deinit Graph: 5AD35410-E6E4-4136-B376-C8121A20B486
+Deinit Graph: 5AD35410-E6E4-4136-B376-C8121A20B486
+Init Graph
+Graph: 10169DB8-69C5-407C-A6B0-C90EF345EBB0 Add Node CMYK Dot Screen
+Graph: 10169DB8-69C5-407C-A6B0-C90EF345EBB0 Add Node CMYK Dot Screen
+Deinit Graph: 10169DB8-69C5-407C-A6B0-C90EF345EBB0
+Deinit Graph: 10169DB8-69C5-407C-A6B0-C90EF345EBB0
+Init Graph
+Graph: 6616BF07-F852-4B5F-AC15-61A0F9122F17 Add Node CMYK To RGB
+Graph: 6616BF07-F852-4B5F-AC15-61A0F9122F17 Add Node CMYK To RGB
+Deinit Graph: 6616BF07-F852-4B5F-AC15-61A0F9122F17
+Deinit Graph: 6616BF07-F852-4B5F-AC15-61A0F9122F17
+Init Graph
+Graph: C458FD73-2587-49A3-B296-21CA65962A95 Add Node Channel Mixer
+Graph: C458FD73-2587-49A3-B296-21CA65962A95 Add Node Channel Mixer
+Deinit Graph: C458FD73-2587-49A3-B296-21CA65962A95
+Deinit Graph: C458FD73-2587-49A3-B296-21CA65962A95
+Init Graph
+Graph: 27A6D6AB-5B82-4DE1-ACB1-3323D8ECD231 Add Node Channel Subsample
+Graph: 27A6D6AB-5B82-4DE1-ACB1-3323D8ECD231 Add Node Channel Subsample
+Deinit Graph: 27A6D6AB-5B82-4DE1-ACB1-3323D8ECD231
+Deinit Graph: 27A6D6AB-5B82-4DE1-ACB1-3323D8ECD231
+Init Graph
+Graph: 495F5114-D50F-41E6-90B6-950313D9A1AA Add Node Cine Grain
+Graph: 495F5114-D50F-41E6-90B6-950313D9A1AA Add Node Cine Grain
+Deinit Graph: 495F5114-D50F-41E6-90B6-950313D9A1AA
+Deinit Graph: 495F5114-D50F-41E6-90B6-950313D9A1AA
+Init Graph
+Graph: BFD5FA84-BE16-4652-A661-C74081A6933A Add Node Circle
+Graph: BFD5FA84-BE16-4652-A661-C74081A6933A Add Node Circle
+Deinit Graph: BFD5FA84-BE16-4652-A661-C74081A6933A
+Deinit Graph: BFD5FA84-BE16-4652-A661-C74081A6933A
+Init Graph
+Graph: 6C620A0A-DF13-4A66-9952-28DE1652CB84 Add Node Classic FBM Noise
+Graph: 6C620A0A-DF13-4A66-9952-28DE1652CB84 Add Node Classic FBM Noise
+Deinit Graph: 6C620A0A-DF13-4A66-9952-28DE1652CB84
+Deinit Graph: 6C620A0A-DF13-4A66-9952-28DE1652CB84
+Init Graph
+Graph: 946D71B9-31C4-4390-B77C-EFA8786CA6B2 Add Node Color
+Graph: 946D71B9-31C4-4390-B77C-EFA8786CA6B2 Add Node Color
+Deinit Graph: 946D71B9-31C4-4390-B77C-EFA8786CA6B2
+Deinit Graph: 946D71B9-31C4-4390-B77C-EFA8786CA6B2
+Init Graph
+Graph: 6D4EF6A0-A3FE-4D7C-BB76-E7098223A26B Add Node Color Burn
+Graph: 6D4EF6A0-A3FE-4D7C-BB76-E7098223A26B Add Node Color Burn
+Deinit Graph: 6D4EF6A0-A3FE-4D7C-BB76-E7098223A26B
+Deinit Graph: 6D4EF6A0-A3FE-4D7C-BB76-E7098223A26B
+Init Graph
+Graph: 864689ED-31EC-4EC2-962A-5D1BD020AD9D Add Node Color Clamp
+Graph: 864689ED-31EC-4EC2-962A-5D1BD020AD9D Add Node Color Clamp
+Deinit Graph: 864689ED-31EC-4EC2-962A-5D1BD020AD9D
+Deinit Graph: 864689ED-31EC-4EC2-962A-5D1BD020AD9D
+Init Graph
+Graph: B7701E3D-8643-4FE1-AC1F-6352D6AC2FD5 Add Node Color Dodge
+Graph: B7701E3D-8643-4FE1-AC1F-6352D6AC2FD5 Add Node Color Dodge
+Deinit Graph: B7701E3D-8643-4FE1-AC1F-6352D6AC2FD5
+Deinit Graph: B7701E3D-8643-4FE1-AC1F-6352D6AC2FD5
+Init Graph
+Graph: 21C9E263-31EA-4695-8DDC-080BA4938EC0 Add Node Composite Atop
+Graph: 21C9E263-31EA-4695-8DDC-080BA4938EC0 Add Node Composite Atop
+Deinit Graph: 21C9E263-31EA-4695-8DDC-080BA4938EC0
+Deinit Graph: 21C9E263-31EA-4695-8DDC-080BA4938EC0
+Init Graph
+Graph: 9D9962F4-1A8B-4EE1-A56A-BB462A002899 Add Node Composite In
+Graph: 9D9962F4-1A8B-4EE1-A56A-BB462A002899 Add Node Composite In
+Deinit Graph: 9D9962F4-1A8B-4EE1-A56A-BB462A002899
+Deinit Graph: 9D9962F4-1A8B-4EE1-A56A-BB462A002899
+Init Graph
+Graph: 8B13A8CC-3DBB-431F-AEC5-CC42CC220270 Add Node Composite Out
+Graph: 8B13A8CC-3DBB-431F-AEC5-CC42CC220270 Add Node Composite Out
+Deinit Graph: 8B13A8CC-3DBB-431F-AEC5-CC42CC220270
+Deinit Graph: 8B13A8CC-3DBB-431F-AEC5-CC42CC220270
+Init Graph
+Graph: B17575F7-A47E-454C-9264-146912F9F86D Add Node Composite Over
+Graph: B17575F7-A47E-454C-9264-146912F9F86D Add Node Composite Over
+Deinit Graph: B17575F7-A47E-454C-9264-146912F9F86D
+Deinit Graph: B17575F7-A47E-454C-9264-146912F9F86D
+Post Shader Pipeline: program_source:871:12: error: no matching function for call to 'compositeXor'
+    return COMPOSITE_FUNC(srcColor, dstColor);
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+program_source:422:30: note: expanded from macro 'COMPOSITE_FUNC'
+#define COMPOSITE_FUNC(a, b) compositeXor(a, b)
+                             ^~~~~~~~~~~~
+program_source:470:7: note: candidate function not viable: no known conversion from 'half4' (vector of 4 'half' values) to 'float' for 1st argument
+float compositeXor(float src, float dst)
+      ^
+program_source:480:8: note: candidate function not viable: no known conversion from 'half4' (vector of 4 'half' values) to 'float4' (vector of 4 'float' values) for 1st argument
+float4 compositeXor(float4 srcColor, float4 dstColor) 
+       ^
+program_source:475:8: note: candidate function not viable: requires 4 arguments, but 2 were provided
+float3 compositeXor(float3 srcColor, float3 dstColor, float srcAlpha, float dstAlpha)
+       ^
+
+Post Shader Path: /Users/andre/.codex/worktrees/review-pr407/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/Resources/Fabric_Fabric.bundle/Contents/Resources/EffectsTwoChannel/Composite/CompositeXor.metal
+Init Graph
+Graph: 9EA38EED-86B6-470D-AF40-EEBE782B4DD7 Add Node Composite Xor
+Post Shader Pipeline: program_source:871:12: error: no matching function for call to 'compositeXor'
+    return COMPOSITE_FUNC(srcColor, dstColor);
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+program_source:422:30: note: expanded from macro 'COMPOSITE_FUNC'
+#define COMPOSITE_FUNC(a, b) compositeXor(a, b)
+                             ^~~~~~~~~~~~
+program_source:470:7: note: candidate function not viable: no known conversion from 'half4' (vector of 4 'half' values) to 'float' for 1st argument
+float compositeXor(float src, float dst)
+      ^
+program_source:480:8: note: candidate function not viable: no known conversion from 'half4' (vector of 4 'half' values) to 'float4' (vector of 4 'float' values) for 1st argument
+float4 compositeXor(float4 srcColor, float4 dstColor) 
+       ^
+program_source:475:8: note: candidate function not viable: requires 4 arguments, but 2 were provided
+float3 compositeXor(float3 srcColor, float3 dstColor, float srcAlpha, float dstAlpha)
+       ^
+
+Post Shader Path: /Users/andre/.codex/worktrees/review-pr407/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/Resources/Fabric_Fabric.bundle/Contents/Resources/EffectsTwoChannel/Composite/CompositeXor.metal
+Graph: 9EA38EED-86B6-470D-AF40-EEBE782B4DD7 Add Node Composite Xor
+Deinit Graph: 9EA38EED-86B6-470D-AF40-EEBE782B4DD7
+Deinit Graph: 9EA38EED-86B6-470D-AF40-EEBE782B4DD7
+Init Graph
+Graph: 2E37AF7E-B6B7-4076-BD1A-E9B83BC146AE Add Node Base Texture Compute (Compute Invert Color)
+Graph: 2E37AF7E-B6B7-4076-BD1A-E9B83BC146AE Add Node Base Texture Compute (Compute Invert Color)
+Deinit Graph: 2E37AF7E-B6B7-4076-BD1A-E9B83BC146AE
+Deinit Graph: 2E37AF7E-B6B7-4076-BD1A-E9B83BC146AE
+Init Graph
+Graph: 230D1F90-ECE9-41A6-82A0-A2762CE54384 Add Node Constant Color
+Graph: 230D1F90-ECE9-41A6-82A0-A2762CE54384 Add Node Constant Color
+Deinit Graph: 230D1F90-ECE9-41A6-82A0-A2762CE54384
+Deinit Graph: 230D1F90-ECE9-41A6-82A0-A2762CE54384
+Init Graph
+Graph: FF796302-2BAF-42E0-999C-2E10120C1E7A Add Node Cross
+Graph: FF796302-2BAF-42E0-999C-2E10120C1E7A Add Node Cross
+Deinit Graph: FF796302-2BAF-42E0-999C-2E10120C1E7A
+Deinit Graph: FF796302-2BAF-42E0-999C-2E10120C1E7A
+Init Graph
+Graph: 35CF1DD4-A6E9-4E8B-B0EC-8C01C824D6BD Add Node Cross Hatch
+Graph: 35CF1DD4-A6E9-4E8B-B0EC-8C01C824D6BD Add Node Cross Hatch
+Deinit Graph: 35CF1DD4-A6E9-4E8B-B0EC-8C01C824D6BD
+Deinit Graph: 35CF1DD4-A6E9-4E8B-B0EC-8C01C824D6BD
+Init Graph
+Graph: F85A953C-22B5-4628-B4EB-A6023EBE646D Add Node Darken
+Graph: F85A953C-22B5-4628-B4EB-A6023EBE646D Add Node Darken
+Deinit Graph: F85A953C-22B5-4628-B4EB-A6023EBE646D
+Deinit Graph: F85A953C-22B5-4628-B4EB-A6023EBE646D
+Init Graph
+Graph: 9F157BAB-872B-46A4-BF1C-742B7DEF1158 Add Node Dent
+Graph: 9F157BAB-872B-46A4-BF1C-742B7DEF1158 Add Node Dent
+Deinit Graph: 9F157BAB-872B-46A4-BF1C-742B7DEF1158
+Deinit Graph: 9F157BAB-872B-46A4-BF1C-742B7DEF1158
+Init Graph
+Graph: E4C40271-3CA7-4CB4-86BD-E207FA012FE0 Add Node Depth Of Field
+Graph: E4C40271-3CA7-4CB4-86BD-E207FA012FE0 Add Node Depth Of Field
+Deinit Graph: E4C40271-3CA7-4CB4-86BD-E207FA012FE0
+Deinit Graph: E4C40271-3CA7-4CB4-86BD-E207FA012FE0
+Init Graph
+Graph: 11959C3E-347A-41DA-A716-D54A75C9432E Add Node Difference
+Graph: 11959C3E-347A-41DA-A716-D54A75C9432E Add Node Difference
+Deinit Graph: 11959C3E-347A-41DA-A716-D54A75C9432E
+Deinit Graph: 11959C3E-347A-41DA-A716-D54A75C9432E
+Init Graph
+Graph: 39A19989-7287-43F6-9604-1965E1828DA7 Add Node Dilation
+Graph: 39A19989-7287-43F6-9604-1965E1828DA7 Add Node Dilation
+Deinit Graph: 39A19989-7287-43F6-9604-1965E1828DA7
+Deinit Graph: 39A19989-7287-43F6-9604-1965E1828DA7
+Init Graph
+Graph: E6220D5E-61DF-495B-A646-991EA558FD26 Add Node Displace
+Graph: E6220D5E-61DF-495B-A646-991EA558FD26 Add Node Displace
+Deinit Graph: E6220D5E-61DF-495B-A646-991EA558FD26
+Deinit Graph: E6220D5E-61DF-495B-A646-991EA558FD26
+Init Graph
+Graph: A77622ED-4463-41A6-9924-AB4AE580D4FE Add Node Displace With Mask
+Graph: A77622ED-4463-41A6-9924-AB4AE580D4FE Add Node Displace With Mask
+Deinit Graph: A77622ED-4463-41A6-9924-AB4AE580D4FE
+Deinit Graph: A77622ED-4463-41A6-9924-AB4AE580D4FE
+Init Graph
+Graph: 087C4E9D-A05D-45CB-8011-F1651A3B3223 Add Node Domain Warp Simplex Noise
+Graph: 087C4E9D-A05D-45CB-8011-F1651A3B3223 Add Node Domain Warp Simplex Noise
+Deinit Graph: 087C4E9D-A05D-45CB-8011-F1651A3B3223
+Deinit Graph: 087C4E9D-A05D-45CB-8011-F1651A3B3223
+Init Graph
+Graph: E5DA94D4-F036-4294-947A-3016DB3644BC Add Node Duo Tone
+Graph: E5DA94D4-F036-4294-947A-3016DB3644BC Add Node Duo Tone
+Deinit Graph: E5DA94D4-F036-4294-947A-3016DB3644BC
+Deinit Graph: E5DA94D4-F036-4294-947A-3016DB3644BC
+Init Graph
+Graph: E5FA69A6-81E1-4DC2-9D28-48C771233EE8 Add Node Exclusion
+Graph: E5FA69A6-81E1-4DC2-9D28-48C771233EE8 Add Node Exclusion
+Deinit Graph: E5FA69A6-81E1-4DC2-9D28-48C771233EE8
+Deinit Graph: E5FA69A6-81E1-4DC2-9D28-48C771233EE8
+Init Graph
+Graph: 37730C3F-C38C-4B13-9A23-A11494D7C29D Add Node Exposure
+Graph: 37730C3F-C38C-4B13-9A23-A11494D7C29D Add Node Exposure
+Deinit Graph: 37730C3F-C38C-4B13-9A23-A11494D7C29D
+Deinit Graph: 37730C3F-C38C-4B13-9A23-A11494D7C29D
+Init Graph
+Graph: DC1894C2-1273-47FE-B54D-A80CB8262AEB Add Node FXAA
+Graph: DC1894C2-1273-47FE-B54D-A80CB8262AEB Add Node FXAA
+Deinit Graph: DC1894C2-1273-47FE-B54D-A80CB8262AEB
+Deinit Graph: DC1894C2-1273-47FE-B54D-A80CB8262AEB
+Init Graph
+Graph: 7BEAB24D-9FA7-4139-A138-3F0BB0C28A8F Add Node Fade Curve
+Graph: 7BEAB24D-9FA7-4139-A138-3F0BB0C28A8F Add Node Fade Curve
+Deinit Graph: 7BEAB24D-9FA7-4139-A138-3F0BB0C28A8F
+Deinit Graph: 7BEAB24D-9FA7-4139-A138-3F0BB0C28A8F
+Init Graph
+Graph: 46D744A8-E596-49AA-95AF-F50D980AF907 Add Node Fast Grain
+Graph: 46D744A8-E596-49AA-95AF-F50D980AF907 Add Node Fast Grain
+Deinit Graph: 46D744A8-E596-49AA-95AF-F50D980AF907
+Deinit Graph: 46D744A8-E596-49AA-95AF-F50D980AF907
+Init Graph
+Graph: 3C6671FB-D6A8-4B67-B1A2-40EDEDBCB621 Add Node Filmic
+Graph: 3C6671FB-D6A8-4B67-B1A2-40EDEDBCB621 Add Node Filmic
+Deinit Graph: 3C6671FB-D6A8-4B67-B1A2-40EDEDBCB621
+Deinit Graph: 3C6671FB-D6A8-4B67-B1A2-40EDEDBCB621
+Init Graph
+Graph: FB9FBDF9-74F2-45DC-96C1-C1D59FC411A6 Add Node Gamma
+Graph: FB9FBDF9-74F2-45DC-96C1-C1D59FC411A6 Add Node Gamma
+Deinit Graph: FB9FBDF9-74F2-45DC-96C1-C1D59FC411A6
+Deinit Graph: FB9FBDF9-74F2-45DC-96C1-C1D59FC411A6
+Init Graph
+Graph: CEAC775C-3B4F-4975-A1D0-9783C59E4A06 Add Node Glow
+Graph: CEAC775C-3B4F-4975-A1D0-9783C59E4A06 Add Node Glow
+Deinit Graph: CEAC775C-3B4F-4975-A1D0-9783C59E4A06
+Deinit Graph: CEAC775C-3B4F-4975-A1D0-9783C59E4A06
+Init Graph
+Graph: AAFAEEFA-7999-486B-A007-155298381795 Add Node Gradient FBM Noise
+Graph: AAFAEEFA-7999-486B-A007-155298381795 Add Node Gradient FBM Noise
+Deinit Graph: AAFAEEFA-7999-486B-A007-155298381795
+Deinit Graph: AAFAEEFA-7999-486B-A007-155298381795
+Init Graph
+Graph: 24FC8714-3987-475F-8E48-D33BF719CA79 Add Node Gradient Flow
+Graph: 24FC8714-3987-475F-8E48-D33BF719CA79 Add Node Gradient Flow
+Deinit Graph: 24FC8714-3987-475F-8E48-D33BF719CA79
+Deinit Graph: 24FC8714-3987-475F-8E48-D33BF719CA79
+Init Graph
+Graph: 91F51C36-D30C-4A78-B054-6AB875C90FC0 Add Node Gradient Flow Offset
+Graph: 91F51C36-D30C-4A78-B054-6AB875C90FC0 Add Node Gradient Flow Offset
+Deinit Graph: 91F51C36-D30C-4A78-B054-6AB875C90FC0
+Deinit Graph: 91F51C36-D30C-4A78-B054-6AB875C90FC0
+Init Graph
+Graph: F78C87A6-5003-4B53-ACF5-D3FE6235A2AA Add Node HSV To RGB
+Graph: F78C87A6-5003-4B53-ACF5-D3FE6235A2AA Add Node HSV To RGB
+Deinit Graph: F78C87A6-5003-4B53-ACF5-D3FE6235A2AA
+Deinit Graph: F78C87A6-5003-4B53-ACF5-D3FE6235A2AA
+Init Graph
+Graph: 186CD6CD-F8D6-4E62-96E7-8AA169876C0F Add Node Halation
+Graph: 186CD6CD-F8D6-4E62-96E7-8AA169876C0F Add Node Halation
+Deinit Graph: 186CD6CD-F8D6-4E62-96E7-8AA169876C0F
+Deinit Graph: 186CD6CD-F8D6-4E62-96E7-8AA169876C0F
+Init Graph
+Graph: D4668C48-27F4-40C9-A95E-1BCFF97311DE Add Node Halation Extract
+Graph: D4668C48-27F4-40C9-A95E-1BCFF97311DE Add Node Halation Extract
+Deinit Graph: D4668C48-27F4-40C9-A95E-1BCFF97311DE
+Deinit Graph: D4668C48-27F4-40C9-A95E-1BCFF97311DE
+Init Graph
+Graph: 2C66C679-C581-49C8-B689-D24136BB4C18 Add Node Hard Light
+Graph: 2C66C679-C581-49C8-B689-D24136BB4C18 Add Node Hard Light
+Deinit Graph: 2C66C679-C581-49C8-B689-D24136BB4C18
+Deinit Graph: 2C66C679-C581-49C8-B689-D24136BB4C18
+Init Graph
+Graph: B8AE8398-54E2-4715-8DB4-9250DB2E4675 Add Node Hard Mix
+Graph: B8AE8398-54E2-4715-8DB4-9250DB2E4675 Add Node Hard Mix
+Deinit Graph: B8AE8398-54E2-4715-8DB4-9250DB2E4675
+Deinit Graph: B8AE8398-54E2-4715-8DB4-9250DB2E4675
+Init Graph
+Graph: BDB49FD6-022C-4F49-AA94-931E81C61E03 Add Node Hexagonal Pixelate
+Graph: BDB49FD6-022C-4F49-AA94-931E81C61E03 Add Node Hexagonal Pixelate
+Deinit Graph: BDB49FD6-022C-4F49-AA94-931E81C61E03
+Deinit Graph: BDB49FD6-022C-4F49-AA94-931E81C61E03
+Init Graph
+Graph: ADDE741A-6FC9-40BA-9318-F0DCCE8452A9 Add Node Hue
+Graph: ADDE741A-6FC9-40BA-9318-F0DCCE8452A9 Add Node Hue
+Deinit Graph: ADDE741A-6FC9-40BA-9318-F0DCCE8452A9
+Deinit Graph: ADDE741A-6FC9-40BA-9318-F0DCCE8452A9
+Init Graph
+Graph: 29F0DE7A-911B-4B46-B0E3-7C94733AE99E Add Node Hue
+Graph: 29F0DE7A-911B-4B46-B0E3-7C94733AE99E Add Node Hue
+Deinit Graph: 29F0DE7A-911B-4B46-B0E3-7C94733AE99E
+Deinit Graph: 29F0DE7A-911B-4B46-B0E3-7C94733AE99E
+Init Graph
+Graph: 63EF5797-B8B5-44FD-AD83-B56E3E4FFE4B Add Node Invert
+Graph: 63EF5797-B8B5-44FD-AD83-B56E3E4FFE4B Add Node Invert
+Deinit Graph: 63EF5797-B8B5-44FD-AD83-B56E3E4FFE4B
+Deinit Graph: 63EF5797-B8B5-44FD-AD83-B56E3E4FFE4B
+Init Graph
+Graph: 1116975F-9568-49C3-9FF9-1F1C75D5327B Add Node Kaliedoscope
+Graph: 1116975F-9568-49C3-9FF9-1F1C75D5327B Add Node Kaliedoscope
+Deinit Graph: 1116975F-9568-49C3-9FF9-1F1C75D5327B
+Deinit Graph: 1116975F-9568-49C3-9FF9-1F1C75D5327B
+Init Graph
+Graph: 44D61097-5456-47B9-A712-D1D67F612968 Add Node LAB To RGB
+Graph: 44D61097-5456-47B9-A712-D1D67F612968 Add Node LAB To RGB
+Deinit Graph: 44D61097-5456-47B9-A712-D1D67F612968
+Deinit Graph: 44D61097-5456-47B9-A712-D1D67F612968
+Init Graph
+Graph: 5D08B94D-F6B1-4992-B069-C4D90FECF41F Add Node LAB To XYZ
+Graph: 5D08B94D-F6B1-4992-B069-C4D90FECF41F Add Node LAB To XYZ
+Deinit Graph: 5D08B94D-F6B1-4992-B069-C4D90FECF41F
+Deinit Graph: 5D08B94D-F6B1-4992-B069-C4D90FECF41F
+Init Graph
+Graph: AEA5D5C1-0261-46E8-A950-F5B794F2A7B9 Add Node Levels
+Graph: AEA5D5C1-0261-46E8-A950-F5B794F2A7B9 Add Node Levels
+Deinit Graph: AEA5D5C1-0261-46E8-A950-F5B794F2A7B9
+Deinit Graph: AEA5D5C1-0261-46E8-A950-F5B794F2A7B9
+Init Graph
+Graph: CEE5799A-FAE8-4BB7-B113-FC436BB99505 Add Node Light Leak
+Graph: CEE5799A-FAE8-4BB7-B113-FC436BB99505 Add Node Light Leak
+Deinit Graph: CEE5799A-FAE8-4BB7-B113-FC436BB99505
+Deinit Graph: CEE5799A-FAE8-4BB7-B113-FC436BB99505
+Init Graph
+Graph: 4CE693F9-1257-4338-B6F1-45CC3E4D6D67 Add Node Lighten
+Graph: 4CE693F9-1257-4338-B6F1-45CC3E4D6D67 Add Node Lighten
+Deinit Graph: 4CE693F9-1257-4338-B6F1-45CC3E4D6D67
+Deinit Graph: 4CE693F9-1257-4338-B6F1-45CC3E4D6D67
+Init Graph
+Graph: FDE4617E-1D4C-4D02-A277-4E1BFFE60FE5 Add Node Linear Burn
+Graph: FDE4617E-1D4C-4D02-A277-4E1BFFE60FE5 Add Node Linear Burn
+Deinit Graph: FDE4617E-1D4C-4D02-A277-4E1BFFE60FE5
+Deinit Graph: FDE4617E-1D4C-4D02-A277-4E1BFFE60FE5
+Init Graph
+Graph: 30C3A4E9-3D34-4606-82CA-45A2661B17B7 Add Node Linear Dodge
+Graph: 30C3A4E9-3D34-4606-82CA-45A2661B17B7 Add Node Linear Dodge
+Deinit Graph: 30C3A4E9-3D34-4606-82CA-45A2661B17B7
+Deinit Graph: 30C3A4E9-3D34-4606-82CA-45A2661B17B7
+Init Graph
+Graph: D7F61BC0-DE18-446A-ABE4-D4A69BE52B8D Add Node Linear Gradient
+Graph: D7F61BC0-DE18-446A-ABE4-D4A69BE52B8D Add Node Linear Gradient
+Deinit Graph: D7F61BC0-DE18-446A-ABE4-D4A69BE52B8D
+Deinit Graph: D7F61BC0-DE18-446A-ABE4-D4A69BE52B8D
+Init Graph
+Graph: A2D135F2-27F3-4370-BD4B-698AC350B56E Add Node Linear Light
+Graph: A2D135F2-27F3-4370-BD4B-698AC350B56E Add Node Linear Light
+Deinit Graph: A2D135F2-27F3-4370-BD4B-698AC350B56E
+Deinit Graph: A2D135F2-27F3-4370-BD4B-698AC350B56E
+Init Graph
+Graph: 1B7A4816-7019-4882-A9A1-FD2471E53C50 Add Node LinearRGBToSRGB
+Graph: 1B7A4816-7019-4882-A9A1-FD2471E53C50 Add Node LinearRGBToSRGB
+Deinit Graph: 1B7A4816-7019-4882-A9A1-FD2471E53C50
+Deinit Graph: 1B7A4816-7019-4882-A9A1-FD2471E53C50
+Init Graph
+Graph: E63EC375-3781-49CD-BF7D-CE72A45A8B5E Add Node Linearize Depth
+Graph: E63EC375-3781-49CD-BF7D-CE72A45A8B5E Add Node Linearize Depth
+Deinit Graph: E63EC375-3781-49CD-BF7D-CE72A45A8B5E
+Deinit Graph: E63EC375-3781-49CD-BF7D-CE72A45A8B5E
+Init Graph
+Graph: AB3BADEC-2687-4923-A698-86E5AF8341E7 Add Node Luminosity
+Graph: AB3BADEC-2687-4923-A698-86E5AF8341E7 Add Node Luminosity
+Deinit Graph: AB3BADEC-2687-4923-A698-86E5AF8341E7
+Deinit Graph: AB3BADEC-2687-4923-A698-86E5AF8341E7
+Init Graph
+Graph: BA711C02-039C-40E7-B02D-B73B3479FB15 Add Node Mix
+Graph: BA711C02-039C-40E7-B02D-B73B3479FB15 Add Node Mix
+Deinit Graph: BA711C02-039C-40E7-B02D-B73B3479FB15
+Deinit Graph: BA711C02-039C-40E7-B02D-B73B3479FB15
+Init Graph
+Graph: 5844FBD9-3B74-46C3-BFD7-FA49C7A58955 Add Node Multiply
+Graph: 5844FBD9-3B74-46C3-BFD7-FA49C7A58955 Add Node Multiply
+Deinit Graph: 5844FBD9-3B74-46C3-BFD7-FA49C7A58955
+Deinit Graph: 5844FBD9-3B74-46C3-BFD7-FA49C7A58955
+Init Graph
+Graph: FA624134-5EC4-4FA6-93C0-4FD393467055 Add Node Negation
+Graph: FA624134-5EC4-4FA6-93C0-4FD393467055 Add Node Negation
+Deinit Graph: FA624134-5EC4-4FA6-93C0-4FD393467055
+Deinit Graph: FA624134-5EC4-4FA6-93C0-4FD393467055
+Init Graph
+Graph: 51A12D2E-4EAF-4D99-ABBB-B1BD147A2F64 Add Node Overlay
+Graph: 51A12D2E-4EAF-4D99-ABBB-B1BD147A2F64 Add Node Overlay
+Deinit Graph: 51A12D2E-4EAF-4D99-ABBB-B1BD147A2F64
+Deinit Graph: 51A12D2E-4EAF-4D99-ABBB-B1BD147A2F64
+Init Graph
+Graph: A5C4AC1E-A9E5-4DA6-B01E-03FF7C56B428 Add Node Phoenix
+Graph: A5C4AC1E-A9E5-4DA6-B01E-03FF7C56B428 Add Node Phoenix
+Deinit Graph: A5C4AC1E-A9E5-4DA6-B01E-03FF7C56B428
+Deinit Graph: A5C4AC1E-A9E5-4DA6-B01E-03FF7C56B428
+Init Graph
+Graph: 56E4672F-F610-4905-A438-2113FEA63317 Add Node Pin Light
+Graph: 56E4672F-F610-4905-A438-2113FEA63317 Add Node Pin Light
+Deinit Graph: 56E4672F-F610-4905-A438-2113FEA63317
+Deinit Graph: 56E4672F-F610-4905-A438-2113FEA63317
+Init Graph
+Graph: BD4EC8C5-B0E9-4C20-B5C2-659B9F26B76F Add Node Pinch
+Graph: BD4EC8C5-B0E9-4C20-B5C2-659B9F26B76F Add Node Pinch
+Deinit Graph: BD4EC8C5-B0E9-4C20-B5C2-659B9F26B76F
+Deinit Graph: BD4EC8C5-B0E9-4C20-B5C2-659B9F26B76F
+Init Graph
+Graph: 63192099-FA4D-456E-BEB2-2CFC787DF4EB Add Node Pixelate
+Graph: 63192099-FA4D-456E-BEB2-2CFC787DF4EB Add Node Pixelate
+Deinit Graph: 63192099-FA4D-456E-BEB2-2CFC787DF4EB
+Deinit Graph: 63192099-FA4D-456E-BEB2-2CFC787DF4EB
+Init Graph
+Graph: 4F29683F-A0D7-4B12-82BA-6D9B6CADAA27 Add Node Polar Pixellatte
+Graph: 4F29683F-A0D7-4B12-82BA-6D9B6CADAA27 Add Node Polar Pixellatte
+Deinit Graph: 4F29683F-A0D7-4B12-82BA-6D9B6CADAA27
+Deinit Graph: 4F29683F-A0D7-4B12-82BA-6D9B6CADAA27
+Init Graph
+Graph: 9AD6F5C0-F6DE-471B-B467-ADFE227E5D24 Add Node Posterize
+Graph: 9AD6F5C0-F6DE-471B-B467-ADFE227E5D24 Add Node Posterize
+Deinit Graph: 9AD6F5C0-F6DE-471B-B467-ADFE227E5D24
+Deinit Graph: 9AD6F5C0-F6DE-471B-B467-ADFE227E5D24
+Init Graph
+Graph: 689124C2-49C3-433C-8231-3BB68D1FBA19 Add Node RGB To CMYK
+Graph: 689124C2-49C3-433C-8231-3BB68D1FBA19 Add Node RGB To CMYK
+Deinit Graph: 689124C2-49C3-433C-8231-3BB68D1FBA19
+Deinit Graph: 689124C2-49C3-433C-8231-3BB68D1FBA19
+Init Graph
+Graph: DAB14DAF-759E-4451-A95D-0738568F4570 Add Node RGB To HSV
+Graph: DAB14DAF-759E-4451-A95D-0738568F4570 Add Node RGB To HSV
+Deinit Graph: DAB14DAF-759E-4451-A95D-0738568F4570
+Deinit Graph: DAB14DAF-759E-4451-A95D-0738568F4570
+Init Graph
+Graph: 5F01AA09-3330-41E0-97CF-AE1091BAAA1B Add Node RGB To LAB
+Graph: 5F01AA09-3330-41E0-97CF-AE1091BAAA1B Add Node RGB To LAB
+Deinit Graph: 5F01AA09-3330-41E0-97CF-AE1091BAAA1B
+Deinit Graph: 5F01AA09-3330-41E0-97CF-AE1091BAAA1B
+Init Graph
+Graph: 75A811BA-48B5-4F90-A4DA-21A1E1B1B438 Add Node RGB To XYZ
+Graph: 75A811BA-48B5-4F90-A4DA-21A1E1B1B438 Add Node RGB To XYZ
+Deinit Graph: 75A811BA-48B5-4F90-A4DA-21A1E1B1B438
+Deinit Graph: 75A811BA-48B5-4F90-A4DA-21A1E1B1B438
+Init Graph
+Graph: 6752D2F9-3223-4ACA-AB8D-0DF18228A579 Add Node RGB To YIQ
+Graph: 6752D2F9-3223-4ACA-AB8D-0DF18228A579 Add Node RGB To YIQ
+Deinit Graph: 6752D2F9-3223-4ACA-AB8D-0DF18228A579
+Deinit Graph: 6752D2F9-3223-4ACA-AB8D-0DF18228A579
+Init Graph
+Graph: 8D76EA17-E51D-4123-BCFE-7C7B4739022D Add Node RGB To YPb Pr
+Graph: 8D76EA17-E51D-4123-BCFE-7C7B4739022D Add Node RGB To YPb Pr
+Deinit Graph: 8D76EA17-E51D-4123-BCFE-7C7B4739022D
+Deinit Graph: 8D76EA17-E51D-4123-BCFE-7C7B4739022D
+Init Graph
+Graph: 14ED21EF-CD05-4579-8402-1A6DA309DC6F Add Node RGB To YUV
+Graph: 14ED21EF-CD05-4579-8402-1A6DA309DC6F Add Node RGB To YUV
+Deinit Graph: 14ED21EF-CD05-4579-8402-1A6DA309DC6F
+Deinit Graph: 14ED21EF-CD05-4579-8402-1A6DA309DC6F
+Init Graph
+Graph: DBA997DF-D49C-4DCB-AAB0-3B1E55B48C15 Add Node Reflect
+Graph: DBA997DF-D49C-4DCB-AAB0-3B1E55B48C15 Add Node Reflect
+Deinit Graph: DBA997DF-D49C-4DCB-AAB0-3B1E55B48C15
+Deinit Graph: DBA997DF-D49C-4DCB-AAB0-3B1E55B48C15
+Init Graph
+Graph: 4DF544D4-5D19-4E2C-A34A-67426CA94466 Add Node Reinhard
+Graph: 4DF544D4-5D19-4E2C-A34A-67426CA94466 Add Node Reinhard
+Deinit Graph: 4DF544D4-5D19-4E2C-A34A-67426CA94466
+Deinit Graph: 4DF544D4-5D19-4E2C-A34A-67426CA94466
+Init Graph
+Graph: 1BD2C437-C752-4402-8F9B-586C54154F30 Add Node Reinhard Jodie
+Graph: 1BD2C437-C752-4402-8F9B-586C54154F30 Add Node Reinhard Jodie
+Deinit Graph: 1BD2C437-C752-4402-8F9B-586C54154F30
+Deinit Graph: 1BD2C437-C752-4402-8F9B-586C54154F30
+Init Graph
+Graph: 93B3D748-DAA6-438C-B5D1-245E433C9CD5 Add Node SDF Blend
+Graph: 93B3D748-DAA6-438C-B5D1-245E433C9CD5 Add Node SDF Blend
+Deinit Graph: 93B3D748-DAA6-438C-B5D1-245E433C9CD5
+Deinit Graph: 93B3D748-DAA6-438C-B5D1-245E433C9CD5
+Init Graph
+Graph: 77B54F13-6524-48C8-A6E8-7CD5C8500E9F Add Node SDF Intersect
+Graph: 77B54F13-6524-48C8-A6E8-7CD5C8500E9F Add Node SDF Intersect
+Deinit Graph: 77B54F13-6524-48C8-A6E8-7CD5C8500E9F
+Deinit Graph: 77B54F13-6524-48C8-A6E8-7CD5C8500E9F
+Init Graph
+Graph: 67AADBBB-645D-4210-936C-A4447349656B Add Node SDF Onion
+Graph: 67AADBBB-645D-4210-936C-A4447349656B Add Node SDF Onion
+Deinit Graph: 67AADBBB-645D-4210-936C-A4447349656B
+Deinit Graph: 67AADBBB-645D-4210-936C-A4447349656B
+Init Graph
+Graph: ECADC650-CB5C-4AF4-B51C-0BD829D546AB Add Node SDF Render
+Graph: ECADC650-CB5C-4AF4-B51C-0BD829D546AB Add Node SDF Render
+Deinit Graph: ECADC650-CB5C-4AF4-B51C-0BD829D546AB
+Deinit Graph: ECADC650-CB5C-4AF4-B51C-0BD829D546AB
+Init Graph
+Graph: 881815D1-E6A8-460A-AF21-BEDB4E101623 Add Node SDF Subtract
+Graph: 881815D1-E6A8-460A-AF21-BEDB4E101623 Add Node SDF Subtract
+Deinit Graph: 881815D1-E6A8-460A-AF21-BEDB4E101623
+Deinit Graph: 881815D1-E6A8-460A-AF21-BEDB4E101623
+Init Graph
+Graph: C262EDED-DAF1-4FFC-BB04-F5F87A4F4D15 Add Node SDF Tile
+Graph: C262EDED-DAF1-4FFC-BB04-F5F87A4F4D15 Add Node SDF Tile
+Deinit Graph: C262EDED-DAF1-4FFC-BB04-F5F87A4F4D15
+Deinit Graph: C262EDED-DAF1-4FFC-BB04-F5F87A4F4D15
+Init Graph
+Graph: CD83F7B8-3AAE-4612-A1EB-CBE4BC4026B9 Add Node SDF Union
+Graph: CD83F7B8-3AAE-4612-A1EB-CBE4BC4026B9 Add Node SDF Union
+Deinit Graph: CD83F7B8-3AAE-4612-A1EB-CBE4BC4026B9
+Deinit Graph: CD83F7B8-3AAE-4612-A1EB-CBE4BC4026B9
+Init Graph
+Graph: E644A505-9CB8-4F23-B431-B54BDCA07A75 Add Node SRGBTo LinearRGB
+Graph: E644A505-9CB8-4F23-B431-B54BDCA07A75 Add Node SRGBTo LinearRGB
+Deinit Graph: E644A505-9CB8-4F23-B431-B54BDCA07A75
+Deinit Graph: E644A505-9CB8-4F23-B431-B54BDCA07A75
+Init Graph
+Graph: 1CD5E966-F365-41E9-9B9C-C52E7F68263E Add Node Saturation
+Graph: 1CD5E966-F365-41E9-9B9C-C52E7F68263E Add Node Saturation
+Deinit Graph: 1CD5E966-F365-41E9-9B9C-C52E7F68263E
+Deinit Graph: 1CD5E966-F365-41E9-9B9C-C52E7F68263E
+Init Graph
+Graph: AADBA661-ACAA-435A-B51C-B37A6A8E5145 Add Node Screen
+Graph: AADBA661-ACAA-435A-B51C-B37A6A8E5145 Add Node Screen
+Deinit Graph: AADBA661-ACAA-435A-B51C-B37A6A8E5145
+Deinit Graph: AADBA661-ACAA-435A-B51C-B37A6A8E5145
+Init Graph
+Graph: 642AD6FE-6F01-45D7-85FC-CA59609D0749 Add Node Simplex FBM Noise
+Graph: 642AD6FE-6F01-45D7-85FC-CA59609D0749 Add Node Simplex FBM Noise
+Deinit Graph: 642AD6FE-6F01-45D7-85FC-CA59609D0749
+Deinit Graph: 642AD6FE-6F01-45D7-85FC-CA59609D0749
+Init Graph
+Graph: 9EEDA0E0-BD40-46E6-B478-7757E4881805 Add Node Simplex Ridge Noise
+Graph: 9EEDA0E0-BD40-46E6-B478-7757E4881805 Add Node Simplex Ridge Noise
+Deinit Graph: 9EEDA0E0-BD40-46E6-B478-7757E4881805
+Deinit Graph: 9EEDA0E0-BD40-46E6-B478-7757E4881805
+Init Graph
+Graph: 33FA539D-CB1F-40C1-A0DA-740AD937135A Add Node Simplex Turbulence Noise
+Graph: 33FA539D-CB1F-40C1-A0DA-740AD937135A Add Node Simplex Turbulence Noise
+Deinit Graph: 33FA539D-CB1F-40C1-A0DA-740AD937135A
+Deinit Graph: 33FA539D-CB1F-40C1-A0DA-740AD937135A
+Init Graph
+Graph: E2D5FA6B-5107-4139-8240-7649A15AEC7E Add Node Sobel
+Graph: E2D5FA6B-5107-4139-8240-7649A15AEC7E Add Node Sobel
+Deinit Graph: E2D5FA6B-5107-4139-8240-7649A15AEC7E
+Deinit Graph: E2D5FA6B-5107-4139-8240-7649A15AEC7E
+Init Graph
+Graph: 30B2FF19-DFCF-45BB-8DB7-F2E19C302AA1 Add Node Soft Light
+Graph: 30B2FF19-DFCF-45BB-8DB7-F2E19C302AA1 Add Node Soft Light
+Deinit Graph: 30B2FF19-DFCF-45BB-8DB7-F2E19C302AA1
+Deinit Graph: 30B2FF19-DFCF-45BB-8DB7-F2E19C302AA1
+Init Graph
+Graph: 49BBDBDD-E941-49FD-B4CF-686B8B2FFB13 Add Node Source Over
+Graph: 49BBDBDD-E941-49FD-B4CF-686B8B2FFB13 Add Node Source Over
+Deinit Graph: 49BBDBDD-E941-49FD-B4CF-686B8B2FFB13
+Deinit Graph: 49BBDBDD-E941-49FD-B4CF-686B8B2FFB13
+Init Graph
+Graph: C6F56C5D-2E11-4245-8AF6-9C6047F2D0DF Add Node Subtract
+Graph: C6F56C5D-2E11-4245-8AF6-9C6047F2D0DF Add Node Subtract
+Deinit Graph: C6F56C5D-2E11-4245-8AF6-9C6047F2D0DF
+Deinit Graph: C6F56C5D-2E11-4245-8AF6-9C6047F2D0DF
+Init Graph
+Graph: 878DC669-473A-408C-9C0A-C172DC78E406 Add Node Technicolor 1
+Graph: 878DC669-473A-408C-9C0A-C172DC78E406 Add Node Technicolor 1
+Deinit Graph: 878DC669-473A-408C-9C0A-C172DC78E406
+Deinit Graph: 878DC669-473A-408C-9C0A-C172DC78E406
+Init Graph
+Graph: D6A95737-3B2E-4C34-B9A2-08F7D140DCA2 Add Node Technicolor 2
+Graph: D6A95737-3B2E-4C34-B9A2-08F7D140DCA2 Add Node Technicolor 2
+Deinit Graph: D6A95737-3B2E-4C34-B9A2-08F7D140DCA2
+Deinit Graph: D6A95737-3B2E-4C34-B9A2-08F7D140DCA2
+Init Graph
+Graph: A410467C-2A52-444D-B289-9C88042FC559 Add Node Technicolor 3
+Graph: A410467C-2A52-444D-B289-9C88042FC559 Add Node Technicolor 3
+Deinit Graph: A410467C-2A52-444D-B289-9C88042FC559
+Deinit Graph: A410467C-2A52-444D-B289-9C88042FC559
+Init Graph
+Graph: EA662519-260B-4D2F-BF36-40A28324DCE4 Add Node Technicolor 3W
+Graph: EA662519-260B-4D2F-BF36-40A28324DCE4 Add Node Technicolor 3W
+Deinit Graph: EA662519-260B-4D2F-BF36-40A28324DCE4
+Deinit Graph: EA662519-260B-4D2F-BF36-40A28324DCE4
+Init Graph
+Graph: B5BCE2BB-BA8B-4B0F-8D7C-5485F867EF47 Add Node Threshold
+Graph: B5BCE2BB-BA8B-4B0F-8D7C-5485F867EF47 Add Node Threshold
+Deinit Graph: B5BCE2BB-BA8B-4B0F-8D7C-5485F867EF47
+Deinit Graph: B5BCE2BB-BA8B-4B0F-8D7C-5485F867EF47
+Init Graph
+Graph: 6AEF0228-8970-4AA9-BCCC-2AC1885784B8 Add Node Triangle
+Graph: 6AEF0228-8970-4AA9-BCCC-2AC1885784B8 Add Node Triangle
+Deinit Graph: 6AEF0228-8970-4AA9-BCCC-2AC1885784B8
+Deinit Graph: 6AEF0228-8970-4AA9-BCCC-2AC1885784B8
+Init Graph
+Graph: 7E79204C-EE8C-4B75-8E2C-FD790BEFB985 Add Node Triangular Pixelate
+Graph: 7E79204C-EE8C-4B75-8E2C-FD790BEFB985 Add Node Triangular Pixelate
+Deinit Graph: 7E79204C-EE8C-4B75-8E2C-FD790BEFB985
+Deinit Graph: 7E79204C-EE8C-4B75-8E2C-FD790BEFB985
+Init Graph
+Graph: 92C53E85-BFEC-491E-BCFD-80BB66E0B796 Add Node Twirl
+Graph: 92C53E85-BFEC-491E-BCFD-80BB66E0B796 Add Node Twirl
+Deinit Graph: 92C53E85-BFEC-491E-BCFD-80BB66E0B796
+Deinit Graph: 92C53E85-BFEC-491E-BCFD-80BB66E0B796
+Init Graph
+Graph: 751353B8-B035-4E50-8BD0-29BCCEDA6009 Add Node UV
+Graph: 751353B8-B035-4E50-8BD0-29BCCEDA6009 Add Node UV
+Deinit Graph: 751353B8-B035-4E50-8BD0-29BCCEDA6009
+Deinit Graph: 751353B8-B035-4E50-8BD0-29BCCEDA6009
+Init Graph
+Graph: ECF745D6-3DC6-487C-B2A3-FABE7118F8AD Add Node Uncharted
+Graph: ECF745D6-3DC6-487C-B2A3-FABE7118F8AD Add Node Uncharted
+Deinit Graph: ECF745D6-3DC6-487C-B2A3-FABE7118F8AD
+Deinit Graph: ECF745D6-3DC6-487C-B2A3-FABE7118F8AD
+Init Graph
+Graph: 6B5A6284-648A-4101-A9E5-A20CDCF6E80C Add Node Uncharted 2
+Graph: 6B5A6284-648A-4101-A9E5-A20CDCF6E80C Add Node Uncharted 2
+Deinit Graph: 6B5A6284-648A-4101-A9E5-A20CDCF6E80C
+Deinit Graph: 6B5A6284-648A-4101-A9E5-A20CDCF6E80C
+Init Graph
+Graph: DA3259B4-C9B9-4743-82C1-18F132B48F95 Add Node Vibrance
+Graph: DA3259B4-C9B9-4743-82C1-18F132B48F95 Add Node Vibrance
+Deinit Graph: DA3259B4-C9B9-4743-82C1-18F132B48F95
+Deinit Graph: DA3259B4-C9B9-4743-82C1-18F132B48F95
+Init Graph
+Graph: 63B184DC-4312-4397-992F-F35BE00E1033 Add Node Vignette
+Graph: 63B184DC-4312-4397-992F-F35BE00E1033 Add Node Vignette
+Deinit Graph: 63B184DC-4312-4397-992F-F35BE00E1033
+Deinit Graph: 63B184DC-4312-4397-992F-F35BE00E1033
+Init Graph
+Graph: 6D323061-7A04-45B4-AE25-D80E9602CE9C Add Node Vivid Light
+Graph: 6D323061-7A04-45B4-AE25-D80E9602CE9C Add Node Vivid Light
+Deinit Graph: 6D323061-7A04-45B4-AE25-D80E9602CE9C
+Deinit Graph: 6D323061-7A04-45B4-AE25-D80E9602CE9C
+Init Graph
+Graph: 2645FF90-5BF9-4466-9B52-4061E92BD688 Add Node Voronoi Cells Noise
+Graph: 2645FF90-5BF9-4466-9B52-4061E92BD688 Add Node Voronoi Cells Noise
+Deinit Graph: 2645FF90-5BF9-4466-9B52-4061E92BD688
+Deinit Graph: 2645FF90-5BF9-4466-9B52-4061E92BD688
+Init Graph
+Graph: 0568ADCC-A2AB-4AA7-B71A-23A425D42444 Add Node Voronoise Noise
+Graph: 0568ADCC-A2AB-4AA7-B71A-23A425D42444 Add Node Voronoise Noise
+Deinit Graph: 0568ADCC-A2AB-4AA7-B71A-23A425D42444
+Deinit Graph: 0568ADCC-A2AB-4AA7-B71A-23A425D42444
+Init Graph
+Graph: 6ED120EA-0F08-4A62-A59D-310BDB6B55A8 Add Node Wavelet FBM Noise
+Graph: 6ED120EA-0F08-4A62-A59D-310BDB6B55A8 Add Node Wavelet FBM Noise
+Deinit Graph: 6ED120EA-0F08-4A62-A59D-310BDB6B55A8
+Deinit Graph: 6ED120EA-0F08-4A62-A59D-310BDB6B55A8
+Init Graph
+Graph: 52261E98-C08E-4EAF-AB92-05E4D3E4C0D8 Add Node White Balance
+Graph: 52261E98-C08E-4EAF-AB92-05E4D3E4C0D8 Add Node White Balance
+Deinit Graph: 52261E98-C08E-4EAF-AB92-05E4D3E4C0D8
+Deinit Graph: 52261E98-C08E-4EAF-AB92-05E4D3E4C0D8
+Init Graph
+Graph: 97694EA1-ED73-4F3E-8874-7C7590FC6A4D Add Node White Diffusion
+Graph: 97694EA1-ED73-4F3E-8874-7C7590FC6A4D Add Node White Diffusion
+Deinit Graph: 97694EA1-ED73-4F3E-8874-7C7590FC6A4D
+Deinit Graph: 97694EA1-ED73-4F3E-8874-7C7590FC6A4D
+Init Graph
+Graph: A91EE180-039E-4CDD-8FA5-28530C1D220F Add Node Wobble
+Graph: A91EE180-039E-4CDD-8FA5-28530C1D220F Add Node Wobble
+Deinit Graph: A91EE180-039E-4CDD-8FA5-28530C1D220F
+Deinit Graph: A91EE180-039E-4CDD-8FA5-28530C1D220F
+Init Graph
+Graph: 3287E786-21BB-4992-9C2F-0B33850E28FF Add Node Worley Noise
+Graph: 3287E786-21BB-4992-9C2F-0B33850E28FF Add Node Worley Noise
+Deinit Graph: 3287E786-21BB-4992-9C2F-0B33850E28FF
+Deinit Graph: 3287E786-21BB-4992-9C2F-0B33850E28FF
+Init Graph
+Graph: 1C884C02-26A6-44D3-9BBA-21329C757A96 Add Node XYZ To LAB
+Graph: 1C884C02-26A6-44D3-9BBA-21329C757A96 Add Node XYZ To LAB
+Deinit Graph: 1C884C02-26A6-44D3-9BBA-21329C757A96
+Deinit Graph: 1C884C02-26A6-44D3-9BBA-21329C757A96
+Init Graph
+Graph: D8A7E184-5A75-4FC5-8562-71A73D44B6FB Add Node XYZ To RGB
+Graph: D8A7E184-5A75-4FC5-8562-71A73D44B6FB Add Node XYZ To RGB
+Deinit Graph: D8A7E184-5A75-4FC5-8562-71A73D44B6FB
+Deinit Graph: D8A7E184-5A75-4FC5-8562-71A73D44B6FB
+Init Graph
+Graph: 6E502DBB-B519-4FFC-8D38-021C0980766E Add Node YIQ To RGB
+Graph: 6E502DBB-B519-4FFC-8D38-021C0980766E Add Node YIQ To RGB
+Deinit Graph: 6E502DBB-B519-4FFC-8D38-021C0980766E
+Deinit Graph: 6E502DBB-B519-4FFC-8D38-021C0980766E
+Init Graph
+Graph: 15766046-1B31-4770-ACBE-D5AC2F700B84 Add Node YPb Pr To RGB
+Graph: 15766046-1B31-4770-ACBE-D5AC2F700B84 Add Node YPb Pr To RGB
+Deinit Graph: 15766046-1B31-4770-ACBE-D5AC2F700B84
+Deinit Graph: 15766046-1B31-4770-ACBE-D5AC2F700B84
+Init Graph
+Graph: 94EF212B-34E9-4A56-B591-1B534AC5DD7C Add Node YUV To RGB
+Graph: 94EF212B-34E9-4A56-B591-1B534AC5DD7C Add Node YUV To RGB
+Deinit Graph: 94EF212B-34E9-4A56-B591-1B534AC5DD7C
+Deinit Graph: 94EF212B-34E9-4A56-B591-1B534AC5DD7C
+􁁛  Test "Every registered node flavor survives encode → decode → encode with its port set intact" passed after 2.290 seconds.
+􁁛  Suite "Node Port Round-Trip Contract" passed after 2.291 seconds.
+􁁛  Test run with 153 tests in 17 suites passed after 2.291 seconds.

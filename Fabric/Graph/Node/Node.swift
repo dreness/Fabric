@@ -454,6 +454,10 @@ open class Node : Codable, Equatable, Identifiable, Hashable, Copyable, CustomDe
 
         self.removePort(existing)
         self.addDynamicPort(replacement, name: registryName)
+        // Rebinding happens while the old port is still registered. Refresh
+        // dependencies only once the registry exposes the replacement's wires.
+        self.refreshConnectedNodes()
+        self.updateConnectionTopology()
 
         if published
         {
@@ -529,11 +533,15 @@ open class Node : Codable, Equatable, Identifiable, Hashable, Copyable, CustomDe
 
     internal func didConnectToNode(_ node: Node)
     {
-        self.inputNodes = calcInputNodes()
-        self.outputNodes = calcOutputNodes()
+        self.refreshConnectedNodes()
     }
 
     internal func didDisconnectFromNode(_ node: Node)
+    {
+        self.refreshConnectedNodes()
+    }
+
+    internal func refreshConnectedNodes()
     {
         self.inputNodes = calcInputNodes()
         self.outputNodes = calcOutputNodes()

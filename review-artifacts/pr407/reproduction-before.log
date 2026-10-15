@@ -1,0 +1,66 @@
+Building for debugging...
+[Computing dependencies]
+[Using on-disk description]
+[1 / 12]
+[1 / 13] MIDIKitSMF
+[2 / 11] Fabric_Fabric
+[3 / 7] FabricTests-product
+[5 / 9] FabricTests-product
+[11 / 14] FabricTests-product
+[12 / 14] FabricTests-product
+[13 / 14] FabricTests-product
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr407/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+Build complete! (6.56 sec)
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Publishing review regressions" started.
+􀟈  Test "Replacing an outlet preserves the node's cached downstream dependency" started.
+􀟈  Test "Replacing an inlet preserves the node's cached upstream dependency" started.
+􀟈  Test "Retyping a published inlet preserves the subgraph's upstream dependency" started.
+􀟈  Test "Sample and Hold settings retain a compatible incoming wire and execution" started.
+Init Graph
+Init Graph
+Graph: F7345D47-C8CC-429F-8850-D8FD76359C92 Add Node Number Binary Operator
+Graph: F7345D47-C8CC-429F-8850-D8FD76359C92 Add Node Sub Graph
+Graph: 9727146E-6151-4F49-BFC8-12D6D6E82FA4 Add Node Number Binary Operator
+􀢄  Test "Retyping a published inlet preserves the subgraph's upstream dependency" recorded an issue at PublishingReviewRegressionTests.swift:75:9: Expectation failed: container.inputNodes.contains { $0 === source }
+􀄵  container.inputNodes.contains { $0 === source } → <not evaluated>
+Deinit Graph: F7345D47-C8CC-429F-8850-D8FD76359C92
+Deinit Graph: 9727146E-6151-4F49-BFC8-12D6D6E82FA4
+Init Graph
+Graph: F3936F09-5A3A-441B-A2BB-0140855EDE68 Add Node Number Binary Operator
+Graph: F3936F09-5A3A-441B-A2BB-0140855EDE68 Add Node Number Binary Operator
+􀢄  Test "Replacing an outlet preserves the node's cached downstream dependency" recorded an issue at PublishingReviewRegressionTests.swift:52:9: Expectation failed: source.outputNodes.contains { $0 === target }
+􀄵  source.outputNodes.contains { $0 === target } → <not evaluated>
+Deinit Graph: F3936F09-5A3A-441B-A2BB-0140855EDE68
+Init Graph
+Init Graph
+Graph: 900D9DE8-7E1F-438C-B463-8DEF7DDE7603 Add Node Number Binary Operator
+Graph: 900D9DE8-7E1F-438C-B463-8DEF7DDE7603 Add Node Number Binary Operator
+􀢄  Test "Replacing an inlet preserves the node's cached upstream dependency" recorded an issue at PublishingReviewRegressionTests.swift:34:9: Expectation failed: target.executionState == .started
+􀄵  target.executionState == .started → false
+􀄵    target.executionState → .stopped
+􀢄  Test "Replacing an inlet preserves the node's cached upstream dependency" recorded an issue at PublishingReviewRegressionTests.swift:35:9: Expectation failed: target.inputNodes.contains { $0 === source }
+􀄵  target.inputNodes.contains { $0 === source } → <not evaluated>
+Deinit Graph: 1BB5B4CD-5316-4914-8BC6-1B89DCA0D9DB
+Deinit Graph: 900D9DE8-7E1F-438C-B463-8DEF7DDE7603
+Init Graph
+Init Graph
+Graph: DA48D52D-09AF-4A5B-AACB-7FD61EB35FDA Add Node Number Binary Operator
+Graph: DA48D52D-09AF-4A5B-AACB-7FD61EB35FDA Add Node Sample and Hold (Float)
+􀢄  Test "Sample and Hold settings retain a compatible incoming wire and execution" recorded an issue at PublishingReviewRegressionTests.swift:97:9: Expectation failed: target.executionState == .started
+􀄵  target.executionState == .started → false
+􀄵    target.executionState → .stopped
+􀢄  Test "Sample and Hold settings retain a compatible incoming wire and execution" recorded an issue at PublishingReviewRegressionTests.swift:98:9: Expectation failed: target.inputNodes.contains { $0 === source }
+􀄵  target.inputNodes.contains { $0 === source } → <not evaluated>
+Deinit Graph: EC6A9656-AE87-4C82-9187-F620F45CAA10
+Deinit Graph: DA48D52D-09AF-4A5B-AACB-7FD61EB35FDA
+􀢄  Test "Retyping a published inlet preserves the subgraph's upstream dependency" failed after 0.122 seconds with 1 issue.
+􀢄  Test "Replacing an outlet preserves the node's cached downstream dependency" failed after 0.122 seconds with 1 issue.
+􀢄  Test "Replacing an inlet preserves the node's cached upstream dependency" failed after 0.122 seconds with 2 issues.
+􀢄  Test "Sample and Hold settings retain a compatible incoming wire and execution" failed after 0.124 seconds with 2 issues.
+􀢄  Suite "Publishing review regressions" failed after 0.124 seconds with 6 issues.
+􀢄  Test run with 4 tests in 1 suite failed after 0.124 seconds with 6 issues.
+Note: Some test targets reported failures:
+  - FabricTests (Swift Testing)
