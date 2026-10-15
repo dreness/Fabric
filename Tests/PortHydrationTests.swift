@@ -225,6 +225,23 @@ struct PortHydrationTests
         #expect(outlet.id == takenOverID)
     }
 
+    @Test("A parameter-backed replacement port rekeys its backing parameter on adoption")
+    func parameterBackedReplacementPortRekeysBackingParameter()
+    {
+        let originalID = UUID()
+        let replacementID = UUID()
+
+        let original = PortType.Float.makeFreshPort(name: "Value", kind: .Inlet, id: originalID) as? ParameterPort<Float>
+
+        #expect(original != nil)
+        #expect(original?.id == originalID)
+        #expect(original?.parameter?.id == originalID)
+
+        original?.adoptID(replacementID)
+        #expect(original?.id == replacementID)
+        #expect(original?.parameter?.id == replacementID)
+    }
+
     @Test("A Transform parameter gets a parameter port; a quaternion one, which Satin cannot encode, gets none")
     func parameterPortFollowsWhatSatinCanCarry() throws
     {

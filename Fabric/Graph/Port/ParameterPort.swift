@@ -141,6 +141,11 @@ public class ParameterPort<ParamValue : PortValueRepresentable & Codable & Hasha
 
         try super.encode(to: encoder)
     }
+
+    override internal func adoptID(_ id: UUID) {
+        super.adoptID(id)
+        self._parameter.id = id
+    }
     
     /// After adopting the document's value, re-impose the declared range — but
     /// only for controls that enforce their range in the UI (a slider can only
