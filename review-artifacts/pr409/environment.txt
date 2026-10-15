@@ -1,11 +1,19 @@
-ProductName:		macOS
-ProductVersion:		27.0.1
-BuildVersion:		26A434
+Reviewed upstream PR: Fabric-Project/Fabric#409
+Reviewed head: f064001906f45621462b1023494a8a50b15c0b85
+Local trial-fix branch: codex/pr409-review
+Host: Apple M5 Max (40 GPU cores), arm64; real Metal device used.
+OS: macOS 27.0.1 (26A434)
+Xcode: 27.0 (27A266a)
+Swift: 6.4 (swiftlang-6.4.0.34.1; clang-2100.3.34.1)
+Build: Fabric Editor, Debug, macOS arm64; signing disabled, deployment target 15.0.
+Local flags: -xcconfig local-build.xcconfig CODE_SIGNING_ALLOWED=NO -skipMacroValidation
+Tests: SwiftPM on macOS; new GPU-dependent reproductions require Metal.
+Runtime prerequisite: Hap needs Sparkle.framework in SwiftPM Products/Debug/PackageFrameworks.
+Dependencies: recursive submodules; Syphon/Hap frameworks built with repository scripts.
+Xcode and SwiftPM resolved independently within package manifest ranges.
 
-Xcode 27.0
-Build version 27A266a
-
-swift-driver version: 1.168.6 Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)
-Target: arm64-apple-macosx27.0.0
-
-arm64
+Pinned submodules:
+ 7fbe36125e146adf4c4b32b41d3f1fe00cfe4c06 Fabric/lygia (remotes/origin/features/half-float-support)
+ f7f153de9920ff0b183ba1d38526c1a8dc0f49f8 HapInAVFoundation (1.6.9.4)
+ 22dfce31640b156e6d43df01257dcb72e5b20294 Satin (20.0.0-Beta-1-36-g22dfce31)
+ 71351d4b484cd2d1917867f7846a5cdca724552d Syphon (5-108-g71351d4)
