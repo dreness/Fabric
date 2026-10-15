@@ -181,65 +181,73 @@ open class SubgraphNode: BaseObjectNode
     /// Whether a proxy can stand for `port`, published in a sub graph.
     internal static func canProxy(_ port: Port) -> Bool
     {
-        self.makeProxy(for: port, id: port.id) != nil
+        self.proxyFactory(for: port) != nil
     }
 
     /// Type-erase proxy creation — matches the inner port's generic type.
     private static func makeProxy(for port: Port, id: UUID) -> Port?
     {
+        self.proxyFactory(for: port)?(id)
+    }
+
+    /// Resolve support without constructing a proxy: initializing and retiring
+    /// one forwards value changes to the live inner port. Both validation and
+    /// creation use this factory so their supported types cannot drift.
+    private static func proxyFactory(for port: Port) -> ((UUID) -> Port)?
+    {
         switch port
         {
-        case let p as NodePort<Float>:                              return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Int>:                                return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Bool>:                               return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<String>:                             return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<simd_float2>:                        return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<simd_float3>:                        return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<simd_float4>:                        return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<FabricImage>:                        return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Geometry>:                           return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Material>:                           return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<PortValue>:                          return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<simd_quatf>:                         return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<simd_float4x4>:                      return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<Float>>:             return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<Int>>:               return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<Bool>>:              return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<String>>:            return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<simd_float2>>:       return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<simd_float3>>:       return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<simd_float4>>:       return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<simd_float4x4>>:     return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<simd_quatf>>:        return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<Geometry>>:          return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<Material>>:          return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<FabricImage>>:       return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<ContiguousArray<PortValue>>:         return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, Float>>:          return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, Int>>:            return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, Bool>>:           return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, String>>:         return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, simd_float2>>:    return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, simd_float3>>:    return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, simd_float4>>:    return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, simd_float4x4>>:  return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, simd_quatf>>:     return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, Geometry>>:       return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, Material>>:       return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, FabricImage>>:    return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<Float>>>:         return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<Int>>>:           return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<Bool>>>:          return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<String>>>:        return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float2>>>:   return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float3>>>:   return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float4>>>:   return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float4x4>>>: return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<simd_quatf>>>:    return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<Geometry>>>:      return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<Material>>>:      return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, ContiguousArray<FabricImage>>>:   return ProxyPort(wrapping: p, id: id)
-        case let p as NodePort<Dictionary<String, PortValue>>:       return ProxyPort(wrapping: p, id: id)
+        case let p as NodePort<Float>:                              return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Int>:                                return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Bool>:                               return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<String>:                             return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<simd_float2>:                        return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<simd_float3>:                        return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<simd_float4>:                        return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<FabricImage>:                        return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Geometry>:                           return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Material>:                           return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<PortValue>:                          return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<simd_quatf>:                         return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<simd_float4x4>:                      return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<Float>>:             return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<Int>>:               return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<Bool>>:              return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<String>>:            return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<simd_float2>>:       return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<simd_float3>>:       return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<simd_float4>>:       return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<simd_float4x4>>:     return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<simd_quatf>>:        return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<Geometry>>:          return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<Material>>:          return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<FabricImage>>:       return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<ContiguousArray<PortValue>>:         return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, Float>>:          return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, Int>>:            return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, Bool>>:           return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, String>>:         return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, simd_float2>>:    return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, simd_float3>>:    return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, simd_float4>>:    return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, simd_float4x4>>:  return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, simd_quatf>>:     return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, Geometry>>:       return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, Material>>:       return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, FabricImage>>:    return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<Float>>>:         return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<Int>>>:           return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<Bool>>>:          return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<String>>>:        return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float2>>>:   return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float3>>>:   return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float4>>>:   return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float4x4>>>: return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<simd_quatf>>>:    return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<Geometry>>>:      return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<Material>>>:      return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, ContiguousArray<FabricImage>>>:   return { ProxyPort(wrapping: p, id: $0) }
+        case let p as NodePort<Dictionary<String, PortValue>>:       return { ProxyPort(wrapping: p, id: $0) }
         default:
             print("ProxyPort: unsupported port type for \(port.name): \(type(of: port))")
             return nil

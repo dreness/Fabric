@@ -1,0 +1,263 @@
+diff --git a/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift b/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift
+index fe59f7f8..6ce93f8f 100644
+--- a/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift
++++ b/Fabric/Nodes/Object/SubGraph/SubgraphNode.swift
+@@ -181,65 +181,73 @@ open class SubgraphNode: BaseObjectNode
+     /// Whether a proxy can stand for `port`, published in a sub graph.
+     internal static func canProxy(_ port: Port) -> Bool
+     {
+-        self.makeProxy(for: port, id: port.id) != nil
++        self.proxyFactory(for: port) != nil
+     }
+ 
+     /// Type-erase proxy creation — matches the inner port's generic type.
+     private static func makeProxy(for port: Port, id: UUID) -> Port?
++    {
++        self.proxyFactory(for: port)?(id)
++    }
++
++    /// Resolve support without constructing a proxy: initializing and retiring
++    /// one forwards value changes to the live inner port. Both validation and
++    /// creation use this factory so their supported types cannot drift.
++    private static func proxyFactory(for port: Port) -> ((UUID) -> Port)?
+     {
+         switch port
+         {
+-        case let p as NodePort<Float>:                              return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Int>:                                return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Bool>:                               return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<String>:                             return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<simd_float2>:                        return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<simd_float3>:                        return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<simd_float4>:                        return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<FabricImage>:                        return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Geometry>:                           return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Material>:                           return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<PortValue>:                          return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<simd_quatf>:                         return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<simd_float4x4>:                      return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<Float>>:             return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<Int>>:               return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<Bool>>:              return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<String>>:            return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<simd_float2>>:       return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<simd_float3>>:       return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<simd_float4>>:       return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<simd_float4x4>>:     return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<simd_quatf>>:        return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<Geometry>>:          return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<Material>>:          return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<FabricImage>>:       return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<ContiguousArray<PortValue>>:         return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, Float>>:          return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, Int>>:            return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, Bool>>:           return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, String>>:         return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, simd_float2>>:    return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, simd_float3>>:    return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, simd_float4>>:    return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, simd_float4x4>>:  return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, simd_quatf>>:     return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, Geometry>>:       return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, Material>>:       return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, FabricImage>>:    return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<Float>>>:         return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<Int>>>:           return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<Bool>>>:          return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<String>>>:        return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float2>>>:   return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float3>>>:   return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float4>>>:   return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float4x4>>>: return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<simd_quatf>>>:    return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<Geometry>>>:      return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<Material>>>:      return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, ContiguousArray<FabricImage>>>:   return ProxyPort(wrapping: p, id: id)
+-        case let p as NodePort<Dictionary<String, PortValue>>:       return ProxyPort(wrapping: p, id: id)
++        case let p as NodePort<Float>:                              return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Int>:                                return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Bool>:                               return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<String>:                             return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<simd_float2>:                        return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<simd_float3>:                        return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<simd_float4>:                        return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<FabricImage>:                        return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Geometry>:                           return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Material>:                           return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<PortValue>:                          return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<simd_quatf>:                         return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<simd_float4x4>:                      return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<Float>>:             return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<Int>>:               return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<Bool>>:              return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<String>>:            return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<simd_float2>>:       return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<simd_float3>>:       return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<simd_float4>>:       return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<simd_float4x4>>:     return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<simd_quatf>>:        return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<Geometry>>:          return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<Material>>:          return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<FabricImage>>:       return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<ContiguousArray<PortValue>>:         return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, Float>>:          return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, Int>>:            return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, Bool>>:           return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, String>>:         return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, simd_float2>>:    return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, simd_float3>>:    return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, simd_float4>>:    return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, simd_float4x4>>:  return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, simd_quatf>>:     return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, Geometry>>:       return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, Material>>:       return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, FabricImage>>:    return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<Float>>>:         return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<Int>>>:           return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<Bool>>>:          return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<String>>>:        return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float2>>>:   return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float3>>>:   return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float4>>>:   return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<simd_float4x4>>>: return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<simd_quatf>>>:    return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<Geometry>>>:      return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<Material>>>:      return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, ContiguousArray<FabricImage>>>:   return { ProxyPort(wrapping: p, id: $0) }
++        case let p as NodePort<Dictionary<String, PortValue>>:       return { ProxyPort(wrapping: p, id: $0) }
+         default:
+             print("ProxyPort: unsupported port type for \(port.name): \(type(of: port))")
+             return nil
+diff --git a/Tests/SubgraphReviewRegressionTests.swift b/Tests/SubgraphReviewRegressionTests.swift
+new file mode 100644
+index 00000000..dc07910f
+--- /dev/null
++++ b/Tests/SubgraphReviewRegressionTests.swift
+@@ -0,0 +1,127 @@
++import Foundation
++import Metal
++import Satin
++import Testing
++@testable import Fabric
++
++@Suite("Subgraph Review Regressions")
++@MainActor
++struct SubgraphReviewRegressionTests
++{
++    @Test("Embedding keeps a boundary outlet's last value", arguments: [false, true])
++    func embeddingKeepsOutletValue(deferred: Bool) throws
++    {
++        let device = try #require(MTLCreateSystemDefaultDevice())
++        let context = Context(device: device, sampleCount: 1, colorPixelFormat: .bgra8Unorm,
++                              depthPixelFormat: .depth32Float, stencilPixelFormat: .invalid)
++        let graph = Graph(context: context)
++        let source = NumberBinaryOperator(context: context)
++        let sink = NumberBinaryOperator(context: context)
++        graph.addNode(source)
++        graph.addNode(sink)
++        source.outputNumber.send(42, force: true)
++        graph.connect(source.outputNumber, to: sink.inputNumber1)
++        let container = try graph.createSubgraph(from: [source], centeredOn: source,
++                                                usingClass: deferred ? DeferredSubgraphNode.self : SubgraphNode.self)
++        #expect(source.outputNumber.value == 42)
++        let proxy = try #require(container.ports.first { $0.id == source.outputNumber.id } as? NodePort<Float>)
++        #expect(proxy.value == 42)
++    }
++
++    @Test("A rejected embedding leaves supported boundary values untouched")
++    func rejectedEmbeddingIsReadOnly() throws
++    {
++        let device = try #require(MTLCreateSystemDefaultDevice())
++        let context = Context(device: device, sampleCount: 1, colorPixelFormat: .bgra8Unorm,
++                              depthPixelFormat: .depth32Float, stencilPixelFormat: .invalid)
++        let graph = Graph(context: context)
++        let source = NumberBinaryOperator(context: context)
++        let moved = NumberBinaryOperator(context: context)
++        let unsupportedInput = NodePort<ContiguousArray<ContiguousArray<Float>>>(name: "Nested", kind: .Inlet)
++        let unsupportedOutput = NodePort<ContiguousArray<ContiguousArray<Float>>>(name: "Nested", kind: .Outlet)
++        moved.addDynamicPort(unsupportedInput)
++        source.addDynamicPort(unsupportedOutput)
++        graph.addNode(source)
++        graph.addNode(moved)
++        source.outputNumber.value = 42
++        graph.connect(source.outputNumber, to: moved.inputNumber1)
++        graph.connect(unsupportedOutput, to: unsupportedInput)
++        let idsBefore = graph.connections.map(\.id)
++        let manager = UndoManager()
++        manager.groupsByEvent = false
++        graph.undoManager = manager
++        var changes = 0
++        moved.inputNumber1.onValueChanged = { changes += 1 }
++        #expect(throws: FabricError.self)
++        {
++            try graph.createSubgraph(from: [moved], centeredOn: moved, usingClass: SubgraphNode.self)
++        }
++        #expect(moved.inputNumber1.value == 42)
++        #expect(changes == 0)
++        #expect(graph.connections.map(\.id) == idsBefore)
++        #expect(graph.nodes.count == 2)
++        #expect(!manager.canUndo)
++    }
++
++    @Test("Proxy preflight leaves live values and change callbacks untouched")
++    func proxyPreflightIsReadOnly() throws
++    {
++        let port = NodePort<Float>(name: "Output", kind: .Outlet)
++        port.value = 42
++        var changes = 0
++        port.onValueChanged = { changes += 1 }
++        #expect(SubgraphNode.canProxy(port))
++        #expect(port.value == 42)
++        #expect(changes == 0)
++    }
++
++    @Test("Nested embedding preserves fan-out and prior edit targets through undo and redo")
++    func nestedEmbeddingPreservesHistory() throws
++    {
++        let device = try #require(MTLCreateSystemDefaultDevice())
++        let context = Context(device: device, sampleCount: 1, colorPixelFormat: .bgra8Unorm,
++                              depthPixelFormat: .depth32Float, stencilPixelFormat: .invalid)
++        let root = Graph(context: context)
++        let outer = SubgraphNode(context: context)
++        root.addNode(outer)
++        let graph = outer.subGraph
++        let source = NumberBinaryOperator(context: context)
++        let moved = MathExpressionNode(context: context, expression: "x + y")
++        let sinkA = NumberBinaryOperator(context: context)
++        let sinkB = NumberBinaryOperator(context: context)
++        for node in [source, moved, sinkA, sinkB] { graph.addNode(node) }
++        let x = try #require(moved.findPort(named: "x", as: Fabric.Port.self))
++        let output = try #require(moved.outputPorts().first)
++        graph.connect(source.outputNumber, to: x)
++        graph.connect(output, to: sinkA.inputNumber1)
++        let disabled = try #require(graph.connect(output, to: sinkB.inputNumber1))
++        graph.setConnection(disabled, active: false)
++        let idsBefore = Set(graph.connections.map(\.id))
++        let manager = UndoManager()
++        manager.groupsByEvent = false
++        root.undoManager = manager
++        graph.setSettings(MathExpressionSettings(stringExpression: "x + y + 1"), on: moved)
++        let inner = try graph.createSubgraph(from: [moved, moved], centeredOn: moved, usingClass: SubgraphNode.self)
++        #expect(inner.subGraph.nodes.count == 1)
++        #expect(graph.connections.count == 3)
++        #expect(graph.connections.filter { !$0.active }.count == 1)
++        inner.subGraph.setSettings(MathExpressionSettings(stringExpression: "x + y + 2"), on: moved)
++        root.undo()
++        #expect(moved.stringExpression == "x + y + 1")
++        for _ in 0..<2
++        {
++            root.undo()
++            #expect(moved.graph === graph)
++            #expect(Set(graph.connections.map(\.id)) == idsBefore)
++            root.undo()
++            #expect(moved.stringExpression == "x + y")
++            root.redo()
++            root.redo()
++            #expect(moved.graph === inner.subGraph)
++            #expect(graph.connections.count == 3)
++            #expect(graph.connections.filter { !$0.active }.count == 1)
++        }
++        root.redo()
++        #expect(moved.stringExpression == "x + y + 2")
++    }
++}

@@ -1,0 +1,50 @@
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Subgraph Review Regressions" started.
+􀟈  Test "A rejected embedding leaves supported boundary values untouched" started.
+􀟈  Test "Nested embedding preserves fan-out and prior edit targets through undo and redo" started.
+􀟈  Test "Proxy preflight leaves live values and change callbacks untouched" started.
+􀟈  Test "Embedding keeps a boundary outlet's last value" started.
+􀟈  Test case passing 1 argument deferred → true to "Embedding keeps a boundary outlet's last value" started.
+􀟈  Test case passing 1 argument deferred → false to "Embedding keeps a boundary outlet's last value" started.
+Init Graph
+Graph: 6D77B952-B608-4724-B760-D14D7F091B79 Add Node Number Binary Operator
+Graph: 6D77B952-B608-4724-B760-D14D7F091B79 Add Node Number Binary Operator
+ProxyPort: unsupported port type for Nested: NodePort<ContiguousArray<ContiguousArray<Float>>>
+Deinit Graph: 6D77B952-B608-4724-B760-D14D7F091B79
+Init Graph
+Init Graph
+Graph: 9B6E79B3-BEA0-4982-A8B2-D60738A6AF57 Add Node Sub Graph
+Graph: 8F835E49-E5FC-4DD0-8898-4A571FAE18A8 Add Node Number Binary Operator
+Graph: 8F835E49-E5FC-4DD0-8898-4A571FAE18A8 Add Node Math Expression (x + y)
+Graph: 8F835E49-E5FC-4DD0-8898-4A571FAE18A8 Add Node Number Binary Operator
+Graph: 8F835E49-E5FC-4DD0-8898-4A571FAE18A8 Add Node Number Binary Operator
+Init Graph
+Graph: 8F835E49-E5FC-4DD0-8898-4A571FAE18A8 Add Node Sub Graph
+Graph: 22298CC9-FFB2-4E54-B52F-1460E6521E9B Add Node Math Expression (x + y + 1)
+Deinit Graph: 9B6E79B3-BEA0-4982-A8B2-D60738A6AF57
+Deinit Graph: 8F835E49-E5FC-4DD0-8898-4A571FAE18A8
+Deinit Graph: 22298CC9-FFB2-4E54-B52F-1460E6521E9B
+􁁛  Test "Nested embedding preserves fan-out and prior edit targets through undo and redo" passed after 0.035 seconds.
+􁁛  Test "A rejected embedding leaves supported boundary values untouched" passed after 0.035 seconds.
+􁁛  Test "Proxy preflight leaves live values and change callbacks untouched" passed after 0.035 seconds.
+Init Graph
+Graph: 8EC9D322-3B2A-4467-8074-13A18AEEA58E Add Node Number Binary Operator
+Graph: 8EC9D322-3B2A-4467-8074-13A18AEEA58E Add Node Number Binary Operator
+Init Graph
+Graph: 8EC9D322-3B2A-4467-8074-13A18AEEA58E Add Node Render To Image and Depth
+Graph: F8165F73-AD71-4E2C-B05D-E91FDB2850EE Add Node Number Binary Operator
+Deinit Graph: 8EC9D322-3B2A-4467-8074-13A18AEEA58E
+Deinit Graph: F8165F73-AD71-4E2C-B05D-E91FDB2850EE
+Init Graph
+Graph: B0F7220F-8D9F-45DE-8A83-8646C155F8D9 Add Node Number Binary Operator
+Graph: B0F7220F-8D9F-45DE-8A83-8646C155F8D9 Add Node Number Binary Operator
+Init Graph
+Graph: B0F7220F-8D9F-45DE-8A83-8646C155F8D9 Add Node Sub Graph
+Graph: 74986CFE-2729-425D-96FB-B799ED1204E2 Add Node Number Binary Operator
+Deinit Graph: B0F7220F-8D9F-45DE-8A83-8646C155F8D9
+Deinit Graph: 74986CFE-2729-425D-96FB-B799ED1204E2
+􁁛  Test "Embedding keeps a boundary outlet's last value" with 2 test cases passed after 0.039 seconds.
+􁁛  Suite "Subgraph Review Regressions" passed after 0.039 seconds.
+􁁛  Test run with 4 tests in 1 suite passed after 0.039 seconds.

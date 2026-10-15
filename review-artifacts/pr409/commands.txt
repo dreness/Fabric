@@ -1,0 +1,7 @@
+Run from this review worktree. These are local builds, with signing disabled.
+
+swift test --filter 'Settings|TypingUndo|Undo|Publishing|ProxyPort|SubgraphEmbedding|GraphConnectionOwnership|GraphNodeLifecycle|PortHydration|MathExpression|JavaScript|Timeline|Routing|DeviceOutput|DocumentSaveReview|SubgraphReview'
+
+xcodebuild -project Fabric.xcodeproj -scheme 'Fabric Editor' -configuration Debug -destination 'platform=macOS,arch=arm64' -derivedDataPath /private/tmp/fabric-pr409-derived -clonedSourcePackagesDirPath /private/tmp/fabric-pr406-derived/SourcePackages -xcconfig review-artifacts/pr409/local-build.xcconfig -skipMacroValidation CODE_SIGNING_ALLOWED=NO build
+
+Dependency setup: git submodule update --init --recursive. Frameworks and the initial .build cache were reused from PR 407, with identical submodule revisions; SwiftPM rebuilt for the new workspace. Syphon/Hap binary frameworks must be built if not already present (repository build scripts). Xcode resolves package versions within manifest ranges; the resolution used is saved separately.

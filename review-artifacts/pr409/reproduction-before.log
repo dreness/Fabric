@@ -1,0 +1,352 @@
+warning: 'swiftsimplify': /Users/andre/.codex/worktrees/review-pr409/Fabric/.build/checkouts/SwiftSimplify/Package.swift:10:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 8 |         .macOS(.v10_14),
+ 9 |         .iOS(.v12),
+10 |         .watchOS(.v4),
+   |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+11 |         .tvOS(.v12)
+12 |     ],
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'midikit': /Users/andre/.codex/worktrees/review-pr409/Fabric/.build/checkouts/MIDIKit/Package.swift:12:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 10 |         .iOS(.v12),
+ 11 |         .tvOS(.v12), // builds, but no MIDI features
+ 12 |         .watchOS(.v4), // builds, but no MIDI features
+    |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 13 |     ],
+ 14 |     products: [
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'swift-data-parsing': /Users/andre/.codex/worktrees/review-pr409/Fabric/.build/checkouts/swift-data-parsing/Package.swift:7:69: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 5 | let package = Package(
+ 6 |     name: "swift-data-parsing",
+ 7 |     platforms: [.macOS(.v10_13), .iOS(.v12), .tvOS(.v12), .watchOS(.v4)],
+   |                                                                     `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 8 |     products: [
+ 9 |         .library(
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'swift-timecode': /Users/andre/.codex/worktrees/review-pr409/Fabric/.build/checkouts/swift-timecode/Package.swift:13:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+11 |         .iOS(.v12),
+12 |         .tvOS(.v12),
+13 |         .watchOS(.v4),
+   |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+14 |         .visionOS(.v1)
+15 |     ],
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+Building for debugging...
+[Computing dependencies]
+[Pre-planning 1 / 2116]
+[Planning deferred tasks]
+[Starting]
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr409/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+[8 / 18] Fabric
+[10 / 20] Fabric
+[28 / 38] Fabric
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Views/NodeRegisitryView.swift:79:52: warning: 'appendInterpolation' is deprecated: Localized string interpolation produces an unlocalized, debug description for this type of value. Use a type supported by LocalizedStringKey.StringInterpolation or initialize a LocalizedStringResource instead with an interpolated value that conforms to CustomLocalizedStringResourceConvertible. [#DeprecatedDeclaration]
+ 77 |                            filteredNodesForType.isEmpty == false
+ 78 |                         {
+ 79 |                             Section(header: Text("\(nodeType)")) {
+    |                                                    `- warning: 'appendInterpolation' is deprecated: Localized string interpolation produces an unlocalized, debug description for this type of value. Use a type supported by LocalizedStringKey.StringInterpolation or initialize a LocalizedStringResource instead with an interpolated value that conforms to CustomLocalizedStringResourceConvertible. [#DeprecatedDeclaration]
+ 80 |                                 ForEach(filteredNodesForType) { node in
+ 81 |                                     VStack(alignment: .leading, spacing: 4)
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Views/Graph/GraphCanvas.swift:189:72: warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+187 |                         else { return }
+188 | 
+189 |                         let node = try wrapper.initializeNode(context: currentGraph.context)
+    |                                                                        `- warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+190 |                         try self.editingContext.layoutNode(node)
+191 | 
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Graph/Graph.swift:11:26: note: class 'Graph' does not conform to the 'Sendable' protocol
+   9 | internal import AnyCodable
+  10 | 
+  11 | @Observable public class Graph : Codable, Identifiable, Hashable, Equatable
+     |                          `- note: class 'Graph' does not conform to the 'Sendable' protocol
+  12 | {
+  13 |     public enum Version : Codable
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Views/Graph/GraphCanvas.swift:235:56: warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+233 |                     else { return }
+234 | 
+235 |                     let node = nodeClass.init(context: currentGraph.context)
+    |                                                        `- warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+236 |                     node.setFileURL(url)
+237 |                     node.offset = CGSize(width: location.x - canvasSize.width / 2.0 - node.nodeSize.width / 2.0,
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Graph/Graph.swift:11:26: note: class 'Graph' does not conform to the 'Sendable' protocol
+   9 | internal import AnyCodable
+  10 | 
+  11 | @Observable public class Graph : Codable, Identifiable, Hashable, Equatable
+     |                          `- note: class 'Graph' does not conform to the 'Sendable' protocol
+  12 | {
+  13 |     public enum Version : Codable
+
+[#SendableClosureCaptures]: <https://docs.swift.org/compiler/documentation/diagnostics/sendable-closure-captures>
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:244:46: warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
+242 |         }
+243 | 
+244 |         let seconds = CMTimeGetSeconds(asset.duration)
+    |                                              `- warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
+245 |         self.duration = seconds.isFinite ? seconds : 0
+246 |     }
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:307:37: warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+305 |         // Falls back to 600 (a common timebase) when no video track
+306 |         // is available — e.g. asset still loading.
+307 |         let timescale = self.asset?.tracks(withMediaType: .video).first?.naturalTimeScale ?? 600
+    |                                     `- warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+308 |         let target = CMTime(seconds: clamped, preferredTimescale: timescale)
+309 |         let tol: CMTime = self.seekTolerance.isInfinite
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:307:74: warning: 'naturalTimeScale' was deprecated in macOS 13.0: Use load(.naturalTimeScale) instead [#DeprecatedDeclaration]
+305 |         // Falls back to 600 (a common timebase) when no video track
+306 |         // is available — e.g. asset still loading.
+307 |         let timescale = self.asset?.tracks(withMediaType: .video).first?.naturalTimeScale ?? 600
+    |                                                                          `- warning: 'naturalTimeScale' was deprecated in macOS 13.0: Use load(.naturalTimeScale) instead [#DeprecatedDeclaration]
+308 |         let target = CMTime(seconds: clamped, preferredTimescale: timescale)
+309 |         let tol: CMTime = self.seekTolerance.isInfinite
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:595:49: warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+593 | 
+594 |                 self.asset = AVURLAsset(url: inputURL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
+595 |                 if let videoTrack = self.asset?.tracks(withMediaType: .video).first
+    |                                                 `- warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:597:69: warning: 'preferredTransform' was deprecated in macOS 13.0: Use load(.preferredTransform) instead [#DeprecatedDeclaration]
+595 |                 if let videoTrack = self.asset?.tracks(withMediaType: .video).first
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+    |                                                                     `- warning: 'preferredTransform' was deprecated in macOS 13.0: Use load(.preferredTransform) instead [#DeprecatedDeclaration]
+598 |                     self.sourceNaturalSize = videoTrack.naturalSize
+599 |                 }
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:598:57: warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead [#DeprecatedDeclaration]
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+598 |                     self.sourceNaturalSize = videoTrack.naturalSize
+    |                                                         `- warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead [#DeprecatedDeclaration]
+599 |                 }
+600 |                 self.cacheDuration(from: self.asset)
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:783:32: warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+781 |     /// for non-Hap tracks.
+782 |     private static func hapCodecLabel(for track: AVAssetTrack) -> String? {
+783 |         guard let desc = track.formatDescriptions.first else { return nil }
+    |                                `- warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+784 |         let cmDesc = desc as! CMFormatDescription
+785 |         let sub = CMFormatDescriptionGetMediaSubType(cmDesc)
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:818:27: warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+816 |     /// the slower RGB fallback.
+817 |     private static func codecSupportsDirectDXTUpload(in track: AVAssetTrack) -> Bool {
+818 |         for desc in track.formatDescriptions {
+    |                           `- warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+819 |             let cmDesc = desc as! CMFormatDescription
+820 |             switch CMFormatDescriptionGetMediaSubType(cmDesc) {
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Nodes/Object/Renderables/InstancedMeshNode.swift:165:14: warning: property is accessed but result is unused [#NoUsage]
+163 |         mesh.renderOrder = self.inputRenderOrder.value ?? 0
+164 |         // TODO:
+165 |         mesh.renderLayer
+    |              `- warning: property is accessed but result is unused [#NoUsage]
+166 | 
+167 |         mesh.position = self.inputPosition.value ?? .zero
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Graph/Graph.swift:964:50: warning: result of call to 'map' is unused [#NoUsage]
+ 962 |             let wire = Wire(connection)
+ 963 |             self.registerUndo { graph in
+ 964 |                 graph.connection(matching: wire).map { graph.disconnect($0) }
+     |                                                  `- warning: result of call to 'map' is unused [#NoUsage]
+ 965 |             }
+ 966 |             return connection
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Graph/Graph.swift:1030:46: warning: result of call to 'map' is unused [#NoUsage]
+1028 |         let wire = Wire(connection)
+1029 |         self.registerUndo { graph in
+1030 |             graph.connection(matching: wire).map { graph.setConnection($0, active: previousActive) }
+     |                                              `- warning: result of call to 'map' is unused [#NoUsage]
+1031 |         }
+1032 |         self.nameEdit(active ? "Enable Connection" : "Disable Connection",
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Graph/Graph.swift:1097:46: warning: result of call to 'map' is unused [#NoUsage]
+1095 | 
+1096 |         self.registerUndo { graph in
+1097 |             graph.connection(matching: wire).map { graph.disconnect($0) }
+     |                                              `- warning: result of call to 'map' is unused [#NoUsage]
+1098 |         }
+1099 |         self.nameEdit("Connect Ports", inverse: "Disconnect Ports")
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Graph/GraphCanvasContext.swift:228:13: warning: initialization of immutable value 'graph' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+226 |     public func layoutNode(_ node: Node) throws
+227 |     {
+228 |         let graph = currentGraph
+    |             `- warning: initialization of immutable value 'graph' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+229 |         node.offset = self.calcInteractiveOffset(for: node)
+230 |     }
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:286:28: warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+284 |     }
+285 | 
+286 |     private var oscServer: OSCServer?
+    |                            |- warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+    |                            `- note: use 'OSCUDPServer' instead
+287 |     fileprivate var isListening: Bool = false
+288 | 
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Nodes/Parameters/PassThroughNode.swift:38:30: warning: 'override' is implied when overriding a required initializer
+36 |     }
+37 |     
+38 |     override public required init(from decoder: any Decoder) throws {
+   |                              `- warning: 'override' is implied when overriding a required initializer
+39 |         try super.init(from: decoder)
+40 |     }
+
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Fabric/Graph/Node/Node.swift:223:21: note: overridden required initializer is here
+221 |     }
+222 | 
+223 |     public required init(from decoder: any Decoder) throws
+    |                     `- note: overridden required initializer is here
+224 |     {
+225 |         guard let decodeContext = decoder.context else
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[35 / 52] Fabric
+[39 / 46] Fabric-product
+[56 / 63] FabricTests-product
+macro expansion @Test:18:17: warning: cannot convert '@MainActor @Sendable (PortType) async throws -> Void' to '@Sendable (PortType) async throws -> Void' because crossing of an isolation boundary requires parameter and result types to conform to 'Sendable' protocol; this is an error in the Swift 6 language mode
+`- /Users/andre/.codex/worktrees/review-pr409/Fabric/Tests/ProxyPortReplacementTests.swift:138:6: note: expanded code originates here
+100 |     }
+101 | 
+102 |     @Test("A published port replaced under its id keeps its proxy's publishing further up, and every level follows the replacement", arguments: [PortType.Int, PortType.Geometry])
+    |     |- note: in expansion of macro 'Test' on instance method 'replacementFollowsUpEveryLevel(to:)' here
+    |     `- note: in expansion of macro 'Test' on instance method 'replacementFollowsUpEveryLevel(to:)' here
+103 |     func replacementFollowsUpEveryLevel(to type: PortType) throws
+104 |     {
+    :
+136 |         #expect(graph.connections.count == (kept ? 1 : 0))
+137 |         if kept { #expect(upstream.outputNumber.connections.first?.inletPort === outer.ports.first { $0.id == value.id }) }
+138 |     }
+    +--- macro expansion @Test -----------------------------------------
+    |16 |   displayName: "A published port replaced under its id keeps its proxy's publishing further up, and every level follows the replacement",traits: [],arguments: {[PortType.Int, PortType.Geometry]},sourceBounds: Testing.__SourceBounds(__uncheckedLowerBound: Testing.SourceLocation(__uncheckedFileID: "FabricTests/ProxyPortReplacementTests.swift", filePath: "/Users/andre/.codex/worktrees/review-pr409/Fabric/Tests/ProxyPortReplacementTests.swift", line: 102, column: 6), upperBound: (138, 6)),
+    |17 |   parameters: [(firstName: "to",secondName: "type",type: (PortType).self)],
+    |18 |   testFunction: $s11FabricTests020ProxyPortReplacementB0V30replacementFollowsUpEveryLevel4TestfMp_16c76c9ca1a8b40abefMu_
+    |   |                 |- warning: cannot convert '@MainActor @Sendable (PortType) async throws -> Void' to '@Sendable (PortType) async throws -> Void' because crossing of an isolation boundary requires parameter and result types to conform to 'Sendable' protocol; this is an error in the Swift 6 language mode
+    |   |                 `- note: type 'PortType' does not conform to 'Sendable' protocol
+    |19 | )
+    |20 | }
+    +-------------------------------------------------------------------
+139 | }
+140 | 
+/Users/andre/.codex/worktrees/review-pr409/Fabric/Tests/TypingUndoTests.swift:15:27: warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 13 |     private final class WindowUndo: NSObject, NSWindowDelegate
+ 14 |     {
+ 15 |         let undoManager = UndoManager()
+    |                           `- warning: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context [#ActorIsolatedCall]
+ 16 |         func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? { undoManager }
+ 17 |     }
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/objc/NSObject.h:66:1: note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 64 | 
+ 65 | + (void)initialize;
+ 66 | - (instancetype)init
+    | `- note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous
+ 67 | #if NS_ENFORCE_NSOBJECT_DESIGNATED_INITIALIZER
+ 68 |     NS_DESIGNATED_INITIALIZER
+
+[#ActorIsolatedCall]: <https://docs.swift.org/compiler/documentation/diagnostics/actor-isolated-call>
+[60 / 65] FabricTests-product
+[62 / 65] FabricTests-product
+[64 / 67] FabricTests-product
+[66 / 67] Fabric-product
+Build complete! (8.88 sec)
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Subgraph Review Regressions" started.
+􀟈  Test "A rejected embedding leaves supported boundary values untouched" started.
+􀟈  Test "Proxy preflight leaves live values and change callbacks untouched" started.
+􀟈  Test "Embedding keeps a boundary outlet's last value" started.
+􀟈  Test "Nested embedding preserves fan-out and prior edit targets through undo and redo" started.
+􀟈  Test case passing 1 argument deferred → true to "Embedding keeps a boundary outlet's last value" started.
+􀟈  Test case passing 1 argument deferred → false to "Embedding keeps a boundary outlet's last value" started.
+Init Graph
+Graph: BDBF3F2B-E306-4129-BDBF-59A69A94B81E Add Node Number Binary Operator
+Graph: BDBF3F2B-E306-4129-BDBF-59A69A94B81E Add Node Number Binary Operator
+ProxyPort: unsupported port type for Nested: NodePort<ContiguousArray<ContiguousArray<Float>>>
+􀢄  Test "A rejected embedding leaves supported boundary values untouched" recorded an issue at SubgraphReviewRegressionTests.swift:60:9: Expectation failed: changes == 0
+􀄵  changes == 0 → false
+􀄵    changes → 5
+Deinit Graph: BDBF3F2B-E306-4129-BDBF-59A69A94B81E
+􀢄  Test "Proxy preflight leaves live values and change callbacks untouched" recorded an issue at SubgraphReviewRegressionTests.swift:74:9: Expectation failed: port.value == 42
+􀄵  port.value == 42 → false
+􀄵    port.value → nil
+􀄵    42 → 42.0
+􀄵      some → 42.0
+􀢄  Test "Proxy preflight leaves live values and change callbacks untouched" recorded an issue at SubgraphReviewRegressionTests.swift:75:9: Expectation failed: changes == 0
+􀄵  changes == 0 → false
+􀄵    changes → 2
+􀢄  Test "A rejected embedding leaves supported boundary values untouched" failed after 0.031 seconds with 1 issue.
+􀢄  Test "Proxy preflight leaves live values and change callbacks untouched" failed after 0.031 seconds with 2 issues.
+Init Graph
+Init Graph
+Graph: 42DE48CE-20D5-45B0-9CC0-87973BF6F6B6 Add Node Sub Graph
+Graph: 9BAAEC6D-9615-4070-80E0-3856E2745573 Add Node Number Binary Operator
+Graph: 9BAAEC6D-9615-4070-80E0-3856E2745573 Add Node Math Expression (x + y)
+Graph: 9BAAEC6D-9615-4070-80E0-3856E2745573 Add Node Number Binary Operator
+Graph: 9BAAEC6D-9615-4070-80E0-3856E2745573 Add Node Number Binary Operator
+Init Graph
+Graph: 9BAAEC6D-9615-4070-80E0-3856E2745573 Add Node Sub Graph
+Graph: E444468C-E8D0-4E3B-A430-0051E6BFFA12 Add Node Math Expression (x + y + 1)
+Deinit Graph: 42DE48CE-20D5-45B0-9CC0-87973BF6F6B6
+Deinit Graph: 9BAAEC6D-9615-4070-80E0-3856E2745573
+Deinit Graph: E444468C-E8D0-4E3B-A430-0051E6BFFA12
+Init Graph
+Graph: E08F6A21-EE4C-4E30-8910-1708915E24DE Add Node Number Binary Operator
+Graph: E08F6A21-EE4C-4E30-8910-1708915E24DE Add Node Number Binary Operator
+Init Graph
+Graph: E08F6A21-EE4C-4E30-8910-1708915E24DE Add Node Sub Graph
+Graph: 6EAA483B-350F-48F3-B3DD-8E6402A6324B Add Node Number Binary Operator
+􀢄  Test "Embedding keeps a boundary outlet's last value" recorded an issue with 1 argument deferred → false at SubgraphReviewRegressionTests.swift:26:9: Expectation failed: source.outputNumber.value == 42
+􀄵  source.outputNumber.value == 42 → false
+􀄵    source.outputNumber.value → nil
+􀄵    42 → 42.0
+􀄵      some → 42.0
+􀢄  Test "Embedding keeps a boundary outlet's last value" recorded an issue with 1 argument deferred → false at SubgraphReviewRegressionTests.swift:28:9: Expectation failed: proxy.value == 42
+􀄵  proxy.value == 42 → false
+􀄵    proxy.value → nil
+􀄵    42 → 42.0
+􀄵      some → 42.0
+Deinit Graph: E08F6A21-EE4C-4E30-8910-1708915E24DE
+Deinit Graph: 6EAA483B-350F-48F3-B3DD-8E6402A6324B
+Init Graph
+Graph: C48FE7B5-6D45-434E-9C1B-A4678AA0A6CD Add Node Number Binary Operator
+Graph: C48FE7B5-6D45-434E-9C1B-A4678AA0A6CD Add Node Number Binary Operator
+Init Graph
+Graph: C48FE7B5-6D45-434E-9C1B-A4678AA0A6CD Add Node Render To Image and Depth
+Graph: 383253E2-BA52-4C9A-A8A3-A28D99C4DE74 Add Node Number Binary Operator
+􀢄  Test "Embedding keeps a boundary outlet's last value" recorded an issue with 1 argument deferred → true at SubgraphReviewRegressionTests.swift:26:9: Expectation failed: source.outputNumber.value == 42
+􀄵  source.outputNumber.value == 42 → false
+􀄵    source.outputNumber.value → nil
+􀄵    42 → 42.0
+􀄵      some → 42.0
+􀢄  Test "Embedding keeps a boundary outlet's last value" recorded an issue with 1 argument deferred → true at SubgraphReviewRegressionTests.swift:28:9: Expectation failed: proxy.value == 42
+􀄵  proxy.value == 42 → false
+􀄵    proxy.value → nil
+􀄵    42 → 42.0
+􀄵      some → 42.0
+Deinit Graph: C48FE7B5-6D45-434E-9C1B-A4678AA0A6CD
+Deinit Graph: 383253E2-BA52-4C9A-A8A3-A28D99C4DE74
+􁁛  Test "Nested embedding preserves fan-out and prior edit targets through undo and redo" passed after 0.040 seconds.
+􀢄  Test "Embedding keeps a boundary outlet's last value" with 2 test cases failed after 0.040 seconds with 4 issues.
+􀢄  Suite "Subgraph Review Regressions" failed after 0.040 seconds with 7 issues.
+􀢄  Test run with 4 tests in 1 suite failed after 0.040 seconds with 7 issues.
+Note: Some test targets reported failures:
+  - FabricTests (Swift Testing)
