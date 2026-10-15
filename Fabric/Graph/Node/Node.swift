@@ -404,6 +404,7 @@ open class Node : Codable, Equatable, Identifiable, Hashable, Copyable, CustomDe
 
         self.registry.addDynamic(p, owner: self, name:name)
         self.invalidatePortCaches()
+        self.refreshConnectionTopology()
         if let param = p.parameter
         {
             self.parameterGroup.append(param)
@@ -428,6 +429,7 @@ open class Node : Codable, Equatable, Identifiable, Hashable, Copyable, CustomDe
 
         self.registry.remove(p)
         self.invalidatePortCaches()
+        self.refreshConnectionTopology()
         if let param = p.parameter
         {
             self.parameterGroup.remove(param)
@@ -454,11 +456,13 @@ open class Node : Codable, Equatable, Identifiable, Hashable, Copyable, CustomDe
 
         self.removePort(existing)
         self.addDynamicPort(replacement, name: registryName)
+        self.refreshConnectionTopology()
 
         if published
         {
             replacement.setPublishing(true, name: publishedName)
             self.graph?.port(existing, wasReplacedBy: replacement)
+            self.graph?.markConnectionsChanged()
         }
     }
 
@@ -480,6 +484,17 @@ open class Node : Codable, Equatable, Identifiable, Hashable, Copyable, CustomDe
     {
         self.registry.reorder(reordered)
         self.invalidatePortCaches()
+        self.refreshConnectionTopology()
+    }
+
+    private func refreshConnectionTopology()
+    {
+        self.inputNodes = self.calcInputNodes()
+        self.outputNodes = self.calcOutputNodes()
+        if let graph = self.graph
+        {
+            graph.markNodeForLifecycleReview(self)
+        }
     }
 
     internal func inputPorts() -> [Port]

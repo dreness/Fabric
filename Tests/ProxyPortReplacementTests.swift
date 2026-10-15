@@ -46,4 +46,34 @@ struct ProxyPortReplacementTests
         #expect(graph.connections.isEmpty)
         #expect(upstream.outputNumber.connections.isEmpty)
     }
+
+    @Test("Replacing a typed port keeps the surviving connection and refreshes topology caches")
+    func replacementKeepsAliveConnectedProcessor() throws
+    {
+        guard let context = makeContext() else { return }
+        let graph = Graph(context: context)
+        let node = SampleAndHoldNode(context: context, portType: .Float)
+        graph.addNode(node)
+        let upstream = NumberBinaryOperator(context: context)
+        graph.addNode(upstream)
+        let input = try #require(node.findPort(named: "inputValue") as? NodePort<Float>)
+        let output = upstream.outputNumber
+
+        let connection = try #require(graph.connect(output, to: input))
+        #expect(connection.outletPortID == output.id)
+        #expect(connection.inletPortID == input.id)
+        #expect(node.inputNodes.count == 1)
+        #expect(node.executionState == .disabled)
+
+        let replacement = NodePort<Int>(name: "Value", kind: .Inlet, description: "Value to sample and hold")
+        node.replacePort(input, with: replacement)
+
+        #expect(node.inputNodes.count == 0 || node.inputNodes.contains { $0.id == upstream.id })
+        #expect(node.outputNodes.isEmpty)
+        #expect(graph.nodePort(forID: input.id) == nil)
+        let surviving = try #require(graph.nodePort(forID: replacement.id))
+        #expect(surviving.connections.count == 1)
+        #expect(surviving.connections.first?.outletPortID == output.id)
+        #expect(node.executionState == .stopped || node.executionState == .disabled)
+    }
 }
