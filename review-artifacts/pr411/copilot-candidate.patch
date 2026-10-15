@@ -1,0 +1,189 @@
+diff --git a/Fabric/Graph/Graph.swift b/Fabric/Graph/Graph.swift
+index d0bdba6b..e7b6a07f 100644
+--- a/Fabric/Graph/Graph.swift
++++ b/Fabric/Graph/Graph.swift
+@@ -2087,25 +2087,37 @@ internal import AnyCodable
+     }
+ 
+     /// Recursively replaces UUID strings in a JSON object using a remap table.
+-    /// Values under `preservingKeys` are left as they are, at any depth.
+-    /// Dictionary keys are never rewritten.
+-    internal static func remapUUIDs(in object: Any, remap: [String: String], preservingKeys: Set<String> = []) -> Any
++    /// Only strings that are themselves identity fields, or arrays of identity
++    /// fields, are rewritten: user text or ordinary value arrays stay as they are
++    /// even when they happen to look like a UUID. Values under `preservingKeys`
++    /// are left as they are, at any depth. Dictionary keys are never rewritten.
++    internal static func remapUUIDs(in object: Any,
++                                   remap: [String: String],
++                                   preservingKeys: Set<String> = [],
++                                   underIDKey: Bool = false) -> Any
+     {
+         switch object
+         {
+         case let string as String:
+-            return remap[string] ?? string
++            return underIDKey ? (remap[string] ?? string) : string
+ 
+         case let array as [Any]:
+-            return array.map { remapUUIDs(in: $0, remap: remap, preservingKeys: preservingKeys) }
++            return array.map { remapUUIDs(in: $0, remap: remap, preservingKeys: preservingKeys, underIDKey: underIDKey) }
+ 
+         case let dict as [String: Any]:
+             var newDict = [String: Any]()
+             for (key, value) in dict
+             {
+-                newDict[key] = preservingKeys.contains(key)
+-                    ? value
+-                    : remapUUIDs(in: value, remap: remap, preservingKeys: preservingKeys)
++                if preservingKeys.contains(key)
++                {
++                    newDict[key] = value
++                    continue
++                }
++                let isIdentityKey = isIDKey(key)
++                newDict[key] = remapUUIDs(in: value,
++                                          remap: remap,
++                                          preservingKeys: preservingKeys,
++                                          underIDKey: underIDKey || isIdentityKey)
+             }
+             return newDict
+ 
+diff --git a/Fabric/Nodes/Parameters/String/StringSplitNode.swift b/Fabric/Nodes/Parameters/String/StringSplitNode.swift
+index c2f5cfc4..02a196b5 100644
+--- a/Fabric/Nodes/Parameters/String/StringSplitNode.swift
++++ b/Fabric/Nodes/Parameters/String/StringSplitNode.swift
+@@ -60,6 +60,21 @@ public class StringSplitNode: StrategyNode
+     /// parked here and seeds the inlet when Custom comes back.
+     public private(set) var customSeparator: String = ", "
+ 
++    /// The complete settings value for this node: the parked custom separator is
++    /// part of the node's design together with its strategy, so a clone set sync
++    /// sees the settings as a cohesive whole instead of a separate live port.
++    public struct Settings: StrategySettings, Equatable
++    {
++        public var strategy: String
++        public var customSeparator: String
++
++        public init(strategy: String, customSeparator: String)
++        {
++            self.strategy = strategy
++            self.customSeparator = customSeparator
++        }
++    }
++
+     private enum CodingKeys: String, CodingKey
+     {
+         case customSeparator
+@@ -89,6 +104,23 @@ public class StringSplitNode: StrategyNode
+         try super.init(from: decoder)
+     }
+ 
++    override public var settings: (any NodeSettings)?
++    {
++        Settings(strategy: strategy, customSeparator: customSeparator)
++    }
++
++    override public func apply(_ settings: any NodeSettings)
++    {
++        guard let settings = settings as? Settings else { return }
++        let previousCustomSeparator = customSeparator
++        customSeparator = settings.customSeparator
++        if previousCustomSeparator != customSeparator
++        {
++            subtitleSubject.send()
++        }
++        super.apply(settings)
++    }
++
+     public override func encode(to encoder: any Encoder) throws
+     {
+         try super.encode(to: encoder)
+diff --git a/Tests/GraphDuplicationTests.swift b/Tests/GraphDuplicationTests.swift
+index 4934565a..6cc7db32 100644
+--- a/Tests/GraphDuplicationTests.swift
++++ b/Tests/GraphDuplicationTests.swift
+@@ -33,4 +33,50 @@ struct GraphDuplicationTests
+         #expect(copy.inputPort.id != node.inputPort.id)
+         #expect(copy.inputPort.value == text)
+     }
++
++    @Test("Duplicating preserves strings that match a node or port ID")
++    func duplicateKeepsNodeAndPortIDStrings() throws
++    {
++        guard let context = makeContext() else { return }
++        let graph = Graph(context: context)
++        let node = StringLengthNode(context: context)
++        graph.addNode(node)
++
++        let portIDText = node.inputPort.id.uuidString
++        let nodeIDText = node.id.uuidString
++        node.inputPort.value = portIDText
++        node.userName = nodeIDText
++
++        let copy = try #require(graph.duplicateNodes([node]).first as? StringLengthNode)
++        #expect(copy.inputPort.value == portIDText)
++        #expect(copy.userName == nodeIDText)
++    }
++
++    @Test("UUID remapping rewrites identity fields but leaves user text and ordinary value arrays alone")
++    func remapUUIDsOnlyChangesIdentityFields() throws
++    {
++        let uuid = UUID().uuidString
++        let sibling = UUID().uuidString
++        let remapped = Graph.remapUUIDs(in: [
++            "id": uuid,
++            "innerPortID": sibling,
++            "text": uuid,
++            "identityIDs": [uuid, sibling],
++            "valueArray": [uuid, "hello"],
++            "preserved": uuid,
++        ], remap: [uuid: "remapped-uuid", sibling: "remapped-sibling"], preservingKeys: ["preserved"]) as? [String: Any]
++
++        let remappedID = try #require(remapped?["id"] as? String)
++        let remappedInnerID = try #require(remapped?["innerPortID"] as? String)
++        let remappedText = try #require(remapped?["text"] as? String)
++        let remappedIDs = try #require(remapped?["identityIDs"] as? [String])
++        let valueArray = try #require(remapped?["valueArray"] as? [String])
++
++        #expect(remappedID == "remapped-uuid")
++        #expect(remappedInnerID == "remapped-sibling")
++        #expect(remappedText == uuid)
++        #expect(remappedIDs == ["remapped-uuid", "remapped-sibling"])
++        #expect(valueArray == [uuid, "hello"])
++        #expect(remapped?["preserved"] as? String == uuid)
++    }
+ }
+diff --git a/Tests/StringSplitNodeTests.swift b/Tests/StringSplitNodeTests.swift
+index 05748707..8ae628d5 100644
+--- a/Tests/StringSplitNodeTests.swift
++++ b/Tests/StringSplitNodeTests.swift
+@@ -58,6 +58,29 @@ struct StringSplitNodeTests
+         #expect(node.inputSeparator?.value == #"\t"#)
+     }
+ 
++    @Test("String Split settings save the parked separator with strategy")
++    func customSeparatorIsInSettings() throws
++    {
++        guard let harness = GraphExecutionTestHarness(renderWidth: 64, renderHeight: 64) else { return }
++
++        let graph = Graph(context: harness.context)
++        let node = StringSplitNode(context: harness.context, strategy: StringSplitMode.custom)
++        graph.addNode(node)
++        try #require(node.inputSeparator).value = #"\t"#
++
++        let settings = StringSplitNode.Settings(strategy: StringSplitMode.comma.rawValue,
++                                                customSeparator: #"\t"#)
++        graph.setSettings(settings, on: node)
++
++        #expect(node.splitMode == .comma)
++        #expect(node.customSeparator == #"\t"#)
++        #expect(node.inputSeparator == nil)
++
++        let saved = try #require(node.settings as? StringSplitNode.Settings)
++        #expect(saved.strategy == StringSplitMode.comma.rawValue)
++        #expect(saved.customSeparator == #"\t"#)
++    }
++
+     @Test("Escaped newline separates file contents into lines")
+     func escapedNewlineSeparator()
+     {

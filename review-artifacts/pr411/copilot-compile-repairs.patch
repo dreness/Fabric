@@ -1,0 +1,18 @@
+diff --git a/Fabric/Nodes/Parameters/String/StringSplitNode.swift b/Fabric/Nodes/Parameters/String/StringSplitNode.swift
+index 02a196b5..08371b7c 100644
+--- a/Fabric/Nodes/Parameters/String/StringSplitNode.swift
++++ b/Fabric/Nodes/Parameters/String/StringSplitNode.swift
+@@ -166,13 +166,6 @@ public class StringSplitNode: StrategyNode
+         ]
+     }
+ 
+-    /// Parks what the Separator inlet holds before a mode change takes it away.
+-    override public func apply(_ settings: any NodeSettings)
+-    {
+-        if let inputSeparator { customSeparator = inputSeparator.value ?? customSeparator }
+-        super.apply(settings)
+-    }
+-
+     /// The String inlet survives a mode change, so nothing else would mark this
+     /// node dirty: re-split what is already there the new way.
+     override public func didApplyStrategy()

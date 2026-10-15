@@ -1,0 +1,34 @@
+Fork practice PR #7; upstream layer #411; Copilot candidate 0a7145f51cd725f73e25c1de2f42c2054fdb4fc8
+Retain local production fix. Candidate has duplicate apply overrides. Temporary removal of the older override permits tests: 9 assertions fail across String Split clone/round-trip behavior and a nested identity-container helper case. Candidate still lacks complete setStrategy capture and parked-only encoding; its UUID identity context leaks into ordinary fields nested below an identity key. New test: CopilotUUIDResponseTests.nestedIdentityContainer.
+Validation: real macOS/Metal; exact candidates tested first. Temporary compile repairs were diagnostic experiments only and were not adopted. No upstream comments or remote changes were made in this validation run.
+Exact candidate command: swift test --filter "Review|EditUndo|GraphAutoLayout|ProxyPortReplacement|SettingsUndo|GraphConnectionOwnership|PortHydration|GraphDuplication|StringSplitNode"
+Diagnostic repair command: swift test --filter "Copilot|Review|UndoFix" (406 omits two tests coupled to local PendingCommit APIs; 408 second run restores upstream SettingsUndoTests to use the save harness).
+Editor command: xcodebuild -project Fabric.xcodeproj -scheme "Fabric Editor" -configuration Debug -destination platform=macOS,arch=arm64 -derivedDataPath /private/tmp/fabric-prNNN-derived -clonedSourcePackagesDirPath /private/tmp/fabric-pr406-derived/SourcePackages -xcconfig /private/tmp/fabric-pr406-build.xcconfig -skipMacroValidation CODE_SIGNING_ALLOWED=NO build
+Focused excerpts below; full transient build output omitted. Existing shader diagnostics emitted by expected negative shader tests are not test failures.
+
+== copilot-tests ==
+/Users/andre/.codex/worktrees/review-pr411/Fabric/Fabric/Nodes/Parameters/String/StringSplitNode.swift:170:26: error: 'apply' has already been overridden
+
+== copilot-editor ==
+/Users/andre/.codex/worktrees/review-pr411/Fabric/Fabric/Nodes/Parameters/String/StringSplitNode.swift:170:26: error: 'apply' has already been overridden
+** BUILD FAILED **
+
+== repaired-compile-tests ==
+􀢄  Test "An identity container does not turn nested user fields into identities" recorded an issue at CopilotUUIDResponseTests.swift:16:9: Expectation failed: member["value"] as? String == original
+􀢄  Test "An identity container does not turn nested user fields into identities" recorded an issue at CopilotUUIDResponseTests.swift:17:9: Expectation failed: member["text"] as? [String] == [original]
+􀢄  Test "String Split gives and takes the complete settings value" recorded an issue at CloneSetReviewRegressionTests.swift:88:9: Expectation failed: copy.customSeparator == "|"
+􀢄  Test "String Split gives and takes the complete settings value" recorded an issue at CloneSetReviewRegressionTests.swift:91:9: Expectation failed: copy.inputSeparator?.value == "|"
+􀢄  Test "A mode change carries the parked custom separator to sibling clones" recorded an issue at CloneSetReviewRegressionTests.swift:62:9: Expectation failed: split.customSeparator == "::"
+􀢄  Test "A mode change carries the parked custom separator to sibling clones" recorded an issue at CloneSetReviewRegressionTests.swift:63:9: Expectation failed: other.customSeparator == "::"
+􀢄  Test "A mode change carries the parked custom separator to sibling clones" recorded an issue at CloneSetReviewRegressionTests.swift:68:9: Expectation failed: other.customSeparator == "::"
+􀢄  Test "A mode change carries the parked custom separator to sibling clones" recorded an issue at CloneSetReviewRegressionTests.swift:74:9: Expectation failed: reopenedSplit.customSeparator == "::"
+􀢄  Test "An unrelated clone edit preserves each published separator value" recorded an issue at CloneSetReviewRegressionTests.swift:109:9: Expectation failed: sibling.isInStepWithCloneSet
+􀢄  Test run with 6 tests in 2 suites failed after 0.115 seconds with 9 issues.
+
+== local-tests ==
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+Post Shader Pipeline: program_source:871:12: error: no matching function for call to 'compositeXor'
+􁁛  Test run with 420 tests in 33 suites passed after 11.318 seconds.
+
+== local-editor ==
+** BUILD SUCCEEDED **
