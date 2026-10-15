@@ -1,0 +1,19 @@
+diff --git a/Fabric Editor/FabricDocument.swift b/Fabric Editor/FabricDocument.swift
+index 0e51f206..05b9b5d8 100644
+--- a/Fabric Editor/FabricDocument.swift	
++++ b/Fabric Editor/FabricDocument.swift	
+@@ -390,12 +390,12 @@ class FabricDocument: FileDocument
+         let data: Data = try {
+             if Thread.isMainThread
+             {
+-                return try self.synchronizeGraphSnapshotForSave(graph: graph)
++                return try MainActor.assumeIsolated { try self.synchronizeGraphSnapshotForSave(graph: graph) }
+             }
+ 
+             var result: Result<Data, Error>!
+             DispatchQueue.main.sync {
+-                result = Result { try self.synchronizeGraphSnapshotForSave(graph: graph) }
++                result = Result { try MainActor.assumeIsolated { try self.synchronizeGraphSnapshotForSave(graph: graph) } }
+             }
+             return try result.get()
+         }()

@@ -1,0 +1,28 @@
+Fork practice PR #4; upstream layer #408; Copilot candidate f350c4dd231dcc0af6440dfd52cb2d8555de2aeb
+Retain local production fix. Candidate invokes a main-actor method from a nonisolated save method; its new SwiftPM test also cannot see FabricDocument (editor target). Temporary assumeIsolated bridges plus our existing verbatim save-method harness pass both main/worker cases. Local fix has no forced Result unwrap and acquires the graph inside the synchronized snapshot.
+Validation: real macOS/Metal; exact candidates tested first. Temporary compile repairs were diagnostic experiments only and were not adopted. No upstream comments or remote changes were made in this validation run.
+Exact candidate command: swift test --filter "Review|EditUndo|GraphAutoLayout|ProxyPortReplacement|SettingsUndo|GraphConnectionOwnership|PortHydration|GraphDuplication|StringSplitNode"
+Diagnostic repair command: swift test --filter "Copilot|Review|UndoFix" (406 omits two tests coupled to local PendingCommit APIs; 408 second run restores upstream SettingsUndoTests to use the save harness).
+Editor command: xcodebuild -project Fabric.xcodeproj -scheme "Fabric Editor" -configuration Debug -destination platform=macOS,arch=arm64 -derivedDataPath /private/tmp/fabric-prNNN-derived -clonedSourcePackagesDirPath /private/tmp/fabric-pr406-derived/SourcePackages -xcconfig /private/tmp/fabric-pr406-build.xcconfig -skipMacroValidation CODE_SIGNING_ALLOWED=NO build
+Focused excerpts below; full transient build output omitted. Existing shader diagnostics emitted by expected negative shader tests are not test failures.
+
+== copilot-tests ==
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/DocumentSaveReviewRegressionTests.swift:22:33: error: call to main actor-isolated instance method 'synchronizeGraphSnapshotForSave(graph:)' in a synchronous nonisolated context [#ActorIsolatedCall]
+
+== copilot-editor ==
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Fabric Editor/FabricDocument.swift:393:33: error: call to main actor-isolated instance method 'synchronizeGraphSnapshotForSave(graph:)' in a synchronous nonisolated context [#ActorIsolatedCall]
+** BUILD FAILED **
+
+== repaired-compile-tests ==
+/Users/andre/.codex/worktrees/review-pr408/Fabric/Tests/SettingsUndoTests.swift:116:24: error: cannot find 'FabricDocument' in scope
+
+== repaired-behavior-tests ==
+􁁛  Test run with 1 test in 1 suite passed after 0.215 seconds.
+
+== local-tests ==
+Post Shader Pipeline: program_source:414:1: error: expected unqualified-id
+Post Shader Pipeline: program_source:871:12: error: no matching function for call to 'compositeXor'
+􁁛  Test run with 278 tests in 26 suites passed after 3.463 seconds.
+
+== local-editor ==
+** BUILD SUCCEEDED **

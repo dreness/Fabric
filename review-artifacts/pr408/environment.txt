@@ -17,3 +17,10 @@ Pinned submodules:
  f7f153de9920ff0b183ba1d38526c1a8dc0f49f8 HapInAVFoundation (1.6.9.4)
  22dfce31640b156e6d43df01257dcb72e5b20294 Satin (20.0.0-Beta-1-36-g22dfce31)
  71351d4b484cd2d1917867f7846a5cdca724552d Syphon (5-108-g71351d4)
+
+Copilot response validation (2026-10-15):
+Fork PR: https://github.com/dreness/Fabric/pull/4
+Candidate head: f350c4dd231dcc0af6440dfd52cb2d8555de2aeb
+Retain local production fix. Candidate invokes a main-actor method from a nonisolated save method; its new SwiftPM test also cannot see FabricDocument (editor target). Temporary assumeIsolated bridges plus our existing verbatim save-method harness pass both main/worker cases. Local fix has no forced Result unwrap and acquires the graph inside the synchronized snapshot.
+􁁛  Test run with 278 tests in 26 suites passed after 3.463 seconds.
+Fabric Editor Debug macOS arm64: BUILD SUCCEEDED.
