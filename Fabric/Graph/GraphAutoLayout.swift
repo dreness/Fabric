@@ -21,7 +21,10 @@ extension Graph {
     /// Consumer nodes (sinks) are placed at the right; their inputs fan
     /// out to the left. Wraps all moves in a single undo group.
     public func autoLayout() {
-        let layout = GraphAutoLayout.compute(graph: self)
+        let layout = GraphAutoLayout.compute(graph: self).filter { node, offset in
+            node.offset != offset
+        }
+        guard !layout.isEmpty else { return }
 
         self.performEdit(named: "Auto Layout") {
             for (node, newOffset) in layout {

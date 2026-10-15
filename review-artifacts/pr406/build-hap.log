@@ -1,0 +1,64 @@
+Building HapInAVFoundation.framework (Release, arm64+x86_64)...
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project /Users/andre/.codex/worktrees/review-pr406/Fabric/HapInAVFoundation/HapInAVFoundation.xcodeproj -scheme HapInAVFoundation -configuration Release -sdk macosx -destination platform=macOS -derivedDataPath /var/folders/tj/2t0mnm3941vbns09mjwtjmvm0000gn/T//hapinavfoundation-xcframework.trdu41/derived-universal "ARCHS=arm64 x86_64" ONLY_ACTIVE_ARCH=NO SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES build
+
+Build settings from command line:
+    ARCHS = arm64 x86_64
+    BUILD_LIBRARY_FOR_DISTRIBUTION = YES
+    ONLY_ACTIVE_ARCH = NO
+    SDKROOT = macosx27.0
+    SKIP_INSTALL = NO
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:macOS, arch:arm64, id:00006050-001E49060C89401C, name:My Mac }
+{ platform:macOS, arch:x86_64, id:00006050-001E49060C89401C, name:My Mac }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (3 targets)
+    Target 'HapInAVFoundation' in project 'HapInAVFoundation'
+        ➜ Explicit dependency on target 'squish' in project 'squish'
+        ➜ Explicit dependency on target 'snappy' in project 'snappy'
+    Target 'snappy' in project 'snappy' (no dependencies)
+    Target 'squish' in project 'squish' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX27.0.sdk -x c++ -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX27.0.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX27.0.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX27.0.sdk -x objective-c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX27.0.sdk -x c++ -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX27.0.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX27.0.sdk -x objective-c -c /dev/null
+
+Build description signature: 02a885da85d542f7e0e5ee3fa765a0c2
+Build description path: /var/folders/tj/2t0mnm3941vbns09mjwtjmvm0000gn/T/hapinavfoundation-xcframework.trdu41/derived-universal/Build/Intermediates.noindex/XCBuildData/02a885da85d542f7e0e5ee3fa765a0c2.xcbuilddata
+/Users/andre/.codex/worktrees/review-pr406/Fabric/HapInAVFoundation/HapInAVFoundation.xcodeproj: error: The macOS deployment target 'MACOSX_DEPLOYMENT_TARGET' is set to 10.15, but the range of supported deployment target versions is 12.0 to 27.0.x. (in target 'HapInAVFoundation' from project 'HapInAVFoundation')
+/Users/andre/.codex/worktrees/review-pr406/Fabric/HapInAVFoundation/HapInAVFoundation.xcodeproj: error: No signing certificate "Mac Development" found: No "Mac Development" signing certificate matching team ID "KH97KZU7A7" with a private key was found. (in target 'HapInAVFoundation' from project 'HapInAVFoundation')
+/Users/andre/.codex/worktrees/review-pr406/Fabric/HapInAVFoundation/external/squish/squish.xcodeproj: error: The macOS deployment target 'MACOSX_DEPLOYMENT_TARGET' is set to 10.13, but the range of supported deployment target versions is 12.0 to 27.0.x. (in target 'squish' from project 'squish')
+** BUILD FAILED **
+
+
+The following build commands failed:
+	Building project HapInAVFoundation with scheme HapInAVFoundation and configuration Release
+(1 failure)

@@ -1,0 +1,60 @@
+Building for debugging...
+[Computing dependencies]
+[Pre-planning 1 / 2116]
+[Planning 1366 / 2116]
+[Planning deferred tasks]
+[Constructing 711 / 5072]
+[Starting]
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+[10 / 188] Fabric_Fabric
+[12 / 184]
+[20 / 31] FabricTests-product
+[22 / 33] FabricTests-product
+[23 / 33] FabricTests-product
+[29 / 32] FabricTests-product
+[30 / 32] FabricTests-product
+[31 / 32] FabricTests-product
+Build complete! (5.93 sec)
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Review Undo Edge Cases" started.
+􀟈  Test "Undo during a focused edit must undo the value before the preceding graph edit" started.
+􀟈  Test "A UI edit uses the live parameter value as its undo baseline" started.
+􀟈  Test "Graph.undo flushes a change waiting for its pause" started.
+􀟈  Test "Auto Layout on an empty graph does not create an undoable edit" started.
+Init Graph
+Graph: 43399BFE-37FE-42D4-9706-1C5C34080137 Add Node String Split (Custom)
+􀢄  Test "Undo during a focused edit must undo the value before the preceding graph edit" recorded an issue at ReviewUndoEdgeCaseTests.swift:70:9: Expectation failed: graph.nodes.contains { $0.id == node.id }
+􀄵  graph.nodes.contains { $0.id == node.id } → <not evaluated>
+􀢄  Test "Undo during a focused edit must undo the value before the preceding graph edit" recorded an issue at ReviewUndoEdgeCaseTests.swift:71:9: Expectation failed: parameter.value == "Before"
+􀄵  parameter.value == "Before" → false
+􀄵    parameter.value → "After"
+Deinit Graph: 43399BFE-37FE-42D4-9706-1C5C34080137
+Init Graph
+􀢄  Test "Auto Layout on an empty graph does not create an undoable edit" recorded an issue at ReviewUndoEdgeCaseTests.swift:31:9: Expectation failed: !manager.canUndo
+􀄵  !manager.canUndo → true
+􀄵    manager.canUndo → false
+􀄵      manager → NSUndoManager<0x74af2b11f0>
+􀄵      canUndo → true
+Deinit Graph: 3798062D-B485-43F0-BB28-FA18B8ACEA8E
+Init Graph
+Graph: 5AD30385-8DC9-4FC2-B38A-2C2A8B6DD88E Add Node Number Binary Operator
+􀢄  Test "A UI edit uses the live parameter value as its undo baseline" recorded an issue at ReviewUndoEdgeCaseTests.swift:91:9: Expectation failed: parameter.value == 2
+􀄵  parameter.value == 2 → false
+􀄵    parameter.value → 1.0
+􀄵    2 → 2.0
+Deinit Graph: 5AD30385-8DC9-4FC2-B38A-2C2A8B6DD88E
+Init Graph
+Graph: 13CEC789-62A3-4E84-BE57-62CE38E8ACEC Add Node Number Binary Operator
+Deinit Graph: 13CEC789-62A3-4E84-BE57-62CE38E8ACEC
+􁁛  Test "Graph.undo flushes a change waiting for its pause" passed after 0.028 seconds.
+􀢄  Test "A UI edit uses the live parameter value as its undo baseline" failed after 0.028 seconds with 1 issue.
+􀢄  Test "Undo during a focused edit must undo the value before the preceding graph edit" failed after 0.028 seconds with 2 issues.
+􀢄  Test "Auto Layout on an empty graph does not create an undoable edit" failed after 0.028 seconds with 1 issue.
+􀢄  Suite "Review Undo Edge Cases" failed after 0.028 seconds with 4 issues.
+􀄵  // Review-only probes, copied into the isolated worktree after the unmodified
+􀄵  // PR tests run. No production code is changed.
+􀢄  Test run with 4 tests in 1 suite failed after 0.028 seconds with 4 issues.
+Note: Some test targets reported failures:
+  - FabricTests (Swift Testing)

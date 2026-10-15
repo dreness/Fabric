@@ -1,0 +1,96 @@
+Building for debugging...
+[Computing dependencies]
+[Provisioning 6 / 112]
+[Using on-disk description]
+[1 / 6] AsyncAlgorithms
+[2 / 6] Fabric
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:262:28: warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+260 |     }
+261 | 
+262 |     private var oscServer: OSCServer?
+    |                            |- warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+    |                            `- note: use 'OSCUDPServer' instead
+263 |     fileprivate var isListening: Bool = false
+264 | 
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Parameters/PassThroughNode.swift:38:30: warning: 'override' is implied when overriding a required initializer
+36 |     }
+37 |     
+38 |     override public required init(from decoder: any Decoder) throws {
+   |                              `- warning: 'override' is implied when overriding a required initializer
+39 |         try super.init(from: decoder)
+40 |     }
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/Node/Node.swift:223:21: note: overridden required initializer is here
+221 |     }
+222 | 
+223 |     public required init(from decoder: any Decoder) throws
+    |                     `- note: overridden required initializer is here
+224 |     {
+225 |         guard let decodeContext = decoder.context else
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[3 / 7] Fabric
+[9 / 13] Fabric_Fabric
+[13 / 16] Fabric
+[14 / 17] Fabric
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/Graph.swift:963:50: warning: result of call to 'map' is unused [#NoUsage]
+ 961 |             let wire = Wire(connection)
+ 962 |             self.registerUndo { graph in
+ 963 |                 graph.connection(matching: wire).map { graph.disconnect($0) }
+     |                                                  `- warning: result of call to 'map' is unused [#NoUsage]
+ 964 |             }
+ 965 |             return connection
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/Graph.swift:1029:46: warning: result of call to 'map' is unused [#NoUsage]
+1027 |         let wire = Wire(connection)
+1028 |         self.registerUndo { graph in
+1029 |             graph.connection(matching: wire).map { graph.setConnection($0, active: previousActive) }
+     |                                              `- warning: result of call to 'map' is unused [#NoUsage]
+1030 |         }
+1031 |         self.nameEdit(active ? "Enable Connection" : "Disable Connection",
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/Graph.swift:1096:46: warning: result of call to 'map' is unused [#NoUsage]
+1094 | 
+1095 |         self.registerUndo { graph in
+1096 |             graph.connection(matching: wire).map { graph.disconnect($0) }
+     |                                              `- warning: result of call to 'map' is unused [#NoUsage]
+1097 |         }
+1098 |         self.nameEdit("Connect Ports", inverse: "Disconnect Ports")
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+[15 / 17] Fabric
+[16 / 19] FabricTests-product
+[17 / 21] FabricTests-product
+[19 / 21] FabricTests-product
+[20 / 23] FabricTests-product
+[24 / 25] FabricTests-product
+[25 / 27] Fabric-product
+[27 / 28] Fabric-product
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+Build complete! (7.65 sec)
+􀟈  Test run started.
+􀄵  Testing Library Version: 2084
+􀄵  Target Platform: arm64e-apple-macos14.0
+􀟈  Suite "Review Undo Edge Cases" started.
+􀟈  Test "Undo during a focused edit must undo the value before the preceding graph edit" started.
+􀟈  Test "Auto Layout on an empty graph does not create an undoable edit" started.
+􀟈  Test "A UI edit uses the live parameter value as its undo baseline" started.
+􀟈  Test "Graph.undo flushes a change waiting for its pause" started.
+Init Graph
+Graph: 5D9E5514-1CC2-45A8-A4D6-8B5CA5753922 Add Node String Split (Custom)
+Deinit Graph: 5D9E5514-1CC2-45A8-A4D6-8B5CA5753922
+Init Graph
+Graph: 19C8C43A-431D-47AD-BCBC-E0C421340886 Add Node Number Binary Operator
+Deinit Graph: 19C8C43A-431D-47AD-BCBC-E0C421340886
+􁁛  Test "Undo during a focused edit must undo the value before the preceding graph edit" passed after 0.025 seconds.
+Init Graph
+Deinit Graph: E4FBEFEF-0B3D-4FC6-8FF6-E496BF9B5ED4
+􁁛  Test "A UI edit uses the live parameter value as its undo baseline" passed after 0.026 seconds.
+Init Graph
+Graph: 8DC5F16A-9320-4FDD-83E9-B8FF5F0268AA Add Node Number Binary Operator
+Deinit Graph: 8DC5F16A-9320-4FDD-83E9-B8FF5F0268AA
+􁁛  Test "Auto Layout on an empty graph does not create an undoable edit" passed after 0.030 seconds.
+􁁛  Test "Graph.undo flushes a change waiting for its pause" passed after 0.030 seconds.
+􁁛  Suite "Review Undo Edge Cases" passed after 0.030 seconds.
+􁁛  Test run with 4 tests in 1 suite passed after 0.030 seconds.

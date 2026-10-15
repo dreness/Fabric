@@ -1,0 +1,1414 @@
+Fetching https://github.com/vade/SwiftSimplify from cache
+Fetched https://github.com/vade/SwiftSimplify from cache (0.41s)
+warning: 'swiftsimplify': /Package.swift:10:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 8 |         .macOS(.v10_14),
+ 9 |         .iOS(.v12),
+10 |         .watchOS(.v4),
+   |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+11 |         .tvOS(.v12)
+12 |     ],
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+Fetching https://github.com/gonzalezreal/textual from cache
+Fetching https://github.com/mchakravarty/CodeEditorView.git from cache
+Fetching https://github.com/huggingface/swift-transformers from cache
+Fetching https://github.com/orchetect/MIDIKit from cache
+Fetching https://github.com/orchetect/OSCKit from cache
+Fetching https://github.com/apple/swift-async-algorithms.git from cache
+Fetching https://github.com/ml-explore/mlx-swift-lm from cache
+Fetching https://github.com/Fabric-Project/MathExpressionEngine from cache
+Fetching https://github.com/tayloraswift/swift-noise from cache
+Fetching https://github.com/Flight-School/AnyCodable from cache
+Fetching https://github.com/ml-explore/mlx-swift from cache
+Fetching https://github.com/huggingface/swift-huggingface from cache
+Fetched https://github.com/huggingface/swift-transformers from cache (0.72s)
+Fetched https://github.com/orchetect/OSCKit from cache (0.75s)
+Fetched https://github.com/mchakravarty/CodeEditorView.git from cache (0.75s)
+Fetched https://github.com/gonzalezreal/textual from cache (0.75s)
+Fetched https://github.com/Fabric-Project/MathExpressionEngine from cache (0.77s)
+Fetched https://github.com/ml-explore/mlx-swift-lm from cache (1.22s)
+Fetched https://github.com/orchetect/MIDIKit from cache (1.28s)
+Fetched https://github.com/Flight-School/AnyCodable from cache (1.28s)
+Fetched https://github.com/huggingface/swift-huggingface from cache (1.29s)
+Fetched https://github.com/tayloraswift/swift-noise from cache (1.29s)
+Fetched https://github.com/ml-explore/mlx-swift from cache (1.29s)
+Fetched https://github.com/apple/swift-async-algorithms.git from cache (1.31s)
+Computing version for https://github.com/orchetect/MIDIKit
+warning: 'midikit': /Package.swift:12:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 10 |         .iOS(.v12),
+ 11 |         .tvOS(.v12), // builds, but no MIDI features
+ 12 |         .watchOS(.v4), // builds, but no MIDI features
+    |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 13 |     ],
+ 14 |     products: [
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+Computed https://github.com/orchetect/MIDIKit at 0.12.0 (1.76s)
+Fetching https://github.com/orchetect/swift-data-parsing from cache
+Fetching https://github.com/orchetect/swift-timecode from cache
+Fetched https://github.com/orchetect/swift-timecode from cache (1.41s)
+Fetched https://github.com/orchetect/swift-data-parsing from cache (1.44s)
+Computing version for https://github.com/gonzalezreal/textual
+Computed https://github.com/gonzalezreal/textual at 0.5.0 (1.67s)
+Fetching https://github.com/pointfreeco/swift-concurrency-extras from cache
+Fetching https://github.com/gonzalezreal/swiftui-math from cache
+Fetched https://github.com/gonzalezreal/swiftui-math from cache (1.36s)
+Fetched https://github.com/pointfreeco/swift-concurrency-extras from cache (1.38s)
+Computing version for https://github.com/Flight-School/AnyCodable
+Computed https://github.com/Flight-School/AnyCodable at 0.6.7 (1.82s)
+Computing version for https://github.com/Fabric-Project/MathExpressionEngine
+Computed https://github.com/Fabric-Project/MathExpressionEngine at 1.2.0 (0.32s)
+Computing version for https://github.com/orchetect/swift-data-parsing
+warning: 'swift-data-parsing': /Package.swift:7:69: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 5 | let package = Package(
+ 6 |     name: "swift-data-parsing",
+ 7 |     platforms: [.macOS(.v10_13), .iOS(.v12), .tvOS(.v12), .watchOS(.v4)],
+   |                                                                     `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 8 |     products: [
+ 9 |         .library(
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+Computed https://github.com/orchetect/swift-data-parsing at 0.1.2 (0.38s)
+Computing version for https://github.com/gonzalezreal/swiftui-math
+Computed https://github.com/gonzalezreal/swiftui-math at 0.1.0 (0.35s)
+Computing version for https://github.com/orchetect/OSCKit
+Computed https://github.com/orchetect/OSCKit at 2.2.0 (0.43s)
+Fetching https://github.com/robbiehanson/CocoaAsyncSocket from cache
+Fetching https://github.com/orchetect/swift-ascii from cache
+Fetched https://github.com/orchetect/swift-ascii from cache (0.35s)
+Fetched https://github.com/robbiehanson/CocoaAsyncSocket from cache (0.35s)
+Computing version for https://github.com/orchetect/swift-ascii
+Computed https://github.com/orchetect/swift-ascii at 1.3.1 (0.71s)
+Computing version for https://github.com/tayloraswift/swift-noise
+Computed https://github.com/tayloraswift/swift-noise at 1.2.0 (0.34s)
+Fetching https://github.com/tayloraswift/swift-png from cache
+Fetched https://github.com/tayloraswift/swift-png from cache (0.53s)
+Computing version for https://github.com/ml-explore/mlx-swift-lm
+Computed https://github.com/ml-explore/mlx-swift-lm at 3.32.3 (0.90s)
+Fetching https://github.com/swiftlang/swift-syntax.git from cache
+Fetched https://github.com/swiftlang/swift-syntax.git from cache (1.02s)
+Computing version for https://github.com/ml-explore/mlx-swift
+Computed https://github.com/ml-explore/mlx-swift at 0.32.3 (1.36s)
+Fetching https://github.com/apple/swift-numerics from cache
+Fetched https://github.com/apple/swift-numerics from cache (0.71s)
+Computing version for https://github.com/swiftlang/swift-syntax.git
+Computed https://github.com/swiftlang/swift-syntax.git at 603.0.2 (1.15s)
+Computing version for https://github.com/orchetect/swift-timecode
+warning: 'swift-timecode': /Package.swift:13:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+11 |         .iOS(.v12),
+12 |         .tvOS(.v12),
+13 |         .watchOS(.v4),
+   |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+14 |         .visionOS(.v1)
+15 |     ],
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+Computed https://github.com/orchetect/swift-timecode at 3.1.4 (0.37s)
+Computing version for https://github.com/huggingface/swift-transformers
+Computed https://github.com/huggingface/swift-transformers at 1.3.5 (0.32s)
+Fetching https://github.com/huggingface/swift-jinja.git from cache
+Fetching https://github.com/apple/swift-collections.git from cache
+Fetching https://github.com/ibireme/yyjson.git from cache
+Fetching https://github.com/apple/swift-crypto.git from cache
+Fetched https://github.com/ibireme/yyjson.git from cache (0.66s)
+Fetched https://github.com/apple/swift-crypto.git from cache (0.74s)
+Fetched https://github.com/huggingface/swift-jinja.git from cache (0.74s)
+Fetched https://github.com/apple/swift-collections.git from cache (0.74s)
+Computing version for https://github.com/ibireme/yyjson.git
+Computed https://github.com/ibireme/yyjson.git at 0.12.0 (1.03s)
+Computing version for https://github.com/huggingface/swift-jinja.git
+Computed https://github.com/huggingface/swift-jinja.git at 2.5.1 (0.21s)
+Computing version for https://github.com/pointfreeco/swift-concurrency-extras
+Computed https://github.com/pointfreeco/swift-concurrency-extras at 1.4.3 (0.29s)
+Computing version for https://github.com/apple/swift-numerics
+Computed https://github.com/apple/swift-numerics at 1.1.1 (0.22s)
+Computing version for https://github.com/huggingface/swift-huggingface
+Computed https://github.com/huggingface/swift-huggingface at 0.13.0 (0.30s)
+Fetching https://github.com/mattt/EventSource.git from cache
+Fetched https://github.com/mattt/EventSource.git from cache (0.51s)
+Computing version for https://github.com/mattt/EventSource.git
+Computed https://github.com/mattt/EventSource.git at 1.5.1 (0.81s)
+Computing version for https://github.com/mchakravarty/CodeEditorView.git
+Computed https://github.com/mchakravarty/CodeEditorView.git at 0.16.0 (0.27s)
+Fetching https://github.com/ChimeHQ/Rearrange.git from cache
+Fetched https://github.com/ChimeHQ/Rearrange.git from cache (1.33s)
+Computing version for https://github.com/ChimeHQ/Rearrange.git
+Computed https://github.com/ChimeHQ/Rearrange.git at 1.8.1 (1.69s)
+Computing version for https://github.com/tayloraswift/swift-png
+Computed https://github.com/tayloraswift/swift-png at 4.5.1 (0.28s)
+Fetching https://github.com/rarestype/h from cache
+Fetched https://github.com/rarestype/h from cache (0.68s)
+Computing version for https://github.com/rarestype/h
+Computed https://github.com/rarestype/h at 1.0.1 (0.91s)
+Computing version for https://github.com/apple/swift-async-algorithms.git
+Computed https://github.com/apple/swift-async-algorithms.git at 1.1.7 (0.24s)
+Computing version for https://github.com/apple/swift-collections.git
+Computed https://github.com/apple/swift-collections.git at 1.7.3 (0.33s)
+Computing version for https://github.com/robbiehanson/CocoaAsyncSocket
+Computed https://github.com/robbiehanson/CocoaAsyncSocket at 7.6.5 (0.33s)
+Computing version for https://github.com/apple/swift-crypto.git
+Computed https://github.com/apple/swift-crypto.git at 4.5.2 (0.29s)
+Fetching https://github.com/apple/swift-asn1.git from cache
+Fetched https://github.com/apple/swift-asn1.git from cache (1.41s)
+Computing version for https://github.com/apple/swift-asn1.git
+Computed https://github.com/apple/swift-asn1.git at 1.7.3 (1.84s)
+Creating working copy for https://github.com/orchetect/MIDIKit
+Working copy of https://github.com/orchetect/MIDIKit resolved at 0.12.0
+Creating working copy for https://github.com/huggingface/swift-jinja.git
+Working copy of https://github.com/huggingface/swift-jinja.git resolved at 2.5.1
+Creating working copy for https://github.com/ml-explore/mlx-swift
+Working copy of https://github.com/ml-explore/mlx-swift resolved at 0.32.3
+Creating working copy for https://github.com/apple/swift-numerics
+Working copy of https://github.com/apple/swift-numerics resolved at 1.1.1
+Creating working copy for https://github.com/mchakravarty/CodeEditorView.git
+Working copy of https://github.com/mchakravarty/CodeEditorView.git resolved at 0.16.0
+Creating working copy for https://github.com/apple/swift-crypto.git
+Working copy of https://github.com/apple/swift-crypto.git resolved at 4.5.2
+Creating working copy for https://github.com/Flight-School/AnyCodable
+Working copy of https://github.com/Flight-School/AnyCodable resolved at 0.6.7
+Creating working copy for https://github.com/orchetect/OSCKit
+Working copy of https://github.com/orchetect/OSCKit resolved at 2.2.0
+Creating working copy for https://github.com/pointfreeco/swift-concurrency-extras
+Working copy of https://github.com/pointfreeco/swift-concurrency-extras resolved at 1.4.3
+Creating working copy for https://github.com/ml-explore/mlx-swift-lm
+Working copy of https://github.com/ml-explore/mlx-swift-lm resolved at 3.32.3
+Creating working copy for https://github.com/tayloraswift/swift-png
+Working copy of https://github.com/tayloraswift/swift-png resolved at 4.5.1
+Creating working copy for https://github.com/robbiehanson/CocoaAsyncSocket
+Working copy of https://github.com/robbiehanson/CocoaAsyncSocket resolved at 7.6.5
+Creating working copy for https://github.com/huggingface/swift-huggingface
+Working copy of https://github.com/huggingface/swift-huggingface resolved at 0.13.0
+Creating working copy for https://github.com/gonzalezreal/textual
+Working copy of https://github.com/gonzalezreal/textual resolved at 0.5.0
+Creating working copy for https://github.com/swiftlang/swift-syntax.git
+Working copy of https://github.com/swiftlang/swift-syntax.git resolved at 603.0.2
+Creating working copy for https://github.com/apple/swift-asn1.git
+Working copy of https://github.com/apple/swift-asn1.git resolved at 1.7.3
+Creating working copy for https://github.com/orchetect/swift-data-parsing
+Working copy of https://github.com/orchetect/swift-data-parsing resolved at 0.1.2
+Creating working copy for https://github.com/rarestype/h
+Working copy of https://github.com/rarestype/h resolved at 1.0.1
+Creating working copy for https://github.com/gonzalezreal/swiftui-math
+Working copy of https://github.com/gonzalezreal/swiftui-math resolved at 0.1.0
+Creating working copy for https://github.com/ibireme/yyjson.git
+Working copy of https://github.com/ibireme/yyjson.git resolved at 0.12.0
+Creating working copy for https://github.com/apple/swift-collections.git
+Working copy of https://github.com/apple/swift-collections.git resolved at 1.7.3
+Creating working copy for https://github.com/ChimeHQ/Rearrange.git
+Working copy of https://github.com/ChimeHQ/Rearrange.git resolved at 1.8.1
+Creating working copy for https://github.com/Fabric-Project/MathExpressionEngine
+Working copy of https://github.com/Fabric-Project/MathExpressionEngine resolved at 1.2.0
+Creating working copy for https://github.com/huggingface/swift-transformers
+Working copy of https://github.com/huggingface/swift-transformers resolved at 1.3.5
+Creating working copy for https://github.com/vade/SwiftSimplify
+Working copy of https://github.com/vade/SwiftSimplify resolved at master (1308781)
+Creating working copy for https://github.com/apple/swift-async-algorithms.git
+Working copy of https://github.com/apple/swift-async-algorithms.git resolved at 1.1.7
+Creating working copy for https://github.com/orchetect/swift-ascii
+Working copy of https://github.com/orchetect/swift-ascii resolved at 1.3.1
+Creating working copy for https://github.com/tayloraswift/swift-noise
+Working copy of https://github.com/tayloraswift/swift-noise resolved at 1.2.0
+Creating working copy for https://github.com/mattt/EventSource.git
+Working copy of https://github.com/mattt/EventSource.git resolved at 1.5.1
+Creating working copy for https://github.com/orchetect/swift-timecode
+Working copy of https://github.com/orchetect/swift-timecode resolved at 3.1.4
+warning: 'swiftsimplify': /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/SwiftSimplify/Package.swift:10:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 8 |         .macOS(.v10_14),
+ 9 |         .iOS(.v12),
+10 |         .watchOS(.v4),
+   |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+11 |         .tvOS(.v12)
+12 |     ],
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'midikit': /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/MIDIKit/Package.swift:12:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 10 |         .iOS(.v12),
+ 11 |         .tvOS(.v12), // builds, but no MIDI features
+ 12 |         .watchOS(.v4), // builds, but no MIDI features
+    |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 13 |     ],
+ 14 |     products: [
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'swift-timecode': /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/swift-timecode/Package.swift:13:19: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+11 |         .iOS(.v12),
+12 |         .tvOS(.v12),
+13 |         .watchOS(.v4),
+   |                   `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+14 |         .visionOS(.v1)
+15 |     ],
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+warning: 'swift-data-parsing': /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/swift-data-parsing/Package.swift:7:69: warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 5 | let package = Package(
+ 6 |     name: "swift-data-parsing",
+ 7 |     platforms: [.macOS(.v10_13), .iOS(.v12), .tvOS(.v12), .watchOS(.v4)],
+   |                                                                     `- warning: 'v4' is deprecated: watchOS 9.0 is the oldest supported version [#DeprecatedDeclaration]
+ 8 |     products: [
+ 9 |         .library(
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+Building for debugging...
+[Computing dependencies]
+[Constructing description]
+[Pre-planning 1 / 2116]
+[Planning 821 / 2116]
+[Planning deferred tasks]
+[Constructing 1103 / 5072]
+[Starting]
+warning: missing creator for mutated node: ('/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/mlx-swift_Cmlx.bundle/Contents/MacOS')
+[32 / 1192] Tokenizers
+[239 / 1192] MLXEmbedders
+[431 / 1192]
+[432 / 1192]
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/random.metal:3:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:9:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:157:54: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex32_t) == 2 * sizeof(half));
+                                                     ^
+                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:158:55: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex64_t) == 2 * sizeof(float));
+                                                      ^
+                                                      , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:159:70: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex_t<bfloat16_t>) == 2 * sizeof(bfloat16_t));
+                                                                     ^
+                                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:299:78: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+    (complex_t<half>{1.0h, 2.0h} * complex_t<half>{3.0h, 4.0h}).real == -5.0h);
+                                                                             ^
+                                                                             , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:303:35: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+        .real == bfloat16_t(-5.0f));
+                                  ^
+                                  , ""
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/random.metal:3:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:80:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> max = complex_t<T>(
+  ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:83:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> min = complex_t<T>(
+  ^
+7 warnings generated.
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/dot.metal:3:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/dot.h:5:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:9:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:157:54: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex32_t) == 2 * sizeof(half));
+                                                     ^
+                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:158:55: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex64_t) == 2 * sizeof(float));
+                                                      ^
+                                                      , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:159:70: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex_t<bfloat16_t>) == 2 * sizeof(bfloat16_t));
+                                                                     ^
+                                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:299:78: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+    (complex_t<half>{1.0h, 2.0h} * complex_t<half>{3.0h, 4.0h}).real == -5.0h);
+                                                                             ^
+                                                                             , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:303:35: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+        .real == bfloat16_t(-5.0f));
+                                  ^
+                                  , ""
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/dot.metal:3:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/dot.h:5:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:80:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> max = complex_t<T>(
+  ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:83:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> min = complex_t<T>(
+  ^
+7 warnings generated.
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/searchsorted.metal:6:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:9:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:157:54: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex32_t) == 2 * sizeof(half));
+                                                     ^
+                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:158:55: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex64_t) == 2 * sizeof(float));
+                                                      ^
+                                                      , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:159:70: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex_t<bfloat16_t>) == 2 * sizeof(bfloat16_t));
+                                                                     ^
+                                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:299:78: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+    (complex_t<half>{1.0h, 2.0h} * complex_t<half>{3.0h, 4.0h}).real == -5.0h);
+                                                                             ^
+                                                                             , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:303:35: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+        .real == bfloat16_t(-5.0f));
+                                  ^
+                                  , ""
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/searchsorted.metal:6:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:80:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> max = complex_t<T>(
+  ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:83:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> min = complex_t<T>(
+  ^
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/searchsorted.metal:7:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/sort.h:43:8: warning: constexpr if is a C++17 extension [-Wc++17-extensions]
+    if constexpr (metal::is_floating_point_v<T>) {
+       ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/sort.h:49:15: warning: constexpr if is a C++17 extension [-Wc++17-extensions]
+    } else if constexpr (metal::is_same_v<T, complex64_t>) {
+              ^
+9 warnings generated.
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/rope.metal:5:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:9:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:157:54: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex32_t) == 2 * sizeof(half));
+                                                     ^
+                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:158:55: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex64_t) == 2 * sizeof(float));
+                                                      ^
+                                                      , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:159:70: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex_t<bfloat16_t>) == 2 * sizeof(bfloat16_t));
+                                                                     ^
+                                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:299:78: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+    (complex_t<half>{1.0h, 2.0h} * complex_t<half>{3.0h, 4.0h}).real == -5.0h);
+                                                                             ^
+                                                                             , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:303:35: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+        .real == bfloat16_t(-5.0f));
+                                  ^
+                                  , ""
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/rope.metal:5:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:80:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> max = complex_t<T>(
+  ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:83:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> min = complex_t<T>(
+  ^
+7 warnings generated.
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/rms_norm.metal:6:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:9:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:157:54: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex32_t) == 2 * sizeof(half));
+                                                     ^
+                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:158:55: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex64_t) == 2 * sizeof(float));
+                                                      ^
+                                                      , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:159:70: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex_t<bfloat16_t>) == 2 * sizeof(bfloat16_t));
+                                                                     ^
+                                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:299:78: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+    (complex_t<half>{1.0h, 2.0h} * complex_t<half>{3.0h, 4.0h}).real == -5.0h);
+                                                                             ^
+                                                                             , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:303:35: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+        .real == bfloat16_t(-5.0f));
+                                  ^
+                                  , ""
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/rms_norm.metal:6:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:80:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> max = complex_t<T>(
+  ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:83:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> min = complex_t<T>(
+  ^
+7 warnings generated.
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/layer_norm.metal:6:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:9:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:157:54: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex32_t) == 2 * sizeof(half));
+                                                     ^
+                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:158:55: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex64_t) == 2 * sizeof(float));
+                                                      ^
+                                                      , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:159:70: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex_t<bfloat16_t>) == 2 * sizeof(bfloat16_t));
+                                                                     ^
+                                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:299:78: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+    (complex_t<half>{1.0h, 2.0h} * complex_t<half>{3.0h, 4.0h}).real == -5.0h);
+                                                                             ^
+                                                                             , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:303:35: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+        .real == bfloat16_t(-5.0f));
+                                  ^
+                                  , ""
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/layer_norm.metal:6:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:80:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> max = complex_t<T>(
+  ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:83:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> min = complex_t<T>(
+  ^
+7 warnings generated.
+[460 / 1192]
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/conv.metal:8:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:9:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:157:54: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex32_t) == 2 * sizeof(half));
+                                                     ^
+                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:158:55: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex64_t) == 2 * sizeof(float));
+                                                      ^
+                                                      , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:159:70: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex_t<bfloat16_t>) == 2 * sizeof(bfloat16_t));
+                                                                     ^
+                                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:299:78: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+    (complex_t<half>{1.0h, 2.0h} * complex_t<half>{3.0h, 4.0h}).real == -5.0h);
+                                                                             ^
+                                                                             , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:303:35: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+        .real == bfloat16_t(-5.0f));
+                                  ^
+                                  , ""
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/conv.metal:8:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:80:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> max = complex_t<T>(
+  ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:83:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> min = complex_t<T>(
+  ^
+7 warnings generated.
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/arg_reduce.metal:5:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:9:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:157:54: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex32_t) == 2 * sizeof(half));
+                                                     ^
+                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:158:55: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex64_t) == 2 * sizeof(float));
+                                                      ^
+                                                      , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:159:70: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex_t<bfloat16_t>) == 2 * sizeof(bfloat16_t));
+                                                                     ^
+                                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:299:78: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+    (complex_t<half>{1.0h, 2.0h} * complex_t<half>{3.0h, 4.0h}).real == -5.0h);
+                                                                             ^
+                                                                             , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:303:35: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+        .real == bfloat16_t(-5.0f));
+                                  ^
+                                  , ""
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/arg_reduce.metal:5:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:80:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> max = complex_t<T>(
+  ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:83:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> min = complex_t<T>(
+  ^
+7 warnings generated.
+[482 / 1192] Satin_Satin
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/scaled_dot_product_attention.metal:4:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:9:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:157:54: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex32_t) == 2 * sizeof(half));
+                                                     ^
+                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:158:55: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex64_t) == 2 * sizeof(float));
+                                                      ^
+                                                      , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:159:70: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex_t<bfloat16_t>) == 2 * sizeof(bfloat16_t));
+                                                                     ^
+                                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:299:78: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+    (complex_t<half>{1.0h, 2.0h} * complex_t<half>{3.0h, 4.0h}).real == -5.0h);
+                                                                             ^
+                                                                             , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/complex.h:303:35: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+        .real == bfloat16_t(-5.0f));
+                                  ^
+                                  , ""
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/scaled_dot_product_attention.metal:4:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:80:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> max = complex_t<T>(
+  ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/utils.h:83:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> min = complex_t<T>(
+  ^
+7 warnings generated.
+[484 / 1192] Fabric_Fabric
+[486 / 1192]
+[504 / 1209] SwiftTimecodeCore
+[505 / 1294] SwiftSimplify
+[512 / 1294] MathExpressionEngine
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/SatinCore/Triangulator.mm:918:23: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+  918 |     tsVertex vertices[length];
+      |                       ^~~~~~
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/SatinCore/Triangulator.mm:918:23: note: function parameter 'length' with unknown value cannot be used in a constant expression
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/SatinCore/Triangulator.mm:917:46: note: declared here
+  917 | int triangulatePath(simd_float2 *points, int length, TriangleData *triData) {
+      |                                              ^
+1 warning generated.
+[517 / 1294] Crypto
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/steel_attention.metal:4:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../utils.h:9:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../complex.h:157:54: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex32_t) == 2 * sizeof(half));
+                                                     ^
+                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../complex.h:158:55: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex64_t) == 2 * sizeof(float));
+                                                      ^
+                                                      , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../complex.h:159:70: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+static_assert(sizeof(complex_t<bfloat16_t>) == 2 * sizeof(bfloat16_t));
+                                                                     ^
+                                                                     , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../complex.h:299:78: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+    (complex_t<half>{1.0h, 2.0h} * complex_t<half>{3.0h, 4.0h}).real == -5.0h);
+                                                                             ^
+                                                                             , ""
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../complex.h:303:35: warning: 'static_assert' with no message is a C++17 extension [-Wc++17-extensions]
+        .real == bfloat16_t(-5.0f));
+                                  ^
+                                  , ""
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/steel_attention.metal:4:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../utils.h:80:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> max = complex_t<T>(
+  ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../utils.h:83:3: warning: inline variables are a C++17 extension [-Wc++17-extensions]
+  inline static constexpr constant complex_t<T> min = complex_t<T>(
+  ^
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/steel_attention.metal:6:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../steel/attn/kernels/steel_attention.h:3:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../steel/attn/attn.h:6:
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../steel/attn/../../steel/attn/mma.h:11:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../steel/attn/../../steel/utils/integral_constant.h:105:6: warning: constexpr if is a C++17 extension [-Wc++17-extensions]
+  if constexpr (start < stop) {
+     ^
+In file included from /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/steel_attention.metal:6:
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../steel/attn/kernels/steel_attention.h:361:16: warning: constexpr if is a C++17 extension [-Wc++17-extensions]
+            if constexpr (is_bool) {
+               ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../steel/attn/kernels/steel_attention.h:431:14: warning: constexpr if is a C++17 extension [-Wc++17-extensions]
+          if constexpr (BD >= 128) {
+             ^
+/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/checkouts/mlx-swift/Source/Cmlx/mlx-generated/metal/steel/attn/kernels/../../../steel/attn/kernels/steel_attention.h:441:14: warning: constexpr if is a C++17 extension [-Wc++17-extensions]
+          if constexpr (BD >= 128) {
+             ^
+11 warnings generated.
+[518 / 1294] ConcurrencyExtras
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/SatinCore/Generators.mm:1251:44: warning: ISO C++ requires field designators to be specified in declaration order; field 'uv' will be initialized after field 'normal' [-Wreorder-init-list]
+ 1251 |                                  .normal = simd_make_float3(0.0, 1.0, 0.0) };
+      |                                  ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/SatinCore/Generators.mm:1248:40: note: previous initialization for field 'uv' is here
+ 1248 |                                  .uv = simd_make_float2(
+      |                                        ^~~~~~~~~~~~~~~~~
+ 1249 |                                      abs(x) < 0.00001 ? 0.0 : x / innerRadius,
+      |                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1250 |                                      abs(y) < 0.00001 ? 0.0 : y / innerRadius),
+      |                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 warning generated.
+[520 / 1303]
+[522 / 1303]
+[524 / 1303]
+[526 / 1303]
+[531 / 1349] SatinCore
+[540 / 1354]
+[548 / 1370]
+[553 / 1370] Noise
+[563 / 1370]
+[567 / 1370] RealModule
+[576 / 1406]
+[582 / 1406]
+[596 / 1410]
+[599 / 1410]
+[602 / 1410]
+[603 / 1410]
+[608 / 1410]
+[610 / 1410]
+[616 / 1410]
+[621 / 1410]
+[626 / 1410] MLXCXGrammar
+[630 / 1410]
+[631 / 1410]
+[632 / 1410]
+[633 / 1410]
+[635 / 1410]
+[640 / 1422] MLXHuggingFaceMacros
+[644 / 1469]
+[652 / 1488]
+[656 / 1488]
+[662 / 1488]
+[668 / 1508] FabricCore
+[675 / 1527]
+[678 / 1527] Cmlx
+[680 / 1549]
+[685 / 1569] InternalCollectionsUtilities
+[691 / 1615] InternalCollectionsUtilities
+[697 / 1615]
+[703 / 1615]
+[705 / 1615]
+[709 / 1615]
+[726 / 1615]
+[739 / 1615]
+[746 / 1615]
+[762 / 1615] Cmlx
+[769 / 1615] Cmlx
+[774 / 1615]
+[779 / 1615]
+[782 / 1615]
+[786 / 1615]
+[789 / 1615] SwiftDataParsing
+[794 / 1615]
+[812 / 1615] Crypto
+[824 / 1615] Cmlx
+[833 / 1615] Crypto
+[846 / 1615]
+[849 / 1615] MIDIKitInternals
+[857 / 1615] Rearrange
+[861 / 1615] Rearrange
+[871 / 1615] Cmlx
+[873 / 1615] Cmlx
+[877 / 1615] SwiftTimecodeCore
+[888 / 1615] Cmlx
+[890 / 1615] Cmlx
+[891 / 1615] Cmlx
+[892 / 1615]
+[901 / 1615] Cmlx
+[903 / 1615] Cmlx
+[906 / 1615] Cmlx
+[908 / 1615] Cmlx
+[909 / 1615] Cmlx
+[912 / 1615] Cmlx
+[913 / 1615] Cmlx
+[914 / 1615] Cmlx
+[917 / 1615] Cmlx
+[919 / 1615] Cmlx
+[922 / 1615] Cmlx
+[923 / 1615] Cmlx
+[924 / 1615] Cmlx
+[925 / 1615] Cmlx
+[926 / 1615] Cmlx
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Extensions/Ray+Extensions.swift:40:1: warning: extension declares a conformance of imported type 'Ray' to imported protocol 'Equatable'; this will not behave correctly if the owners of 'SatinCore' introduce this conformance in the future
+38 | }
+39 | 
+40 | extension Ray: Equatable {
+   | |- warning: extension declares a conformance of imported type 'Ray' to imported protocol 'Equatable'; this will not behave correctly if the owners of 'SatinCore' introduce this conformance in the future
+   | `- note: add '@retroactive' to silence this warning
+41 |     public static func == (lhs: Ray, rhs: Ray) -> Bool {
+42 |         return lhs.origin == rhs.origin && lhs.direction == rhs.direction
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Extensions/Vertex+Extensions.swift:12:1: warning: extension declares a conformance of imported type 'SatinVertex' to imported protocols 'Decodable', 'Encodable'; this will not behave correctly if the owners of 'SatinCore' introduce this conformance in the future
+10 | #endif
+11 | 
+12 | extension SatinVertex: Codable {
+   | |- warning: extension declares a conformance of imported type 'SatinVertex' to imported protocols 'Decodable', 'Encodable'; this will not behave correctly if the owners of 'SatinCore' introduce this conformance in the future
+   | `- note: add '@retroactive' to silence this warning
+13 |     private enum CodingKeys: String, CodingKey {
+14 |         case position
+[929 / 1615] Cmlx
+[930 / 1615] Satin
+[938 / 1615] Cmlx
+[940 / 1615] Cmlx
+[941 / 1615] Cmlx
+[945 / 1615] Cmlx
+[947 / 1615] Cmlx
+[951 / 1615] Cmlx
+[952 / 1615] Cmlx
+[954 / 1615] Cmlx
+[958 / 1615] Cmlx
+[959 / 1615] Cmlx
+[960 / 1615] Cmlx
+[962 / 1615] Cmlx
+[964 / 1615] Cmlx
+[965 / 1615] Cmlx
+[979 / 1615] Cmlx
+[981 / 1615] Cmlx
+[982 / 1615] Cmlx
+[983 / 1615] Cmlx
+[987 / 1615] Cmlx
+[988 / 1615] Cmlx
+[991 / 1615] Cmlx
+[996 / 1615] Cmlx
+[997 / 1615] Cmlx
+[998 / 1615] Cmlx
+[1000 / 1615] Cmlx
+[1005 / 1615] Cmlx
+[1006 / 1615] Cmlx
+[1009 / 1615] Cmlx
+[1015 / 1615] Cmlx
+[1016 / 1615] Cmlx
+[1017 / 1615] Cmlx
+[1019 / 1615] Cmlx
+[1021 / 1615] Cmlx
+[1022 / 1615] Cmlx
+[1024 / 1615] Cmlx
+[1025 / 1615] Cmlx
+[1026 / 1615] Cmlx
+[1030 / 1615] Cmlx
+[1032 / 1615] Cmlx
+[1034 / 1615] Cmlx
+[1036 / 1615] yyjson
+[1041 / 1626]
+[1051 / 1626] _NumericsShims
+[1053 / 1626] _NumericsShims
+[1056 / 1626]
+[1058 / 1626] yyjson
+[1061 / 1626] SwiftUIMath
+[1062 / 1626] SwiftUIMath
+[1063 / 1626] SwiftUIMath-product
+[1064 / 1626] SwiftUIMath-product
+[1067 / 1626] SwiftUIMath
+[1068 / 1626] SwiftUIMath
+[1069 / 1626] SwiftUIMath
+[1073 / 1626] yyjson
+[1074 / 1626] SwiftUIMath
+[1078 / 1626] SwiftTimecodeCore
+[1079 / 1626] SwiftUIMath
+[1083 / 1626] SwiftTimecodeCore-product
+[1084 / 1626] SwiftTimecodeCore-product
+[1086 / 1626] Cmlx
+[1087 / 1626] SwiftTimecodeCore
+[1093 / 1626] SwiftSimplify
+[1096 / 1626] SwiftTimecodeCore
+[1098 / 1626] SwiftSimplify-product
+[1105 / 1626] SwiftDataParsing-product
+[1112 / 1626] SwiftDataParsing
+[1117 / 1626] SwiftASCII-product
+[1121 / 1626] Satin-product
+[1126 / 1626] Satin
+[1126 / 1626] SwiftASCII
+[1127 / 1626] SwiftSimplify
+[1129 / 1626] Satin
+[1134 / 1626] Satin
+[1137 / 1626] SwiftUIMath
+[1139 / 1626] Satin
+[1142 / 1626] Rearrange
+[1143 / 1626] Rearrange
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Extensions/MTLTexture+Extensions.swift:12:9: warning: switch must be exhaustive
+ 10 | extension MTLPixelFormat {
+ 11 |     var srgb: Bool {
+ 12 |         switch self {
+    |         |- warning: switch must be exhaustive
+    |         |- note: add missing case: '.rgb8Unorm'
+    |         |- note: add missing case: '.rgb8Snorm'
+    |         |- note: add missing case: '.rgb8Uint'
+    |         |- note: add missing case: '.rgb8Sint'
+    |         |- note: add missing case: '.rgb16Unorm'
+    |         |- note: add missing case: '.rgb16Snorm'
+    |         |- note: add missing case: '.rgb16Uint'
+    |         |- note: add missing case: '.rgb16Sint'
+    |         |- note: add missing case: '.rgb16Float'
+    |         |- note: add missing case: '.rgb32Uint'
+    |         |- note: add missing case: '.rgb32Sint'
+    |         |- note: add missing case: '.rgb32Float'
+    |         `- note: add missing cases
+ 13 |             case .invalid:
+ 14 |                 return false
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Extensions/Ray+Extensions.swift:40:1: warning: extension declares a conformance of imported type 'Ray' to imported protocol 'Equatable'; this will not behave correctly if the owners of 'SatinCore' introduce this conformance in the future
+38 | }
+39 | 
+40 | extension Ray: Equatable {
+   | |- warning: extension declares a conformance of imported type 'Ray' to imported protocol 'Equatable'; this will not behave correctly if the owners of 'SatinCore' introduce this conformance in the future
+   | `- note: add '@retroactive' to silence this warning
+41 |     public static func == (lhs: Ray, rhs: Ray) -> Bool {
+42 |         return lhs.origin == rhs.origin && lhs.direction == rhs.direction
+[1145 / 1626] Rearrange
+[1150 / 1626] Rearrange
+[1155 / 1626] RealModule
+[1162 / 1626] RealModule
+[1167 / 1626] RealModule
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Extensions/Vertex+Extensions.swift:12:1: warning: extension declares a conformance of imported type 'SatinVertex' to imported protocols 'Decodable', 'Encodable'; this will not behave correctly if the owners of 'SatinCore' introduce this conformance in the future
+10 | #endif
+11 | 
+12 | extension SatinVertex: Codable {
+   | |- warning: extension declares a conformance of imported type 'SatinVertex' to imported protocols 'Decodable', 'Encodable'; this will not behave correctly if the owners of 'SatinCore' introduce this conformance in the future
+   | `- note: add '@retroactive' to silence this warning
+13 |     private enum CodingKeys: String, CodingKey {
+14 |         case position
+[1172 / 1626] MathExpressionEngine
+[1174 / 1626] MathExpressionEngine
+[1180 / 1626] MathExpressionEngine
+[1183 / 1626] MLXHuggingFaceMacros
+[1189 / 1626] MIDIKitInternals
+[1195 / 1626] MLXHuggingFaceMacros
+[1199 / 1626] MIDIKitInternals
+[1208 / 1626] InternalCollectionsUtilities
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Materials/PhysicalMaterial.swift:563:80: warning: immutable value 'rgba' was never used; consider replacing with '_' or removing it [#NoUsage]
+561 |                     loadTexture(loader: textureLoader, mdlTexture: mdlTexture, options: options, target: .normal)
+562 |                 }
+563 |             } else if property.type == .color, let color = property.color, let rgba = color.components {
+    |                                                                                `- warning: immutable value 'rgba' was never used; consider replacing with '_' or removing it [#NoUsage]
+564 | //                print(simd_make_float4(Float(rgba[0]), Float(rgba[1]), Float(rgba[2]), Float(rgba[3])))
+565 |             } else if property.type == .float4 {
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+[1217 / 1626] MIDIKitInternals
+[1227 / 1626] EventSource-product
+[1232 / 1626] Crypto
+[1234 / 1626] Crypto-product
+[1241 / 1626] Crypto
+[1248 / 1626] Crypto
+[1255 / 1626] ConcurrencyExtras
+[1264 / 1626] Textual
+[1277 / 1626] SwiftUIMath
+[1289 / 1636] SpanPreview
+[1308 / 1698] EventSource
+[1308 / 1698]
+[1327 / 1700] Rearrange-product
+[1337 / 1701] AnyCodable
+[1342 / 1701] Fabric_Fabric
+[1344 / 1701]
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Animation/Tweener.swift:23:28: warning: 'CVDisplayLinkCreateWithActiveCGDisplays' was deprecated in macOS 15.0: use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:)  [#DeprecatedDeclaration]
+ 21 |     private class func setupDisplayLink() {
+ 22 |         if Tweener.displayLink == nil {
+ 23 |             var cvReturn = CVDisplayLinkCreateWithActiveCGDisplays(&Tweener.displayLink)
+    |                            `- warning: 'CVDisplayLinkCreateWithActiveCGDisplays' was deprecated in macOS 15.0: use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:)  [#DeprecatedDeclaration]
+ 24 | 
+ 25 |             assert(cvReturn == kCVReturnSuccess)
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Animation/Tweener.swift:27:24: warning: 'CVDisplayLinkSetOutputCallback' was deprecated in macOS 15.0: use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:)  [#DeprecatedDeclaration]
+ 25 |             assert(cvReturn == kCVReturnSuccess)
+ 26 | 
+ 27 |             cvReturn = CVDisplayLinkSetOutputCallback(
+    |                        `- warning: 'CVDisplayLinkSetOutputCallback' was deprecated in macOS 15.0: use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:)  [#DeprecatedDeclaration]
+ 28 |                 Tweener.displayLink!,
+ 29 |                 Tweener.displayLoop,
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Animation/Tweener.swift:35:24: warning: 'CVDisplayLinkSetCurrentCGDisplay' was deprecated in macOS 15.0: use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:)  [#DeprecatedDeclaration]
+ 33 |             assert(cvReturn == kCVReturnSuccess)
+ 34 | 
+ 35 |             cvReturn = CVDisplayLinkSetCurrentCGDisplay(Tweener.displayLink!, CGMainDisplayID())
+    |                        `- warning: 'CVDisplayLinkSetCurrentCGDisplay' was deprecated in macOS 15.0: use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:)  [#DeprecatedDeclaration]
+ 36 | 
+ 37 |             assert(cvReturn == kCVReturnSuccess)
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Animation/Tweener.swift:81:9: warning: 'CVDisplayLinkStop' was deprecated in macOS 15.0: use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:)  [#DeprecatedDeclaration]
+ 79 | 
+ 80 |         #if os(macOS)
+ 81 |         CVDisplayLinkStop(displayLink)
+    |         `- warning: 'CVDisplayLinkStop' was deprecated in macOS 15.0: use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:)  [#DeprecatedDeclaration]
+ 82 |         #else
+ 83 |         displayLink.isPaused = true
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Animation/Tweener.swift:93:9: warning: 'CVDisplayLinkStart' was deprecated in macOS 15.0: use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:)  [#DeprecatedDeclaration]
+ 91 | 
+ 92 |         #if os(macOS)
+ 93 |         CVDisplayLinkStart(displayLink)
+    |         `- warning: 'CVDisplayLinkStart' was deprecated in macOS 15.0: use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:)  [#DeprecatedDeclaration]
+ 94 |         #else
+ 95 |         displayLink.isPaused = false
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[1350 / 1701]
+[1364 / 1713]
+[1374 / 1713] ComplexModule
+[1380 / 1713] ComplexModule
+[1381 / 1713]
+[1393 / 1714]
+[1395 / 1714]
+[1399 / 1716] Numerics
+[1408 / 1717]
+[1412 / 1717] CocoaAsyncSocket
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Satin/Sources/Satin/Core/RenderEncoder.swift:2887:26: warning: 'init(contentsOf:)' was deprecated in macOS 15: Use `init(contentsOf:encoding:)` instead [#DeprecatedDeclaration]
+2885 |             throw NSError(domain: "Satin.RenderEncoder", code: 1, userInfo: [NSLocalizedDescriptionKey: "Missing AlphaOIT pipeline source"])
+2886 |         }
+2887 |         let source = try String(contentsOf: pipelineURL)
+     |                          `- warning: 'init(contentsOf:)' was deprecated in macOS 15: Use `init(contentsOf:encoding:)` instead [#DeprecatedDeclaration]
+2888 |         let library = try renderer.context.device.makeLibrary(source: source, options: nil)
+2889 | 
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[1421 / 1730] LanguageSupport
+[1422 / 1730] Satin
+[1425 / 1730] LanguageSupport
+[1426 / 1730] Satin
+[1428 / 1730] LanguageSupport
+[1432 / 1768] DequeModule
+[1433 / 1768] LanguageSupport
+[1440 / 1768] OrderedCollections
+[1444 / 1829] MIDIKitCore
+[1448 / 1867]
+[1454 / 1867] Textual
+[1459 / 1867] Textual
+[1459 / 1867] OrderedCollections
+[1462 / 1867] Textual
+[1463 / 1867] Textual
+[1463 / 1867] OSCKitCore
+[1473 / 1867] Textual
+[1474 / 1867] Textual
+[1475 / 1867] Textual
+[1490 / 1867] Textual
+[1491 / 1867] Textual
+[1494 / 1867] OrderedCollections-product
+[1498 / 1867] OrderedCollections
+[1513 / 1867] OSCKitCore
+[1516 / 1867] OSCKitCore
+[1520 / 1867] OSCKitCore
+[1522 / 1867] OSCKitCore
+[1527 / 1867] Textual
+[1535 / 1867] Textual-product
+[1540 / 1867] MLX
+[1545 / 1867] OSCKitCore
+[1553 / 1867] MLXNN
+[1556 / 1867] MLX
+[1559 / 1867] MLX
+[1562 / 1867] MLX
+[1568 / 1867] MIDIKitCore
+[1571 / 1867] MIDIKitCore
+[1574 / 1867] MIDIKitCore
+[1575 / 1867] MIDIKitSMF
+[1579 / 1867] MIDIKitCore
+[1581 / 1867] MIDIKitCore
+[1584 / 1867] LanguageSupport-product
+[1586 / 1867] MathExpressionEditorSupport
+[1591 / 1867] MIDIKitCore
+[1594 / 1867] HuggingFace
+[1598 / 1867] HuggingFace
+[1600 / 1867] HuggingFace
+[1602 / 1867] DequeModule
+[1604 / 1867] DequeModule
+[1607 / 1867] DequeModule-product
+[1611 / 1867] MLX
+[1618 / 1867] DequeModule
+[1625 / 1869] OrderedCollections-product
+[1630 / 1874] LanguageSupport
+[1632 / 1876] MIDIKitCore
+[1636 / 1878]
+[1637 / 1878] MLX
+[1637 / 1878] MLXLinalg
+[1650 / 1901] MLXLinalg
+[1661 / 1943] MLXFast
+[1677 / 2000] OSCKit
+[1687 / 2019] OSCKit
+[1690 / 2019] OSCKit
+[1698 / 2019] OSCKit
+[1704 / 2019] OSCKit
+[1721 / 2019] MLXNN
+[1726 / 2019] MLXNN
+[1738 / 2019] MLXFast-product
+[1743 / 2019] MLXFFT
+[1757 / 2019] CodeEditorView
+[1763 / 2019] MIDIKitSMF
+[1766 / 2019] MIDIKitSMF
+[1769 / 2019] MIDIKitSMF
+[1778 / 2019] AsyncAlgorithms
+[1785 / 2019] MIDIKitIO
+[1791 / 2019] MIDIKitUI
+[1794 / 2019] MIDIKitIO
+[1797 / 2019] MIDIKitIO
+[1799 / 2019] MIDIKitSMF
+[1806 / 2019] Jinja
+[1811 / 2019] Jinja-product
+[1816 / 2019] Hub
+[1821 / 2019] MIDIKitIO
+[1827 / 2019] CodeEditorView
+[1829 / 2019] CodeEditorView-product
+[1834 / 2019] CodeEditorView
+[1839 / 2019] AsyncAlgorithms
+[1843 / 2019] AsyncAlgorithms
+[1846 / 2019] AsyncAlgorithms
+[1850 / 2019] CodeEditorView
+[1855 / 2019] AsyncAlgorithms
+[1856 / 2019]
+[1864 / 2019]
+[1868 / 2023]
+[1869 / 2024] AsyncAlgorithms
+[1872 / 2027] AsyncAlgorithms
+[1884 / 2053] MIDIKitSync
+[1896 / 2065] MIDIKitUI
+[1901 / 2084] MIDIKitUI
+[1913 / 2084] MIDIKitSync
+[1924 / 2084] MIDIKitSync
+[1939 / 2084] MIDIKitControlSurfaces
+[1941 / 2084] MIDIKitControlSurfaces
+[1948 / 2084] MIDIKitUI
+[1952 / 2084] AsyncAlgorithms
+[1955 / 2084] Tokenizers
+[1958 / 2084] MIDIKitControlSurfaces
+[1967 / 2086]
+[1967 / 2086] MIDIKitControlSurfaces
+[1977 / 2099] Tokenizers
+[1979 / 2099] MIDIKitControlSurfaces
+[1982 / 2124] MIDIKitControlSurfaces
+[1982 / 2124] Tokenizers
+[1989 / 2124] Tokenizers
+[1991 / 2124] MIDIKitControlSurfaces
+[2000 / 2125] MIDIKitControlSurfaces
+[2002 / 2125]
+[2020 / 2127] MIDIKit
+[2021 / 2127] MLXLMCommon
+[2029 / 2127] MIDIKit
+[2034 / 2127] MLXLMCommon
+[2044 / 2131] MLXLMCommon
+[2057 / 2158]
+[2063 / 2196] MLXLLM
+[2064 / 2196] MLXGuidedGeneration
+[2066 / 2196] MLXVLM
+[2070 / 2196] MLXEmbedders
+[2083 / 2196] MLXVLM
+[2084 / 2196] MLXEmbedders
+[2088 / 2196] MLXVLM
+[2090 / 2196] MLXVLM
+[2091 / 2196] MLXLMCommon
+[2094 / 2196] MLXLLM
+[2096 / 2196] MLXVLM
+[2098 / 2196] MLXVLM
+[2101 / 2196] MLXVLM
+[2108 / 2196] MLXVLM-product
+[2109 / 2196] MLXVLM-product
+[2110 / 2196] MLXVLM-product
+[2115 / 2196] MLXLLM
+[2116 / 2196] MLXLLM
+[2123 / 2196] MLXLLM-product
+[2125 / 2196] MLXLLM-product
+[2128 / 2196] MLXGuidedGeneration
+[2131 / 2196] MLXGuidedGeneration
+[2132 / 2196] MLXLLM
+[2137 / 2197]
+[2138 / 2197] MLXGuidedGeneration
+[2139 / 2197] MLXVLM
+[2140 / 2197] MLXGuidedGeneration
+[2140 / 2197] MLXFoundationModels
+[2149 / 2211] MLXFoundationModels
+[2150 / 2211] MLXFoundationModels
+[2153 / 2211] MLXLLM
+[2156 / 2211] MLXFoundationModels
+[2163 / 2212] MLXLLM
+[2163 / 2212] MLXFoundationModels
+[2163 / 2212] MLXHuggingFace
+[2166 / 2215] MLXLLM
+[2174 / 2215] Fabric
+[2175 / 2216] MLXLLM
+[2177 / 2216] Fabric
+[2193 / 2258]
+[2195 / 2258]
+[2197 / 2258]
+[2201 / 2258] MLXHuggingFace
+[2201 / 2258]
+[2208 / 2258] Fabric
+[2222 / 2258] Fabric
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Object/Renderables/InstancedMeshNode.swift:165:14: warning: property is accessed but result is unused [#NoUsage]
+163 |         mesh.renderOrder = self.inputRenderOrder.value ?? 0
+164 |         // TODO:
+165 |         mesh.renderLayer
+    |              `- warning: property is accessed but result is unused [#NoUsage]
+166 | 
+167 |         mesh.position = self.inputPosition.value ?? .zero
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Views/Graph/GraphCanvas.swift:189:72: warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+187 |                         else { return }
+188 | 
+189 |                         let node = try wrapper.initializeNode(context: currentGraph.context)
+    |                                                                        `- warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+190 |                         try self.editingContext.layoutNode(node)
+191 | 
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/Graph.swift:11:26: note: class 'Graph' does not conform to the 'Sendable' protocol
+   9 | internal import AnyCodable
+  10 | 
+  11 | @Observable public class Graph : Codable, Identifiable, Hashable, Equatable
+     |                          `- note: class 'Graph' does not conform to the 'Sendable' protocol
+  12 | {
+  13 |     public enum Version : Codable
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Views/Graph/GraphCanvas.swift:235:56: warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+233 |                     else { return }
+234 | 
+235 |                     let node = nodeClass.init(context: currentGraph.context)
+    |                                                        `- warning: capture of 'currentGraph' with non-Sendable type 'Graph' in a '@Sendable' closure [#SendableClosureCaptures]
+236 |                     node.setFileURL(url)
+237 |                     node.offset = CGSize(width: location.x - canvasSize.width / 2.0 - node.nodeSize.width / 2.0,
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/Graph.swift:11:26: note: class 'Graph' does not conform to the 'Sendable' protocol
+   9 | internal import AnyCodable
+  10 | 
+  11 | @Observable public class Graph : Codable, Identifiable, Hashable, Equatable
+     |                          `- note: class 'Graph' does not conform to the 'Sendable' protocol
+  12 | {
+  13 |     public enum Version : Codable
+
+[#SendableClosureCaptures]: <https://docs.swift.org/compiler/documentation/diagnostics/sendable-closure-captures>
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Parameters/PassThroughNode.swift:38:30: warning: 'override' is implied when overriding a required initializer
+36 |     }
+37 |     
+38 |     override public required init(from decoder: any Decoder) throws {
+   |                              `- warning: 'override' is implied when overriding a required initializer
+39 |         try super.init(from: decoder)
+40 |     }
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/Node/Node.swift:223:21: note: overridden required initializer is here
+221 |     }
+222 | 
+223 |     public required init(from decoder: any Decoder) throws
+    |                     `- note: overridden required initializer is here
+224 |     {
+225 |         guard let decodeContext = decoder.context else
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Image/Mask/ForegroundMaskNode.swift:57:19: warning: value 'decodeContext' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 55 |         let container = try decoder.container(keyedBy: CodingKeys.self)
+ 56 |         
+ 57 |         guard let decodeContext = decoder.context else
+    |                   `- warning: value 'decodeContext' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 58 |         {
+ 59 |             fatalError("Required Decode Context Not set")
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Image/Mask/PersonSegmentationMaskNode.swift:57:19: warning: value 'decodeContext' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 55 |         let container = try decoder.container(keyedBy: CodingKeys.self)
+ 56 |         
+ 57 |         guard let decodeContext = decoder.context else
+    |                   `- warning: value 'decodeContext' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 58 |         {
+ 59 |             fatalError("Required Decode Context Not set")
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:244:46: warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
+242 |         }
+243 | 
+244 |         let seconds = CMTimeGetSeconds(asset.duration)
+    |                                              `- warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
+245 |         self.duration = seconds.isFinite ? seconds : 0
+246 |     }
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:307:37: warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+305 |         // Falls back to 600 (a common timebase) when no video track
+306 |         // is available — e.g. asset still loading.
+307 |         let timescale = self.asset?.tracks(withMediaType: .video).first?.naturalTimeScale ?? 600
+    |                                     `- warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+308 |         let target = CMTime(seconds: clamped, preferredTimescale: timescale)
+309 |         let tol: CMTime = self.seekTolerance.isInfinite
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:307:74: warning: 'naturalTimeScale' was deprecated in macOS 13.0: Use load(.naturalTimeScale) instead [#DeprecatedDeclaration]
+305 |         // Falls back to 600 (a common timebase) when no video track
+306 |         // is available — e.g. asset still loading.
+307 |         let timescale = self.asset?.tracks(withMediaType: .video).first?.naturalTimeScale ?? 600
+    |                                                                          `- warning: 'naturalTimeScale' was deprecated in macOS 13.0: Use load(.naturalTimeScale) instead [#DeprecatedDeclaration]
+308 |         let target = CMTime(seconds: clamped, preferredTimescale: timescale)
+309 |         let tol: CMTime = self.seekTolerance.isInfinite
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:595:49: warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+593 | 
+594 |                 self.asset = AVURLAsset(url: inputURL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
+595 |                 if let videoTrack = self.asset?.tracks(withMediaType: .video).first
+    |                                                 `- warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead [#DeprecatedDeclaration]
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:597:69: warning: 'preferredTransform' was deprecated in macOS 13.0: Use load(.preferredTransform) instead [#DeprecatedDeclaration]
+595 |                 if let videoTrack = self.asset?.tracks(withMediaType: .video).first
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+    |                                                                     `- warning: 'preferredTransform' was deprecated in macOS 13.0: Use load(.preferredTransform) instead [#DeprecatedDeclaration]
+598 |                     self.sourceNaturalSize = videoTrack.naturalSize
+599 |                 }
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:598:57: warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead [#DeprecatedDeclaration]
+596 |                 {
+597 |                     self.sourceToPresentationTransform = videoTrack.preferredTransform
+598 |                     self.sourceNaturalSize = videoTrack.naturalSize
+    |                                                         `- warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead [#DeprecatedDeclaration]
+599 |                 }
+600 |                 self.cacheDuration(from: self.asset)
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:783:32: warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+781 |     /// for non-Hap tracks.
+782 |     private static func hapCodecLabel(for track: AVAssetTrack) -> String? {
+783 |         guard let desc = track.formatDescriptions.first else { return nil }
+    |                                `- warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+784 |         let cmDesc = desc as! CMFormatDescription
+785 |         let sub = CMFormatDescriptionGetMediaSubType(cmDesc)
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Image/MovieProviderNode.swift:818:27: warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+816 |     /// the slower RGB fallback.
+817 |     private static func codecSupportsDirectDXTUpload(in track: AVAssetTrack) -> Bool {
+818 |         for desc in track.formatDescriptions {
+    |                           `- warning: 'formatDescriptions' was deprecated in macOS 13.0: Use load(.formatDescriptions) instead [#DeprecatedDeclaration]
+819 |             let cmDesc = desc as! CMFormatDescription
+820 |             switch CMFormatDescriptionGetMediaSubType(cmDesc) {
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:262:28: warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+260 |     }
+261 | 
+262 |     private var oscServer: OSCServer?
+    |                            |- warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+    |                            `- note: use 'OSCUDPServer' instead
+263 |     fileprivate var isListening: Bool = false
+264 | 
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Parameters/PassThroughNode.swift:38:30: warning: 'override' is implied when overriding a required initializer
+36 |     }
+37 |     
+38 |     override public required init(from decoder: any Decoder) throws {
+   |                              `- warning: 'override' is implied when overriding a required initializer
+39 |         try super.init(from: decoder)
+40 |     }
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/Node/Node.swift:223:21: note: overridden required initializer is here
+221 |     }
+222 | 
+223 |     public required init(from decoder: any Decoder) throws
+    |                     `- note: overridden required initializer is here
+224 |     {
+225 |         guard let decodeContext = decoder.context else
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/Graph.swift:959:50: warning: result of call to 'map' is unused [#NoUsage]
+ 957 |             let wire = Wire(connection)
+ 958 |             self.registerUndo { graph in
+ 959 |                 graph.connection(matching: wire).map { graph.disconnect($0) }
+     |                                                  `- warning: result of call to 'map' is unused [#NoUsage]
+ 960 |             }
+ 961 |             return connection
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/Graph.swift:1025:46: warning: result of call to 'map' is unused [#NoUsage]
+1023 |         let wire = Wire(connection)
+1024 |         self.registerUndo { graph in
+1025 |             graph.connection(matching: wire).map { graph.setConnection($0, active: previousActive) }
+     |                                              `- warning: result of call to 'map' is unused [#NoUsage]
+1026 |         }
+1027 |         self.nameEdit(active ? "Enable Connection" : "Disable Connection",
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/Graph.swift:1092:46: warning: result of call to 'map' is unused [#NoUsage]
+1090 | 
+1091 |         self.registerUndo { graph in
+1092 |             graph.connection(matching: wire).map { graph.disconnect($0) }
+     |                                              `- warning: result of call to 'map' is unused [#NoUsage]
+1093 |         }
+1094 |         self.nameEdit("Connect Ports", inverse: "Disconnect Ports")
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Graph/GraphCanvasContext.swift:228:13: warning: initialization of immutable value 'graph' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+226 |     public func layoutNode(_ node: Node) throws
+227 |     {
+228 |         let graph = currentGraph
+    |             `- warning: initialization of immutable value 'graph' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+229 |         node.offset = self.calcInteractiveOffset(for: node)
+230 |     }
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+[2232 / 2258] Fabric
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Views/NodeRegisitryView.swift:79:52: warning: 'appendInterpolation' is deprecated: Localized string interpolation produces an unlocalized, debug description for this type of value. Use a type supported by LocalizedStringKey.StringInterpolation or initialize a LocalizedStringResource instead with an interpolated value that conforms to CustomLocalizedStringResourceConvertible. [#DeprecatedDeclaration]
+ 77 |                            filteredNodesForType.isEmpty == false
+ 78 |                         {
+ 79 |                             Section(header: Text("\(nodeType)")) {
+    |                                                    `- warning: 'appendInterpolation' is deprecated: Localized string interpolation produces an unlocalized, debug description for this type of value. Use a type supported by LocalizedStringKey.StringInterpolation or initialize a LocalizedStringResource instead with an interpolated value that conforms to CustomLocalizedStringResourceConvertible. [#DeprecatedDeclaration]
+ 80 |                                 ForEach(filteredNodesForType) { node in
+ 81 |                                     VStack(alignment: .leading, spacing: 4)
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:262:28: warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+260 |     }
+261 | 
+262 |     private var oscServer: OSCServer?
+    |                            |- warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+    |                            `- note: use 'OSCUDPServer' instead
+263 |     fileprivate var isListening: Bool = false
+264 | 
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:392:25: warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+390 |         do
+391 |         {
+392 |             oscServer = OSCServer(port: listenPort) { [weak self] message, _ in
+    |                         |- warning: 'OSCServer' is deprecated: renamed to 'OSCUDPServer' [#DeprecatedDeclaration]
+    |                         `- note: use 'OSCUDPServer' instead
+393 |                 self?.handleOSCMessage(message)
+394 |             }
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Fabric/Nodes/Parameters/IO/OSCReceiveNode.swift:392:25: warning: 'init(port:timeTagMode:receiveQueue:handler:)' is deprecated: Handler closure now takes 4 parameters: message, timeTag, host, port. [#DeprecatedDeclaration]
+390 |         do
+391 |         {
+392 |             oscServer = OSCServer(port: listenPort) { [weak self] message, _ in
+    |                         `- warning: 'init(port:timeTagMode:receiveQueue:handler:)' is deprecated: Handler closure now takes 4 parameters: message, timeTag, host, port. [#DeprecatedDeclaration]
+393 |                 self?.handleOSCMessage(message)
+394 |             }
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[2234 / 2258] Fabric
+[2244 / 2259] FabricTests-product
+[2246 / 2282] Fabric-product
+[2249 / 2282]
+[2267 / 2282] FabricTests-product
+[2269 / 2282] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Tests/SyphonServerLifecycleTests.swift:54:40: warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: firstDescription,
+                                                       device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 52 |         let firstDescription = try #require(descriptions().first)
+ 53 |         let firstIdentity = try #require(firstDescription[SyphonServerDescriptionUUIDKey] as? String)
+ 54 |         let firstClient = try #require(SyphonMetalClient(serverDescription: firstDescription,
+    |                                        `- warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: firstDescription,
+                                                       device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 55 |                                                        device: harness.context.device))
+ 56 |         defer { firstClient.stop() }
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Tests/SyphonServerLifecycleTests.swift:71:44: warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: restartedDescription,
+                                                           device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 69 |         let restartedDescription = try #require(descriptions().first)
+ 70 |         #expect((restartedDescription[SyphonServerDescriptionUUIDKey] as? String) != firstIdentity)
+ 71 |         let restartedClient = try #require(SyphonMetalClient(serverDescription: restartedDescription,
+    |                                            `- warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: restartedDescription,
+                                                           device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 72 |                                                            device: harness.context.device))
+ 73 |         defer { restartedClient.stop() }
+[2270 / 2282] FabricTests-product
+[2270 / 2282]
+[2270 / 2282] FabricTests-product
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Tests/SyphonClientReconnectionTests.swift:70:43: warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: originalServer.serverDescription,
+                                                          device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 68 |         // Keep the old endpoint valid and present: this reproduces the state
+ 69 |         // observed after a crash without relying on a process timing race.
+ 70 |         let originalClient = try #require(SyphonMetalClient(serverDescription: originalServer.serverDescription,
+    |                                           `- warning: '#require(_:_:)' is redundant because 'SyphonMetalClient(serverDescription: originalServer.serverDescription,
+                                                          device: harness.context.device)' never equals 'nil' (from macro 'require')
+ 71 |                                                           device: harness.context.device))
+ 72 |         defer { originalClient.stop() }
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Tests/NodePortRoundTripContractTests.swift:113:21: warning: initialization of immutable value 'decodedNode' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+111 |                 let decodedGraph = try decoder.decode(Graph.self, from: savedData)
+112 | 
+113 |                 let decodedNode = try #require(decodedGraph.nodes.first { $0.id == node.id },
+    |                     `- warning: initialization of immutable value 'decodedNode' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+114 |                                                "\(label): node missing after decode")
+115 | 
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Tests/DeviceOutputPortTests.swift:54:9: warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+52 | 
+53 |         let node = GameControllerNode(context: context)
+54 |         synchronize(node, to: [DeviceOutputPortDescriptor(name: "Trigger", isButton: false)])
+   |         `- warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+55 |         #expect(node.findPort(named: "Trigger") is NodePort<Float>)
+56 | 
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Tests/DeviceOutputPortTests.swift:72:9: warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+70 | 
+71 |         let node = GameControllerNode(context: context)
+72 |         synchronize(node, to: [DeviceOutputPortDescriptor(name: "A", isButton: true),
+   |         `- warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+73 |                                DeviceOutputPortDescriptor(name: "B", isButton: true)])
+74 | 
+
+/Users/andre/.codex/worktrees/review-pr406/Fabric/Tests/DeviceOutputPortTests.swift:75:9: warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+73 |                                DeviceOutputPortDescriptor(name: "B", isButton: true)])
+74 | 
+75 |         synchronize(node, to: [DeviceOutputPortDescriptor(name: "A", isButton: true)])
+   |         `- warning: result of call to 'synchronize(_:to:)' is unused [#NoUsage]
+76 | 
+77 |         #expect(node.ports.map(\.name) == ["A"])
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+[2275 / 2282] FabricTests-product
+[2277 / 2282] FabricTests-product
+[2279 / 2282] FabricTests-product
+Build complete! (95.60 sec)
+error: terminated(1): /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/libexec/swift/pm/swiftpm-xctest-helper /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest /var/folders/tj/2t0mnm3941vbns09mjwtjmvm0000gn/T/TemporaryFile.MnZYmc output:
+    error: Error Domain=NSCocoaErrorDomain Code=3588 "dlopen(/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/FabricTests, 0x0109): Library not loaded: @rpath/Sparkle.framework/Versions/B/Sparkle
+      Referenced from: <D303C153-4C42-39F0-AC78-655E91AEEEAB> /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/HapInAVFoundation.framework/Versions/A/HapInAVFoundation
+      Reason: tried: '/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/libexec/swift/Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/HapInAVFoundation.framework/Versions/A/../Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/HapInAVFoundation.framework/Versions/A/Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file, not in dyld cache), '/System/Volumes/Preboot/Cryptexes/OS/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/PackageFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/PackageFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/../../../Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/../Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v27.1.266.1.REFWXS/Metal.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v27.1.266.1.REFWXS/Metal.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file, not in dyld cache), '/System/Volumes/Preboot/Cryptexes/OS/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/PackageFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/PackageFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/../../../Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/../Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v27.1.266.1.REFWXS/Metal.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v27.1.266.1.REFWXS/Metal.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file, not in dyld cache), '/System/Volumes/Preboot/Cryptexes/OS/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Applications/Xcode.app/Contents/SharedFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file)" UserInfo={NSLocalizedFailureReason=The bundle couldn’t be loaded., NSLocalizedRecoverySuggestion=Try reinstalling the bundle., NSFilePath=/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/FabricTests, NSDebugDescription=dlopen(/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/FabricTests, 0x0109): Library not loaded: @rpath/Sparkle.framework/Versions/B/Sparkle
+      Referenced from: <D303C153-4C42-39F0-AC78-655E91AEEEAB> /Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/HapInAVFoundation.framework/Versions/A/HapInAVFoundation
+      Reason: tried: '/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/libexec/swift/Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/HapInAVFoundation.framework/Versions/A/../Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/HapInAVFoundation.framework/Versions/A/Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file, not in dyld cache), '/System/Volumes/Preboot/Cryptexes/OS/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/PackageFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/PackageFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/../../../Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/../Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v27.1.266.1.REFWXS/Metal.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v27.1.266.1.REFWXS/Metal.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file, not in dyld cache), '/System/Volumes/Preboot/Cryptexes/OS/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/PackageFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/PackageFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/../../../Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest/Contents/MacOS/../Frameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), '/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v27.1.266.1.REFWXS/Metal.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v27.1.266.1.REFWXS/Metal.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx/Sparkle.framework/Versions/B/Sparkle' (no such file), '/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file, not in dyld cache), '/System/Volumes/Preboot/Cryptexes/OS/usr/lib/swift/Sparkle.framework/Versions/B/Sparkle' (no such file), '/Applications/Xcode.app/Contents/SharedFrameworks/Sparkle.framework/Versions/B/Sparkle' (no such file), NSBundlePath=/Users/andre/.codex/worktrees/review-pr406/Fabric/.build/out/Products/Debug/FabricTests.xctest, NSLocalizedDescription=The bundle “FabricTests” couldn’t be loaded.}

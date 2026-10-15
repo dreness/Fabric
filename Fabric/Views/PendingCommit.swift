@@ -14,18 +14,25 @@ final class PendingCommit
     private var commit: (() -> Void)?
     private var timer: Task<Void, Never>?
 
+    /// Holds an active edit until editing ends or Graph.undo()/redo() flushes
+    /// it. Unlike a paused edit, an active edit has no timer.
+    func hold(on undoManager: UndoManager?, _ commit: @escaping () -> Void)
+    {
+        self.cancel()
+        self.commit = commit
+        if let undoManager { Self.register(self, on: undoManager) }
+    }
+
     /// Holds `commit` for `delay`, replacing any commit held. `undoManager` is
     /// the one the commit records on.
     func schedule(after delay: Duration, undoManager: UndoManager?, _ commit: @escaping () -> Void)
     {
-        self.cancel()
-        self.commit = commit
+        self.hold(on: undoManager, commit)
         self.timer = Task { @MainActor [weak self] in
             try? await Task.sleep(for: delay)
             guard !Task.isCancelled else { return }
             self?.flush()
         }
-        if let undoManager { Self.register(self, on: undoManager) }
     }
 
     private func flush()
@@ -62,6 +69,15 @@ final class PendingCommit
         var entries = self.registry[key, default: []].filter { $0.pendingCommit?.commit != nil && $0.pendingCommit !== pendingCommit }
         entries.append(Entry(pendingCommit: pendingCommit))
         self.registry[key] = entries
+    }
+
+    /// Whether this manager has an uncommitted edit, even when its undo
+    /// history is empty. Cancelled and released commits do not count.
+    static func hasCommits(on undoManager: UndoManager) -> Bool
+    {
+        self.registry[ObjectIdentifier(undoManager), default: []].contains {
+            $0.pendingCommit?.commit != nil
+        }
     }
 
     /// Commits now every commit held for `undoManager`.

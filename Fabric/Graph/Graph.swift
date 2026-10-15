@@ -520,7 +520,11 @@ internal import AnyCodable
         undoManager.redo()
     }
 
-    public var canUndo: Bool { self.effectiveUndoManager?.canUndo ?? false }
+    public var canUndo: Bool
+    {
+        guard let undoManager = self.effectiveUndoManager else { return false }
+        return PendingCommit.hasCommits(on: undoManager) || undoManager.canUndo
+    }
 
     /// Reading this posts the undo manager's checkpoint notification, so a
     /// menu that validates on it should read it as the manager's

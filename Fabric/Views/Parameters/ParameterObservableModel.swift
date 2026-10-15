@@ -21,7 +21,9 @@ final class ParameterObservableModel<Value: Codable & Equatable>
             guard !applyingEngine else { return }
             if getValue() != uiValue
             {
-                if editStart == nil { editStart = oldValue }
+                // The parameter is authoritative; its queued notification
+                // may not have reached the UI mirror yet.
+                if editStart == nil { editStart = getValue() }
                 applyingUI = true
                 setValue(uiValue)
                 applyingUI = false
@@ -101,12 +103,27 @@ final class ParameterObservableModel<Value: Codable & Equatable>
     func setEditing(_ editing: Bool)
     {
         isEditing = editing
-        if !editing { self.commitEdit() }
+        if editing {
+            if editStart != nil { self.commitUnlessEditing() }
+        } else {
+            self.commitEdit()
+        }
     }
 
     private func commitUnlessEditing()
     {
-        guard !isEditing else { return }
+        // A gesture that returns to its starting value is not an edit.
+        guard undoParameter != nil, editStart != getValue() else {
+            editStart = nil
+            pendingCommit.cancel()
+            return
+        }
+        if isEditing {
+            pendingCommit.hold(on: graph?.effectiveUndoManager) { [weak self] in
+                self?.commitEdit()
+            }
+            return
+        }
         switch commit
         {
         case .eachChange:
