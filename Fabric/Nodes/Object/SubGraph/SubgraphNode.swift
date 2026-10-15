@@ -183,67 +183,13 @@ open class SubgraphNode: BaseObjectNode
     /// live port value and violate atomic rejected-edit semantics.
     internal static func canProxy(_ port: Port) -> Bool
     {
-        switch port
-        {
-        case is NodePort<Float>,
-             is NodePort<Int>,
-             is NodePort<Bool>,
-             is NodePort<String>,
-             is NodePort<simd_float2>,
-             is NodePort<simd_float3>,
-             is NodePort<simd_float4>,
-             is NodePort<FabricImage>,
-             is NodePort<Geometry>,
-             is NodePort<Material>,
-             is NodePort<PortValue>,
-             is NodePort<simd_quatf>,
-             is NodePort<simd_float4x4>,
-             is NodePort<ContiguousArray<Float>>,
-             is NodePort<ContiguousArray<Int>>,
-             is NodePort<ContiguousArray<Bool>>,
-             is NodePort<ContiguousArray<String>>,
-             is NodePort<ContiguousArray<simd_float2>>,
-             is NodePort<ContiguousArray<simd_float3>>,
-             is NodePort<ContiguousArray<simd_float4>>,
-             is NodePort<ContiguousArray<simd_float4x4>>,
-             is NodePort<ContiguousArray<simd_quatf>>,
-             is NodePort<ContiguousArray<Geometry>>,
-             is NodePort<ContiguousArray<Material>>,
-             is NodePort<ContiguousArray<FabricImage>>,
-             is NodePort<ContiguousArray<PortValue>>,
-             is NodePort<Dictionary<String, Float>>,
-             is NodePort<Dictionary<String, Int>>,
-             is NodePort<Dictionary<String, Bool>>,
-             is NodePort<Dictionary<String, String>>,
-             is NodePort<Dictionary<String, simd_float2>>,
-             is NodePort<Dictionary<String, simd_float3>>,
-             is NodePort<Dictionary<String, simd_float4>>,
-             is NodePort<Dictionary<String, simd_float4x4>>,
-             is NodePort<Dictionary<String, simd_quatf>>,
-             is NodePort<Dictionary<String, Geometry>>,
-             is NodePort<Dictionary<String, Material>>,
-             is NodePort<Dictionary<String, FabricImage>>,
-             is NodePort<Dictionary<String, ContiguousArray<Float>>>,
-             is NodePort<Dictionary<String, ContiguousArray<Int>>>,
-             is NodePort<Dictionary<String, ContiguousArray<Bool>>>,
-             is NodePort<Dictionary<String, ContiguousArray<String>>>,
-             is NodePort<Dictionary<String, ContiguousArray<simd_float2>>>,
-             is NodePort<Dictionary<String, ContiguousArray<simd_float3>>>,
-             is NodePort<Dictionary<String, ContiguousArray<simd_float4>>>,
-             is NodePort<Dictionary<String, ContiguousArray<simd_float4x4>>>,
-             is NodePort<Dictionary<String, ContiguousArray<simd_quatf>>>,
-             is NodePort<Dictionary<String, ContiguousArray<Geometry>>>,
-             is NodePort<Dictionary<String, ContiguousArray<Material>>>,
-             is NodePort<Dictionary<String, ContiguousArray<FabricImage>>>,
-             is NodePort<Dictionary<String, PortValue>>:
-            return true
-        default:
-            return false
-        }
+        self.resolveProxyFactory(for: port, id: port.id) != nil
     }
 
-    /// Type-erase proxy creation — matches the inner port's generic type.
-    private static func makeProxy(for port: Port, id: UUID) -> Port?
+    /// Returns a pass-through wrapper for any port type supported by proxies,
+    /// using one switch as the single source of truth for both capability checks
+    /// and actual creation.
+    private static func resolveProxyFactory(for port: Port, id: UUID) -> Port?
     {
         switch port
         {
@@ -302,6 +248,12 @@ open class SubgraphNode: BaseObjectNode
             print("ProxyPort: unsupported port type for \(port.name): \(type(of: port))")
             return nil
         }
+    }
+
+    /// Type-erase proxy creation — matches the inner port's generic type.
+    private static func makeProxy(for port: Port, id: UUID) -> Port?
+    {
+        self.resolveProxyFactory(for: port, id: id)
     }
 
     override open var nodeExecutionMode:ExecutionMode
