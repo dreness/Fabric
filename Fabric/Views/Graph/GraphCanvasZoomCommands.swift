@@ -1,11 +1,19 @@
 import SwiftUI
 
-/// Scene-scoped actions supplied by the canvas's view-local zoom state.
+/// Which of the canvas's contents a framing command brings into view.
+enum GraphCanvasFramingScope
+{
+    case selection
+    case allContent
+}
+
+/// Scene-scoped actions supplied by the canvas zoom modifier; nil when unavailable.
 struct GraphCanvasZoomActions
 {
     let zoomIn: (() -> Void)?
     let zoomOut: (() -> Void)?
     let actualSize: (() -> Void)?
+    let frame: ((GraphCanvasFramingScope) -> Void)?
 }
 
 private struct GraphCanvasZoomActionsKey: FocusedValueKey
@@ -46,6 +54,15 @@ public struct GraphCanvasZoomCommands: Commands
                     .keyboardShortcut("0", modifiers: .command)
                     .disabled(actions?.actualSize == nil)
             }
+
+            Button("Frame Selected") { actions?.frame?(.selection) }
+                .keyboardShortcut("f", modifiers: [.command, .shift])
+                .disabled(actions?.frame == nil)
+
+            // Option-Command-F is Find and Replace.
+            Button("Frame All") { actions?.frame?(.allContent) }
+                .keyboardShortcut("9", modifiers: .command)
+                .disabled(actions?.frame == nil)
         }
     }
 }

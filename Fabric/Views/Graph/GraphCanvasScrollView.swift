@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Hosts a graph canvas: scrolling, zoom, and reporting scroll geometry
+/// Hosts a graph canvas: scrolling, zoom, framing, and reporting scroll geometry
 /// to `editingContext.currentScrollGeometry`.
 public struct GraphCanvasScrollView<Content: View>: View
 {
@@ -9,6 +9,7 @@ public struct GraphCanvasScrollView<Content: View>: View
     private let initialAnchor: UnitPoint
     private let allowsContentHitTesting: Bool
     private let content: () -> Content
+    @State private var scrollPosition = ScrollPosition()
 
     /// `initialAnchor` is the content point shown when the view first appears.
     public init(editingContext: GraphCanvasContext,
@@ -32,10 +33,12 @@ public struct GraphCanvasScrollView<Content: View>: View
                 .frame(width: canvasSize.width, height: canvasSize.height)
                 .modifier(GraphCanvasZoomModifier(editingContext: editingContext,
                                                   canvasSize: canvasSize,
+                                                  scrollPosition: $scrollPosition,
                                                   allowsContentHitTesting: allowsContentHitTesting))
         }
         .defaultScrollAnchor(initialAnchor, for: .initialOffset)
         .defaultScrollAnchor(.center)
+        .scrollPosition($scrollPosition)
         .onScrollGeometryChange(for: ScrollGeometry.self) { geometry in
             geometry
         } action: { _, newGeometry in

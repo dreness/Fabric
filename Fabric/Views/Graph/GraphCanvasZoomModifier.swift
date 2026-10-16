@@ -20,8 +20,12 @@ extension EnvironmentValues
 /// Constructed only by `GraphCanvasScrollView`, which supplies the scroll wiring.
 struct GraphCanvasZoomModifier: ViewModifier
 {
+    /// Keeps framed nodes clear of the viewport edges, in layout-frame points.
+    private static let framingMargin: CGFloat = 40
+
     private let editingContext: GraphCanvasContext
     private let canvasSize: CGSize
+    @Binding private var scrollPosition: ScrollPosition
     private let allowsContentHitTesting: Bool
     private let zoomLimits: ClosedRange<CGFloat>
 
@@ -31,11 +35,13 @@ struct GraphCanvasZoomModifier: ViewModifier
 
     init(editingContext: GraphCanvasContext,
          canvasSize: CGSize,
+         scrollPosition: Binding<ScrollPosition>,
          allowsContentHitTesting: Bool = true,
          zoomLimits: ClosedRange<CGFloat> = 0.25...2)
     {
         self.editingContext = editingContext
         self.canvasSize = canvasSize
+        self._scrollPosition = scrollPosition
         self.allowsContentHitTesting = allowsContentHitTesting
         self.zoomLimits = zoomLimits
     }
@@ -49,10 +55,11 @@ struct GraphCanvasZoomModifier: ViewModifier
     func body(content: Content) -> some View
     {
         let transform = gestureTransform ?? committedTransform
+        let isIdle = gestureTransform == nil
 
         content
             .environment(\.centerGraphCanvas, center(on:))
-            .allowsHitTesting(allowsContentHitTesting && gestureTransform == nil)
+            .allowsHitTesting(allowsContentHitTesting && isIdle)
             .scaleEffect(transform.scale, anchor: .topLeading)
             .offset(transform.translation)
             // This outer frame stays unscaled, so startLocation is independent
@@ -64,12 +71,13 @@ struct GraphCanvasZoomModifier: ViewModifier
             }
             .contentShape(.rect)
             .focusedSceneValue(\.graphCanvasZoomActions, GraphCanvasZoomActions(
-                zoomIn: gestureTransform == nil && committedTransform.scale < zoomLimits.upperBound
+                zoomIn: isIdle && committedTransform.scale < zoomLimits.upperBound
                     ? { zoom(by: 1.25) } : nil,
-                zoomOut: gestureTransform == nil && committedTransform.scale > zoomLimits.lowerBound
+                zoomOut: isIdle && committedTransform.scale > zoomLimits.lowerBound
                     ? { zoom(by: 1 / 1.25) } : nil,
-                actualSize: gestureTransform == nil && committedTransform.scale != 1
-                    ? { zoom(by: 1 / committedTransform.scale) } : nil
+                actualSize: isIdle && committedTransform.scale != 1
+                    ? { zoom(by: 1 / committedTransform.scale) } : nil,
+                frame: isIdle ? frame : nil
             ))
             .gesture(
                 MagnifyGesture()
@@ -98,11 +106,49 @@ struct GraphCanvasZoomModifier: ViewModifier
     private func center(on graphPosition: CGPoint)
     {
         guard gestureTransform == nil else { return }
-        // Repeated selections retarget the same spring instead of queuing moves.
-        withAnimation(reduceMotion ? nil : .spring(duration: 0.16, bounce: 0))
+
+        animatingTransformChange
         {
             committedTransform = committedTransform.placing(editingContext.canvasPosition(forGraphPosition: graphPosition),
                                                             at: editingContext.currentScrollViewport.center)
         }
+    }
+
+    /// Zooms and scrolls so the scope's contents fill the viewport, centered.
+    private func frame(_ scope: GraphCanvasFramingScope)
+    {
+        guard gestureTransform == nil,
+              let graphRect = editingContext.graphRect(framing: scope)
+        else
+        {
+            return
+        }
+
+        let canvasRect = CGRect(origin: editingContext.canvasPosition(forGraphPosition: graphRect.origin),
+                                size: graphRect.size)
+        let scrollGeometry = editingContext.currentScrollGeometry
+
+        guard let framing = GraphCanvasZoomTransform.framing(canvasRect,
+                                                             in: editingContext.currentScrollViewport,
+                                                             scrollContentSize: scrollGeometry.contentSize,
+                                                             margin: Self.framingMargin,
+                                                             limits: zoomLimits)
+        else
+        {
+            return
+        }
+
+        animatingTransformChange
+        {
+            committedTransform = framing.transform
+            scrollPosition.scrollTo(point: GraphCanvasContext.scrollPoint(movingViewportOf: scrollGeometry,
+                                                                          by: framing.scrollDelta))
+        }
+    }
+
+    private func animatingTransformChange(_ change: () -> Void)
+    {
+        // Repeated commands retarget the same spring instead of queuing moves.
+        withAnimation(reduceMotion ? nil : .spring(duration: 0.16, bounce: 0), change)
     }
 }
