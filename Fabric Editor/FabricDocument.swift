@@ -109,30 +109,30 @@ class FabricDocument: FileDocument
         directionalLightNode.inputPosition.value = SIMD3<Float>(1, 2, 5)
 
         // Ports can only register connections after their nodes belong to the graph.
-        self.editingContext.currentGraph.addNode(spinNode)
-        self.editingContext.currentGraph.addNode(mathNode)
-        self.editingContext.currentGraph.addNode(smoothNode)
-        self.editingContext.currentGraph.addNode(integralNode)
-        self.editingContext.currentGraph.addNode(eulerNode)
-        self.editingContext.currentGraph.addNode(boxNode)
-        self.editingContext.currentGraph.addNode(materialNode)
-        self.editingContext.currentGraph.addNode(meshNode)
-        self.editingContext.currentGraph.addNode(directionalLightNode)
+        graph.addNode(spinNode)
+        graph.addNode(mathNode)
+        graph.addNode(smoothNode)
+        graph.addNode(integralNode)
+        graph.addNode(eulerNode)
+        graph.addNode(boxNode)
+        graph.addNode(materialNode)
+        graph.addNode(meshNode)
+        graph.addNode(directionalLightNode)
 
         // Connections — animation chain
-        self.editingContext.currentGraph.connect(spinNode.output, to: mathNode.findPort(named: "Amount", as: ParameterPort<Float>.self)!)
-        self.editingContext.currentGraph.connect(mathNode.findPort(named: "result", as: NodePort<Float>.self)!, to: smoothNode.findPort(named: "inputNumber", as: ParameterPort<Float>.self)!)
-        self.editingContext.currentGraph.connect(smoothNode.findPort(named: "outputNumber", as: NodePort<Float>.self)!, to: integralNode.inputNumber)
-        self.editingContext.currentGraph.connect(integralNode.outputNumber, to: eulerNode.findPort(named: "inputX", as: ParameterPort<Float>.self)!)
-        self.editingContext.currentGraph.connect(integralNode.outputNumber, to: eulerNode.findPort(named: "inputY", as: ParameterPort<Float>.self)!)
-        self.editingContext.currentGraph.connect(eulerNode.findPort(named: "outputOrientation", as: NodePort<simd_float4>.self)!, to: meshNode.inputOrientation)
+        graph.connect(spinNode.output, to: mathNode.findPort(named: "Amount", as: ParameterPort<Float>.self)!)
+        graph.connect(mathNode.findPort(named: "result", as: NodePort<Float>.self)!, to: smoothNode.findPort(named: "inputNumber", as: ParameterPort<Float>.self)!)
+        graph.connect(smoothNode.findPort(named: "outputNumber", as: NodePort<Float>.self)!, to: integralNode.inputNumber)
+        graph.connect(integralNode.outputNumber, to: eulerNode.findPort(named: "inputX", as: ParameterPort<Float>.self)!)
+        graph.connect(integralNode.outputNumber, to: eulerNode.findPort(named: "inputY", as: ParameterPort<Float>.self)!)
+        graph.connect(eulerNode.findPort(named: "outputOrientation", as: NodePort<simd_float4>.self)!, to: meshNode.inputOrientation)
 
         // Connections — geometry
-        self.editingContext.currentGraph.connect(boxNode.outputGeometry, to: meshNode.inputGeometry)
-        self.editingContext.currentGraph.connect(materialNode.outputMaterial, to: meshNode.inputMaterial)
+        graph.connect(boxNode.outputGeometry, to: meshNode.inputGeometry)
+        graph.connect(materialNode.outputMaterial, to: meshNode.inputMaterial)
 
         // Auto-layout the graph
-        self.editingContext.currentGraph.autoLayout()
+        graph.autoLayout()
         
         Task
         {
