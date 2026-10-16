@@ -392,6 +392,7 @@ struct GraphConnectionOwnershipTests
     }
 
     @Test("Embedding transfers internal wires and undo restores their identity")
+    @MainActor
     func embeddingTransfersInternalConnections() throws
     {
         guard let context = makeContext() else { return }
