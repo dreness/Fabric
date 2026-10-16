@@ -14,7 +14,6 @@ struct GraphCanvasZoomActions
     let zoomOut: (() -> Void)?
     let actualSize: (() -> Void)?
     let frame: ((GraphCanvasFramingScope) -> Void)?
-    let canFrame: (GraphCanvasFramingScope) -> Bool
 }
 
 private struct GraphCanvasZoomActionsKey: FocusedValueKey
@@ -58,18 +57,12 @@ public struct GraphCanvasZoomCommands: Commands
 
             Button("Frame Selected") { actions?.frame?(.selection) }
                 .keyboardShortcut("f", modifiers: [.command, .shift])
-                .disabled(!canFrame(.selection))
+                .disabled(actions?.frame == nil)
 
             // Option-Command-F is Find and Replace.
             Button("Frame All") { actions?.frame?(.allContent) }
                 .keyboardShortcut("9", modifiers: .command)
-                .disabled(!canFrame(.allContent))
+                .disabled(actions?.frame == nil)
         }
-    }
-
-    private func canFrame(_ scope: GraphCanvasFramingScope) -> Bool
-    {
-        guard let actions, actions.frame != nil else { return false }
-        return actions.canFrame(scope)
     }
 }

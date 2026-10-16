@@ -18,7 +18,7 @@ extension GraphCanvasContext
         set { currentScrollGeometry.containerSize = newValue }
     }
 
-    @available(*, deprecated, renamed: "visibleGraphCenter")
+    @available(*, deprecated, message: "Read-only; use visibleGraphCenter for node placement and report ScrollGeometry to currentScrollGeometry")
     public var currentScrollOffset: CGPoint
     {
         visibleGraphCenter

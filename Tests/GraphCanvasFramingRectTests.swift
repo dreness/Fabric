@@ -35,6 +35,7 @@ private func addNote(to graph: Graph, rect: CGRect) -> Note {
 // MARK: - Tests
 
 @Suite("Graph canvas framing rect")
+@MainActor
 struct GraphCanvasFramingRectTests {
 
     @Test("An empty graph has nothing to frame")
@@ -106,27 +107,6 @@ struct GraphCanvasFramingRectTests {
         #expect(framed?.maxY == node.nodeSize.height / 2)
     }
 
-    @Test("Frame availability agrees with whether there is a rect to frame")
-    func hasContentMatchesGraphRect() {
-        guard let canvasContext = makeCanvasContext() else { return }
-        let graph = canvasContext.currentGraph
-
-        func expectAgreement() {
-            for scope in [GraphCanvasFramingScope.selection, .allContent] {
-                #expect(canvasContext.hasContent(framing: scope) == (canvasContext.graphRect(framing: scope) != nil))
-            }
-        }
-
-        expectAgreement()
-        _ = addNote(to: graph, rect: CGRect(x: 0, y: 0, width: 100, height: 100))
-        expectAgreement()
-        let node = addNode(to: graph, offset: .zero)
-        expectAgreement()
-        graph.viewModel(for: node).isSelected = true
-        expectAgreement()
-        #expect(canvasContext.hasContent(framing: .selection))
-    }
-
     @Test("Framing reads the subgraph being displayed, not the root")
     func currentGraphOnly() {
         guard let canvasContext = makeCanvasContext() else { return }
@@ -139,5 +119,20 @@ struct GraphCanvasFramingRectTests {
         let innerNote = addNote(to: subgraphNode.subGraph, rect: CGRect(x: 10, y: 20, width: 300, height: 400))
 
         #expect(canvasContext.graphRect(framing: .allContent) == innerNote.rect)
+    }
+
+    @Test("Dropped nodes center on the drop point without the rapid-add stagger")
+    func dropCentering() throws {
+        guard let canvasContext = makeCanvasContext() else { return }
+        let graph = canvasContext.currentGraph
+        let dropPosition = CGPoint(x: 300, y: -200)
+
+        for _ in 0..<2 {
+            let node = NumberBinaryOperator(context: graph.context)
+            try canvasContext.layoutNode(node)
+            let offset = GraphCanvas.offset(centering: node, at: dropPosition)
+            #expect(offset == CGSize(width: dropPosition.x - node.nodeSize.width / 2,
+                                     height: dropPosition.y - node.nodeSize.height / 2))
+        }
     }
 }

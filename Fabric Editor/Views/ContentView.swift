@@ -18,7 +18,8 @@ struct ContentView: View {
     
     @State private var radialGradientEndRadius: CGFloat = .zero
 
-    @State private var canvasScrollPosition = ScrollPosition()
+    /// Opens the canvas on the root graph's first node.
+    private let initialCanvasAnchor: UnitPoint
 
     @State private var columnVisibility = NavigationSplitViewVisibility.doubleColumn
     @State private var inspectorVisibility:Bool = true
@@ -36,10 +37,14 @@ struct ContentView: View {
     init(document: Binding<FabricDocument>, documentURL: URL? = nil) {
         self._document = document
         self.documentURL = documentURL
+        self.initialCanvasAnchor = document.wrappedValue.editingContext.rootGraph.nodes.first.map { firstNode in
+            UnitPoint(x: 0.5 + firstNode.offset.width / Self.canvasSize,
+                      y: 0.5 + firstNode.offset.height / Self.canvasSize)
+        } ?? .center
     }
 
     // Magic Numbers...
-    private let canvasSize = 10000.0
+    private static let canvasSize = 10000.0
     
     var body: some View {
 
@@ -82,59 +87,35 @@ struct ContentView: View {
                     CanvasBackdropView(outputPresenter: self.outputPresenter,
                                        radialGradientEndRadius: self.radialGradientEndRadius)
 
-                    ScrollViewReader { proxy in
-                        ScrollView([.horizontal, .vertical])
-                        {
-                            GraphCanvas(editingContext: self.document.editingContext,
-                                        focus: self.$focusTarget,
-                                        canvasSize: CGSize(width: self.canvasSize, height: self.canvasSize),
-                                        connectionsHitTestingEnabled: self.canvasHitTestingEnabled)
-                                .id("canvas")
-                                .frame(width: self.canvasSize, height: self.canvasSize)
-                                .modifier(GraphCanvasZoomModifier(
-                                    editingContext: self.document.editingContext,
-                                    canvasSize: CGSize(width: self.canvasSize, height: self.canvasSize),
-                                    scrollPosition: self.$canvasScrollPosition,
-                                    allowsContentHitTesting: self.canvasHitTestingEnabled
-                                ))
-                                .contextMenu(menuItems: {
-                                    Button("New Note") {
-                                        let editingContext = self.document.editingContext
-                                        let noteSize = CGSize(width: 500, height: 500)
-                                        let note = Note(note: "New Note",
-                                                        rect: CGRect(origin: editingContext.visibleGraphCenter - noteSize / 2,
-                                                                     size: noteSize))
-                                        editingContext.currentGraph.addNote(note)
-                                    }
-                                })
-                                .onAppear {
-                                    self.document.editingContext.rootGraph.undoManager = undoManager
-
-                                    DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(10)) ) {
-                                        let editingContext = self.document.editingContext
-                                        if let firstNode = editingContext.rootGraph.nodes.first
-                                        {
-                                            let canvasPosition = editingContext.canvasPosition(forGraphPosition: CGPoint(x: firstNode.offset.width,
-                                                                                                                         y: firstNode.offset.height))
-                                            let targetPoint = UnitPoint(x: canvasPosition.x / self.canvasSize,
-                                                                        y: canvasPosition.y / self.canvasSize)
-                                            proxy.scrollTo("canvas", anchor: targetPoint)
-                                        }
-                                    }
+                    GraphCanvasScrollView(editingContext: self.document.editingContext,
+                                          canvasSize: CGSize(width: Self.canvasSize, height: Self.canvasSize),
+                                          initialAnchor: self.initialCanvasAnchor,
+                                          allowsContentHitTesting: self.canvasHitTestingEnabled)
+                    {
+                        GraphCanvas(editingContext: self.document.editingContext,
+                                    focus: self.$focusTarget,
+                                    canvasSize: CGSize(width: Self.canvasSize, height: Self.canvasSize),
+                                    connectionsHitTestingEnabled: self.canvasHitTestingEnabled)
+                            .contextMenu(menuItems: {
+                                Button("New Note") {
+                                    let editingContext = self.document.editingContext
+                                    let noteSize = CGSize(width: 500, height: 500)
+                                    let note = Note(note: "New Note",
+                                                    rect: CGRect(origin: editingContext.visibleGraphCenter - noteSize / 2,
+                                                                 size: noteSize))
+                                    editingContext.currentGraph.addNote(note)
                                 }
-
-                        }
-                        .defaultScrollAnchor(.center)
-                        .scrollPosition(self.$canvasScrollPosition)
-                        .onScrollPhaseChange { _, newPhase in
-                            self.canvasHitTestingEnabled = !newPhase.isScrolling
-                        }
+                            })
+                            .onAppear {
+                                self.document.editingContext.rootGraph.undoManager = undoManager
+                            }
+                    }
+                    .onScrollPhaseChange { _, newPhase in
+                        self.canvasHitTestingEnabled = !newPhase.isScrolling
                     }
                     .onScrollGeometryChange(for: ScrollGeometry.self) { geometry in
                         geometry
                     } action: { _, newGeometry in
-                        self.document.editingContext.currentScrollGeometry = newGeometry
-
                         let newRadialGradientEndRadius = newGeometry.containerSize.width * 1.5
                         if self.radialGradientEndRadius != newRadialGradientEndRadius
                         {

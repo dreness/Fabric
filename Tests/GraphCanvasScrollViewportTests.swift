@@ -8,6 +8,7 @@ import Satin
 /// Values measured from the running editor on macOS 27: a 200pt sidebar and a
 /// 250.5pt inspector overlay a 1314pt-wide scroll container, which reports a
 /// 863.5pt container size and a content offset at its physical leading edge.
+@MainActor
 struct GraphCanvasScrollViewportTests
 {
     private let contentOffset = CGPoint(x: 3930.5, y: 4427.5)

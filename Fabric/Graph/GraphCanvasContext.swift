@@ -31,12 +31,14 @@ struct GraphConnectionPair: Identifiable
 ///
 /// Views should depend on this single object rather than reaching into
 /// `Graph` for UI concerns. `Graph` remains a pure document model.
+@MainActor
 @Observable
 public class GraphCanvasContext
 {
     // MARK: - Navigation
 
-    public let rootGraph: Graph
+    // Immutable; set by the nonisolated init.
+    nonisolated(unsafe) public let rootGraph: Graph
     public private(set) var entries: [SubgraphNode] = []
 
     /// The graph currently being displayed and edited.
@@ -223,22 +225,6 @@ public class GraphCanvasContext
 
     // MARK: - Framing
 
-    /// Whether `graphRect(framing:)` would find anything. Reads selection and membership
-    /// only, not positions, so observers aren't invalidated by node drags.
-    func hasContent(framing scope: GraphCanvasFramingScope) -> Bool
-    {
-        let graph = currentGraph
-
-        switch scope
-        {
-        case .selection:
-            return graph.nodes.contains { graph.viewModel(for: $0).isSelected }
-
-        case .allContent:
-            return !(graph.nodes.isEmpty && graph.notes.isEmpty)
-        }
-    }
-
     /// The rect in graph coordinates enclosing the scope's nodes and notes in the
     /// graph being displayed, or nil when the scope is empty.
     func graphRect(framing scope: GraphCanvasFramingScope) -> CGRect?
@@ -271,7 +257,7 @@ public class GraphCanvasContext
 
     // MARK: - Init
 
-    public init(rootGraph: Graph)
+    nonisolated public init(rootGraph: Graph)
     {
         self.rootGraph = rootGraph
     }

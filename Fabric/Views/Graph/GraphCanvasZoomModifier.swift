@@ -17,7 +17,8 @@ extension EnvironmentValues
 
 /// Keeps pinch state in the view layer and preserves the canvas point under the pinch.
 /// The committed zoom lives on the editing context, which places new nodes from it.
-public struct GraphCanvasZoomModifier: ViewModifier
+/// Constructed only by `GraphCanvasScrollView`, which supplies the scroll wiring.
+struct GraphCanvasZoomModifier: ViewModifier
 {
     /// Keeps framed nodes clear of the viewport edges, in layout-frame points.
     private static let framingMargin: CGFloat = 40
@@ -32,9 +33,7 @@ public struct GraphCanvasZoomModifier: ViewModifier
     @GestureState(resetTransaction: Transaction(animation: nil))
     private var gestureTransform: GraphCanvasZoomTransform?
 
-    /// `scrollPosition` must be bound to the scroll view hosting the canvas, which
-    /// must also report its geometry to `editingContext.currentScrollGeometry`.
-    public init(editingContext: GraphCanvasContext,
+    init(editingContext: GraphCanvasContext,
                 canvasSize: CGSize,
                 scrollPosition: Binding<ScrollPosition>,
                 allowsContentHitTesting: Bool = true,
@@ -53,7 +52,7 @@ public struct GraphCanvasZoomModifier: ViewModifier
         nonmutating set { editingContext.canvasZoomTransform = newValue }
     }
 
-    public func body(content: Content) -> some View
+    func body(content: Content) -> some View
     {
         let transform = gestureTransform ?? committedTransform
         let isIdle = gestureTransform == nil
@@ -78,9 +77,7 @@ public struct GraphCanvasZoomModifier: ViewModifier
                     ? { zoom(by: 1 / 1.25) } : nil,
                 actualSize: isIdle && committedTransform.scale != 1
                     ? { zoom(by: 1 / committedTransform.scale) } : nil,
-                frame: isIdle ? frame : nil,
-                // Evaluated by the menu, so selection changes don't invalidate the canvas.
-                canFrame: editingContext.hasContent(framing:)
+                frame: isIdle ? frame : nil
             ))
             .gesture(
                 MagnifyGesture()

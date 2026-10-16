@@ -179,13 +179,8 @@ public struct GraphCanvas : View
                         else { return }
 
                         let node = try wrapper.initializeNode(context: currentGraph.context)
-                        try self.editingContext.layoutNode(node)
-
                         let dropPosition = self.editingContext.graphPosition(forCanvasPosition: location)
-                        let visibleGraphCenter = self.editingContext.visibleGraphCenter
-                        node.offset.width += dropPosition.x - visibleGraphCenter.x
-                        node.offset.height += dropPosition.y - visibleGraphCenter.y - node.nodeSize.height / 4.0
-
+                        node.offset = Self.offset(centering: node, at: dropPosition)
                         currentGraph.addNode(node)
                     }
                     catch {
@@ -229,14 +224,20 @@ public struct GraphCanvas : View
                     let node = nodeClass.init(context: currentGraph.context)
                     node.setFileURL(url)
                     let dropPosition = self.editingContext.graphPosition(forCanvasPosition: location)
-                    node.offset = CGSize(width: dropPosition.x - node.nodeSize.width / 2.0,
-                                         height: dropPosition.y - node.nodeSize.height / 2.0)
+                    node.offset = Self.offset(centering: node, at: dropPosition)
                     currentGraph.addNode(node)
                 }
             }
         }
 
         return !fileProviders.isEmpty
+    }
+
+    /// Offset that centers `node` on a graph position.
+    static func offset(centering node: Node, at graphPosition: CGPoint) -> CGSize
+    {
+        CGSize(width: graphPosition.x - node.nodeSize.width / 2.0,
+               height: graphPosition.y - node.nodeSize.height / 2.0)
     }
 
     // MARK: - Key Press
