@@ -91,6 +91,25 @@ struct GraphCanvasScrollViewportTests
         #expect(abs(center.y) < 0.000001)
     }
 
+    /// `ScrollPosition.scrollTo(point:)` puts the point at the inset-adjusted leading
+    /// edge, so the requested point becomes the new viewport origin.
+    @Test func framingWithTheSidebarOpenCentersTheRectInTheUnoccludedViewport() throws
+    {
+        let scrollGeometry = geometry(insets: EdgeInsets(top: 0, leading: 200, bottom: 0, trailing: 0))
+        let viewport = GraphCanvasContext.scrollViewport(for: scrollGeometry)
+        let canvasRect = CGRect(x: 5500, y: 5200, width: 600, height: 400)
+
+        let framing = try #require(GraphCanvasZoomTransform.framing(canvasRect, in: viewport,
+                                                                     scrollContentSize: contentSize,
+                                                                     limits: 0.25...2))
+        let scrollPoint = GraphCanvasContext.scrollPoint(movingViewportOf: scrollGeometry, by: framing.scrollDelta)
+        let scrolledViewport = CGRect(origin: scrollPoint, size: viewport.size)
+
+        let framedCenter = framing.transform.position(forCanvasPosition: canvasRect.center)
+        #expect(abs(framedCenter.x - scrolledViewport.midX) < 0.000001)
+        #expect(abs(framedCenter.y - scrolledViewport.midY) < 0.000001)
+    }
+
     @Test("Dropped nodes center on the drop point without the rapid-add stagger")
     func dropCentering() throws
     {

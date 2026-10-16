@@ -215,6 +215,39 @@ public class GraphCanvasContext
                height: geometry.containerSize.height)
     }
 
+    /// The point to pass to `ScrollPosition.scrollTo(point:)` to move the viewport by `delta`.
+    /// `scrollTo(point:)` places the point at the inset-adjusted leading edge, not at
+    /// the raw `contentOffset`.
+    static func scrollPoint(movingViewportOf geometry: ScrollGeometry, by delta: CGSize) -> CGPoint
+    {
+        scrollViewport(for: geometry).origin + delta
+    }
+
+    // MARK: - Framing
+
+    /// The rect in graph coordinates enclosing the scope's nodes and notes in the
+    /// graph being displayed, or nil when the scope is empty.
+    func graphRect(framing scope: GraphCanvasFramingScope) -> CGRect?
+    {
+        let graph = currentGraph
+
+        let enclosedRects: [CGRect]
+        switch scope
+        {
+        case .selection:
+            enclosedRects = graph.selectedNodes.map { graph.viewModel(for: $0).graphRect }
+
+        case .allContent:
+            // A note's rect is already in graph coordinates.
+            enclosedRects = graph.nodes.map { graph.viewModel(for: $0).graphRect }
+                + graph.notes.map(\.rect)
+        }
+
+        return enclosedRects.reduce(nil) { enclosingRect, rect in
+            enclosingRect?.union(rect) ?? rect
+        }
+    }
+
     // MARK: - Auto-Layout Timing
 
     @ObservationIgnored private let nodeOffset = CGSize(width: 20, height: 20)

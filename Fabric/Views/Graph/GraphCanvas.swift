@@ -91,8 +91,7 @@ public struct GraphCanvas : View
             DragGesture(minimumDistance: 3)
                 .onChanged { value in
                     self.calcMarqueeDragChanged(forValue: value,
-                                                currentGraph: self.editingContext.currentGraph,
-                                                canvasSize: canvasSize)
+                                                currentGraph: self.editingContext.currentGraph)
                 }
                 .onEnded { _ in
                     self.marqueeRect = .zero
@@ -116,7 +115,7 @@ public struct GraphCanvas : View
 
     // MARK: - Marquee Drag
 
-    private func calcMarqueeDragChanged(forValue value: DragGesture.Value, currentGraph graph: Graph, canvasSize: CGSize)
+    private func calcMarqueeDragChanged(forValue value: DragGesture.Value, currentGraph graph: Graph)
     {
         if self.marqueeRect == .zero
         {
@@ -141,20 +140,13 @@ public struct GraphCanvas : View
 
         self.marqueeRect = CGRect(origin: origin, size: size)
 
-        let marqueeInNodeSpace = CGRect(
-            x: origin.x - canvasSize.width / 2,
-            y: origin.y - canvasSize.height / 2,
-            width: size.width,
-            height: size.height
-        )
+        let marqueeInNodeSpace = CGRect(origin: self.editingContext.graphPosition(forCanvasPosition: origin),
+                                        size: size)
 
         for node in graph.nodes
         {
             let nodeViewModel = graph.viewModel(for: node)
-            let nodeOrigin = CGPoint(x: nodeViewModel.offset.width  - nodeViewModel.nodeSize.width  / 2,
-                                     y: nodeViewModel.offset.height - nodeViewModel.nodeSize.height / 2)
-            let nodeRect = CGRect(origin: nodeOrigin, size: nodeViewModel.nodeSize)
-            let inMarquee = nodeRect.intersects(marqueeInNodeSpace)
+            let inMarquee = nodeViewModel.graphRect.intersects(marqueeInNodeSpace)
             nodeViewModel.isSelected = inMarquee || preMarqueeSelection.contains(node.id)
         }
     }
