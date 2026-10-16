@@ -102,4 +102,116 @@ struct GraphCanvasZoomTransformTests
         expectEqual(restored.position(forCanvasPosition: .zero),
                     initial.position(forCanvasPosition: .zero))
     }
+
+    // MARK: - Framing
+
+    private let scrollContentSize = CGSize(width: 10_000, height: 10_000)
+
+    @Test func framingScalesToTheTighterAxisAndCentersTheRect() throws
+    {
+        // Wider than it is tall relative to the viewport, so width decides the scale.
+        let viewport = CGRect(x: 4200, y: 4100, width: 1000, height: 500)
+        let canvasRect = CGRect(x: 4000, y: 5000, width: 2000, height: 500)
+        let framing = try #require(GraphCanvasZoomTransform.framing(canvasRect, in: viewport,
+                                                                     scrollContentSize: scrollContentSize,
+                                                                     limits: limits))
+        let scrolledViewport = viewport.offsetBy(dx: framing.scrollDelta.width, dy: framing.scrollDelta.height)
+
+        #expect(abs(framing.transform.scale - 0.5) < 0.000001)
+        expectEqual(framing.transform.position(forCanvasPosition: canvasRect.center), scrolledViewport.center)
+        expectEqual(framing.transform.position(forCanvasPosition: CGPoint(x: canvasRect.minX, y: canvasRect.midY)),
+                    CGPoint(x: scrolledViewport.minX, y: scrolledViewport.midY))
+    }
+
+    @Test func framingZoomsAroundTheRectAndScrollsToIt() throws
+    {
+        // The case where panning by translation alone would strand most of the canvas:
+        // scrolled to the top-left corner, framing a node at the canvas center.
+        let viewport = CGRect(x: 0, y: 0, width: 1000, height: 800)
+        let canvasRect = CGRect(x: 4950, y: 4975, width: 100, height: 50)
+        let framing = try #require(GraphCanvasZoomTransform.framing(canvasRect, in: viewport,
+                                                                     scrollContentSize: scrollContentSize,
+                                                                     limits: limits))
+
+        #expect(framing.transform.scale == 2)
+        // The rect keeps its unscaled layout position, so the canvas around it stays as
+        // reachable as after a pinch on it, and the scroll brings it to the center.
+        expectEqual(framing.transform.position(forCanvasPosition: canvasRect.center), canvasRect.center)
+        #expect(framing.scrollDelta == CGSize(width: 4500, height: 4600))
+    }
+
+    @Test func framingTranslatesWhatScrollingCannotReach() throws
+    {
+        // A rect near the canvas's top-left corner can't be scrolled to the center.
+        let viewport = CGRect(x: 2000, y: 3000, width: 1000, height: 800)
+        let canvasRect = CGRect(x: 100, y: 50, width: 400, height: 300)
+        let framing = try #require(GraphCanvasZoomTransform.framing(canvasRect, in: viewport,
+                                                                     scrollContentSize: scrollContentSize,
+                                                                     limits: limits))
+        let scrolledViewport = viewport.offsetBy(dx: framing.scrollDelta.width, dy: framing.scrollDelta.height)
+
+        #expect(scrolledViewport.origin == .zero)
+        expectEqual(framing.transform.position(forCanvasPosition: canvasRect.center), scrolledViewport.center)
+    }
+
+    @Test func framingClampsToZoomLimitsAndStillCenters() throws
+    {
+        let viewport = CGRect(x: 4000, y: 4000, width: 1000, height: 1000)
+
+        // A single small node cannot be magnified past the upper limit, and a
+        // sprawling graph is not shrunk past the lower one; both stay centered.
+        for (size, expectedScale) in [(CGSize(width: 10, height: 10), CGFloat(2)),
+                                      (CGSize(width: 100_000, height: 100_000), 0.25)]
+        {
+            let canvasRect = CGRect(origin: CGPoint(x: 4500, y: 5200), size: size)
+            let framing = try #require(GraphCanvasZoomTransform.framing(canvasRect, in: viewport,
+                                                                         scrollContentSize: scrollContentSize,
+                                                                         limits: limits))
+            let scrolledViewport = viewport.offsetBy(dx: framing.scrollDelta.width, dy: framing.scrollDelta.height)
+
+            #expect(framing.transform.scale == expectedScale)
+            expectEqual(framing.transform.position(forCanvasPosition: canvasRect.center), scrolledViewport.center)
+        }
+    }
+
+    @Test func framingKeepsTheRectClearOfTheViewportEdgesByTheMargin() throws
+    {
+        let viewport = CGRect(x: 4000, y: 4000, width: 1000, height: 500)
+        let canvasRect = CGRect(x: 4000, y: 5000, width: 2000, height: 500)
+        let framing = try #require(GraphCanvasZoomTransform.framing(canvasRect, in: viewport,
+                                                                     scrollContentSize: scrollContentSize,
+                                                                     margin: 40, limits: limits))
+        let scrolledViewport = viewport.offsetBy(dx: framing.scrollDelta.width, dy: framing.scrollDelta.height)
+
+        // Width decides: (1000 - 2 * 40) / 2000.
+        #expect(abs(framing.transform.scale - 0.46) < 0.000001)
+        expectEqual(framing.transform.position(forCanvasPosition: CGPoint(x: canvasRect.minX, y: canvasRect.midY)),
+                    CGPoint(x: scrolledViewport.minX + 40, y: scrolledViewport.midY))
+    }
+
+    @Test func framingShrinksTheMarginInANarrowViewport() throws
+    {
+        // A 40pt margin would leave a 20pt-wide fit rect; a quarter of 100 leaves 50.
+        let viewport = CGRect(x: 5000, y: 5000, width: 100, height: 100)
+        let canvasRect = CGRect(x: 5000, y: 5000, width: 100, height: 100)
+        let framing = try #require(GraphCanvasZoomTransform.framing(canvasRect, in: viewport,
+                                                                     scrollContentSize: scrollContentSize,
+                                                                     margin: 40, limits: limits))
+        let scrolledViewport = viewport.offsetBy(dx: framing.scrollDelta.width, dy: framing.scrollDelta.height)
+
+        #expect(abs(framing.transform.scale - 0.5) < 0.000001)
+        expectEqual(framing.transform.position(forCanvasPosition: canvasRect.origin),
+                    CGPoint(x: scrolledViewport.minX + 25, y: scrolledViewport.minY + 25))
+    }
+
+    @Test func framingAnEmptyRectOrViewportDoesNothing()
+    {
+        let viewport = CGRect(x: 0, y: 0, width: 800, height: 600)
+        let canvasRect = CGRect(x: 5000, y: 5000, width: 400, height: 300)
+
+        #expect(GraphCanvasZoomTransform.framing(.zero, in: viewport,
+                                                 scrollContentSize: scrollContentSize, limits: limits) == nil)
+        #expect(GraphCanvasZoomTransform.framing(canvasRect, in: .zero,
+                                                 scrollContentSize: scrollContentSize, limits: limits) == nil)
+    }
 }
