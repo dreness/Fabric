@@ -154,6 +154,7 @@ struct ReviewEvidenceTests {
         var frames: Int
         var cpuMillisecondsPerFrameMedian: Double
         var cpuMillisecondsPerFrameMean: Double
+        var gpuMillisecondsPerFrameMedian: Double
         var wallMillisecondsPerFrameMean: Double
         var error: String?
     }
@@ -170,7 +171,7 @@ struct ReviewEvidenceTests {
 
         for file in files {
             let name = file.deletingPathExtension().lastPathComponent
-            var result = SampleResult(name: name, nodes: 0, frames: 0, cpuMillisecondsPerFrameMedian: 0, cpuMillisecondsPerFrameMean: 0, wallMillisecondsPerFrameMean: 0)
+            var result = SampleResult(name: name, nodes: 0, frames: 0, cpuMillisecondsPerFrameMedian: 0, cpuMillisecondsPerFrameMean: 0, gpuMillisecondsPerFrameMedian: 0, wallMillisecondsPerFrameMean: 0)
             do {
                 let context = Context(device: device, sampleCount: 1, colorPixelFormat: .bgra8Unorm, depthPixelFormat: .depth32Float, stencilPixelFormat: .invalid)
                 let decoder = JSONDecoder()
@@ -193,6 +194,8 @@ struct ReviewEvidenceTests {
                 let inFlight = DispatchSemaphore(value: 3)
                 var cpuSamples: [Double] = []
                 var wallSamples: [Double] = []
+                var gpuSamples: [Double] = []
+                let gpuLock = NSLock()
                 let start = Date()
                 for frame in 0..<(warmupFrames + measuredFrames) {
                     inFlight.wait()
@@ -201,7 +204,13 @@ struct ReviewEvidenceTests {
                     let cpuBefore = Self.threadCPUNanoseconds()
                     let wallBefore = DispatchTime.now().uptimeNanoseconds
                     let commands = try #require(renderer.commandQueue.makeCommandBuffer())
-                    commands.addCompletedHandler { _ in inFlight.signal() }
+                    commands.addCompletedHandler { buffer in
+                        if frame >= warmupFrames {
+                            let gpu = (buffer.gpuEndTime - buffer.gpuStartTime) * 1000
+                            gpuLock.withLock { gpuSamples.append(gpu) }
+                        }
+                        inFlight.signal()
+                    }
                     try renderer.executeAndDraw(executionInfo: info, renderPassDescriptor: pass, commandBuffer: commands)
                     commands.commit()
                     let cpu = Double(Self.threadCPUNanoseconds() - cpuBefore) / 1e6
@@ -219,10 +228,12 @@ struct ReviewEvidenceTests {
                 result.cpuMillisecondsPerFrameMedian = cpuSamples.sorted()[cpuSamples.count / 2]
                 result.cpuMillisecondsPerFrameMean = cpuSamples.reduce(0, +) / Double(cpuSamples.count)
                 result.wallMillisecondsPerFrameMean = wallSamples.reduce(0, +) / Double(wallSamples.count)
+                let gpuSorted = gpuLock.withLock { gpuSamples.sorted() }
+                result.gpuMillisecondsPerFrameMedian = gpuSorted.isEmpty ? 0 : gpuSorted[gpuSorted.count / 2]
             } catch {
                 result.error = "\(error)"
             }
-            print("EVIDENCE \(Self.tree) \(name): nodes=\(result.nodes) cpu median \(result.cpuMillisecondsPerFrameMedian) ms, mean \(result.cpuMillisecondsPerFrameMean) ms, wall \(result.wallMillisecondsPerFrameMean) ms \(result.error ?? "")")
+            print("EVIDENCE \(Self.tree) \(name): nodes=\(result.nodes) cpu median \(result.cpuMillisecondsPerFrameMedian) ms, mean \(result.cpuMillisecondsPerFrameMean) ms, gpu median \(result.gpuMillisecondsPerFrameMedian) ms, wall \(result.wallMillisecondsPerFrameMean) ms \(result.error ?? "")")
             results.append(result)
         }
         let encoder = JSONEncoder()
