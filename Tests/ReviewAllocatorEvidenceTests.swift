@@ -85,14 +85,67 @@ struct ReviewAllocatorEvidenceTests {
                      Self.tree, nodeCount, width, height, cpu, gpu, Double(peakBytes) / 1_048_576, Double(settledBytes) / 1_048_576))
     }
 
-    /// Fails on the PR when a full-resolution image skips the heaps: at 4K an 8-bit RGBA image is
-    /// over `dedicatedThreshold` (32 MB), so every image version is a separate device allocation.
+    /// At ddab23b8 a 4K bgra8 image was over the 32 MB `dedicatedThreshold`, so it skipped the heaps.
     @Test("A 3840x2160 image comes from a heap")
     func fourKImageUsesHeap() throws {
         guard let harness = GraphExecutionTestHarness(renderWidth: 4, renderHeight: 4) else { return }
         let image = try harness.renderer.newImage(withWidth: 3840, height: 2160, format: .bgra8Unorm)
         print("ALLOC4K tree=\(Self.tree) heap=\(image.texture.heap != nil) bytes=\(image.texture.allocatedSize)")
         #expect(image.texture.heap != nil)
+    }
+
+    /// One Render to Image node whose size steps from 960x540 to 3840x2160 (a live window resize or an
+    /// animated size), then drops back to 960x540. Heaps are not trimmed while running, so the settled
+    /// figure shows what the sweep leaves behind.
+    @Test("Render to Image resize sweep: peak and retained device memory")
+    func resizeSweep() throws {
+        guard let device = MTLCreateSystemDefaultDevice() else { return }
+        let baselineBytes = device.currentAllocatedSize
+        let context = Context(device: device, sampleCount: 1, colorPixelFormat: .bgra8Unorm, depthPixelFormat: .depth32Float, stencilPixelFormat: .invalid)
+        let graph = Graph(context: context)
+        let imageNode = Self.makeBoxImageNode(context: context, width: 960, height: 540)
+        graph.addNode(imageNode)
+        let renderer = GraphRenderer(context: context, graph: graph)
+        renderer.resize(size: (width: 960, height: 540), scaleFactor: 1)
+        try renderer.startExecution()
+        defer { try? renderer.stopExecution() }
+
+        let descriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .bgra8Unorm, width: 64, height: 64, mipmapped: false)
+        descriptor.usage = [.renderTarget, .shaderRead]
+        let target = try #require(device.makeTexture(descriptor: descriptor))
+        let pass = MTLRenderPassDescriptor()
+        pass.colorAttachments[0].texture = target
+        pass.colorAttachments[0].loadAction = .clear
+        pass.colorAttachments[0].storeAction = .store
+
+        let steps = 16, framesPerStep = 10, settleFrames = 60
+        let inFlight = DispatchSemaphore(value: 3)
+        var peakBytes = 0
+        var frame = 0
+        func render(width: Int, height: Int, frames: Int) throws {
+            imageNode.inputWidth.value = width
+            imageNode.inputHeight.value = height
+            for _ in 0 ..< frames {
+                inFlight.wait()
+                let time = Double(frame) / 60
+                let info = GraphExecutionInfo(timing: GraphExecutionTiming(time: time, deltaTime: 1.0 / 60, displayTime: time, systemTime: time, hostMediaTime: time, frameNumber: frame), iterationInfo: nil, eventInfo: nil)
+                let commands = try #require(renderer.commandQueue.makeCommandBuffer())
+                commands.addCompletedHandler { _ in inFlight.signal() }
+                try renderer.executeAndDraw(executionInfo: info, renderPassDescriptor: pass, commandBuffer: commands)
+                commands.commit()
+                peakBytes = max(peakBytes, device.currentAllocatedSize - baselineBytes)
+                frame += 1
+            }
+        }
+        for step in 0 ... steps {
+            let width = 960 + (3840 - 960) * step / steps
+            try render(width: width, height: width * 9 / 16, frames: framesPerStep)
+        }
+        try render(width: 960, height: 540, frames: settleFrames)
+        for _ in 0 ..< 3 { inFlight.wait() }
+        for _ in 0 ..< 3 { inFlight.signal() }
+        let settledBytes = device.currentAllocatedSize - baselineBytes
+        print(String(format: "ALLOCSWEEP tree=%@ peak_MB=%.1f settled_MB=%.1f", Self.tree, Double(peakBytes) / 1_048_576, Double(settledBytes) / 1_048_576))
     }
 
     /// Unconnected depth is nil on the PR; connecting it must produce an image on the next frame.
