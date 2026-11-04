@@ -445,7 +445,7 @@ public class MathExpressionNode: Node
             self._settingsModel.stringExpression = self.stringExpression
         }
         self._settingsModel.diagnostics = result.diagnostics
-        self.subtitleSubject.send()
+        self.namingDidChange()
     }
 
     /// The ports of the last valid compile: its inputs then its outputs, each

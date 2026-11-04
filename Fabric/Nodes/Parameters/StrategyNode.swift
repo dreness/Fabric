@@ -169,7 +169,7 @@ open class StrategyNode: Node
             }
 
             // `subtitle` is derived from `strategy`; notify so the title refreshes.
-            self.subtitleSubject.send()
+            self.namingDidChange()
         }
     }
 

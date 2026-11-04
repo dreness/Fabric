@@ -69,7 +69,7 @@ public class BaseFormatStringNode: Node {
     public fileprivate(set) var formatString: String {
         didSet {
             self.updatePorts()
-            self.subtitleSubject.send()
+            self.namingDidChange()
         }
     }
 

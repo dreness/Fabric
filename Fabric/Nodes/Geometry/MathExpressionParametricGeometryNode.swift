@@ -67,7 +67,7 @@ public class MathExpressionParametricGeometryNode: BaseGeometryNode
 
     /// Shown as the node's title: the three axis expressions. Falls back to the
     /// type name when all axes are blank; a user `userName` overrides it.
-    /// Refreshed via subtitleSubject in parseExpressions().
+    /// Refreshed via namingDidChange() in parseExpressions().
     override public func deriveSubtitle() -> String? {
         let axes = [expressionX, expressionY, expressionZ]
         guard axes.contains(where: { !$0.isEmpty }) else { return nil }
@@ -286,7 +286,7 @@ public class MathExpressionParametricGeometryNode: BaseGeometryNode
         updateCompileErrorStatus()
         syncVariablePorts()
         _expressionsDirty = true
-        subtitleSubject.send()
+        namingDidChange()
     }
 
     /// Blank everywhere is a node not yet written rather than one that fails,
