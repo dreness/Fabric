@@ -83,10 +83,10 @@ public class LiveImageNode: BaseImageNode
         self.postInit()
     }
 
-    override public func postSetupSynchronizePorts(allowReplace: Bool) {
+    override public func postSetupSynchronizePorts() {
         guard self.suppressesTemplateShaderPortSync == false else { return }
 
-        super.postSetupSynchronizePorts(allowReplace: allowReplace)
+        super.postSetupSynchronizePorts()
     }
 
     deinit {
@@ -247,7 +247,7 @@ public class LiveImageNode: BaseImageNode
             sourceShader.reloadFromSource()
 
             if sourceShader.pipelineError == nil {
-                self.postSetupSynchronizePorts(allowReplace: false)
+                self.postSetupSynchronizePorts()
                 return
             }
         }
