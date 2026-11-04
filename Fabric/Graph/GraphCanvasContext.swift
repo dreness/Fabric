@@ -31,12 +31,14 @@ struct GraphConnectionPair: Identifiable
 ///
 /// Views should depend on this single object rather than reaching into
 /// `Graph` for UI concerns. `Graph` remains a pure document model.
+@MainActor
 @Observable
 public class GraphCanvasContext
 {
     // MARK: - Navigation
 
-    public let rootGraph: Graph
+    // Immutable; set by the nonisolated init.
+    nonisolated(unsafe) public let rootGraph: Graph
     public private(set) var entries: [SubgraphNode] = []
 
     /// The graph currently being displayed and edited.
@@ -187,7 +189,7 @@ public class GraphCanvasContext
 
     // MARK: - Init
 
-    public init(rootGraph: Graph)
+    nonisolated public init(rootGraph: Graph)
     {
         self.rootGraph = rootGraph
     }
