@@ -16,30 +16,37 @@ extension EnvironmentValues
 }
 
 /// Keeps pinch state in the view layer and preserves the canvas point under the pinch.
-public struct GraphCanvasZoomModifier: ViewModifier
+/// The committed zoom lives on the editing context, which places new nodes from it.
+/// Constructed only by `GraphCanvasScrollView`, which supplies the scroll wiring.
+struct GraphCanvasZoomModifier: ViewModifier
 {
+    private let editingContext: GraphCanvasContext
     private let canvasSize: CGSize
     private let allowsContentHitTesting: Bool
     private let zoomLimits: ClosedRange<CGFloat>
-    private let commandZoomAnchor: () -> CGPoint
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var committedTransform = GraphCanvasZoomTransform()
     @GestureState(resetTransaction: Transaction(animation: nil))
     private var gestureTransform: GraphCanvasZoomTransform?
 
-    public init(canvasSize: CGSize,
-                commandZoomAnchor: @escaping () -> CGPoint,
-                allowsContentHitTesting: Bool = true,
-                zoomLimits: ClosedRange<CGFloat> = 0.25...2)
+    init(editingContext: GraphCanvasContext,
+         canvasSize: CGSize,
+         allowsContentHitTesting: Bool = true,
+         zoomLimits: ClosedRange<CGFloat> = 0.25...2)
     {
+        self.editingContext = editingContext
         self.canvasSize = canvasSize
-        self.commandZoomAnchor = commandZoomAnchor
         self.allowsContentHitTesting = allowsContentHitTesting
         self.zoomLimits = zoomLimits
     }
 
-    public func body(content: Content) -> some View
+    private var committedTransform: GraphCanvasZoomTransform
+    {
+        get { editingContext.canvasZoomTransform }
+        nonmutating set { editingContext.canvasZoomTransform = newValue }
+    }
+
+    func body(content: Content) -> some View
     {
         let transform = gestureTransform ?? committedTransform
 
@@ -84,19 +91,18 @@ public struct GraphCanvasZoomModifier: ViewModifier
     {
         guard gestureTransform == nil else { return }
         committedTransform = committedTransform.magnified(by: magnification,
-                                                         around: commandZoomAnchor(),
+                                                         around: editingContext.currentScrollViewport.center,
                                                          limits: zoomLimits)
     }
 
     private func center(on graphPosition: CGPoint)
     {
         guard gestureTransform == nil else { return }
-        let canvasPosition = CGPoint(x: graphPosition.x + canvasSize.width / 2,
-                                     y: graphPosition.y + canvasSize.height / 2)
         // Repeated selections retarget the same spring instead of queuing moves.
         withAnimation(reduceMotion ? nil : .spring(duration: 0.16, bounce: 0))
         {
-            committedTransform = committedTransform.placing(canvasPosition, at: commandZoomAnchor())
+            committedTransform = committedTransform.placing(editingContext.canvasPosition(forGraphPosition: graphPosition),
+                                                            at: editingContext.currentScrollViewport.center)
         }
     }
 }
