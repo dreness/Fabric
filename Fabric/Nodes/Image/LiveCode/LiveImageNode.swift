@@ -28,12 +28,12 @@ public class LiveImageNode: BaseImageNode
 
     private static let shaderSchemaVersion = 1
 
-    /// A shader that does not compile on open keeps the ports its document wired.
-    override public class var savesPortInterface: Bool { true }
     private static let rootWorkspaceURL = URL(filePath: "/tmp/fabric-live-shaders", directoryHint: .isDirectory)
     private static let staleWorkspaceTTL: TimeInterval = 24 * 60 * 60
 
     private(set) var shaderSource: String = LiveImageNode.defaultShaderSource()
+
+    override public var compilableSource: String? { self.shaderSource }
 
     // A decoded copy of a node carries the document and node UUIDs of the
     // original, so keying the workspace on those alone puts two live instances
@@ -81,7 +81,7 @@ public class LiveImageNode: BaseImageNode
 
         // The single sync: uniform ports the saved shader declares are created
         // and adopt their persisted identity and state by registry key. On
-        // compile failure the document's own ports stand in — see
+        // compile failure the last compiled source's do — see
         // recompileAndResyncPorts.
         self.postInit()
     }
@@ -176,7 +176,7 @@ public class LiveImageNode: BaseImageNode
         }
         catch {
             self.workspaceError = error
-            self.declareSavedInterfaceWhileDecoding()
+            self.declareLastCompiledInterfaceIfUndeclared()
         }
     }
 
@@ -256,9 +256,9 @@ public class LiveImageNode: BaseImageNode
         }
 
         // The saved shader declares the uniform ports; without a compiled one
-        // there is nothing to rebuild them from, so let the document's own
-        // stand in until the user fixes the source.
-        self.declareSavedInterfaceWhileDecoding()
+        // the last source that compiled stands in, until the user fixes this
+        // one.
+        self.declareLastCompiledInterfaceIfUndeclared()
     }
 
     public override func execute(renderer: GraphRenderer,
