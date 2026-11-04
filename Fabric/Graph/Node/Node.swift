@@ -559,6 +559,12 @@ open class Node : Codable, Equatable, Identifiable, Hashable, Copyable, CustomDe
         self.outputNodes = calcOutputNodes()
     }
 
+    /// A wire has been attached to `inlet`, from `outlet`: by a connect, an
+    /// undo, or a document opening. Called by the graph on the editing thread,
+    /// inside the edit. A node whose interface follows what is wired to it
+    /// changes it here, never from execute. Does nothing by default.
+    open func inletDidConnect(_ inlet: Port, from outlet: Port) { }
+
     internal func didDisconnectFromNode(_ node: Node)
     {
         self.inputNodes = calcInputNodes()
