@@ -501,6 +501,9 @@ public final class JavaScriptNode: Node
 
     private static let scriptSchemaVersion = 1
 
+    /// A script that does not parse on open keeps the ports its document wired.
+    override public class var savesPortInterface: Bool { true }
+
     @ObservationIgnored private(set) var scriptSource: String = JavaScriptNode.defaultScriptSource()
     @ObservationIgnored private var compiledSignature: JavaScriptNodeSignature?
     @ObservationIgnored private var runtime: JavaScriptNodeRuntime?
@@ -705,7 +708,7 @@ public final class JavaScriptNode: Node
             self.diagnostics = []
 
             self.portSignature = signature
-            self.discardUndeclaredSnapshotPorts()
+            self.discardSavedInterface()
             self.reconcilePorts()
         }
         catch {
@@ -725,7 +728,7 @@ public final class JavaScriptNode: Node
 
             // Every port here is minted from the script's signature, so a saved
             // script that no longer parses leaves the node with none at all.
-            self.adoptRemainingSnapshotPortsAsFallback()
+            self.declareSavedInterfaceWhileDecoding()
         }
     }
 
