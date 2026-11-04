@@ -93,7 +93,7 @@ public enum VectorType: NodeStrategyOption, CaseIterable {
 // MARK: - StrategyNode
 
 /// Open so plugins can define strategy nodes: subclass, override `strategyOptions`, and
-/// rebuild ports in `rebuildPorts(forStrategy:)`.
+/// declare the ports for `strategy` in `declaredPorts()`.
 open class StrategyNode: Node
 {
     /// Ordered strategy options — the single source of truth for the picker and
@@ -154,7 +154,7 @@ open class StrategyNode: Node
             if let graph
             {
                 graph.withoutUndoRegistration {
-                    self.rebuildPorts(forStrategy: strategy)
+                    self.reconcileToStrategy()
                 }
                 graph.undoManager?.registerUndo(withTarget: self) { node in
                     node.strategy = previousStrategy
@@ -163,7 +163,7 @@ open class StrategyNode: Node
             }
             else
             {
-                self.rebuildPorts(forStrategy: strategy)
+                self.reconcileToStrategy()
             }
 
             // `subtitle` is derived from `strategy`; notify so the title refreshes.
@@ -181,15 +181,12 @@ open class StrategyNode: Node
         let container = try decoder.container(keyedBy: StrategyCodingKeys.self)
         let decoded = try container.decodeIfPresent(String.self, forKey: .strategy)
 
-        // Initializing assignment — didSet does not fire here, matching the
-        // plain-creation path (ports are (re)built by rebuildPorts below).
+        // Initializing assignment, before super.init: didSet does not fire,
+        // and Node's initializer declares the ports for the saved strategy.
         self.strategy = decoded ?? Self.defaultStrategy
 
         try super.init(from: decoder)
-
-        // Rebuild from the restored strategy, evicting any dynamic port left
-        // over from whatever strategy the document was saved in.
-        self.rebuildPorts(forStrategy: self.strategy)
+        self.didApplyStrategy()
     }
 
     open override func encode(to encoder: Encoder) throws
@@ -204,16 +201,17 @@ open class StrategyNode: Node
     {
         self.strategy = Self.defaultStrategy
         super.init(context: context)
-        self.rebuildPorts(forStrategy: self.strategy)
+        self.didApplyStrategy()
     }
 
     /// Designated init for programmatic construction with a specific initial strategy.
-    /// Sets strategy before super.init so didSet never fires, then calls rebuildPorts exactly once.
+    /// Sets strategy before super.init so didSet never fires and Node's
+    /// initializer declares the ports for it.
     public init(context: Context, initialStrategy: String)
     {
         self.strategy = initialStrategy
         super.init(context: context)
-        self.rebuildPorts(forStrategy: self.strategy)
+        self.didApplyStrategy()
     }
 
     /// Convenience init for compile-time-checked programmatic construction.
@@ -235,43 +233,19 @@ open class StrategyNode: Node
     /// views (e.g. the routing nodes') reuse it to embed StrategyPickerView.
     public var strategySettingsModel: SettingsModel { _settingsModel }
 
-    /// Subclasses: diff current dynamic ports against the wanted set for
-    /// `strategy` (removePort for anything dynamic no longer wanted,
-    /// addDynamicPort for anything wanted not already present) — the same
-    /// name-set-diff pattern MathExpressionNode.syncPorts(to:)
-    /// already uses. Called on creation, on every Settings-view strategy
-    /// change, and once after decode.
-    open func rebuildPorts(forStrategy strategy: String) { }
-
-    /// The rebuild step for one port: a port of the wanted type is left alone;
-    /// one of another type is replaced (see `Node.replacePort`) by a fresh port
-    /// of the wanted type on the same id; a missing port is added.
-    public func addOrReplaceDynamicPortPreservingIdentity(name registryName: String,
-                                                          displayName: String,
-                                                          portType: PortType,
-                                                          kind: PortKind,
-                                                          description: String)
+    /// Brings the ports to the declarations for the current strategy, then
+    /// lets a subclass reset the state that follows it.
+    func reconcileToStrategy()
     {
-        if let existing: Port = findPort(named: registryName), existing.portType != portType
-        {
-            replacePort(existing, with: portType.makeFreshPort(name: displayName,
-                                                                kind: kind,
-                                                                description: description,
-                                                                id: existing.id))
-        }
-
-        if findPort(named: registryName) == nil
-        {
-            addDynamicPort(
-                portType.makeFreshPort(
-                    name: displayName,
-                    kind: kind,
-                    description: description
-                ),
-                name: registryName
-            )
-        }
+        self.reconcilePorts()
+        self.didApplyStrategy()
     }
+
+    /// Runs once the ports stand for the strategy: after init, decode and every
+    /// strategy change. For a subclass's runtime state that follows the
+    /// strategy, as a held value resets when the type it holds changes. Ports
+    /// come from declaredPorts(), which a subclass computes from `strategy`.
+    open func didApplyStrategy() { }
 
     // MARK: - Settings Model
 

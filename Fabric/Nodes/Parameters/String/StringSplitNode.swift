@@ -80,7 +80,7 @@ public class StringSplitNode: StrategyNode
 
     public required init(from decoder: any Decoder) throws
     {
-        // Decoded before super.init, which rebuilds the ports: in Custom mode the
+        // Decoded before super.init, which declares the ports: in Custom mode the
         // inlet is restored from the document, in any other mode this is all that
         // is left of the separator.
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -124,27 +124,30 @@ public class StringSplitNode: StrategyNode
 
     /// The Separator inlet belongs to Custom alone; the other modes carry their
     /// separator in the mode itself.
-    override public func rebuildPorts(forStrategy strategy: String)
+    override public func declaredPorts() -> [PortDeclaration]
     {
-        let wantsSeparator = strategy == StringSplitMode.custom.rawValue
-        let existingSeparator: ParameterPort<String>? = findPort(named: "inputSeparator")
+        guard splitMode == .custom else { return super.declaredPorts() }
 
-        switch (wantsSeparator, existingSeparator)
+        return super.declaredPorts() + [
+            PortDeclaration(key: "inputSeparator",
+                            port: ParameterPort(parameter: StringParameter("Separator", customSeparator, .inputfield, #"Separator string to split on. Supports \n, \r, \t, and \\ escape sequences"#))),
+        ]
+    }
+
+    /// Parks what the Separator inlet holds before a mode change takes it away.
+    override var strategy: String
+    {
+        willSet
         {
-        case (true, nil):
-            addDynamicPort(
-                ParameterPort(parameter: StringParameter("Separator", customSeparator, .inputfield, #"Separator string to split on. Supports \n, \r, \t, and \\ escape sequences"#)),
-                name: "inputSeparator"
-            )
-        case (false, let separatorPort?):
-            customSeparator = separatorPort.value ?? customSeparator
-            removePort(separatorPort)
-        default:
-            break
+            if let inputSeparator { customSeparator = inputSeparator.value ?? customSeparator }
         }
+    }
 
-        // The String inlet survives a mode change, so nothing else would mark
-        // this node dirty — re-split what's already there the new way.
+    /// The String inlet survives a mode change, so nothing else would mark this
+    /// node dirty: re-split what is already there the new way.
+    override public func didApplyStrategy()
+    {
+        super.didApplyStrategy()
         if let inputPort: ParameterPort<String> = findPort(named: "inputPort")
         {
             inputPort.valueDidChange = true
