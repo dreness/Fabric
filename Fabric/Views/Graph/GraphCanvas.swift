@@ -106,7 +106,7 @@ public struct GraphCanvas : View
             self.editingContext.currentGraph.deselectAllNodes()
         }
         .onDrop(of: [.nodeRegistryItem, .fileURL], isTargeted: nil) { providers, location in
-            self.handleDrop(providers: providers, location: location, canvasSize: canvasSize)
+            self.handleDrop(providers: providers, location: location)
         }
         .onChange(of: editingContext.currentGraph.nodes.count) { _, _ in
             let nodeIDs = Set(editingContext.currentGraph.nodes.map(\.id))
@@ -162,7 +162,7 @@ public struct GraphCanvas : View
     // MARK: - Drop Helpers
 
     @MainActor
-    private func handleDrop(providers: [NSItemProvider], location: CGPoint, canvasSize: CGSize) -> Bool
+    private func handleDrop(providers: [NSItemProvider], location: CGPoint) -> Bool
     {
         let currentGraph = self.editingContext.currentGraph
         let registryProviders = providers.filter {
@@ -187,11 +187,8 @@ public struct GraphCanvas : View
                         else { return }
 
                         let node = try wrapper.initializeNode(context: currentGraph.context)
-                        try self.editingContext.layoutNode(node)
-
-                        node.offset.width += location.x - canvasSize.width / 2.0 - self.editingContext.currentScrollOffset.x
-                        node.offset.height += location.y - canvasSize.height / 2.0 - self.editingContext.currentScrollOffset.y - node.nodeSize.height / 4.0
-
+                        let dropPosition = self.editingContext.graphPosition(forCanvasPosition: location)
+                        node.offset = Self.offset(centering: node, at: dropPosition)
                         currentGraph.addNode(node)
                     }
                     catch {
@@ -206,12 +203,12 @@ public struct GraphCanvas : View
         let fileProviders = providers.filter {
             !$0.hasItemConformingToTypeIdentifier(UTType.nodeRegistryItem.identifier)
         }
-        let acceptedFiles = self.handleFileDrop(providers: fileProviders, location: location, canvasSize: canvasSize)
+        let acceptedFiles = self.handleFileDrop(providers: fileProviders, location: location)
         return !registryProviders.isEmpty || acceptedFiles
     }
 
     @MainActor
-    private func handleFileDrop(providers: [NSItemProvider], location: CGPoint, canvasSize: CGSize) -> Bool
+    private func handleFileDrop(providers: [NSItemProvider], location: CGPoint) -> Bool
     {
         let currentGraph = self.editingContext.currentGraph
         let fileProviders = providers.filter {
@@ -234,14 +231,21 @@ public struct GraphCanvas : View
 
                     let node = nodeClass.init(context: currentGraph.context)
                     node.setFileURL(url)
-                    node.offset = CGSize(width: location.x - canvasSize.width / 2.0 - node.nodeSize.width / 2.0,
-                                         height: location.y - canvasSize.height / 2.0 - node.nodeSize.height / 2.0)
+                    let dropPosition = self.editingContext.graphPosition(forCanvasPosition: location)
+                    node.offset = Self.offset(centering: node, at: dropPosition)
                     currentGraph.addNode(node)
                 }
             }
         }
 
         return !fileProviders.isEmpty
+    }
+
+    /// Offset that centers `node` on a graph position.
+    static func offset(centering node: Node, at graphPosition: CGPoint) -> CGSize
+    {
+        CGSize(width: graphPosition.x - node.nodeSize.width / 2.0,
+               height: graphPosition.y - node.nodeSize.height / 2.0)
     }
 
     // MARK: - Key Press
