@@ -205,17 +205,9 @@ public class KeyboardNode : Node
            (event.type == .keyDown || event.type == .keyUp),
            let characters = event.characters
         {
-            for keyBinding in keyBindings
+            for (bindingCharacters, port) in keyOutlets where characters == bindingCharacters
             {
-                if let keyBinding,
-                   let portName = self.portNameForKeyBinding(keyBinding),
-                   let port = self.findPort(named: portName) as? NodePort<Bool>
-                {
-                    if characters == keyBinding.characters
-                    {
-                        port.send(event.type == .keyDown)
-                    }
-                }
+                port.send(event.type == .keyDown)
             }
         }
     }
@@ -263,6 +255,20 @@ public class KeyboardNode : Node
     private lazy var _settingsModel = SettingsModel(node: self)
 
     // MARK: - Internal
+
+    /// Each bound key's characters and outlet, in binding order.
+    private var keyOutlets: [(characters: String, port: NodePort<Bool>)] = []
+
+    override public func bindPorts()
+    {
+        super.bindPorts()
+        self.keyOutlets = keyBindings.compactMap { binding in
+            guard let binding, let portName = portNameForKeyBinding(binding),
+                  let port: NodePort<Bool> = findPort(named: portName)
+            else { return nil }
+            return (binding.characters, port)
+        }
+    }
 
     /// A Bool outlet per bound key, in binding order.
     override public func declaredPorts() -> [PortDeclaration]

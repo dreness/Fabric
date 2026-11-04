@@ -132,17 +132,19 @@ open class StrategyNode: Node
     /// The currently selected strategy resolved to its typed option.
     public func strategyOption<T: NodeStrategyOption>(as _: T.Type = T.self) -> T?
     {
-        // `strategyOptions` builds its array on every call; resolve once per strategy.
-        if resolvedStrategyRawValue != strategy
-        {
-            resolvedStrategyRawValue = strategy
-            resolvedStrategyOption = Self.strategyOptions.first { $0.rawValue == strategy }
-        }
-        return resolvedStrategyOption as? T
+        resolvedStrategyOption as? T
     }
 
-    private var resolvedStrategyRawValue: String?
+    /// The selected strategy's option, resolved before each reconcile, so a
+    /// read never searches the option list or parses the string.
     private var resolvedStrategyOption: (any NodeStrategyOption)?
+
+    override open func prepareDeclarations()
+    {
+        super.prepareDeclarations()
+        // `strategyOptions` builds its array on every call; resolve once per change.
+        self.resolvedStrategyOption = Self.strategyOptions.first { $0.rawValue == strategy }
+    }
 
     var strategy: String
     {

@@ -49,13 +49,35 @@ public class DecomposeTransformArrayNode: StrategyNode
         return super.declaredPorts() + wanted.map { PortDeclaration(key: $0.name, port: $0.port) }
     }
 
+    private var boundInputTransforms: NodePort<ContiguousArray<simd_float4x4>>?
+    private var boundOutputTranslations: NodePort<ContiguousArray<simd_float3>>?
+    private var boundOutputScales: NodePort<ContiguousArray<simd_float3>>?
+    private var boundOutputRotations: NodePort<ContiguousArray<simd_float4>>?
+    private var boundOutputColumn0s: NodePort<ContiguousArray<simd_float4>>?
+    private var boundOutputColumn1s: NodePort<ContiguousArray<simd_float4>>?
+    private var boundOutputColumn2s: NodePort<ContiguousArray<simd_float4>>?
+    private var boundOutputColumn3s: NodePort<ContiguousArray<simd_float4>>?
+
+    override public func bindPorts()
+    {
+        super.bindPorts()
+        self.boundInputTransforms = findPort(named: "inputTransforms")
+        self.boundOutputTranslations = findPort(named: "outputTranslations")
+        self.boundOutputScales = findPort(named: "outputScales")
+        self.boundOutputRotations = findPort(named: "outputRotations")
+        self.boundOutputColumn0s = findPort(named: "outputColumn0s")
+        self.boundOutputColumn1s = findPort(named: "outputColumn1s")
+        self.boundOutputColumn2s = findPort(named: "outputColumn2s")
+        self.boundOutputColumn3s = findPort(named: "outputColumn3s")
+    }
+
     public override func execute(renderer: GraphRenderer,
                                  executionInfo: GraphExecutionInfo,
                                  renderPassDescriptor: MTLRenderPassDescriptor,
                                  commandBuffer: MTLCommandBuffer)
     throws
     {
-        guard let inputTransforms: NodePort<ContiguousArray<simd_float4x4>> = findPort(named: "inputTransforms"),
+        guard let inputTransforms: NodePort<ContiguousArray<simd_float4x4>> = self.boundInputTransforms,
               inputTransforms.valueDidChange
         else { return }
 
@@ -64,9 +86,9 @@ public class DecomposeTransformArrayNode: StrategyNode
         switch self.strategy
         {
         case "TRS":
-            guard let outputTranslations: NodePort<ContiguousArray<simd_float3>> = findPort(named: "outputTranslations"),
-                  let outputScales: NodePort<ContiguousArray<simd_float3>> = findPort(named: "outputScales"),
-                  let outputRotations: NodePort<ContiguousArray<simd_float4>> = findPort(named: "outputRotations")
+            guard let outputTranslations: NodePort<ContiguousArray<simd_float3>> = self.boundOutputTranslations,
+                  let outputScales: NodePort<ContiguousArray<simd_float3>> = self.boundOutputScales,
+                  let outputRotations: NodePort<ContiguousArray<simd_float4>> = self.boundOutputRotations
             else { return }
 
             var translations = ContiguousArray<simd_float3>(); translations.reserveCapacity(transforms.count)
@@ -86,10 +108,10 @@ public class DecomposeTransformArrayNode: StrategyNode
             outputRotations.send(rotations)
 
         case "Columns":
-            guard let outputColumn0s: NodePort<ContiguousArray<simd_float4>> = findPort(named: "outputColumn0s"),
-                  let outputColumn1s: NodePort<ContiguousArray<simd_float4>> = findPort(named: "outputColumn1s"),
-                  let outputColumn2s: NodePort<ContiguousArray<simd_float4>> = findPort(named: "outputColumn2s"),
-                  let outputColumn3s: NodePort<ContiguousArray<simd_float4>> = findPort(named: "outputColumn3s")
+            guard let outputColumn0s: NodePort<ContiguousArray<simd_float4>> = self.boundOutputColumn0s,
+                  let outputColumn1s: NodePort<ContiguousArray<simd_float4>> = self.boundOutputColumn1s,
+                  let outputColumn2s: NodePort<ContiguousArray<simd_float4>> = self.boundOutputColumn2s,
+                  let outputColumn3s: NodePort<ContiguousArray<simd_float4>> = self.boundOutputColumn3s
             else { return }
 
             var c0s = ContiguousArray<simd_float4>(); c0s.reserveCapacity(transforms.count)

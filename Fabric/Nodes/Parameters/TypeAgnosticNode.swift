@@ -30,7 +30,13 @@ public class TypeAgnosticNode: StrategyNode
     public override class var separatorAfterFirstStrategy: Bool { true }
 
     /// The currently active port type, derived from the strategy string.
-    public var selectedPortType: PortType { PortType(rawValue: strategy) ?? .Virtual }
+    public private(set) var selectedPortType: PortType = .Virtual
+
+    override public func prepareDeclarations()
+    {
+        super.prepareDeclarations()
+        self.selectedPortType = self.strategyOption(as: PortType.self) ?? PortType(rawValue: strategy) ?? .Virtual
+    }
 
     /// Convenience programmatic init for a specific port type.
     public convenience init(context: Context, portType: PortType)

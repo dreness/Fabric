@@ -47,13 +47,31 @@ public class DecomposeOrientationArrayNode: StrategyNode
         return super.declaredPorts() + wanted.map { PortDeclaration(key: $0.name, port: $0.port) }
     }
 
+    private var boundInputOrientations: NodePort<ContiguousArray<simd_float4>>?
+    private var boundOutputX: NodePort<ContiguousArray<Float>>?
+    private var boundOutputY: NodePort<ContiguousArray<Float>>?
+    private var boundOutputZ: NodePort<ContiguousArray<Float>>?
+    private var boundOutputAxes: NodePort<ContiguousArray<simd_float3>>?
+    private var boundOutputAngles: NodePort<ContiguousArray<Float>>?
+
+    override public func bindPorts()
+    {
+        super.bindPorts()
+        self.boundInputOrientations = findPort(named: "inputOrientations")
+        self.boundOutputX = findPort(named: "outputX")
+        self.boundOutputY = findPort(named: "outputY")
+        self.boundOutputZ = findPort(named: "outputZ")
+        self.boundOutputAxes = findPort(named: "outputAxes")
+        self.boundOutputAngles = findPort(named: "outputAngles")
+    }
+
     public override func execute(renderer: GraphRenderer,
                                  executionInfo: GraphExecutionInfo,
                                  renderPassDescriptor: MTLRenderPassDescriptor,
                                  commandBuffer: MTLCommandBuffer)
     throws
     {
-        guard let inputOrientations: NodePort<ContiguousArray<simd_float4>> = findPort(named: "inputOrientations"),
+        guard let inputOrientations: NodePort<ContiguousArray<simd_float4>> = self.boundInputOrientations,
               inputOrientations.valueDidChange
         else { return }
 
@@ -63,9 +81,9 @@ public class DecomposeOrientationArrayNode: StrategyNode
         switch self.strategy
         {
         case "To Euler":
-            guard let outputX: NodePort<ContiguousArray<Float>> = findPort(named: "outputX"),
-                  let outputY: NodePort<ContiguousArray<Float>> = findPort(named: "outputY"),
-                  let outputZ: NodePort<ContiguousArray<Float>> = findPort(named: "outputZ")
+            guard let outputX: NodePort<ContiguousArray<Float>> = self.boundOutputX,
+                  let outputY: NodePort<ContiguousArray<Float>> = self.boundOutputY,
+                  let outputZ: NodePort<ContiguousArray<Float>> = self.boundOutputZ
             else { return }
 
             var xs = ContiguousArray<Float>(); xs.reserveCapacity(quats.count)
@@ -82,8 +100,8 @@ public class DecomposeOrientationArrayNode: StrategyNode
             outputZ.send(zs)
 
         case "To Axis Angle":
-            guard let outputAxes: NodePort<ContiguousArray<simd_float3>> = findPort(named: "outputAxes"),
-                  let outputAngles: NodePort<ContiguousArray<Float>> = findPort(named: "outputAngles")
+            guard let outputAxes: NodePort<ContiguousArray<simd_float3>> = self.boundOutputAxes,
+                  let outputAngles: NodePort<ContiguousArray<Float>> = self.boundOutputAngles
             else { return }
 
             var axes = ContiguousArray<simd_float3>(); axes.reserveCapacity(quats.count)
