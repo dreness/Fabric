@@ -164,13 +164,11 @@ public class KeyboardNode : Node
 
     public required init(from decoder: any Decoder) throws
     {
-        try super.init(from: decoder)
-
+        // Decoded before super.init, which declares a port per binding.
         let container = try decoder.container(keyedBy: KeyboardCodingKeys.self)
-        let decodedBindings = try container.decodeIfPresent([KeyBinding?].self, forKey: .keyBindings)
+        self.keyBindings = try container.decodeIfPresent([KeyBinding?].self, forKey: .keyBindings) ?? [nil]
 
-        self.keyBindings = decodedBindings ?? [nil]
-        self.rebuildPorts()
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws
@@ -190,7 +188,8 @@ public class KeyboardNode : Node
     {
         self.init(context: context)
         self.keyBindings = keyBindings.map { Optional($0) }
-        self.rebuildPorts()
+        // didSet does not fire in a convenience initializer.
+        self.reconcilePorts()
     }
 
     // MARK: - Execution
@@ -206,17 +205,9 @@ public class KeyboardNode : Node
            (event.type == .keyDown || event.type == .keyUp),
            let characters = event.characters
         {
-            for keyBinding in keyBindings
+            for (bindingCharacters, port) in keyOutlets where characters == bindingCharacters
             {
-                if let keyBinding,
-                   let portName = self.portNameForKeyBinding(keyBinding),
-                   let port = self.findPort(named: portName) as? NodePort<Bool>
-                {
-                    if characters == keyBinding.characters
-                    {
-                        port.send(event.type == .keyDown)
-                    }
-                }
+                port.send(event.type == .keyDown)
             }
         }
     }
@@ -227,7 +218,7 @@ public class KeyboardNode : Node
     {
         didSet
         {
-            self.rebuildPorts()
+            self.reconcilePorts()
         }
     }
 
@@ -265,30 +256,27 @@ public class KeyboardNode : Node
 
     // MARK: - Internal
 
-    private func rebuildPorts()
+    /// Each bound key's characters and outlet, in binding order.
+    private var keyOutlets: [(characters: String, port: NodePort<Bool>)] = []
+
+    override public func bindPorts()
     {
-        let portNamesWeNeed = self.keyBindings.compactMap { self.portNameForKeyBinding($0) }
-        let existingPortNames = self.outputPorts().map { $0.name }
-
-        let portNamesToRemove = Set(existingPortNames).subtracting(Set(portNamesWeNeed))
-        let portNamesToAdd = Set(portNamesWeNeed).subtracting(portNamesToRemove)
-
-        for portName in portNamesToRemove
-        {
-            if let port = self.findPort(named: portName) as? NodePort<Bool>
-            {
-                self.removePort(port)
-            }
+        super.bindPorts()
+        self.keyOutlets = keyBindings.compactMap { binding in
+            guard let binding, let portName = portNameForKeyBinding(binding),
+                  let port: NodePort<Bool> = findPort(named: portName)
+            else { return nil }
+            return (binding.characters, port)
         }
+    }
 
-        for portName in portNamesToAdd
-        {
-            if self.findPort(named: portName) == nil
-            {
-                let port = NodePort<Bool>(name: portName, kind: .Outlet,
-                                         description: "True when key '\(portName)' is pressed")
-                self.addDynamicPort(port)
-            }
+    /// A Bool outlet per bound key, in binding order.
+    override public func declaredPorts() -> [PortDeclaration]
+    {
+        super.declaredPorts() + self.keyBindings.compactMap { self.portNameForKeyBinding($0) }.map { portName in
+            PortDeclaration(key: portName,
+                            port: NodePort<Bool>(name: portName, kind: .Outlet,
+                                                 description: "True when key '\(portName)' is pressed"))
         }
     }
 

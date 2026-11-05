@@ -42,9 +42,13 @@ public class NumericTypeAgnosticNode: StrategyNode
 
     public override class var separatorAfterFirstStrategy: Bool { true }
 
-    public var selectedNumericPortType: PortType
+    /// The strategy's port type, resolved before each reconcile.
+    public private(set) var selectedNumericPortType: PortType = .NumericVirtual
+
+    override public func prepareDeclarations()
     {
-        Self.portType(forStrategy: strategy)
+        super.prepareDeclarations()
+        self.selectedNumericPortType = Self.portType(forStrategy: strategy)
     }
 
     public convenience init(context: Context, portType: PortType)
@@ -90,22 +94,18 @@ public class NumericTypeAgnosticNode: StrategyNode
         return nil
     }
 
-    @discardableResult
-    public func specializeFromConnectedPort(named portName: String) -> Bool
+    /// While the node is Numeric Virtual, a wire into one of its virtual
+    /// inlets from an outlet of a supported type makes that type the node's
+    /// strategy, as part of the connect. An explicit choice of Virtual made
+    /// while wired stands: retyping moves wires without connecting them.
+    override public func inletDidConnect(_ inlet: Port, from outlet: Port)
     {
+        super.inletDidConnect(inlet, from: outlet)
         guard selectedNumericPortType == .NumericVirtual,
-              let port: Port = findPort(named: portName),
-              let connectedType = port.connectedPorts.first?.portType,
-              Self.supportedPortTypes.contains(connectedType)
-        else { return false }
+              inlet.portType == .NumericVirtual,
+              Self.supportedPortTypes.contains(outlet.portType)
+        else { return }
 
-        strategy = connectedType.rawValue
-        return true
-    }
-
-    public func reorderPorts(named names: [String])
-    {
-        let reordered: [Port] = names.compactMap { name in let p: Port? = findPort(named: name); return p }
-        if reordered.count == self.ports.count { reorderPorts(reordered) }
+        strategy = outlet.portType.rawValue
     }
 }

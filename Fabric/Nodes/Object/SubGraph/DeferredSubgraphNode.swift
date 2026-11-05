@@ -72,22 +72,16 @@ public class DeferredSubgraphNode: SubgraphNode
     override public class var nodeTimeMode: Node.TimeMode { .TimeBase }
     override public class var nodeDescription: String { "Renders a Sub Graph to an Color Image and Depth Image, suitable for post processing."}
 
-    override public class func registerPorts(context: Context) -> [(name: String, port: Port)] {
-        let ports = super.registerPorts(context: context)
-        
-        return  [
-            ("inputWidth", ParameterPort(parameter: IntParameter("Width", 1920, .inputfield, "Output texture width in pixels"))),
-            ("inputHeight", ParameterPort(parameter: IntParameter("Height", 1080, .inputfield, "Output texture height in pixels"))),
-            ("outputColorTexture", NodePort<FabricImage>(name: "Color Texture", kind: .Outlet, description: "Rendered color output from the subgraph")),
-            ("outputDepthTexture", NodePort<FabricImage>(name: "Depth Texture", kind: .Outlet, description: "Rendered depth buffer from the subgraph")),
-        ] + ports
+    public let inputWidth = ParameterPort(parameter: IntParameter("Width", 1920, .inputfield, "Output texture width in pixels"))
+    public let inputHeight = ParameterPort(parameter: IntParameter("Height", 1080, .inputfield, "Output texture height in pixels"))
+    public let outputColorTexture = NodePort<FabricImage>(name: "Color Texture", kind: .Outlet, description: "Rendered color output from the subgraph")
+    public let outputDepthTexture = NodePort<FabricImage>(name: "Depth Texture", kind: .Outlet, description: "Rendered depth buffer from the subgraph")
+
+    override public func bindPorts()
+    {
+        super.bindPorts()
+        self.auxiliaryOutlets = Self.auxiliaryOutputPorts.compactMap { findPort(named: $0.registryName) }
     }
-    
-    // Proxy Port
-    public var inputWidth: ParameterPort<Int> { port(named: "inputWidth") }
-    public var inputHeight: ParameterPort<Int> { port(named: "inputHeight") }
-    public var outputColorTexture: NodePort<FabricImage> { port(named: "outputColorTexture") }
-    public var outputDepthTexture: NodePort<FabricImage> { port(named: "outputDepthTexture") }
     
     override public var object:Object? {
         return nil
@@ -120,10 +114,11 @@ public class DeferredSubgraphNode: SubgraphNode
 
     public required init(from decoder: any Decoder) throws
     {
-        try super.init(from: decoder)
-
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.deferredMRTEnabled = try container.decodeIfPresent(Bool.self, forKey: .deferredMRTEnabled) ?? false
+
+        try super.init(from: decoder)
+
         self.synchronizeDeferredConfiguration()
     }
 
@@ -165,30 +160,29 @@ public class DeferredSubgraphNode: SubgraphNode
 
     private func synchronizeDeferredConfiguration()
     {
-        self.syncAuxiliaryOutputPorts()
+        self.reconcilePorts()
         self.rebuildGraphRenderer()
         self.markDirty()
     }
 
-    private func syncAuxiliaryOutputPorts()
+    /// The deferred render targets follow the registered ports while they are
+    /// enabled.
+    override public func declaredPorts() -> [PortDeclaration]
     {
-        for descriptor in Self.auxiliaryOutputPorts
-        {
-            if deferredMRTEnabled
-            {
-                guard self.findPort(named: descriptor.registryName, as: Port.self) == nil else { continue }
+        let storedPorts = [
+            PortDeclaration(key: "inputWidth", port: self.inputWidth),
+            PortDeclaration(key: "inputHeight", port: self.inputHeight),
+            PortDeclaration(key: "outputColorTexture", port: self.outputColorTexture),
+            PortDeclaration(key: "outputDepthTexture", port: self.outputDepthTexture),
+        ]
 
-                let port = NodePort<FabricImage>(
-                    name: descriptor.displayName,
-                    kind: .Outlet,
-                    description: descriptor.description
-                )
-                self.addDynamicPort(port, name: descriptor.registryName)
-            }
-            else if let port = self.findPort(named: descriptor.registryName, as: Port.self)
-            {
-                self.removePort(port)
-            }
+        guard deferredMRTEnabled else { return storedPorts + super.declaredPorts() }
+
+        return storedPorts + super.declaredPorts() + Self.auxiliaryOutputPorts.map { descriptor in
+            PortDeclaration(key: descriptor.registryName,
+                            port: NodePort<FabricImage>(name: descriptor.displayName,
+                                                        kind: .Outlet,
+                                                        description: descriptor.description))
         }
     }
 
@@ -237,7 +231,7 @@ public class DeferredSubgraphNode: SubgraphNode
     /// outputs get no image, so nothing is allocated or copied for them.
     private static func isUsed(_ port: Port) -> Bool
     {
-        port.published || !port.connections.isEmpty
+        port.node?.graph?.isPublished(port) == true || !port.connections.isEmpty
     }
 
     /// A fresh depth image the inner scene renders into directly, or nil where the encoder must keep
@@ -253,10 +247,14 @@ public class DeferredSubgraphNode: SubgraphNode
                                                 usage: [.renderTarget, .shaderRead])
     }
 
-    private func sendAuxiliaryTexture(_ texture: MTLTexture?, toPortNamed portName: String,
+    /// The deferred render target outlets, in auxiliaryOutputPorts order, while enabled.
+    private var auxiliaryOutlets: [NodePort<FabricImage>] = []
+
+    private func sendAuxiliaryTexture(_ texture: MTLTexture?, toOutlet index: Int,
                                       commandBuffer: MTLCommandBuffer) throws
     {
-        guard let port = self.findPort(named: portName, as: NodePort<FabricImage>.self) else { return }
+        guard auxiliaryOutlets.indices.contains(index) else { return }
+        let port = auxiliaryOutlets[index]
 
         if let texture, Self.isUsed(port)
         {
@@ -349,11 +347,11 @@ public class DeferredSubgraphNode: SubgraphNode
 
         if self.deferredMRTEnabled
         {
-            try self.sendAuxiliaryTexture(self.graphRenderer.renderEncoder.albedoTexture, toPortNamed: "outputAlbedoTexture", commandBuffer: commandBuffer)
-            try self.sendAuxiliaryTexture(self.graphRenderer.renderEncoder.normalTexture, toPortNamed: "outputNormalsTexture", commandBuffer: commandBuffer)
-            try self.sendAuxiliaryTexture(self.graphRenderer.renderEncoder.pbrTexture, toPortNamed: "outputPBRTexture", commandBuffer: commandBuffer)
-            try self.sendAuxiliaryTexture(self.graphRenderer.renderEncoder.velocityTexture, toPortNamed: "outputVelocityTexture", commandBuffer: commandBuffer)
-            try self.sendAuxiliaryTexture(self.graphRenderer.renderEncoder.emissiveTexture, toPortNamed: "outputEmissiveTexture", commandBuffer: commandBuffer)
+            try self.sendAuxiliaryTexture(self.graphRenderer.renderEncoder.albedoTexture, toOutlet: 0, commandBuffer: commandBuffer)
+            try self.sendAuxiliaryTexture(self.graphRenderer.renderEncoder.normalTexture, toOutlet: 1, commandBuffer: commandBuffer)
+            try self.sendAuxiliaryTexture(self.graphRenderer.renderEncoder.pbrTexture, toOutlet: 2, commandBuffer: commandBuffer)
+            try self.sendAuxiliaryTexture(self.graphRenderer.renderEncoder.velocityTexture, toOutlet: 3, commandBuffer: commandBuffer)
+            try self.sendAuxiliaryTexture(self.graphRenderer.renderEncoder.emissiveTexture, toOutlet: 4, commandBuffer: commandBuffer)
         }
         
         // We need to call this to ensure any published port values also get forwarded.
