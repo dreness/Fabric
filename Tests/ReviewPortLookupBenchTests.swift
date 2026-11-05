@@ -92,6 +92,49 @@ final class ReviewPortLookupBenchTests: XCTestCase
         }
     }
 
+    /// A model of `PortRegistry.port(named:)`'s scan over `names`, run backwards (as the PR does) and
+    /// forwards. Shadowed keys are nil, so each live key appears once and both directions agree.
+    /// Tree-independent: it measures the loop, not either tree's registry.
+    func testScanDirectionModel() throws
+    {
+        let iterations = 500_000
+        let builtIns = ["inputNumber1", "inputNumber2", "inputParam", "outputNumber"]
+        for totalPorts in [4, 8, 12, 16]
+        {
+            let names = ContiguousArray<String?>(builtIns + (0..<(totalPorts - builtIns.count)).map { "extraInputNumber\($0)" })
+            for (position, target) in [("first", "inputNumber1"), ("last", names[names.count - 1] ?? ""), ("miss", "missingPortName")]
+            {
+                for direction in ["backward", "forward"]
+                {
+                    var found = 0
+                    let nanoseconds = Self.nanosecondsPerOperation(operations: iterations)
+                    {
+                        for _ in 0..<iterations
+                        {
+                            var match: Int? = nil
+                            if direction == "backward"
+                            {
+                                var index = names.endIndex
+                                while index > names.startIndex
+                                {
+                                    index -= 1
+                                    if names[index] == target { match = index; break }
+                                }
+                            }
+                            else
+                            {
+                                for index in names.indices where names[index] == target { match = index; break }
+                            }
+                            if match != nil { found &+= 1 }
+                        }
+                    }
+                    XCTAssertEqual(found, position == "miss" ? 0 : Self.rounds * iterations)
+                    print("PORTBENCH tree=model metric=scan_ns ports=\(totalPorts) position=\(position) direction=\(direction) median=\(nanoseconds.formatted(.number.precision(.fractionLength(2)).grouping(.never)))")
+                }
+            }
+        }
+    }
+
     /// Assigning a value to ports without a publishing proxy: valueDidSet runs on each.
     func testValueAssignmentWithoutProxy() throws
     {
