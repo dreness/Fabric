@@ -24,7 +24,7 @@ struct FabricSampleFixture: Sendable, CustomTestStringConvertible
     }
 }
 
-private enum FabricSampleCatalog
+enum FabricSampleCatalog
 {
     static let repositoryRootURL = URL(fileURLWithPath: #filePath)
         .deletingLastPathComponent()
@@ -77,7 +77,7 @@ private struct FabricSampleTestError: Error, CustomStringConvertible
     }
 }
 
-private struct FabricSampleImage
+struct FabricSampleImage
 {
     let width: Int
     let height: Int
@@ -92,7 +92,7 @@ private struct FabricSampleImageDifference
     let image: FabricSampleImage
 }
 
-private enum FabricSampleTestSupport
+enum FabricSampleTestSupport
 {
     static let renderSize = (width: 640, height: 480)
     static let renderTime: TimeInterval = 1.0
@@ -231,10 +231,16 @@ private enum FabricSampleTestSupport
         let renderer = GraphExportRenderer(graph: graph, context: context, size: renderSize)
         try renderer.renderSingleFrame(into: colorTexture, depthTexture: depthTexture, time: renderTime)
 
+        return try makeImage(from: colorTexture, context: context)
+    }
+
+    /// Reads a linear render target back as sRGB, as the editor displays it.
+    static func makeImage(from colorTexture: MTLTexture, context: Context) throws -> FabricSampleImage
+    {
         let sourceColorSpace = CGColorSpace(name: CGColorSpace.linearSRGB) ?? CGColorSpaceCreateDeviceRGB()
         let outputColorSpace = CGColorSpace(name: CGColorSpace.sRGB) ?? CGColorSpaceCreateDeviceRGB()
         let coreImageContext = CIContext(mtlDevice: context.device)
-        let bounds = CGRect(x: 0, y: 0, width: renderSize.width, height: renderSize.height)
+        let bounds = CGRect(x: 0, y: 0, width: colorTexture.width, height: colorTexture.height)
 
         guard let coreImage = CIImage(
             mtlTexture: colorTexture,
@@ -385,7 +391,7 @@ private enum FabricSampleTestSupport
         )
     }
 
-    private static func writePNG(_ image: FabricSampleImage, to url: URL) throws
+    static func writePNG(_ image: FabricSampleImage, to url: URL) throws
     {
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         guard let provider = CGDataProvider(data: Data(image.pixels) as CFData),
